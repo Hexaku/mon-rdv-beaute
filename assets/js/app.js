@@ -11,3 +11,13 @@ require('../scss/app.scss');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
 require('bootstrap');
+
+
+const burgerElt = document.getElementById("burger");
+const topbarMenuElt = document.getElementById("topbar-menu-mobile");
+
+burgerElt.addEventListener("click", function(e){
+    topbarMenuElt.classList.toggle("no-show");
+    burgerElt.classList.toggle("change");
+    console.log("clic");
+})
