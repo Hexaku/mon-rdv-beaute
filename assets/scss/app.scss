@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Roboto, sans-serif;
 }
 
 a {
@@ -179,7 +180,7 @@ a {
   height: auto;
 }
 
-.category-content {
+.category-button {
   width: 70%;
   margin: -35px auto 60px auto;
   padding: 20px 0;
@@ -212,18 +213,83 @@ a {
 .article-title {
   font-size: 27px;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .article-image {
   height: 250px;
   width: 250px;
   border-radius: 50%;
+  margin-bottom: 40px;
 }
 
 .article-content {
   border: 1px solid #4e555b;
   border-radius: 15px;
   padding: 20px;
+}
+
+.article-button {
+  width: 70%;
+}
+
+.footer {
+  font-family: "Libre Baskerville";
+  margin-top: 40px;
+  text-align: center;
+}
+
+.higher-footer {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0 20px;
+}
+
+.footer-description {
+  margin-bottom: 15px;
+}
+
+.footer-description-logo {
+  width: 250px;
+  height: auto;
+}
+
+.footer-socials-title {
+  display: none;
+}
+
+.footer-socials-icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-socials img {
+  width: 60px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.footer-newsletter {
+  display: none;
+}
+
+.lower-footer {
+  background-color: rgba(0, 0, 0, 0.82);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 10px 20px;
+}
+
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.footer-wild {
+  font-size: 14px;
 }
 
 /* TABLET AND DESKTOP PART */
@@ -239,6 +305,20 @@ a {
   .main {
     margin: 0 50px;
   }
+
+  .footer-description-content {
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .footer-socials-icons {
+    justify-content: center;
+    img {
+      margin: 15px 20px;
+    }
+  }
+
 }
 
 @media only screen and(min-width:750px) {
@@ -316,6 +396,59 @@ a {
   .filter-submit {
     width: 100px;
   }
+
+  .article-flex {
+    width: 600px;
+  }
+
+  .higher-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px 50px;
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footer-socials-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    img {
+      margin: 0 10px;
+    }
+  }
+
+  .footer-socials-title {
+    display: block;
+    font-family: "Libre Baskerville";
+  }
+
+  .lower-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+  }
+
+  .footer-copyright {
+    flex-direction: row;
+    margin: 0;
+    a {
+      margin: 0 8px;
+    }
+  }
+
+  .footer-wild {
+    font-size: 16px;
+  }
 }
 
 @media only screen and (min-width: 1250px){
@@ -361,6 +494,52 @@ a {
 
   .category-content {
     font-size: 22px;
+  }
+
+  .article-flex {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    width: 1000px;
+  }
+
+  .article-content {
+    max-width: 500px;
+  }
+
+  .article-button {
+    width: 50%;
+  }
+
+  .footer-newsletter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-newsletter-form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-newsletter-title {
+    font-family: "Libre Baskerville";
+    margin-bottom: 30px;
+  }
+
+  .footer-newsletter-input {
+    border: 1px solid black;
+    border-radius: 10px 0 0 10px;
+    padding: 10px;
+  }
+
+  .footer-newsletter-submit {
+    background-color: #FFBD14;
+    border: 1px solid black;
+    border-radius: 0 10px 10px 0;
+    padding: 10px;
   }
 }
 

@@ -48,24 +48,25 @@
                 <input class="filter-input" type="text" placeholder="Votre ville">
                 <button class="filter-submit" type="submit" >
                     <span>Rechercher</span>
-                    <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}"/>
+                    <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
                 </button>
             </form>
         </div>
     </header>
+
     <main class="main">
         <div class="categories-container">
             <div class="category">
                 <img src="{{ asset('/build/hairstyle2.jpeg') }}" class="category-image"/>
-                <a href="#"><div class="category-content">CHOISIR VOTRE PRESTATION</div></a>
+                <a href="#"><div class="category-button">CHOISIR VOTRE PRESTATION</div></a>
             </div>
             <div class="category">
                 <img src="{{ asset('/build/massage3.jpeg') }}" class="category-image"/>
-                <a href="#"><div class="category-content">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
+                <a href="#"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
                 <img src="{{ asset('/build/contact.jpeg')  }}" class="category-image"/>
-                <a href="#"><div class="category-content">CONTACTEZ-NOUS</div></a>
+                <a href="#"><div class="category-button">CONTACTEZ-NOUS</div></a>
             </div>
         </div>
         <div class="black-line"></div>
@@ -73,9 +74,48 @@
             <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
             <div class="article-flex">
                 <img class="article-image" src="{{ asset('/build/hairstyle.jpeg')  }}"/>
-                <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui. Mauris quam ante, aliquet et tristique non, gravida quis diam. Proin in dui quis erat vestibulum porta. Etiam sit amet rhoncus eros. Fusce consectetur tellus purus, ut vestibulum libero hendrerit id. Vestibulum eu congue neque, quis suscipit metus. Vestibulum egestas turpis libero, nec lobortis turpis iaculis eget. Praesent vitae porta turpis.</p>
-                <a href="#"><div class="category-content">LIRE L'ARTICLE</div></a>
+                <div>
+                    <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui. Mauris quam ante, aliquet et tristique non, gravida quis diam. Proin in dui quis erat vestibulum porta. Etiam sit amet rhoncus eros. Fusce consectetur tellus purus, ut vestibulum libero hendrerit id. Vestibulum eu congue neque, quis suscipit metus. Vestibulum egestas turpis libero, nec lobortis turpis iaculis eget. Praesent vitae porta turpis.</p>
+                    <a href="#"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+                </div>
             </div>
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="higher-footer">
+            <div class="footer-description">
+                <img class="footer-description-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo mon RDV Beauté"/>
+                <p class="footer-description-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui.</p>
+            </div>
+            <div class="footer-socials">
+                <h4 class="footer-socials-title">Suivez-nous !</h4>
+                <div class="footer-socials-icons">
+                    <img src="{{ asset('/build/icon-facebook.png')  }}" alt="Logo Facebook"/>
+                    <img src="{{ asset('/build/icon-insta.png')  }}" alt="Logo Instagram"/>
+                    <img src="{{ asset('/build/icon-twitter.png')  }}" alt="Logo Twitter"/>
+                    <img src="{{ asset('/build/icon-youtube.png')  }}" alt="Logo Youtube"/>
+                </div>
+            </div>
+            <div class="footer-newsletter">
+                <h4 class="footer-newsletter-title">Notre Actualité</h4>
+                <form class="footer-newsletter-form">
+                    <input class=" footer-newsletter-input" type="text" placeholder="Entrez votre e-mail">
+                    <button class="footer-newsletter-submit" type="submit" >
+                        <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="lower-footer">
+            <div class="footer-copyright">
+                <a href="#">Termes & Conditions</a>
+                <a href="#">Informations sur l’entreprise</a>
+                <a href="#">Copyright</a>
+            </div>
+            <div class="footer-wild">
+                Built with ❤️ by Wild Code School
+            </div>
+        </div>
+    </footer>
 {% endblock %}
