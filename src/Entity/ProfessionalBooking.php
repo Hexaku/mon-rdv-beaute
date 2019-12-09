@@ -32,7 +32,8 @@ class ProfessionalBooking
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Professional", inversedBy="professionalBooking", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Professional", inversedBy="professionalBooking",
+     *     cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $professional;
