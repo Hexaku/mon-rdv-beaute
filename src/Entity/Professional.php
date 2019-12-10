@@ -54,12 +54,12 @@ class Professional
     private $services;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
      */
     private $businessHour;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ProfessionalBooking",
+     * @ORM\OneToMany(targetEntity="App\Entity\ProfessionalBooking",
      *     mappedBy="professional", cascade={"persist", "remove"})
      */
     private $professionalBooking;

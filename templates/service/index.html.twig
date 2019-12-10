@@ -28,9 +28,9 @@
                 <td>{{ service.slogan }}</td>
                 <td>{{ service.description }}</td>
                 <td>{{ service.image }}</td>
-                <td>{{ service.serviceType }}</td>
-                <td>{{ service.intervalTime ? service.intervalTime|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ service.duration ? service.duration|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ service.serviceType.type }}</td>
+                <td>{{ service.intervalTime}}</td>
+                <td>{{ service.duration}}</td>
                 <td>{{ service.area }}</td>
                 <td>
                     <a href="{{ path('service_show', {'id': service.id}) }}">show</a>

@@ -2,35 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Service;
+use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ServiceType extends AbstractType
+class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
-            ->add('slogan')
             ->add('description')
             ->add('image')
-            ->add('serviceType', null, ["choice_label" => "type"])
-            ->add('intervalTime')
-            ->add('duration')
-            ->add('area')
-            ->add('category', null, ["choice_label" => "name"])
-            ->add('professional', null, ["choice_label" => "name"])
-            ->add('member')
-            ->add('price')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Service::class,
+            'data_class' => Article::class,
         ]);
     }
 }

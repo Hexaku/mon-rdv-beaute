@@ -81,6 +81,11 @@ class Service
      */
     private $serviceType;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $price;
+
     public function __construct()
     {
         $this->prices = new ArrayCollection();
@@ -265,6 +270,18 @@ class Service
     public function setServiceType(?ServiceType $serviceType): self
     {
         $this->serviceType = $serviceType;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

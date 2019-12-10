@@ -17,11 +17,11 @@
             </tr>
             <tr>
                 <th>OpenTime</th>
-                <td>{{ business_hour.openTime ? business_hour.openTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ business_hour.openTime ? business_hour.openTime|date('H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>CloseTime</th>
-                <td>{{ business_hour.closeTime ? business_hour.closeTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ business_hour.closeTime ? business_hour.closeTime|date('H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
