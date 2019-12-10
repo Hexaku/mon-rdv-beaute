@@ -18,8 +18,7 @@ class BusinessHourController extends AbstractController
     /**
      * @Route("/", name="business_hour_index", methods={"GET"})
      */
-    public function index(BusinessHourRepository $businessHourRepository)
-    : Response
+    public function index(BusinessHourRepository $businessHourRepository): Response
     {
         return $this->render('business_hour/index.html.twig', [
             'business_hours' => $businessHourRepository->findAll(),

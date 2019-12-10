@@ -18,8 +18,7 @@ class ProfessionalController extends AbstractController
     /**
      * @Route("/", name="professional_index", methods={"GET"})
      */
-    public function index(ProfessionalRepository $professionalRepository)
-    : Response
+    public function index(ProfessionalRepository $professionalRepository): Response
     {
         return $this->render('professional/index.html.twig', [
             'professionals' => $professionalRepository->findAll(),
