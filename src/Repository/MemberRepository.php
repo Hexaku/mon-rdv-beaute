@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Member;
+use App\Entity\Customer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Member|null find($id, $lockMode = null, $lockVersion = null)
- * @method Member|null findOneBy(array $criteria, array $orderBy = null)
- * @method Member[]    findAll()
- * @method Member[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Customer|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Customer|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Customer[]    findAll()
+ * @method Customer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class MemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Member::class);
+        parent::__construct($registry, Customer::class);
     }
 
     // /**
-    //  * @return Member[] Returns an array of Member objects
+    //  * @return Customer[] Returns an array of Customer objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class MemberRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Member
+    public function findOneBySomeField($value): ?Customer
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.exampleField = :val')

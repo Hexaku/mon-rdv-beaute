@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BusinessHour{% endblock %}
+
+{% block body %}
+    <h1>BusinessHour</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ business_hour.id }}</td>
+            </tr>
+            <tr>
+                <th>Day</th>
+                <td>{{ business_hour.day }}</td>
+            </tr>
+            <tr>
+                <th>OpenTime</th>
+                <td>{{ business_hour.openTime ? business_hour.openTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CloseTime</th>
+                <td>{{ business_hour.closeTime ? business_hour.closeTime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('business_hour_index') }}">back to list</a>
+
+    <a href="{{ path('business_hour_edit', {'id': business_hour.id}) }}">edit</a>
+
+    {{ include('business_hour/_delete_form.html.twig') }}
+{% endblock %}

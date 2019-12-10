@@ -39,7 +39,7 @@ class Professional
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=10)
      */
     private $phone;
 

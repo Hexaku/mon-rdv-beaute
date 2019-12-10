@@ -39,17 +39,12 @@ class Service
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $serviceType;
-
-    /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
      */
     private $intervalTime;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
      */
     private $duration;
 
@@ -76,9 +71,15 @@ class Service
     private $professional;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Member", inversedBy="services")
+     * @ORM\ManyToMany(targetEntity="Customer", inversedBy="services")
      */
     private $member;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceType", inversedBy="services")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $serviceType;
 
     public function __construct()
     {
@@ -139,36 +140,24 @@ class Service
         return $this;
     }
 
-    public function getServiceType(): ?string
-    {
-        return $this->serviceType;
-    }
-
-    public function setServiceType(string $serviceType): self
-    {
-        $this->serviceType = $serviceType;
-
-        return $this;
-    }
-
-    public function getIntervalTime(): ?\DateTimeInterface
+    public function getIntervalTime()
     {
         return $this->intervalTime;
     }
 
-    public function setIntervalTime(\DateTimeInterface $intervalTime): self
+    public function setIntervalTime($intervalTime): self
     {
         $this->intervalTime = $intervalTime;
 
         return $this;
     }
 
-    public function getDuration(): ?\DateTimeInterface
+    public function getDuration()
     {
         return $this->duration;
     }
 
-    public function setDuration(\DateTimeInterface $duration): self
+    public function setDuration($duration): self
     {
         $this->duration = $duration;
 
@@ -243,14 +232,14 @@ class Service
     }
 
     /**
-     * @return Collection|Member[]
+     * @return Collection|Customer[]
      */
     public function getMember(): Collection
     {
         return $this->member;
     }
 
-    public function addMember(Member $member): self
+    public function addMember(Customer $member): self
     {
         if (!$this->member->contains($member)) {
             $this->member[] = $member;
@@ -259,11 +248,23 @@ class Service
         return $this;
     }
 
-    public function removeMember(Member $member): self
+    public function removeMember(Customer $member): self
     {
         if ($this->member->contains($member)) {
             $this->member->removeElement($member);
         }
+
+        return $this;
+    }
+
+    public function getServiceType(): ?ServiceType
+    {
+        return $this->serviceType;
+    }
+
+    public function setServiceType(?ServiceType $serviceType): self
+    {
+        $this->serviceType = $serviceType;
 
         return $this;
     }
