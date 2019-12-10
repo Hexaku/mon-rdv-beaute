@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
  */
-class Member
+class Customer
 {
     /**
      * @ORM\Id()
@@ -39,7 +39,7 @@ class Member
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=10)
      */
     private $phone;
 

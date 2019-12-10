@@ -22,17 +22,17 @@ class BusinessHour
     private $day;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="time")
      */
     private $openTime;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="time")
      */
     private $closeTime;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Professional", inversedBy="businessHour", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="businessHour", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $professional;
@@ -54,24 +54,24 @@ class BusinessHour
         return $this;
     }
 
-    public function getOpenTime(): ?\DateTimeInterface
+    public function getOpenTime()
     {
         return $this->openTime;
     }
 
-    public function setOpenTime(\DateTimeInterface $openTime): self
+    public function setOpenTime($openTime): self
     {
         $this->openTime = $openTime;
 
         return $this;
     }
 
-    public function getCloseTime(): ?\DateTimeInterface
+    public function getCloseTime()
     {
         return $this->closeTime;
     }
 
-    public function setCloseTime(\DateTimeInterface $closeTime): self
+    public function setCloseTime($closeTime): self
     {
         $this->closeTime = $closeTime;
 
