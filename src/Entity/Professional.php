@@ -57,12 +57,13 @@ class Professional
      * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
      */
     private $businessHour;
-
+    /*
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProfessionalBooking",
      *     mappedBy="professional", cascade={"persist", "remove"})
      */
-    private $professionalBooking;
+
+    //private $professionalBooking;
 
     public function __construct()
     {
@@ -193,7 +194,7 @@ class Professional
 
         return $this;
     }
-
+    /*
     public function getProfessionalBooking(): ?ProfessionalBooking
     {
         return $this->professionalBooking;
@@ -210,4 +211,5 @@ class Professional
 
         return $this;
     }
+    */
 }
