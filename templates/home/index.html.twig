@@ -24,7 +24,12 @@
                 </div>
                 <div class="topbar-container-connexion">
                     <img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
-                    <a href="#" class="topbar-connexion-desktop">CONNEXION</a>
+                    {% if app.user %}
+                        {{ app.user.email }}
+                        <a href="{{ path('app_logout') }}"> Se déconnecter</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
+                    {% endif %}
                 </div>
             </div>
             <nav class="topbar-menu topbar-menu-mobile no-show" id="topbar-menu-mobile">
