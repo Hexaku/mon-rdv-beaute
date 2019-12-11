@@ -47,5 +47,5 @@ security:
         - { path: ^/servicetype, roles: ROLE_ADMIN }
 
     role_hierarchy:
-        ROLE_SUBSCRIBER: ROLE_USER
-        ROLE_ADMIN:  ROLE_SUBSCRIBER
+        ROLE_PRESTATAIRE: ROLE_USER
+        ROLE_ADMIN:  ROLE_PRESTATAIRE
