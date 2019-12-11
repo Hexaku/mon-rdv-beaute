@@ -1,5 +1,14 @@
-{% extends "base.html.twig" %}
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Rendez-Vous Beauté{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('home') }}
+    {% endblock %}
+</head>
+<body>
 {% block body %}
     <header class="header">
         <div class="layer"></div>
@@ -127,3 +136,10 @@
         </div>
     </footer>
 {% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>
+
