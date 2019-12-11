@@ -2,13 +2,13 @@
 <header class="header">
         <div class="topbar">
             <div class="mobile">
-                <img class="topbar-main-logo" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/>
+                <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
             </div>
             <nav class="topbar-menu topbar-menu-desktop">
-                <a href="#">PRESTATIONS</a>
+                <a href="{{ path('category_index') }}">PRESTATIONS</a>
                 <a href="#">JOURNEE BIEN-ETRE</a>
                 <a href="#">A PROPOS</a>
-                <a href="#">CONTACT</a>
+                <a href="{{ path('contact') }}">CONTACT</a>
             </nav>
             <div class="topbar-burger" id="burger">
                 <div class="bar1"></div>
@@ -16,7 +16,7 @@
                 <div class="bar3"></div>
             </div>
             <div >
-                <img class="topbar-main-logo desktop" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/>
+                <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
             </div>
             <div class="topbar-container-connexion">
                 <img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
@@ -24,18 +24,18 @@
             </div>
         </div>
         <nav class="topbar-menu topbar-menu-mobile no-show" id="topbar-menu-mobile">
-            <a href="#">Prestations</a>
+            <a href="{{ path('category_index') }}">Prestations</a>
             <div class="white-line"></div>
             <a href="#">Journée Bien-Être</a>
             <div class="white-line"></div>
             <a href="#">A propos</a>
             <div class="white-line"></div>
-            <a href="#">Contact</a>
+            <a href="{{ path('contact') }}">Contact</a>
         </nav>
         <nav class="topbar-menu topbar-menu-tablet">
-            <a href="#">PRESTATIONS</a>
+            <a href="{{ path('category_index') }}">PRESTATIONS</a>
             <a href="#">JOURNEE BIEN-ETRE</a>
             <a href="#">A PROPOS</a>
-            <a href="#">CONTACT</a>
+            <a href="{{ path('contact') }}">CONTACT</a>
         </nav>
 </header>
