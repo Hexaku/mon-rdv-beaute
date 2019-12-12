@@ -20,7 +20,7 @@
                 <nav class="topbar-menu topbar-menu-desktop">
                     <a href="{{ path('category_index') }}">PRESTATIONS</a>
                     <a href="#">JOURNEE BIEN-ETRE</a>
-                    <a href="#">A PROPOS</a>
+                    <a href="{{ path('about') }}">A PROPOS</a>
                     <a href="{{ path('contact') }}">CONTACT</a>
                 </nav>
                 <div class="topbar-burger" id="burger">
@@ -32,13 +32,15 @@
                     <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
                 </div>
                 <div class="topbar-container-connexion">
-                    <img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
-                    {% if app.user %}
-                        {{ app.user.email }}
-                        <a href="{{ path('app_logout') }}"> Se déconnecter</a>
-                    {% else %}
-                        <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
-                    {% endif %}
+                    <a href="#"><img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion"></a>
+                    <div class="topbar-container-connexion-flex">
+                        {% if app.user %}
+                            <span class="account">{{ app.user.email }}</span>
+                            <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop"> Se déconnecter</a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <nav class="topbar-menu topbar-menu-mobile no-show" id="topbar-menu-mobile">
@@ -46,14 +48,14 @@
                 <div class="white-line"></div>
                 <a href="#">Journée Bien-Être</a>
                 <div class="white-line"></div>
-                <a href="#">A propos</a>
+                <a href="{{ path('about') }}">A propos</a>
                 <div class="white-line"></div>
                 <a href="{{ path('contact') }}">Contact</a>
             </nav>
             <nav class="topbar-menu topbar-menu-tablet">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>
                 <a href="#">JOURNEE BIEN-ETRE</a>
-                <a href="#">A PROPOS</a>
+                <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
             </nav>
             <div>
@@ -72,14 +74,29 @@
     </header>
 
     <main class="main">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="{{ asset('/build/logo-noir.svg') }}"/>
+                        <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Merci de compléter le formulaire</p>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="categories-container">
             <div class="category">
                 <img src="{{ asset('/build/hairstyle2.jpeg') }}" class="category-image"/>
                 <a href="#"><div class="category-button">CHOISIR VOTRE PRESTATION</div></a>
             </div>
             <div class="category">
-                <img src="{{ asset('/build/massage3.jpeg') }}" class="category-image"/>
-                <a href="#"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
+                <img src="{{ asset('/build/massage-tools.png') }}" class="category-image"/>
+                <a href="#" data-toggle="modal" data-target="#exampleModal"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
                 <img src="{{ asset('/build/contact.jpeg')  }}" class="category-image"/>
