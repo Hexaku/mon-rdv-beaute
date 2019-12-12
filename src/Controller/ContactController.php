@@ -26,11 +26,17 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
             $email = (new Email())
                 ->from('akuserukid@gmail.com')
                 ->to('akuserukid@gmail.com')
-                ->subject('Sujet du mail')
-                ->html('<p>Contenu du mail</p>');
+                ->subject('Vous avez reçu un message depuis Mon RDV Beauté !')
+                ->html($this->renderView("contact/mail.html.twig", [
+                    "message" => $data["Message"],
+                    "prenom" => $data["Prenom"],
+                    "nom" => $data["Nom"],
+                    "email" => $data["Email"],
+                ]));
 
             $mailer->send($email);
 
