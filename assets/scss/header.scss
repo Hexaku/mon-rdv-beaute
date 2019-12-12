@@ -144,6 +144,11 @@ a:hover {
   display: none !important;
 }
 
+.account {
+  color: black !important;
+  display: none;
+}
+
 /* TABLET AND DESKTOP PART */
 @media only screen and(min-width:500px){
   .topbar-main-logo {
@@ -156,6 +161,9 @@ a:hover {
     width: 350px;
   }
 
+  .account {
+    display: block;
+  }
 }
 
 @media only screen and(min-width:850px) {
