@@ -32,10 +32,10 @@ class ContactController extends AbstractController
                 ->to('akuserukid@gmail.com')
                 ->subject('Vous avez reçu un message depuis Mon RDV Beauté !')
                 ->html($this->renderView("contact/mail.html.twig", [
-                    "message" => $data["Message"],
-                    "prenom" => $data["Prenom"],
-                    "nom" => $data["Nom"],
-                    "email" => $data["Email"],
+                    "message" => $data["message"],
+                    "prenom" => $data["prenom"],
+                    "nom" => $data["nom"],
+                    "email" => $data["email"],
                 ]));
 
             $mailer->send($email);

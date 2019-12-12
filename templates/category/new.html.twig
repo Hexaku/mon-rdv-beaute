@@ -3,9 +3,9 @@
 {% block title %}New Category{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
-
-    {{ include('category/_form.html.twig') }}
-
-    <a href="{{ path('category_index') }}">back to list</a>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="contact-form">
+        <h2 class="title">Ajouter une nouvelle catégorie</h2>
+        {{ include('category/_form.html.twig') }}
+    </div>
 {% endblock %}

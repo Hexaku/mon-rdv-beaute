@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Article{% endblock %}
+{% block title %}Nouvel Article{% endblock %}
 
 {% block body %}
-    <h1>Create new Article</h1>
-
-    {{ include('article/_form.html.twig') }}
-
-    <a href="{{ path('article_index') }}">back to list</a>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <h1 class="title">Créer un nouvel Article</h1>
+    <div class="contact-form">
+        {{ include('article/_form.html.twig') }}
+    </div>
 {% endblock %}
