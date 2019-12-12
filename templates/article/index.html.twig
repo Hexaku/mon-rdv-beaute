@@ -3,19 +3,8 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="contact-form">
+        <h2 class="title">Tous les articles</h2>
         {% for article in articles %}
             <tr>
                 <td>{{ article.id }}</td>
@@ -28,12 +17,7 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+            <p colspan="5">Il n'y a pas d'articles !</p>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('article_new') }}">Create new</a>
+    </div>
 {% endblock %}
