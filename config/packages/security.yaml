@@ -39,7 +39,6 @@ security:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/article, roles: ROLE_ADMIN }
         - { path: ^/business, roles: ROLE_ADMIN }
-        - { path: ^/category, roles: ROLE_ADMIN }
         - { path: ^/customer, roles: ROLE_ADMIN }
         - { path: ^/member, roles: ROLE_ADMIN }
         - { path: ^/professional, roles: ROLE_ADMIN }

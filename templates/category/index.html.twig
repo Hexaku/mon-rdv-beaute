@@ -8,11 +8,13 @@
     <div class="contact-form">
         <div class="subtitle">
             {% for category in categories %}
-                <a href="{{ path('category_show', {'id': category.id}) }}" class="salmon-link">{{ category.name }}</a>
+                <a href="{{ path('category_show', {'slug': category.slug}) }}" class="salmon-link">{{ category.name }}</a>
             {% else %}
                 <p>Il n'y a pas de catégories !</p>
             {% endfor %}
-            <div><a href="{{ path('category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
+            {% if app.user('ROLE_ADMIN') %}
+                <div><a href="{{ path('category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
+            {% endif %}
         </div>
 
     </div>
