@@ -24,6 +24,11 @@ class Category
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $slug;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="category")
      */
     private $services;
@@ -77,6 +82,18 @@ class Category
                 $service->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
