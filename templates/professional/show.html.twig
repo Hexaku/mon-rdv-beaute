@@ -35,6 +35,14 @@
                 <th>Image</th>
                 <td>{{ professional.image }}</td>
             </tr>
+            <tr>
+                <th>FileName</th>
+                {% if professional.filename %}
+                    <img src="{{ vich_uploader_asset(professional, 'imageFile') }}">{{ professional.filename }}</img>
+                {% endif %}
+            </tr>
+
+
         </tbody>
     </table>
 
