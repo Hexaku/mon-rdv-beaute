@@ -36,7 +36,8 @@
                     <div class="topbar-container-connexion-flex">
                         {% if app.user %}
                             <span class="account">{{ app.user.email }}</span>
-                            <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop"> Se déconnecter</a>
+                            <a href="{{ path('admin_index') }}" class="topbar-connexion-desktop"><button class="btn btn-link">Espace admin</button></a>
+                            <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop">Se déconnecter</a>
                         {% else %}
                             <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
                         {% endif %}
