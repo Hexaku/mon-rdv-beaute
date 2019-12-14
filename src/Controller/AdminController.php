@@ -4,9 +4,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\BusinessHour;
 use App\Entity\Category;
 use App\Entity\Professional;
 use App\Form\ArticleType;
+use App\Form\BusinessHourType;
 use App\Form\CategoryType;
 use App\Form\ProfessionalType;
 use App\Repository\ArticleRepository;
@@ -232,5 +234,28 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('admin_professional');
+    }
+
+    /**
+     * @Route("/business-hours/{id}/new", name="admin_business_hour_new", methods={"GET","POST"})
+     */
+    public function businessHoursNew(Request $request): Response
+    {
+        $businessHour = new BusinessHour();
+        $form = $this->createForm(BusinessHourType::class, $businessHour);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($businessHour);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('business_hour_index');
+        }
+
+        return $this->render('business_hour/new.html.twig', [
+            'business_hour' => $businessHour,
+            'form' => $form->createView(),
+        ]);
     }
 }
