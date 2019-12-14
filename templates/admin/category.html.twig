@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <h2 class="h2 mb-3 text-gray-800">Liste des catégories</h2>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Catégories</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <a href="{{ path("admin_category_new") }}"><button class="btn btn-success btn-add">Ajouter une catégorie</button></a>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{category.name}}</a>
+                                <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        <div class="flex-buttons">
+                                            <a class="collapse-item" href="{{ path('admin_category_edit', {'id': category.id}) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            {{ include('admin/_category_delete_form.html.twig') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <h4>Il n'y a pas de catégories !</h4>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

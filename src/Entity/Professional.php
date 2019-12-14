@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProfessionalRepository")
@@ -20,16 +21,20 @@ class Professional
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $place;
 
@@ -40,6 +45,7 @@ class Professional
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank
      */
     private $phone;
 
@@ -57,13 +63,6 @@ class Professional
      * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
      */
     private $businessHour;
-    /*
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProfessionalBooking",
-     *     mappedBy="professional", cascade={"persist", "remove"})
-     */
-
-    //private $professionalBooking;
 
     public function __construct()
     {
@@ -194,22 +193,4 @@ class Professional
 
         return $this;
     }
-    /*
-    public function getProfessionalBooking(): ?ProfessionalBooking
-    {
-        return $this->professionalBooking;
-    }
-
-    public function setProfessionalBooking(ProfessionalBooking $professionalBooking): self
-    {
-        $this->professionalBooking = $professionalBooking;
-
-        // set the owning side of the relation if necessary
-        if ($professionalBooking->getProfessional() !== $this) {
-            $professionalBooking->setProfessional($this);
-        }
-
-        return $this;
-    }
-    */
 }
