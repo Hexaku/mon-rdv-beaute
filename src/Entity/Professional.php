@@ -57,13 +57,6 @@ class Professional
      * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
      */
     private $businessHour;
-    /*
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProfessionalBooking",
-     *     mappedBy="professional", cascade={"persist", "remove"})
-     */
-
-    //private $professionalBooking;
 
     public function __construct()
     {
@@ -194,22 +187,4 @@ class Professional
 
         return $this;
     }
-    /*
-    public function getProfessionalBooking(): ?ProfessionalBooking
-    {
-        return $this->professionalBooking;
-    }
-
-    public function setProfessionalBooking(ProfessionalBooking $professionalBooking): self
-    {
-        $this->professionalBooking = $professionalBooking;
-
-        // set the owning side of the relation if necessary
-        if ($professionalBooking->getProfessional() !== $this) {
-            $professionalBooking->setProfessional($this);
-        }
-
-        return $this;
-    }
-    */
 }

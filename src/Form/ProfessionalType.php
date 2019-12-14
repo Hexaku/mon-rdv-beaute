@@ -19,7 +19,6 @@ class ProfessionalType extends AbstractType
             ->add('phone')
             ->add('image')
             ->add('businessHour')
-            ->add('professionalBooking')
         ;
     }
 

@@ -1,0 +1,11 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Modifier Categorie{% endblock %}
+
+{% block content %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="contact-form">
+        <h2 class="title">Modifier une catégorie</h2>
+        {{ include('category/_form.html.twig') }}
+    </div>
+{% endblock %}
