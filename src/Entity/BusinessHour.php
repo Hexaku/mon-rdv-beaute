@@ -33,7 +33,7 @@ class BusinessHour
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="businessHour", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $professional;
 

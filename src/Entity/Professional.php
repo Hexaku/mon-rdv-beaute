@@ -55,6 +55,7 @@ class Professional
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
+     *
      */
     private $businessHour;
 
