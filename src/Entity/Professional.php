@@ -67,17 +67,12 @@ class Professional
     private $phone;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $image;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="professional", orphanRemoval=true)
      */
     private $services;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", orphanRemoval=true)
      */
     private $businessHour;
 
@@ -152,18 +147,6 @@ class Professional
     public function setPhone(int $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
 
         return $this;
     }

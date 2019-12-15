@@ -3,12 +3,23 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BusinessHourRepository")
  */
 class BusinessHour
 {
+    const DAYS = [
+        1 => "Lundi",
+        2 => "Mardi",
+        3 => "Mercredi",
+        4 => "Jeudi",
+        5 => "Vendredi",
+        6 => "Samedi",
+        7 => "Dimanche"
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,6 +29,7 @@ class BusinessHour
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(min="1", max="7")
      */
     private $day;
 
@@ -32,7 +44,7 @@ class BusinessHour
     private $closeTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="businessHour", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="businessHour")
      * @ORM\JoinColumn(nullable=true)
      */
     private $professional;
@@ -52,6 +64,11 @@ class BusinessHour
         $this->day = $day;
 
         return $this;
+    }
+
+    public function getDayName(): string
+    {
+        return self::DAYS[$this->day];
     }
 
     public function getOpenTime()

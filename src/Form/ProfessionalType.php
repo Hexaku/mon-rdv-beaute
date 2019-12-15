@@ -13,13 +13,12 @@ class ProfessionalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('email')
-            ->add('place')
-            ->add('description')
-            ->add('phone')
-            ->add('image')
-            ->add('imageFile', FileType::class, ['required' => false])
+            ->add('name', null, ["label" => "Nom"])
+            ->add('email', null, ["label" => "Email"])
+            ->add('place', null, ["label" => "Adresse"])
+            ->add('description', null, ["label" => "Activité"])
+            ->add('phone', null, ["label" => "Téléphone"])
+            ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
         ;
     }
 
