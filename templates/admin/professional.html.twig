@@ -45,7 +45,7 @@
                             <td>{{professional.place}}</td>
                             <td>{{professional.description}}</td>
                             <td>{{professional.phone}}</td>
-                            <td>{{professional.image}}</td>
+                            <td><img src="{{ vich_uploader_asset(professional, 'imageFile') }}" height="auto" width="200px"/></td>
                         </tr>
                     {% else %}
                         <h4>Il n'y a pas de professionnels !</h4>

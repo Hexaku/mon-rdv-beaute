@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProfessionalRepository")
+ * @Vich\Uploadable()
  */
 class Professional
 {
@@ -18,6 +23,18 @@ class Professional
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -50,19 +67,19 @@ class Professional
     private $phone;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $image;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="professional", orphanRemoval=true)
      */
     private $services;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", orphanRemoval=true)
      */
     private $businessHour;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $uploadedAt;
 
     public function __construct()
     {
@@ -134,18 +151,6 @@ class Professional
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Service[]
      */
@@ -191,6 +196,56 @@ class Professional
             $businessHour->setProfessional($this);
         }
 
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string|null $filename
+     * @return Professional
+     */
+    public function setFilename(?string $filename): Professional
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     * @return Professional
+     */
+    public function setImageFile(?File $imageFile): Professional
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
+
+    public function getUploadedAt(): ?\DateTimeInterface
+    {
+        return $this->uploadedAt;
+    }
+
+    public function setUploadedAt(\DateTimeInterface $uploadedAt): self
+    {
+        $this->uploadedAt = $uploadedAt;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->uploadedAt = new \DateTime('now');
+        }
         return $this;
     }
 }

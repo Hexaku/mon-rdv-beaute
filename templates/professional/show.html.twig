@@ -31,12 +31,12 @@
                 <th>Phone</th>
                 <td>{{ professional.phone }}</td>
             </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ professional.image }}</td>
-            </tr>
         </tbody>
     </table>
+    <p>FileName</p>
+    {% if professional.filename %}
+        <img src="{{ vich_uploader_asset(professional, 'imageFile') }}" width="300px" height="auto">{{ professional.filename }}</img>
+    {% endif %}
 
     <a href="{{ path('professional_index') }}">back to list</a>
 
