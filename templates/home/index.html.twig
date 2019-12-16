@@ -77,7 +77,7 @@
     </header>
 
     <main class="main">
-        <!-- Modal -->
+        <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -87,6 +87,13 @@
                     </div>
                     <div class="modal-body">
                         <p>Merci de compléter le formulaire</p>
+                        {{ form_start(form) }}
+                        {{ form_row(form.Name) }}
+                        {{ form_row(form.Email) }}
+                        {{ form_row(form.phone) }}
+                        <button type="submit" name="btnSearch">Envoyer</button>
+                        {{ form_end(form) }}
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
