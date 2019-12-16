@@ -12,8 +12,10 @@
             {% else %}
                 <p>Il n'y a pas de catégories !</p>
             {% endfor %}
-            {% if app.user('ROLE_ADMIN') %}
-                <div><a href="{{ path('category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
+            {% if app.user %}
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <div><a href="{{ path('category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
+                {% endif %}
             {% endif %}
         </div>
 
