@@ -12,6 +12,7 @@ use App\Form\BusinessHourType;
 use App\Form\CategoryType;
 use App\Form\ProfessionalType;
 use App\Repository\ArticleRepository;
+use App\Repository\BusinessHourRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProfessionalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -237,9 +238,19 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/business-hours/new", name="admin_business_hour_new", methods={"GET","POST"})
+     * @Route("/business-hour", name="admin_business_hour", methods={"GET"})
      */
-    public function businessHoursNew(Request $request): Response
+    public function businessHour(BusinessHourRepository $businessHourRepository): Response
+    {
+        return $this->render('admin/business_hour.html.twig', [
+            'business_hours' => $businessHourRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/business-hour/new", name="admin_business_hour_new", methods={"GET","POST"})
+     */
+    public function businessHourNew(Request $request): Response
     {
         $businessHour = new BusinessHour();
         $form = $this->createForm(BusinessHourType::class, $businessHour);
@@ -250,12 +261,46 @@ class AdminController extends AbstractController
             $entityManager->persist($businessHour);
             $entityManager->flush();
 
-            return $this->redirectToRoute('business_hour_index');
+            return $this->redirectToRoute('admin_business_hour');
         }
 
-        return $this->render('business_hour/new.html.twig', [
+        return $this->render('admin/business_hour_new.html.twig', [
             'business_hour' => $businessHour,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/business_hour/{id}/edit", name="admin_business_hour_edit", methods={"GET","POST"})
+     */
+    public function businessHourEdit(Request $request, BusinessHour $businessHour): Response
+    {
+        $form = $this->createForm(BusinessHourType::class, $businessHour);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_business_hour');
+        }
+
+        return $this->render('admin/business_hour_edit.html.twig', [
+            'business_hour' => $businessHour,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("business_hour/{id}", name="admin_business_hour_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, BusinessHour $businessHour): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$businessHour->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($businessHour);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_business_hour');
     }
 }
