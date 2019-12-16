@@ -237,7 +237,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/business-hours/{id}/new", name="admin_business_hour_new", methods={"GET","POST"})
+     * @Route("/business-hours/new", name="admin_business_hour_new", methods={"GET","POST"})
      */
     public function businessHoursNew(Request $request): Response
     {
