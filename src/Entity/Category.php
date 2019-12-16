@@ -26,7 +26,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
     private $slug;
 
