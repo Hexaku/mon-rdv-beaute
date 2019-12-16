@@ -14,6 +14,7 @@ use App\Form\ProfessionalType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProfessionalRepository;
+use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,13 +49,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/category/new", name="admin_category_new", methods={"GET","POST"})
      */
-    public function categoryNew(Request $request): Response
+    public function categoryNew(Request $request, Slugify $slugify): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($category->getName());
+            $category->setSlug($slug);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
@@ -71,12 +75,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/category/{id}/edit", name="admin_category_edit", methods={"GET","POST"})
      */
-    public function categoryEdit(Request $request, Category $category): Response
+    public function categoryEdit(Request $request, Category $category, Slugify $slugify): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($category->getName());
+            $category->setSlug($slug);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_category');
