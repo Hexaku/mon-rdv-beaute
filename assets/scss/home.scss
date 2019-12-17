@@ -22,7 +22,7 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: #D6A9A9;
 }
 
 /* Elements a afficher uniquement en desktop */
@@ -395,7 +395,7 @@ a:hover {
     justify-content: space-around;
     font-family: "Libre Baskerville", serif;
     font-size: 22px;
-    color: #D6A9A9;
+    color: white;
     margin-bottom: 200px;
     a {
       margin: 0 5px;
@@ -502,7 +502,7 @@ a:hover {
   .topbar-menu-desktop {
     display: block;
     font-family: "Libre Baskerville", serif;
-    color: #D6A9A9;
+    color: white;
     a {
       margin: 0 8px;
     }
