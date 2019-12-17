@@ -186,8 +186,14 @@ class AdminController extends AbstractController
     public function professionalNew(Request $request): Response
     {
         $professional = new Professional();
+        $businessHour = new BusinessHour();
+        $businessHour->setDay(1)
+            ->setCloseTime(new \DateTime())
+            ->setOpenTime(new \DateTime());
+        $professional->addBusinessHour($businessHour);
         $form = $this->createForm(ProfessionalType::class, $professional);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

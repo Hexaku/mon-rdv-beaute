@@ -22,4 +22,4 @@ const topbarMenuElt = document.getElementById("topbar-menu-mobile");
 burgerElt.addEventListener("click", function(e){
     topbarMenuElt.classList.toggle("no-show");
     burgerElt.classList.toggle("change");
-})
+});
