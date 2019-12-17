@@ -1828,6 +1828,7 @@ pre code {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     .table-responsive-sm > .table-bordered {
         border: 0;
     }
@@ -1840,6 +1841,7 @@ pre code {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     .table-responsive-md > .table-bordered {
         border: 0;
     }
@@ -1852,6 +1854,7 @@ pre code {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     .table-responsive-lg > .table-bordered {
         border: 0;
     }
@@ -1864,6 +1867,7 @@ pre code {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     .table-responsive-xl > .table-bordered {
         border: 0;
     }
@@ -2339,6 +2343,7 @@ textarea.form-control {
         justify-content: center;
         margin-bottom: 0;
     }
+
     .form-inline .form-group {
         display: flex;
         flex: 0 0 auto;
@@ -2346,18 +2351,22 @@ textarea.form-control {
         align-items: center;
         margin-bottom: 0;
     }
+
     .form-inline .form-control {
         display: inline-block;
         width: auto;
         vertical-align: middle;
     }
+
     .form-inline .form-control-plaintext {
         display: inline-block;
     }
+
     .form-inline .input-group,
     .form-inline .custom-select {
         width: auto;
     }
+
     .form-inline .form-check {
         display: flex;
         align-items: center;
@@ -2365,6 +2374,7 @@ textarea.form-control {
         width: auto;
         padding-left: 0;
     }
+
     .form-inline .form-check-input {
         position: relative;
         flex-shrink: 0;
@@ -2372,10 +2382,12 @@ textarea.form-control {
         margin-right: 0.25rem;
         margin-left: 0;
     }
+
     .form-inline .custom-control {
         align-items: center;
         justify-content: center;
     }
+
     .form-inline .custom-control-label {
         margin-bottom: 0;
     }
@@ -5207,6 +5219,7 @@ a.badge-dark:focus, a.badge-dark.focus {
     from {
         background-position: 1rem 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -5216,6 +5229,7 @@ a.badge-dark:focus, a.badge-dark.focus {
     from {
         background-position: 1rem 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -6380,6 +6394,7 @@ a.close.disabled {
     0% {
         transform: scale(0);
     }
+
     50% {
         opacity: 1;
     }
@@ -6389,6 +6404,7 @@ a.close.disabled {
     0% {
         transform: scale(0);
     }
+
     50% {
         opacity: 1;
     }
