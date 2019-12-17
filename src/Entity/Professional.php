@@ -70,7 +70,11 @@ class Professional
     private $services;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", orphanRemoval=true)
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\BusinessHour",
+     *     mappedBy="professional",
+     *     orphanRemoval=true,
+     *     cascade={"persist"})
      */
     private $businessHour;
 

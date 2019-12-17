@@ -18,7 +18,6 @@ class BusinessHourType extends AbstractType
             ->add('day', ChoiceType::class, ["choices" => $this->getChoices(), "label" => "Jour"])
             ->add('openTime', TimeType::class, ["label" => "Heure d'ouverture"])
             ->add('closeTime', TimeType::class, ["label" => "Heure de fermeture"])
-            ->add('professional', EntityType::class, ['choice_label' => 'name', "label" => "Professionnel"])
         ;
     }
 

@@ -21,12 +21,15 @@ class ProfessionalType extends AbstractType
             ->add('place', TextType::class, ["label" => "Adresse"])
             ->add('description', TextType::class, ["label" => "Activité"])
             ->add('phone', TextType::class, ["label" => "Téléphone"])
+            ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
             ->add('businessHour', CollectionType::class, [
                 'entry_type' => BusinessHourType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ])
-            ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
+
         ;
     }
 

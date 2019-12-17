@@ -1,4 +1,26 @@
+
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.place) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.imageFile) }}
+        <div class="flex-form">
+            <h5>Horaires</h5>
+            <div class="hours" data-prototype="{{ form_widget(form.businessHour.vars.prototype)|e('html_attr')}}">
+                {# iterate over each existing tag and render its only field: name #}
+                {% for hour in form.businessHour %}
+                    {{ form_row(hour) }}
+                {% endfor %}
+            </div>
+        </div>
     <button class="btn btn-success">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('embed') }}
+{% endblock %}
+
+
