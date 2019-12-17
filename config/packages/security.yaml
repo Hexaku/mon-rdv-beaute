@@ -47,7 +47,6 @@ security:
         - { path: ^/servicetype, roles: ROLE_ADMIN }
         - { path: ^/register/prestataire, roles: ROLE_ADMIN }
 
-
     role_hierarchy:
         ROLE_PRESTATAIRE: ROLE_USER
         ROLE_ADMIN:  ROLE_PRESTATAIRE
