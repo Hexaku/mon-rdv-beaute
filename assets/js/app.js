@@ -19,7 +19,7 @@ require('@fortawesome/fontawesome-free/js/all.js');
 const burgerElt = document.getElementById('burger');
 const topbarMenuElt = document.getElementById('topbar-menu-mobile');
 
-burgerElt.addEventListener('click', const (e) => {
+burgerElt.addEventListener('click', (e) => {
     topbarMenuElt.classList.toggle('no-show');
     burgerElt.classList.toggle('change');
 });
