@@ -195,11 +195,11 @@ a:hover {
     }
 
 
-    .topbar-connexion-desktop {
-        display: block;
-        font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
-    }
+  .topbar-connexion-desktop {
+    display: block;
+    font-family: "Libre Baskerville", serif;
+    color: #d18a8a
+  }
 
     /*.topbar-menu-tablet {
       text-align: center;
@@ -230,15 +230,14 @@ a:hover {
         display: none;
     }
 
-    .topbar-menu-desktop {
-        display: block;
-        font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
-
-        a {
-            margin: 0 8px;
-        }
+  .topbar-menu-desktop {
+    display: block;
+    font-family: "Libre Baskerville", serif;
+    color: #d18a8a;
+    a {
+      margin: 0 8px;
     }
+  }
 
     .mobile {
         display: block;

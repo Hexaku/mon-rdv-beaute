@@ -22,7 +22,7 @@ a {
 }
 
 a:hover {
-    color: white;
+  color: #D6A9A9;
 }
 
 /* Elements a afficher uniquement en desktop */
@@ -394,20 +394,19 @@ a:hover {
         display: none;
     }
 
-    .topbar-menu-tablet {
-        text-align: center;
-        position: relative;
-        display: flex;
-        justify-content: space-around;
-        font-family: "Libre Baskerville", serif;
-        font-size: 22px;
-        color: #D6A9A9;
-        margin-bottom: 200px;
-
-        a {
-            margin: 0 5px;
-        }
+  .topbar-menu-tablet {
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-family: "Libre Baskerville", serif;
+    font-size: 22px;
+    color: white;
+    margin-bottom: 200px;
+    a {
+      margin: 0 5px;
     }
+  }
 
     .topbar-connexion-desktop {
         display: block;
@@ -511,15 +510,14 @@ a:hover {
         display: none;
     }
 
-    .topbar-menu-desktop {
-        display: block;
-        font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
-
-        a {
-            margin: 0 8px;
-        }
+  .topbar-menu-desktop {
+    display: block;
+    font-family: "Libre Baskerville", serif;
+    color: white;
+    a {
+      margin: 0 8px;
     }
+  }
 
     .main-title {
         margin-top: 150px;
