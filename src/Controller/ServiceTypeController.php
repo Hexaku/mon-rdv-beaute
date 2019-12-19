@@ -18,10 +18,10 @@ class ServiceTypeController extends AbstractController
     /**
      * @Route("/", name="service_type_index", methods={"GET"})
      */
-    public function index(ServiceTypeRepository $serviceTypeRepository): Response
+    public function index(ServiceTypeRepository $serviceTypeRepo): Response
     {
         return $this->render('service_type/index.html.twig', [
-            'service_types' => $serviceTypeRepository->findAll(),
+            'service_types' => $serviceTypeRepo->findAll(),
         ]);
     }
 

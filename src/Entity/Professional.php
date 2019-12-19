@@ -244,7 +244,7 @@ class Professional
     {
         $this->uploadedAt = $uploadedAt;
         if ($this->imageFile instanceof UploadedFile) {
-            $this->uploadedAt = new \DateTime('now');
+            $this->uploadedAt = new DateTime('now');
         }
         return $this;
     }
