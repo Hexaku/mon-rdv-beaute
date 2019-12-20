@@ -17,7 +17,6 @@ class BusinessHourController extends AbstractController
 {
     /**
      * @Route("/", name="business_hour_index", methods={"GET"})
-     * @return Response
      */
     public function index(BusinessHourRepository $businessHourRepo): Response
     {

@@ -17,7 +17,6 @@ class ProfessionalController extends AbstractController
 {
     /**
      * @Route("/", name="professional_index", methods={"GET"})
-     * @return Response
      */
     public function index(ProfessionalRepository $professionalRepo): Response
     {

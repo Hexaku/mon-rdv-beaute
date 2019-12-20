@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class AdminCategoryController
- * @package App\Controller
  * @Route("/admin")
  */
 class AdminArticleController extends AbstractController

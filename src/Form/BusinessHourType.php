@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\BusinessHour;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +16,9 @@ class BusinessHourType extends AbstractType
     {
         $builder
             ->add('day', ChoiceType::class, ["choices" => $this->getChoices(), "label" => "Jour"])
-            ->add('openTime', null, ["label" => "Heure d'ouverture"])
-            ->add('closeTime', null, ["label" => "Heure de fermeture"])
-            ->add('professional', null, ['choice_label' => 'name', "label" => "Professionnel"])
+            ->add('openTime', TimeType::class, ["label" => "Heure d'ouverture"])
+            ->add('closeTime', TimeType::class, ["label" => "Heure de fermeture"])
+            ->add('professional', EntityType::class, ['choice_label' => 'name', "label" => "Professionnel"])
         ;
     }
 

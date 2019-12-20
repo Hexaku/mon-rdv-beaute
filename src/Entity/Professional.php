@@ -25,13 +25,11 @@ class Professional
     private $id;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
 
     /**
-     * @var File|null
      * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
      */
     private $imageFile;
