@@ -408,11 +408,15 @@ a:hover {
     }
   }
 
-    .topbar-connexion-desktop {
-        display: block;
-        font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
-    }
+  .topbar-burger {
+    display: none;
+  }
+
+  .topbar-connexion-desktop {
+    display: block;
+    font-family: "Libre Baskerville", serif;
+    color: #D6A9A9;
+  }
 
     .filter-form {
         display: flex;
