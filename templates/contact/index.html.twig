@@ -7,10 +7,13 @@
     <div class="contact-form">
             {% include "flash_message.html.twig" %}
             {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-primary">{{ button_label|default('Envoyer') }}</button>
+            <div class="form-flex">
+                {{ form_row(form.prenom) }}
+                {{ form_row(form.nom) }}
+            </div>
+            {{ form_row(form.email) }}
+            {{ form_row(form.message) }}
+            <button class="btn btn-success">{{ button_label|default('Envoyer') }}</button>
             {{ form_end(form) }}
     </div>
-
-
 {% endblock %}

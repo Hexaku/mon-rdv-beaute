@@ -194,26 +194,11 @@ a:hover {
         justify-content: center;
     }
 
-
-    .topbar-connexion-desktop {
-        display: block;
-        font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
-    }
-
-    /*.topbar-menu-tablet {
-      text-align: center;
-      position: relative;
-      display: flex;
-      justify-content: space-around;
-      font-family: "Libre Baskerville", serif;
-      font-size: 22px;
-      color: #D6A9A9;
-      margin-bottom: 200px;
-      a {
-        margin: 0 5px;
-      }
-    }*/
+  .topbar-connexion-desktop {
+    display: block;
+    font-family: "Libre Baskerville", serif;
+    color: #d18a8a
+  }
 }
 
 @media only screen and (min-width: 1250px) {
@@ -233,8 +218,7 @@ a:hover {
     .topbar-menu-desktop {
         display: block;
         font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
-
+        color: #d18a8a;
         a {
             margin: 0 8px;
         }
@@ -251,7 +235,6 @@ a:hover {
     .topbar-burger {
         display: none;
     }
-
 }
 
 @media only screen and (min-width: 1500px) {

@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <h2 class="title">Nous-rejoindre</h2>
+    <div class="contact-form description-block">
+        <h3 class="subtitle-pink">Vous êtes professionnel du bien-être et de la beauté ?</h3>
+        <p>Mon RDV Beauté vous offre plusieurs avantages afin d'optimiser votre travail et prendre le temps de chouchouter vos clients  !</p>
+        <ul>
+            <li class="bold">- Gagnez du temps sur la prise de rdv de vos clients grâce à l'outil de réservation en ligne</li>
+            <li class="bold">- Développez votre visibilité via le site monrdvbeaute.fr  et les réseaux sociaux</li>
+            <li class="bold">- Rejoignez  une communauté de professionnels bien-être et beauté</li>
+        </ul>
+        <p >Nous recherchons principalement des professionnels de la Coiffure, Massage et Esthétique.</p>
+        <p class="bold">Si vous souhaitez être référencé , veuillez compléter la fiche contact ci-dessous : </p>
+    </div>
+    <div class="contact-form">
+        {% include "flash_message.html.twig" %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">{{ button_label|default('Envoyer') }}</button>
+        {{ form_end(form) }}
+    </div>
+
+
+{% endblock %}

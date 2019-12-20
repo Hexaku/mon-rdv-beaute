@@ -4,12 +4,12 @@ namespace App\Form;
 
 use App\Entity\Professional;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
 
 class ProfessionalType extends AbstractType
 {
@@ -22,6 +22,14 @@ class ProfessionalType extends AbstractType
             ->add('description', TextType::class, ["label" => "Activité"])
             ->add('phone', TextType::class, ["label" => "Téléphone"])
             ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
+
+            ->add('businessHour', CollectionType::class, [
+                'entry_type' => BusinessHourType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 
