@@ -8,18 +8,17 @@
 // any CSS you require will output into a single css file (app.css in this case)
 require('../scss/app.scss');
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
+// Need jQuery? Install it with 'yarn add jquery', then uncomment to require it.
 const $ = require('jquery');
 require('bootstrap');
 
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
+const burgerElt = document.getElementById('burger');
+const topbarMenuElt = document.getElementById('topbar-menu-mobile');
 
-const burgerElt = document.getElementById("burger");
-const topbarMenuElt = document.getElementById("topbar-menu-mobile");
-
-burgerElt.addEventListener("click", function(e){
-    topbarMenuElt.classList.toggle("no-show");
-    burgerElt.classList.toggle("change");
+burgerElt.addEventListener('click', (e) => {
+    topbarMenuElt.classList.toggle('no-show');
+    burgerElt.classList.toggle('change');
 });

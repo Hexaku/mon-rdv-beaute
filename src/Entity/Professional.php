@@ -25,13 +25,11 @@ class Professional
     private $id;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
 
     /**
-     * @var File|null
      * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
      */
     private $imageFile;
@@ -178,10 +176,6 @@ class Professional
     {
         if ($this->services->contains($service)) {
             $this->services->removeElement($service);
-            // set the owning side to null (unless already changed)
-            if ($service->getProfessional() === $this) {
-                $service->setProfessional(null);
-            }
         }
 
         return $this;
@@ -234,7 +228,7 @@ class Professional
     {
         $this->uploadedAt = $uploadedAt;
         if ($this->imageFile instanceof UploadedFile) {
-            $this->uploadedAt = new \DateTime('now');
+            $this->uploadedAt = new DateTime('now');
         }
         return $this;
     }
@@ -261,10 +255,6 @@ class Professional
     {
         if ($this->businessHour->contains($businessHour)) {
             $this->businessHour->removeElement($businessHour);
-            // set the owning side to null (unless already changed)
-            if ($businessHour->getProfessional() === $this) {
-                $businessHour->setProfessional(null);
-            }
         }
 
         return $this;

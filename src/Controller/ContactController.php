@@ -16,9 +16,6 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
-     * @param MailerInterface $mailer
-     * @return Response
-     * @throws TransportExceptionInterface
      */
     public function index(Request $request, MailerInterface $mailer): Response
     {

@@ -11,24 +11,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/professional")
+ * @Route("/admin")
  */
-class ProfessionalController extends AbstractController
+class AdminProfessionalController extends AbstractController
 {
     /**
-     * @Route("/", name="professional_index", methods={"GET"})
+     * @Route("/professional", name="admin_professional", methods={"GET"})
      */
-    public function index(ProfessionalRepository $professionalRepo): Response
+    public function professional(ProfessionalRepository $professionalRepo): Response
     {
-        return $this->render('professional/index.html.twig', [
+        return $this->render('admin/professional.html.twig', [
             'professionals' => $professionalRepo->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="professional_new", methods={"GET","POST"})
+     * @Route("/professional/new", name="admin_professional_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function professionalNew(Request $request): Response
     {
         $professional = new Professional();
         $form = $this->createForm(ProfessionalType::class, $professional);
@@ -39,29 +39,19 @@ class ProfessionalController extends AbstractController
             $entityManager->persist($professional);
             $entityManager->flush();
 
-            return $this->redirectToRoute('professional_index');
+            return $this->redirectToRoute('admin_professional');
         }
 
-        return $this->render('professional/new.html.twig', [
+        return $this->render('admin/professional_new.html.twig', [
             'professional' => $professional,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="professional_show", methods={"GET"})
+     * @Route("/professional/{id}/edit", name="admin_professional_edit", methods={"GET","POST"})
      */
-    public function show(Professional $professional): Response
-    {
-        return $this->render('professional/show.html.twig', [
-            'professional' => $professional,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="professional_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Professional $professional): Response
+    public function professionalEdit(Request $request, Professional $professional): Response
     {
         $form = $this->createForm(ProfessionalType::class, $professional);
         $form->handleRequest($request);
@@ -69,19 +59,19 @@ class ProfessionalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('professional_index');
+            return $this->redirectToRoute('admin_professional');
         }
 
-        return $this->render('professional/edit.html.twig', [
+        return $this->render('admin/professional_edit.html.twig', [
             'professional' => $professional,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="professional_delete", methods={"DELETE"})
+     * @Route("professional/{id}", name="admin_professional_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Professional $professional): Response
+    public function professionalDelete(Request $request, Professional $professional): Response
     {
         if ($this->isCsrfTokenValid('delete'.$professional->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -89,6 +79,6 @@ class ProfessionalController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('professional_index');
+        return $this->redirectToRoute('admin_professional');
     }
 }
