@@ -32,12 +32,12 @@ class ContactProfessionalController extends AbstractController
                 ->to('akuserukid@gmail.com')
                 ->subject('Un professionel souhaite rejoindre Mon RDV Beauté !')
                 ->html($this->renderView("contact-professional/mail.html.twig", [
-                    "prenom" => $data["prenom"],
-                    "nom" => $data["nom"],
+                    "firstName" => $data["firstName"],
+                    "lastName" => $data["lastName"],
                     "email" => $data["email"],
-                    "activite" => $data["activite"],
-                    "lieu" => $data["lieu"],
-                    "commentaire" => $data["commentaire"],
+                    "profession" => $data["profession"],
+                    "city" => $data["city"],
+                    "commentary" => $data["commentary"],
                 ]));
 
             $mailer->send($email);

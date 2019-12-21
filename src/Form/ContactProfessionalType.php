@@ -16,14 +16,14 @@ class ContactProfessionalType extends AbstractType
     {
         $builder
             ->add(
-                "prenom",
+                "firstName",
                 TextType::class,
                 ["required" => true,
                 'constraints' => [new NotBlank()],
                 "label" => "Prénom"]
             )
             ->add(
-                "nom",
+                "lastName",
                 TextType::class,
                 ["required" => true,
                     'constraints' => [new NotBlank()],
@@ -37,21 +37,21 @@ class ContactProfessionalType extends AbstractType
                 "label" => "Email"]
             )
             ->add(
-                "activite",
+                "profession",
                 TextType::class,
                 ["required" => true,
                 'constraints' => [new NotBlank()],
                 "label" => "Activité"]
             )
             ->add(
-                "lieu",
+                "city",
                 TextType::class,
                 ["required" => true,
                 'constraints' => [new NotBlank()],
                 "label" => "Lieu d'activité"]
             )
             ->add(
-                "commentaire",
+                "commentary",
                 TextareaType::class,
                 ["required" => true,
                 'constraints' => [new NotBlank()],
