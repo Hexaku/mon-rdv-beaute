@@ -14,7 +14,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <a href="{# path("admin_service_new") #}"><button class="btn btn-success btn-add">Ajouter une prestation</button></a>
+                    <a href="{{ path("admin_service_new") }}"><button class="btn btn-success btn-add">Ajouter une prestation</button></a>
                     <thead>
                     <tr>
                         <th>Id</th>
@@ -24,6 +24,7 @@
                         <th>Slogan</th>
                         <th>Description</th>
                         <th>Prix</th>
+                        <th>Type de prestation</th>
                         <th>Durée</th>
                         <th>Délai de reprise</th>
                         <th>Image</th>
@@ -44,14 +45,15 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{service.category}}</td>
-                            <td>{{service.professional}}</td>
+                            <td>{{service.category.name}}</td>
+                            <td>{{service.professional.name}}</td>
                             <td>{{service.slogan}}</td>
                             <td>{{service.description}}</td>
-                            <td>{{service.prices}}</td>
-                            <td>{{service.duration}}</td>
-                            <td>{{service.intervalTime}}</td>
-                            <td>{{service.image}}</td>
+                            <td>{{service.price}}€</td>
+                            <td>{{service.serviceType|service}}</td>
+                            <td>{{service.duration|duration}}</td>
+                            <td>{{service.intervalTime|duration}}</td>
+                            <td><img src="{{ vich_uploader_asset(service, 'imageFile') }}" alt="service image" height="100px" width="auto"/></td>
                         </tr>
                     {% else %}
                         <h4>Il n'y a pas de prestations !</h4>

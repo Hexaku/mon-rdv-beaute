@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Service;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,17 +19,18 @@ class ServiceType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('category', null, ["choice_label" => "name"])
+            ->add('professional', null, ["choice_label" => "name"])
             ->add('slogan', TextType::class)
-            ->add('description', TextType::class)
-            ->add('image', TextType::class)
-            ->add('serviceType', EntityType::class, ["choice_label" => "type"])
-            ->add('intervalTime', TimeType::class)
-            ->add('duration', TimeType::class)
-            ->add('area', TextType::class)
-            ->add('category', EntityType::class, ["choice_label" => "name"])
-            ->add('professional', EntityType::class, ["choice_label" => "name"])
-            ->add('member', EntityType::class)
+            ->add('description', TextareaType::class)
             ->add('price', IntegerType::class)
+            ->add('serviceType', ChoiceType::class, [
+                "choices" => $this->getServiceType(),
+                "label" => "Type de prestation"
+            ])
+            ->add('duration', IntegerType::class)
+            ->add('intervalTime', IntegerType::class)
+            ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
         ;
     }
 
@@ -36,5 +39,15 @@ class ServiceType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Service::class,
         ]);
+    }
+
+    public function getServiceType()
+    {
+        $choices = Service::SERVICE_TYPE;
+        $output = [];
+        foreach ($choices as $k => $v) {
+            $output[$v] = $k;
+        }
+        return $output;
     }
 }
