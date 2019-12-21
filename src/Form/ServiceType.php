@@ -18,18 +18,18 @@ class ServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('category', null, ["choice_label" => "name"])
-            ->add('professional', null, ["choice_label" => "name"])
-            ->add('slogan', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('price', IntegerType::class)
+            ->add('name', TextType::class, ["label" => "Nom"])
+            ->add('category', null, ["choice_label" => "name", "label" => "Catégorie"])
+            ->add('professional', null, ["choice_label" => "name", "label" => "Professionnel"])
+            ->add('slogan', TextType::class, ["label" => "Slogan"])
+            ->add('description', TextareaType::class, ["label" => "Description"])
+            ->add('price', IntegerType::class, ["label" => "Prix"])
             ->add('serviceType', ChoiceType::class, [
                 "choices" => $this->getServiceType(),
                 "label" => "Type de prestation"
             ])
-            ->add('duration', IntegerType::class)
-            ->add('intervalTime', IntegerType::class)
+            ->add('duration', IntegerType::class, ["label" => "Durée (en minutes)"])
+            ->add('intervalTime', IntegerType::class, ["label" => "Délai de reprise (en minutes)"])
             ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
         ;
     }

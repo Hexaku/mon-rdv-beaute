@@ -39,8 +39,8 @@
                                 <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                     <div class="bg-white py-2 collapse-inner rounded">
                                         <div class="flex-buttons">
-                                            <a class="collapse-item" href="{#  path('admin_service_edit', {'id': service.id}) #}"><button class="btn btn-warning">Modifier</button></a>
-                                            {# include('admin/_service_delete_form.html.twig') #}
+                                            <a class="collapse-item" href="{{ path('admin_service_edit', {'id': service.id}) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            {{ include('admin/_service_delete_form.html.twig') }}
                                         </div>
                                     </div>
                                 </div>

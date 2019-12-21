@@ -18,7 +18,7 @@ class AdminServiceController extends AbstractController
     /**
      * @Route("/service", name="admin_service", methods={"GET"})
      */
-    public function article(ServiceRepository $serviceRepository): Response
+    public function service(ServiceRepository $serviceRepository): Response
     {
         return $this->render('admin/service.html.twig', [
             'services' => $serviceRepository->findAll(),
@@ -28,7 +28,7 @@ class AdminServiceController extends AbstractController
     /**
      * @Route("/service/new", name="admin_service_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function serviceNew(Request $request): Response
     {
         $service = new Service();
         $form = $this->createForm(ServiceType::class, $service);
@@ -46,5 +46,39 @@ class AdminServiceController extends AbstractController
             'service' => $service,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/service/{id}/edit", name="admin_service_edit", methods={"GET","POST"})
+     */
+    public function serviceEdit(Request $request, Service $service): Response
+    {
+        $form = $this->createForm(ServiceType::class, $service);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_service');
+        }
+
+        return $this->render('admin/service_edit.html.twig', [
+            'service' => $service,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/service/{id}", name="admin_service_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Service $service): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($service);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_service');
     }
 }
