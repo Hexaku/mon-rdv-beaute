@@ -5,12 +5,20 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
+ * @Vich\Uploadable()
  */
 class Service
 {
+    const SERVICE_TYPE = [
+        1 => "Sur place",
+        2 => "À domicile"
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -34,11 +42,6 @@ class Service
     private $description;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $image;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $intervalTime;
@@ -47,11 +50,6 @@ class Service
      * @ORM\Column(type="integer")
      */
     private $duration;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $area;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="services")
@@ -76,8 +74,8 @@ class Service
     private $member;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceType", inversedBy="services")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min="1", max="2")
      */
     private $serviceType;
 
@@ -85,6 +83,52 @@ class Service
      * @ORM\Column(type="integer")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
+     * @return mixed
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param mixed $filename
+     * @return Service
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     * @return Service
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
 
     public function __construct()
     {
@@ -133,17 +177,6 @@ class Service
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function getIntervalTime()
     {
@@ -165,18 +198,6 @@ class Service
     public function setDuration($duration): self
     {
         $this->duration = $duration;
-
-        return $this;
-    }
-
-    public function getArea(): ?string
-    {
-        return $this->area;
-    }
-
-    public function setArea(?string $area): self
-    {
-        $this->area = $area;
 
         return $this;
     }
@@ -262,15 +283,21 @@ class Service
         return $this;
     }
 
-    public function getServiceType(): ?ServiceType
+    /**
+     * @return mixed
+     */
+    public function getServiceType()
     {
         return $this->serviceType;
     }
 
-    public function setServiceType(?ServiceType $serviceType): self
+    /**
+     * @param mixed $serviceType
+     * @return Service
+     */
+    public function setServiceType($serviceType)
     {
         $this->serviceType = $serviceType;
-
         return $this;
     }
 
