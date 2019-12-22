@@ -38,7 +38,10 @@
                             </td>
                         </tr>
                     {% else %}
-                        <h4>Il n'y a pas de catégories !</h4>
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore de catégories !" | raw }}
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>

@@ -23,11 +23,12 @@
                         <th>Professionnel</th>
                         <th>Slogan</th>
                         <th>Description</th>
-                        <th>Prix</th>
                         <th>Type de prestation</th>
                         <th>Durée</th>
                         <th>Délai de reprise</th>
                         <th>Image</th>
+                        <th>Prix</th>
+                        <th>Prix additionnels</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -49,14 +50,31 @@
                             <td>{{service.professional.name}}</td>
                             <td>{{service.slogan}}</td>
                             <td>{{service.description}}</td>
-                            <td>{{service.price}}€</td>
                             <td>{{service.serviceType|service}}</td>
                             <td>{{service.duration|duration}}</td>
                             <td>{{service.intervalTime|duration}}</td>
                             <td><img src="{{ vich_uploader_asset(service, 'imageFile') }}" alt="service image" height="100px" width="auto"/></td>
+                            <td>{{service.price}}€</td>
+                            <td>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePagesHours{{ loop.index }}" aria-expanded="true" aria-controls="collapsePagesHours"><button class="btn btn-primary">Voir</button></a>
+                                <div id="collapsePagesHours{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        {% if service.servicePrices.toArray is empty %}
+                                            <p>Il n'y a pas de prix additionnels pour ce service</p>
+                                        {% else %}
+                                            {% for servicePrice in service.servicePrices.toArray %}
+                                                <p>{{ servicePrice.name }} - {{ servicePrice.price }}€</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     {% else %}
-                        <h4>Il n'y a pas de prestations !</h4>
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore de prestations !" | raw }}
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>

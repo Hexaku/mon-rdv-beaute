@@ -28,6 +28,7 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -43,11 +44,15 @@ class Service
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\PositiveOrZero
      */
     private $intervalTime;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\PositiveOrZero
      */
     private $duration;
 
@@ -56,11 +61,6 @@ class Service
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Price", mappedBy="service")
-     */
-    private $prices;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="services")
@@ -81,6 +81,8 @@ class Service
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\Positive
      */
     private $price;
 
@@ -93,6 +95,15 @@ class Service
      * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
      */
     private $imageFile;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\ServicePrices",
+     *     mappedBy="service",
+     *     orphanRemoval=true,
+     *     cascade={"persist"})
+     */
+    private $servicePrices;
 
     /**
      * @return mixed
@@ -132,8 +143,8 @@ class Service
 
     public function __construct()
     {
-        $this->prices = new ArrayCollection();
         $this->member = new ArrayCollection();
+        $this->servicePrices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,37 +225,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|Price[]
-     */
-    public function getPrices(): Collection
-    {
-        return $this->prices;
-    }
-
-    public function addPrice(Price $price): self
-    {
-        if (!$this->prices->contains($price)) {
-            $this->prices[] = $price;
-            $price->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removePrice(Price $price): self
-    {
-        if ($this->prices->contains($price)) {
-            $this->prices->removeElement($price);
-            // set the owning side to null (unless already changed)
-            if ($price->getService() === $this) {
-                $price->setService(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getProfessional(): ?Professional
     {
         return $this->professional;
@@ -309,6 +289,37 @@ class Service
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ServicePrices[]
+     */
+    public function getServicePrices(): Collection
+    {
+        return $this->servicePrices;
+    }
+
+    public function addServicePrice(ServicePrices $servicePrice): self
+    {
+        if (!$this->servicePrices->contains($servicePrice)) {
+            $this->servicePrices[] = $servicePrice;
+            $servicePrice->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServicePrice(ServicePrices $servicePrice): self
+    {
+        if ($this->servicePrices->contains($servicePrice)) {
+            $this->servicePrices->removeElement($servicePrice);
+            // set the owning side to null (unless already changed)
+            if ($servicePrice->getService() === $this) {
+                $servicePrice->setService(null);
+            }
+        }
 
         return $this;
     }
