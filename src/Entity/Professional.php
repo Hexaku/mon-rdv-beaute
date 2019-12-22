@@ -181,8 +181,6 @@ class Professional
         return $this;
     }
 
-
-
     /**
      * @return string|null
      */

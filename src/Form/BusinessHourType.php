@@ -15,7 +15,7 @@ class BusinessHourType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('day', ChoiceType::class, ["choices" => $this->getChoices(), "label" => "Jour"])
+            ->add('day', ChoiceType::class, ["choices" => $this->getDays(), "label" => "Jour"])
             ->add('openTime', TimeType::class, ["label" => "Heure d'ouverture"])
             ->add('closeTime', TimeType::class, ["label" => "Heure de fermeture"])
         ;
@@ -28,7 +28,7 @@ class BusinessHourType extends AbstractType
         ]);
     }
 
-    public function getChoices()
+    public function getDays()
     {
         $choices = BusinessHour::DAYS;
         $output = [];
