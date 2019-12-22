@@ -16,11 +16,11 @@
                 {% endfor %}
             </div>
         </div>
-    <button class="btn btn-success">{{ button_label|default('Valider') }}</button>
+    <button class="btn btn-success mt-3">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('embed') }}
+    {{ encore_entry_script_tags('embed_business_hours') }}
 {% endblock %}
 
 

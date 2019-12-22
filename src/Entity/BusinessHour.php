@@ -29,17 +29,23 @@ class BusinessHour
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      * @Assert\Range(min="1", max="7")
+     * @Assert\NotBlank()
      */
     private $day;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\Time
+     * @Assert\NotBlank()
      */
     private $openTime;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\Time
+     * @Assert\NotBlank()
      */
     private $closeTime;
 
