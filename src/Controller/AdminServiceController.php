@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Service;
 use App\Form\ServiceType;
 use App\Repository\ServiceRepository;
+use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,13 +29,16 @@ class AdminServiceController extends AbstractController
     /**
      * @Route("/service/new", name="admin_service_new", methods={"GET","POST"})
      */
-    public function serviceNew(Request $request): Response
+    public function serviceNew(Request $request, Slugify $slugify): Response
     {
         $service = new Service();
         $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($service->getName());
+            $service->setSlug($slug);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($service);
             $entityManager->flush();

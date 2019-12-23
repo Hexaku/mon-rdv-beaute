@@ -33,6 +33,11 @@ class Service
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $slogan;
@@ -161,6 +166,24 @@ class Service
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Service
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
         return $this;
     }
 

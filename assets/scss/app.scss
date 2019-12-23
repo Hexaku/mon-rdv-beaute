@@ -82,9 +82,11 @@ ul {
   padding: 30px 45px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   flex-direction: column;
   margin-bottom: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .card-service-right, .card-service-left {
@@ -93,10 +95,15 @@ ul {
 
 .card-service-left {
   margin-bottom: 25px;
+  width: 250px;
 }
 
 .card-service-name {
   margin-bottom: 15px;
+}
+
+.card-service-link:hover {
+  color: #474e54;
 }
 
 .card-service-price {
@@ -105,8 +112,8 @@ ul {
 }
 
 .card-service-image {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   border: 1px solid #dbd9d9;
 }
@@ -133,10 +140,12 @@ ul {
 
   .card-service {
     flex-direction: row;
-    margin-right: 20px;
-    margin-left: 20px;
     margin-bottom: 25px;
     padding: 30px 10px;
+  }
+
+  .card-service-right, .card-service-left {
+    width: 50%;
   }
 
   .card-service-separator {
@@ -162,6 +171,11 @@ ul {
 
   .card-service-price {
     margin-bottom: 25px;
+  }
+
+  .card-service-image {
+    width: 250px;
+    height: 250px;
   }
 }
 
