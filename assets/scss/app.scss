@@ -123,7 +123,7 @@ ul {
 }
 
 .btn-pink {
-  background-color: #F5B8B2;
+  background-color: #CF8080;
   color: white;
 }
 
@@ -135,7 +135,7 @@ ul {
 @media only screen and (min-width: 600px) {
   .container-flex {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 50px auto;
   }
 
   .card-service {
@@ -154,6 +154,18 @@ ul {
     opacity: 0.7;
     width: 1px;
   }
+}
+
+/* DESCRIPTION SERVICE */
+.service-separator {
+  width: 80%;
+  background-color: #a6acb2;
+  height: 1px;
+  margin: 40px auto;
+}
+
+.service-price {
+  font-size: 24px;
 }
 
 @media only screen and (min-width: 800px) {
