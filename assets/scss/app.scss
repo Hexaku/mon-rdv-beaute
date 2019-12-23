@@ -13,10 +13,11 @@ ul {
 }
 
 .title {
-    font-family: "Libre Baskerville", serif;
-    font-size: 2rem;
-    margin: 50px 0;
-    text-align: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 1.8rem;
+  margin: 50px 0;
+  text-align: center;
+  color: #414141;
 }
 
 .subtitle-pink {
@@ -28,10 +29,10 @@ ul {
 }
 
 .category-carousel {
-    margin: 50px 0;
+  margin: 50px 0;
 }
 
-.contact-form {
+.container-flex {
   margin: 50px 15px;
   li {
     list-style: none;
@@ -39,32 +40,29 @@ ul {
 }
 
 .card {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .salmon-link {
-    color: #D6A9A9;
-
-    :hover {
-        color: #0b2e13;
-    }
+  color: #D6A9A9;
+  :hover {
+    color: #0b2e13;
+  }
 }
 
-.subtitle {
-    text-align: center;
-    font-size: 20px;
-
-    a {
-        margin-right: 15px;
-    }
+.categories {
+  text-align: center;
+  font-size: 22px;
+  a {
+    margin: 0 20px;
+  }
 }
 
 .flex-buttons {
-    display: flex;
-
-    button {
-        margin-right: 10px;
-    }
+  display: flex;
+  button {
+    margin-right: 10px;
+  }
 }
 
 .bold {
@@ -75,27 +73,66 @@ ul {
   margin-bottom: 30px !important;
 }
 
-@media only screen and (min-width: 800px){
+.card-service {
+  border: 1px solid rgba(232,230,230,1);
+  padding: 55px 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.card-service-right, .card-service-left {
+  text-align: center;
+}
+
+.card-service-left {
+  padding-right: 55px;
+}
+
+.card-service-right {
+  padding-left: 55px;
+}
+
+.card-service-separator {
+  height: 260px;
+  background-color: #414141;
+  opacity: 0.7;
+  width: 1px;
+}
+
+.card-service-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,230,230,1);
+}
+
+.hidden {
+  display: none;
+}
+
+@media only screen and (min-width: 800px) {
   .category-carousel {
     margin: 50px 100px;
   }
 
-    .contact-form {
-        max-width: 600px;
-        margin: 0 auto;
-    }
+  .container-flex {
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
-    .category-carousel {
-        margin: 50px 250px;
-    }
+  .category-carousel {
+    margin: 50px 250px;
+  }
 
-    .title {
-        font-size: 2.5rem;
-    }
+  .title {
+    font-size: 2.2rem;
+  }
 
-    .contact-form {
-        max-width: 900px;
-    }
+  .container-flex {
+    max-width: 1000px;
+  }
 }
