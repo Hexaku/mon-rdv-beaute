@@ -12,6 +12,15 @@ ul {
   }
 }
 
+/* CONTAINER FLEX */
+.container-flex {
+  margin: 50px 15px;
+  li {
+    list-style: none;
+  }
+}
+
+/* TITRES DES PAGES */
 .title {
   font-family: "Libre Baskerville", serif;
   font-size: 1.8rem;
@@ -32,13 +41,7 @@ ul {
   margin: 50px 0;
 }
 
-.container-flex {
-  margin: 50px 15px;
-  li {
-    list-style: none;
-  }
-}
-
+/* CARD ARTICLES */
 .card {
   margin-bottom: 25px;
 }
@@ -47,14 +50,6 @@ ul {
   color: #D6A9A9;
   :hover {
     color: #0b2e13;
-  }
-}
-
-.categories {
-  text-align: center;
-  font-size: 22px;
-  a {
-    margin: 0 20px;
   }
 }
 
@@ -73,12 +68,22 @@ ul {
   margin-bottom: 30px !important;
 }
 
+.categories {
+  text-align: center;
+  font-size: 22px;
+  a {
+    margin: 0 20px;
+  }
+}
+
+/* CARD PRESTATIONS */
 .card-service {
-  border: 1px solid rgba(232,230,230,1);
-  padding: 55px 27px;
+  border: 1px solid #dbd9d9;
+  padding: 30px 45px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  flex-direction: column;
   margin-bottom: 30px;
 }
 
@@ -87,29 +92,59 @@ ul {
 }
 
 .card-service-left {
-  padding-right: 55px;
+  margin-bottom: 25px;
 }
 
-.card-service-right {
-  padding-left: 55px;
+.card-service-name {
+  margin-bottom: 15px;
 }
 
-.card-service-separator {
-  height: 260px;
-  background-color: #414141;
-  opacity: 0.7;
-  width: 1px;
+.card-service-price {
+  margin-bottom: 15px;
+  font-size: 19px;
 }
 
 .card-service-image {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  border: 1px solid rgba(232,230,230,1);
+  border: 1px solid #dbd9d9;
 }
 
 .hidden {
   display: none;
+}
+
+.btn-pink {
+  background-color: #F5B8B2;
+  color: white;
+}
+
+.btn-pink:hover {
+  color: white;
+  background-color: #e5a099;
+}
+
+@media only screen and (min-width: 600px) {
+  .container-flex {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .card-service {
+    flex-direction: row;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 25px;
+    padding: 30px 10px;
+  }
+
+  .card-service-separator {
+    height: 260px;
+    background-color: #414141;
+    opacity: 0.7;
+    width: 1px;
+  }
 }
 
 @media only screen and (min-width: 800px) {
@@ -118,8 +153,15 @@ ul {
   }
 
   .container-flex {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 800px;
+  }
+
+  .card-service-name {
+    margin-bottom: 25px;
+  }
+
+  .card-service-price {
+    margin-bottom: 25px;
   }
 }
 
@@ -134,5 +176,18 @@ ul {
 
   .container-flex {
     max-width: 1000px;
+  }
+
+  .card-service {
+    margin-bottom: 50px;
+    padding: 55px 45px;
+  }
+
+  .card-service-name {
+    margin-bottom: 35px;
+  }
+
+  .card-service-price {
+    margin-bottom: 35px;
   }
 }
