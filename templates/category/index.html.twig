@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nos prestations{% endblock %}
+{% block title %}Choisissez un service{% endblock %}
 
 {% block body %}
 
-    <h2 class="title">Nos prestations</h2>
+    <h2 class="title">Choisissez un service</h2>
     <div class="contact-form">
-        <div class="subtitle">
+        <div class="categories">
             {% for category in categories %}
                 <a href="{{ path('category_show', {'slug': category.slug}) }}" class="salmon-link">{{ category.name }}</a>
+                <span class="pipe-separator">{% if not loop.last %}|{% endif %}</span>
             {% else %}
                 <p>Il n'y a pas de catégories !</p>
             {% endfor %}
