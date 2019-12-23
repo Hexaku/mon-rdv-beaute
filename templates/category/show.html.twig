@@ -3,8 +3,22 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <div class="contact-form">
-        <h2 class="title">Mes prestations : {{ category.name }}</h2>
+    <div class="container-flex">
+        <h2 class="title">Nos prestations - {{ category.name }}</h2>
+        {% for service in services %}
+        <div class="card-service">
+            <div class="card-service-left">
+                <img class="card-service-image" src="{{ vich_uploader_asset(service, 'imageFile') }}"/>
+                <p class="card-service-slogan hidden">{{ service.slogan }}</p>
+            </div>
+            <div class="card-service-separator"></div>
+            <div class="card-service-right">
+                <h3>{{ service.name }}</h3>
+                <p>{{ service.duration|duration }} | {{ service.price }}€</p>
+                <button class="btn btn-primary btn-pink">Prendre RDV</button>
+            </div>
+        </div>
+        {% endfor %}
         <div class="flex-buttons">
             <a href="{{ path('category_index') }}"><button class="btn btn-success">Retour à la liste</button></a>
             {% if app.user %}
@@ -17,5 +31,4 @@
             {% endif %}
         </div>
     </div>
-
 {% endblock %}

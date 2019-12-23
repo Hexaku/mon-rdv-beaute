@@ -57,8 +57,10 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
+        $services = $category->getServices()->toArray();
         return $this->render('category/show.html.twig', [
             'category' => $category,
+            'services' => $services,
         ]);
     }
 
