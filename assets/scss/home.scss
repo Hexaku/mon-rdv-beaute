@@ -107,9 +107,7 @@ a:hover {
 }
 
 .topbar-flex {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: none;
 }
 
 .topbar-menu-mobile {
@@ -552,6 +550,12 @@ a:hover {
   .topbar {
     padding-top: 10px;
     margin-bottom: 200px;
+  }
+
+  .topbar-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .topbar-menu-tablet {
