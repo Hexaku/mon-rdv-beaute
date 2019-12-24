@@ -8,7 +8,7 @@
     <div class="contact-form">
         <div class="categories">
             {% for category in categories %}
-                <a href="{{ path('category_show', {'slug': category.slug}) }}" class="salmon-link">{{ category.name }}</a>
+                <a href="{{ path('category_show', {'slug': category.slug}) }}" class="grey-link">{{ category.name }}</a>
                 <span class="pipe-separator">{% if not loop.last %}|{% endif %}</span>
             {% else %}
                 <p>Il n'y a pas de catégories !</p>
