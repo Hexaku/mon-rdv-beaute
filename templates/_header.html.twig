@@ -45,14 +45,16 @@
         <a href="{{ path('contact') }}">Contact</a>
     </nav>
     <nav class="topbar-connexion-mobile no-show rounded" id="topbar-connexion-mobile">
-        <a href="{{ path('app_login') }}">Se connecter</a>
         {% if app.user %}
             {% if 'ROLE_ADMIN' in app.user.roles %}
-                <div class="white-line"></div>
-                <a href="{{ path('admin_index') }}">Espace Admin</a>
+                <a href="{{ path('admin_index') }}">Espace admin</a>
                 <div class="white-line"></div>
                 <a href="{{ path('app_logout') }}">Se déconnecter</a>
             {% endif %}
+        {% else %}
+            <a href="{{ path('app_login') }}">Se connecter</a>
+            <div class="white-line"></div>
+            <a href="{{ path('app_register') }}">S'inscrire</a>
         {% endif %}
     </nav>
     <nav class="topbar-menu topbar-menu-tablet">
