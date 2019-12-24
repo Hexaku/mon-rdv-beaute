@@ -64,7 +64,6 @@ a:hover {
     display: none;
 }
 
-
 /* Calque noir header */
 .layer {
     position: absolute;
@@ -93,7 +92,6 @@ a:hover {
     align-items: center;
     padding: 15px 0;
     position: relative;
-    margin-bottom: 50px;
     font-family: "Libre Baskerville", serif;
 }
 
@@ -222,7 +220,8 @@ a:hover {
     text-align: center;
     line-height: 1.5;
     font-size: 42px;
-    margin-bottom: 100px;
+    margin-bottom: 70px;
+    margin-top: 50px
 }
 
 .main {
@@ -234,6 +233,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
 }
 
 .category-image {
@@ -395,8 +395,8 @@ a:hover {
         width: 350px;
     }
 
-    .topbar {
-        margin-bottom: 150px;
+    .main-title {
+      margin-top: 100px;
     }
 
     .main {
@@ -409,24 +409,20 @@ a:hover {
 }
 
 @media only screen and(min-width: 850px) {
-    .topbar-main-logo {
-        width: 500px;
-    }
+  .topbar-main-logo {
+    width: 500px;
+  }
 
-    .topbar {
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
+  .topbar {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 
-    .topbar-container-connexion {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .topbar-burger {
-        display: none;
-    }
+  .topbar-container-connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .topbar-menu-tablet {
     text-align: center;
@@ -437,6 +433,7 @@ a:hover {
     font-size: 22px;
     color: white;
     margin-bottom: 200px;
+
     a {
       margin: 0 5px;
     }
@@ -452,207 +449,209 @@ a:hover {
     color: #D6A9A9;
   }
 
-    .filter-form {
-        display: flex;
-        flex-direction: row;
+  .filter-form {
+    display: flex;
+    flex-direction: row;
 
-        :first-child {
-            border-radius: 10px 0 0 10px;
-        }
-
-        :last-child {
-            border-radius: 0 10px 10px 0;
-        }
-
-        span {
-            display: none;
-        }
+    :first-child {
+      border-radius: 10px 0 0 10px;
     }
 
-    .filter-input {
-        width: 15%;
+    :last-child {
+      border-radius: 0 10px 10px 0;
     }
 
-    .filter-submit {
-        width: 100px;
+    span {
+      display: none;
     }
+  }
 
-    .article-flex {
-        width: 600px;
+  .filter-input {
+    width: 20%;
+  }
+
+  .filter-submit {
+    width: 100px;
+  }
+
+  .article-flex {
+    width: 600px;
+  }
+
+  .higher-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 20px 50px;
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footer-socials-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+    img {
+      margin: 0 10px;
     }
+  }
 
-    .higher-footer {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        padding: 20px 50px;
-    }
-
-    .footer-socials {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .footer-socials-icons {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-
-        img {
-            margin: 0 10px;
-        }
-    }
-
-    .footer-socials-title {
-        display: block;
-        font-family: "Libre Baskerville", serif;
-    }
-
-    .lower-footer {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 50px;
-    }
-
-    .footer-copyright {
-        flex-direction: row;
-        margin: 0;
-
-        a {
-            margin: 0 8px;
-        }
-    }
-
-    .footer-wild {
-        font-size: 16px;
-    }
-}
-
-@media only screen and (min-width: 1250px) {
-    .topbar-main-logo {
-        width: 500px;
-    }
-
-    .topbar {
-        padding-top: 0;
-        margin-top: -10px;
-        margin-bottom: 200px;
-    }
-
-    .topbar-menu-tablet {
-        display: none;
-    }
-
-  .topbar-menu-desktop {
+  .footer-socials-title {
     display: block;
     font-family: "Libre Baskerville", serif;
-    color: white;
+  }
+
+  .lower-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+  }
+
+  .footer-copyright {
+    flex-direction: row;
+    margin: 0;
+
     a {
       margin: 0 8px;
     }
   }
 
-    .main-title {
-        margin-top: 150px;
-    }
+  .footer-wild {
+    font-size: 16px;
+  }
+}
 
-    .categories-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 100px;
-    }
+@media only screen and (min-width: 1250px) {
+  .topbar-main-logo {
+    width: 500px;
+  }
 
-    .category-image {
-        width: 400px;
-        height: 400px;
-    }
+  .topbar {
+    padding-top: 0;
+    margin-top: -10px;
+    margin-bottom: 200px;
+  }
 
-    .category-content {
-        font-size: 22px;
-    }
+  .topbar-menu-tablet {
+    display: none;
+  }
 
-    .article-flex {
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-        align-items: center;
-        width: 1000px;
-    }
+  .topbar-menu-desktop {
+    display: block;
+    font-family: "Libre Baskerville", serif;
+    color: white;
 
-    .article-content {
-        max-width: 500px;
+    a {
+      margin: 0 8px;
     }
+  }
 
-    .article-button {
-        width: 50%;
-    }
+  .main-title {
+    margin-top: 150px;
+    margin-bottom: 100px;
+  }
 
-    .footer-newsletter {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+  .categories-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 100px;
+  }
 
-    .footer-newsletter-form {
-        display: flex;
-        justify-content: center;
-    }
+  .category-image {
+    width: 400px;
+    height: 400px;
+  }
 
-    .footer-newsletter-title {
-        font-family: "Libre Baskerville", serif;
-        margin-bottom: 30px;
-    }
+  .category-content {
+    font-size: 22px;
+  }
 
-    .footer-newsletter-input {
-        border: 1px solid black;
-        border-radius: 10px 0 0 10px;
-        padding: 10px;
-    }
+  .article-flex {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    width: 1000px;
+  }
 
-    .footer-newsletter-submit {
-        background-color: #FFBD14;
-        border: 1px solid black;
-        border-radius: 0 10px 10px 0;
-        padding: 10px;
-    }
+  .article-content {
+    max-width: 500px;
+  }
 
-    .mobile {
-        display: block;
-    }
+  .article-button {
+    width: 50%;
+  }
 
-    .desktop {
-        display: none;
-    }
+  .footer-newsletter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-newsletter-form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-newsletter-title {
+    font-family: "Libre Baskerville", serif;
+    margin-bottom: 30px;
+  }
+
+  .footer-newsletter-input {
+    border: 1px solid black;
+    border-radius: 10px 0 0 10px;
+    padding: 10px;
+  }
+
+  .footer-newsletter-submit {
+    background-color: #FFBD14;
+    border: 1px solid black;
+    border-radius: 0 10px 10px 0;
+    padding: 10px;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 1500px) {
-    .topbar-menu-desktop {
-        a {
-            margin: 0 18px;
-        }
+  .topbar-menu-desktop {
+    a {
+      margin: 0 18px;
     }
+  }
 
-    .topbar {
-        margin-bottom: 150px;
-    }
+  .topbar {
+    margin-bottom: 150px;
+  }
 
-    .topbar-main-logo {
-        width: 650px;
-    }
+  .topbar-main-logo {
+    width: 650px;
+  }
 
-    .main-title {
-        font-size: 50px;
-    }
+  .main-title {
+    font-size: 50px;
+  }
+
+  .filter-input {
+    width: 15%;
+  }
 }
-
-
-
-
