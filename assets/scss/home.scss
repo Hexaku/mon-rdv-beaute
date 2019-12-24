@@ -242,11 +242,14 @@ a:hover {
 }
 
 .category-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 70%;
+    height: 75px;
     margin: -35px auto 60px auto;
-    padding: 20px 0;
+    padding: 20px 10px;
     text-align: center;
-    height: auto;
     background-color: #CF8080;
     color: white;
     border-radius: 10px;
@@ -262,6 +265,7 @@ a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 75px;
 }
 
 .article-flex {
@@ -274,7 +278,7 @@ a:hover {
 .article-title {
     font-size: 27px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 75px;
 }
 
 .article-image {
@@ -532,7 +536,7 @@ a:hover {
 
 @media only screen and (min-width: 1250px) {
   .topbar-main-logo {
-    width: 500px;
+    width: 400px;
   }
 
   .topbar {
@@ -566,11 +570,12 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     margin-top: 100px;
+    margin-bottom: 100px;
   }
 
   .category-image {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
   }
 
   .category-content {
@@ -632,6 +637,13 @@ a:hover {
   }
 }
 
+@media only screen and (min-width: 1400px) {
+  .category-image {
+    width: 400px;
+    height: 400px;
+  }
+}
+
 @media only screen and (min-width: 1500px) {
   .topbar-menu-desktop {
     a {
@@ -653,5 +665,10 @@ a:hover {
 
   .filter-input {
     width: 15%;
+  }
+
+  .category-image {
+    width: 450px;
+    height: 450px;
   }
 }
