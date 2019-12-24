@@ -55,6 +55,12 @@ a:hover {
     cursor: pointer;
 }
 
+.topbar-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .topbar-menu-mobile {
     position: relative;
     font-family: "Libre Baskerville", serif;
