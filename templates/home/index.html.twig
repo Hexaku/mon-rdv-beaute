@@ -195,15 +195,17 @@
         <div class="layer"></div>
         <div class="banner">
             <div class="topbar">
-                <div class="mobile">
-                    <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                <div class="topbar-flex">
+                    <div class="mobile">
+                        <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                    </div>
+                    <nav class="topbar-menu topbar-menu-desktop">
+                        <a href="{{ path('category_index') }}">PRESTATIONS</a>
+                        <a href="#">JOURNEE BIEN-ETRE</a>
+                        <a href="{{ path('about') }}">A PROPOS</a>
+                        <a href="{{ path('contact') }}">CONTACT</a>
+                    </nav>
                 </div>
-                <nav class="topbar-menu topbar-menu-desktop">
-                    <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                    <a href="#">JOURNEE BIEN-ETRE</a>
-                    <a href="{{ path('about') }}">A PROPOS</a>
-                    <a href="{{ path('contact') }}">CONTACT</a>
-                </nav>
                 <div class="topbar-burger" id="burger">
                     <div class="bar1"></div>
                     <div class="bar2"></div>
