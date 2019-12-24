@@ -215,7 +215,7 @@
                     <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
                 </div>
                 <div class="topbar-container-connexion">
-                    <a href="#"><img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion"></a>
+                    <img class="topbar-connexion-logo" id="connexion" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
                     <div class="topbar-container-connexion-flex">
                         {% if app.user %}
                             <span class="account">{{ app.user.email }}</span>
@@ -229,7 +229,7 @@
                     </div>
                 </div>
             </div>
-            <nav class="topbar-menu topbar-menu-mobile no-show rounde" id="topbar-menu-mobile">
+            <nav class="topbar-menu topbar-menu-mobile no-show rounded" id="topbar-menu-mobile">
                 <a href="{{ path('category_index') }}">Prestations</a>
                 <div class="white-line"></div>
                 <a href="#">Journée Bien-Être</a>
@@ -237,6 +237,17 @@
                 <a href="{{ path('about') }}">A propos</a>
                 <div class="white-line"></div>
                 <a href="{{ path('contact') }}">Contact</a>
+            </nav>
+            <nav class="topbar-connexion-mobile no-show rounded" id="topbar-connexion-mobile">
+                <a href="{{ path('app_login') }}">Se connecter</a>
+                {% if app.user %}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                        <div class="white-line"></div>
+                        <a href="{{ path('admin_index') }}">Espace Admin</a>
+                        <div class="white-line"></div>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    {% endif %}
+                {% endif %}
             </nav>
             <nav class="topbar-menu topbar-menu-tablet">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>

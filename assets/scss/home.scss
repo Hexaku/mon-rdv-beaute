@@ -110,7 +110,7 @@ a:hover {
   display: none;
 }
 
-.topbar-menu-mobile {
+.topbar-menu-mobile, .topbar-connexion-mobile {
   position: relative;
   font-family: "Libre Baskerville", serif;
   color: white;
@@ -128,6 +128,8 @@ a:hover {
 
   a:hover {
     cursor: pointer;
+    color: white;
+    text-decoration: underline;
   }
 }
 
@@ -410,10 +412,6 @@ a:hover {
     margin: 0 80px;
   }
 
-  .account {
-    display: block;
-  }
-
   .category-button {
     font-size: 20px;
   }
@@ -433,6 +431,10 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .topbar-connexion-mobile {
+    display: none;
   }
 
   .topbar-menu-tablet {
@@ -457,6 +459,10 @@ a:hover {
     display: block;
     font-family: "Libre Baskerville", serif;
     color: #D6A9A9;
+  }
+
+  .account {
+    display: block;
   }
 
   .filter-form {

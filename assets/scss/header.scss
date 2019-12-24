@@ -13,8 +13,8 @@ a {
 }
 
 a:hover {
-  color: #4B6635;
-  text-decoration: none;
+  color: #d18a8a;
+  text-decoration: underline;
 }
 
 /* Elements a afficher uniquement en desktop */
@@ -59,7 +59,7 @@ a:hover {
   display: none;
 }
 
-.topbar-menu-mobile {
+.topbar-menu-mobile, .topbar-connexion-mobile {
   position: relative;
   font-family: "Libre Baskerville", serif;
   color: white;
@@ -78,6 +78,8 @@ a:hover {
 
   a:hover {
     cursor: pointer;
+    color: white;
+    text-decoration: underline;
   }
 }
 
@@ -170,10 +172,6 @@ a:hover {
   .topbar-main-logo {
     width: 350px;
   }
-
-  .account {
-    display: block;
-  }
 }
 
 @media only screen and(min-width: 850px) {
@@ -192,6 +190,10 @@ a:hover {
     align-items: center;
   }
 
+  .topbar-connexion-mobile {
+    display: none;
+  }
+
   .topbar-container-connexion-flex {
     display: flex;
     flex-direction: column;
@@ -203,6 +205,10 @@ a:hover {
     display: block;
     font-family: "Libre Baskerville", serif;
     color: #d18a8a
+  }
+
+  .account {
+    display: block;
   }
 }
 

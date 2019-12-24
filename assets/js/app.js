@@ -23,5 +23,9 @@ burgerElt.addEventListener('click', (e) => {
     burgerElt.classList.toggle('change');
 });
 
+const connexionElt = document.getElementById('connexion');
+const topbarConnexionElt = document.getElementById('topbar-connexion-mobile');
 
-
+connexionElt.addEventListener('click', (e) => {
+    topbarConnexionElt.classList.toggle('no-show');
+});
