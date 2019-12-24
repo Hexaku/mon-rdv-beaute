@@ -46,11 +46,13 @@ ul {
   margin-bottom: 25px;
 }
 
-.salmon-link {
-  color: #D6A9A9;
-  :hover {
-    color: #0b2e13;
-  }
+.grey-link {
+  color: #414141;
+}
+
+.grey-link:hover {
+  color: #d18a8a;
+  text-decoration: none;
 }
 
 .flex-buttons {
