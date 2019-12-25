@@ -30,3 +30,5 @@ const topbarConnexionElt = document.getElementById('topbar-connexion-mobile');
 connexionElt.addEventListener('click', (e) => {
     topbarConnexionElt.classList.toggle('no-show');
 });
+
+
