@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/datatables.min.css"/>
+
     <title>{% block title %}{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('admin') }}
@@ -367,5 +370,51 @@
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 {% endblock %}
+<!-- Bootstrap core JavaScript-->
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dataTable').dataTable( {
+            "language": {
+                "sEmptyTable":     "Aucune donnée disponible dans le tableau",
+                "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                "sInfoEmpty":      "Affichage de l'élément 0 à 0 sur 0 élément",
+                "sInfoFiltered":   "(filtré à partir de _MAX_ éléments au total)",
+                "sInfoPostFix":    "",
+                "sInfoThousands":  ",",
+                "sLengthMenu":     "Afficher _MENU_ éléments",
+                "sLoadingRecords": "Chargement...",
+                "sProcessing":     "Traitement...",
+                "sSearch":         "Rechercher :",
+                "sZeroRecords":    "Aucun élément correspondant trouvé",
+                "oPaginate": {
+                    "sFirst":    "Premier",
+                    "sLast":     "Dernier",
+                    "sNext":     "Suivant",
+                    "sPrevious": "Précédent"
+                },
+                "oAria": {
+                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d lignes sélectionnées",
+                        "0": "Aucune ligne sélectionnée",
+                        "1": "1 ligne sélectionnée"
+                    }
+                }
+            }
+        } );
+    } );
+</script>
+<script>
+    $(document).ready( function () {
+        $('#dataTable1').DataTable();
+    } );
+</script>
+
 </body>
 </html>
