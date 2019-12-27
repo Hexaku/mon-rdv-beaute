@@ -23,6 +23,7 @@ Encore
     .addEntry('header', './assets/scss/header.scss')
     .addEntry('home', './assets/scss/home.scss')
     .addEntry('admin', './assets/scss/admin.scss')
+    .addEntry('calendar', './assets/js/calendar.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     .copyFiles([

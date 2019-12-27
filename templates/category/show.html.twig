@@ -15,7 +15,7 @@
             <div class="card-service-right">
                 <a href="{{ path('service_show', {'slug': service.slug}) }}" class="grey-link"><h3 class="card-service-name">{{ service.name }}</h3></a>
                 <p class="card-service-price">{{ service.duration|duration }} | {{ service.price }}€</p>
-                <button class="btn btn-lg btn-pink">Prendre RDV</button>
+                <a href="{{ path('service_booking', {'slug': service.slug}) }}"><button class="btn btn-lg btn-pink">Prendre RDV</button></a>
             </div>
         </div>
         {% endfor %}
