@@ -59,6 +59,16 @@ class ServiceController extends AbstractController
     }
 
     /**
+     * @Route("/{slug}/booking", name="service_booking")
+     */
+    public function booking(Service $service): Response
+    {
+        return $this->render("service/booking.html.twig", [
+            "service" => $service,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/edit", name="service_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Service $service): Response

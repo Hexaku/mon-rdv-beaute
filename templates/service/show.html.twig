@@ -7,7 +7,7 @@
         <h1 class="title">{{ service.name }}</h1>
         <p class="service-professional mb-3">Prestation réalisée par {{ service.professional.name }} et {{ service.serviceType|service }}</p>
         <p class="service-price mb-3">{{ service.duration|duration }} | {{ service.price }}€</p>
-        <button class="btn btn-pink mb-3">Réserver maintenant</button>
+        <a href="{{ path('service_booking', {'slug': service.slug}) }}"><button class="btn btn-pink mb-3">Réserver maintenant</button></a>
         <img src="{{ vich_uploader_asset(service, 'imageFile') }}" class="img-fluid rounded mb-5 mt-5"/>
         <p class="service-description mb-4">{{ service.description }}</p>
         {% if service.servicePrices is not empty %}
@@ -17,7 +17,7 @@
             <p>{{ servicePrice.name }} - {{ servicePrice.price }}€</p>
         {% endfor %}
         <h4 class="service-title mb-4">Réservation</h4>
-        <button class="btn btn-pink">Réserver maintenant</button>
+        <a href="{{ path('service_booking', {'slug': service.slug}) }}"><button class="btn btn-pink">Réserver maintenant</button></a>
         {# 1 = "Sur place", 2 = "A domicile" #}
         {% if service.serviceType is same as (1) %}
             <div class="service-separator"></div>
