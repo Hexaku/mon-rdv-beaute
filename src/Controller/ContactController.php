@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use App\Service\Mailer;
+use App\Service\MailerSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,25 +19,15 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request, MailerInterface $mailer, Mailer $mailerService): Response
+    public function index(Request $request, MailerSender $mailerSender): Response
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $email = (new Email())
-                ->from($mailerService->sender())
-                ->to($mailerService->sender())
-                ->subject('Vous avez reçu un message depuis Mon RDV Beauté !')
-                ->html($this->renderView("contact/mail.html.twig", [
-                    "message" => $data["message"],
-                    "prenom" => $data["prenom"],
-                    "nom" => $data["nom"],
-                    "email" => $data["email"],
-                ]));
+            $mailerSender->sendContactMail($data);
 
-            $mailer->send($email);
 
             $this->addFlash("success", "Votre messaqe a bien été envoyé !");
 
