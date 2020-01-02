@@ -13,7 +13,8 @@ a {
 }
 
 a:hover {
-  color: #4B6635;
+  color: #d18a8a;
+  text-decoration: underline;
 }
 
 /* Elements a afficher uniquement en desktop */
@@ -54,7 +55,11 @@ a:hover {
   cursor: pointer;
 }
 
-.topbar-menu-mobile {
+.topbar-flex {
+  display: none;
+}
+
+.topbar-menu-mobile, .topbar-connexion-mobile {
   position: relative;
   font-family: "Libre Baskerville", serif;
   color: white;
@@ -66,11 +71,15 @@ a:hover {
   background-color: #CF8080;
   z-index: 3;
   padding: 20px 0;
+
   a {
     margin: 10px 0;
   }
+
   a:hover {
     cursor: pointer;
+    color: white;
+    text-decoration: underline;
   }
 }
 
@@ -86,11 +95,13 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   :first-child {
-    border-radius: 10px 10px 0 0;
+      border-radius: 10px 10px 0 0;
   }
+
   :last-child {
-    border-radius: 0 0 10px 10px;
+      border-radius: 0 0 10px 10px;
   }
 }
 
@@ -106,6 +117,7 @@ a:hover {
   background-color: #FFBD14;
   width: 80%;
   border: 1px solid black;
+
   span {
     font-weight: bold;
     font-size: 18px;
@@ -150,26 +162,23 @@ a:hover {
 }
 
 /* TABLET AND DESKTOP PART */
-@media only screen and(min-width:500px){
+@media only screen and(min-width: 500px) {
   .topbar-main-logo {
     width: 275px;
   }
 }
 
-@media only screen and(min-width:750px) {
+@media only screen and(min-width: 750px) {
   .topbar-main-logo {
     width: 350px;
   }
-
-  .account {
-    display: block;
-  }
 }
 
-@media only screen and(min-width:850px) {
+@media only screen and(min-width: 850px) {
   .topbar-main-logo {
     width: 500px;
   }
+
   .topbar {
     margin-bottom: 0;
     padding-bottom: 0;
@@ -181,6 +190,10 @@ a:hover {
     align-items: center;
   }
 
+  .topbar-connexion-mobile {
+    display: none;
+  }
+
   .topbar-container-connexion-flex {
     display: flex;
     flex-direction: column;
@@ -188,29 +201,18 @@ a:hover {
     justify-content: center;
   }
 
-
   .topbar-connexion-desktop {
     display: block;
     font-family: "Libre Baskerville", serif;
-    color: #D6A9A9;
+    color: #d18a8a
   }
 
-  /*.topbar-menu-tablet {
-    text-align: center;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    font-family: "Libre Baskerville", serif;
-    font-size: 22px;
-    color: #D6A9A9;
-    margin-bottom: 200px;
-    a {
-      margin: 0 5px;
-    }
-  }*/
+  .account {
+    display: block;
+  }
 }
 
-@media only screen and (min-width: 1250px){
+@media only screen and (min-width: 1250px) {
   .topbar-main-logo {
     width: 500px;
   }
@@ -220,6 +222,12 @@ a:hover {
     margin-top: -10px;
   }
 
+  .topbar-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   .topbar-menu-tablet {
     display: none;
   }
@@ -227,7 +235,7 @@ a:hover {
   .topbar-menu-desktop {
     display: block;
     font-family: "Libre Baskerville", serif;
-    color: #D6A9A9;
+    color: #d18a8a;
     a {
       margin: 0 8px;
     }
@@ -244,13 +252,16 @@ a:hover {
   .topbar-burger {
     display: none;
   }
-
 }
 
-@media only screen and (min-width: 1500px){
+@media only screen and (min-width: 1500px) {
   .topbar-menu-desktop {
     a {
       margin: 0 18px;
     }
+  }
+
+  .topbar-main-logo {
+    margin-right: 15px;
   }
 }

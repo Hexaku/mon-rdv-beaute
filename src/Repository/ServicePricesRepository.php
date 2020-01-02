@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ServiceType;
+use App\Entity\ServicePrices;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method ServiceType|null find($id, $lockMode = null, $lockVersion = null)
- * @method ServiceType|null findOneBy(array $criteria, array $orderBy = null)
- * @method ServiceType[]    findAll()
- * @method ServiceType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ServicePrices|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ServicePrices|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ServicePrices[]    findAll()
+ * @method ServicePrices[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ServiceTypeRepository extends ServiceEntityRepository
+class ServicePricesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ServiceType::class);
+        parent::__construct($registry, ServicePrices::class);
     }
 
     // /**
-    //  * @return ServiceType[] Returns an array of ServiceType objects
+    //  * @return ServicePrices[] Returns an array of ServicePrices objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ServiceTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ServiceType
+    public function findOneBySomeField($value): ?ServicePrices
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

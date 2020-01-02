@@ -25,13 +25,11 @@ class Professional
     private $id;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
 
     /**
-     * @var File|null
      * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
      */
     private $imageFile;
@@ -72,7 +70,11 @@ class Professional
     private $services;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", orphanRemoval=true)
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\BusinessHour",
+     *     mappedBy="professional",
+     *     orphanRemoval=true,
+     *     cascade={"persist"})
      */
     private $businessHour;
 
@@ -84,6 +86,7 @@ class Professional
     public function __construct()
     {
         $this->services = new ArrayCollection();
+        $this->businessHour = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,27 +176,6 @@ class Professional
     {
         if ($this->services->contains($service)) {
             $this->services->removeElement($service);
-            // set the owning side to null (unless already changed)
-            if ($service->getProfessional() === $this) {
-                $service->setProfessional(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getBusinessHour(): ?BusinessHour
-    {
-        return $this->businessHour;
-    }
-
-    public function setBusinessHour(BusinessHour $businessHour): self
-    {
-        $this->businessHour = $businessHour;
-
-        // set the owning side of the relation if necessary
-        if ($businessHour->getProfessional() !== $this) {
-            $businessHour->setProfessional($this);
         }
 
         return $this;
@@ -244,8 +226,35 @@ class Professional
     {
         $this->uploadedAt = $uploadedAt;
         if ($this->imageFile instanceof UploadedFile) {
-            $this->uploadedAt = new \DateTime('now');
+            $this->uploadedAt = new DateTime('now');
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|BusinessHour[]
+     */
+    public function getBusinessHour(): Collection
+    {
+        return $this->businessHour;
+    }
+
+    public function addBusinessHour(BusinessHour $businessHour): self
+    {
+        if (!$this->businessHour->contains($businessHour)) {
+            $this->businessHour[] = $businessHour;
+            $businessHour->setProfessional($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBusinessHour(BusinessHour $businessHour): self
+    {
+        if ($this->businessHour->contains($businessHour)) {
+            $this->businessHour->removeElement($businessHour);
+        }
+
         return $this;
     }
 }

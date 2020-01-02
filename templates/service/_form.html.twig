@@ -1,4 +1,26 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.name) }}
+    {{ form_row(form.category) }}
+    {{ form_row(form.professional) }}
+    {{ form_row(form.slogan) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.serviceType) }}
+    {{ form_row(form.duration) }}
+    {{ form_row(form.intervalTime) }}
+    {{ form_row(form.imageFile) }}
+    {{ form_row(form.price) }}
+    <div class="flex-form">
+        <h5>Prix additionnels</h5>
+        <div class="hours" data-prototype="{{ form_widget(form.servicePrices.vars.prototype)|e('html_attr')}}">
+            {# iterate over each existing tag and render its only field: name #}
+            {% for servicePrice in form.servicePrices %}
+                {{ form_row(servicePrice) }}
+            {% endfor %}
+        </div>
+    </div>
+    <button class="btn btn-success mt-3">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('embed_service_prices') }}
+{% endblock %}

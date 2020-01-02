@@ -5,12 +5,20 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
+ * @Vich\Uploadable()
  */
 class Service
 {
+    const SERVICE_TYPE = [
+        1 => "Sur place",
+        2 => "À domicile"
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,8 +28,14 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -34,35 +48,24 @@ class Service
     private $description;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $image;
-
-    /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\PositiveOrZero
      */
     private $intervalTime;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\PositiveOrZero
      */
     private $duration;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $area;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="services")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Price", mappedBy="service")
-     */
-    private $prices;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="services")
@@ -76,20 +79,77 @@ class Service
     private $member;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceType", inversedBy="services")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min="1", max="2")
      */
     private $serviceType;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\Positive
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\ServicePrices",
+     *     mappedBy="service",
+     *     orphanRemoval=true,
+     *     cascade={"persist"})
+     */
+    private $servicePrices;
+
+    /**
+     * @return mixed
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param mixed $filename
+     * @return Service
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     * @return Service
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
+
     public function __construct()
     {
-        $this->prices = new ArrayCollection();
         $this->member = new ArrayCollection();
+        $this->servicePrices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,6 +166,24 @@ class Service
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Service
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
         return $this;
     }
 
@@ -133,17 +211,6 @@ class Service
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 
     public function getIntervalTime()
     {
@@ -169,18 +236,6 @@ class Service
         return $this;
     }
 
-    public function getArea(): ?string
-    {
-        return $this->area;
-    }
-
-    public function setArea(?string $area): self
-    {
-        $this->area = $area;
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -189,37 +244,6 @@ class Service
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Price[]
-     */
-    public function getPrices(): Collection
-    {
-        return $this->prices;
-    }
-
-    public function addPrice(Price $price): self
-    {
-        if (!$this->prices->contains($price)) {
-            $this->prices[] = $price;
-            $price->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removePrice(Price $price): self
-    {
-        if ($this->prices->contains($price)) {
-            $this->prices->removeElement($price);
-            // set the owning side to null (unless already changed)
-            if ($price->getService() === $this) {
-                $price->setService(null);
-            }
-        }
 
         return $this;
     }
@@ -262,15 +286,21 @@ class Service
         return $this;
     }
 
-    public function getServiceType(): ?ServiceType
+    /**
+     * @return mixed
+     */
+    public function getServiceType()
     {
         return $this->serviceType;
     }
 
-    public function setServiceType(?ServiceType $serviceType): self
+    /**
+     * @param mixed $serviceType
+     * @return Service
+     */
+    public function setServiceType($serviceType)
     {
         $this->serviceType = $serviceType;
-
         return $this;
     }
 
@@ -282,6 +312,37 @@ class Service
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ServicePrices[]
+     */
+    public function getServicePrices(): Collection
+    {
+        return $this->servicePrices;
+    }
+
+    public function addServicePrice(ServicePrices $servicePrice): self
+    {
+        if (!$this->servicePrices->contains($servicePrice)) {
+            $this->servicePrices[] = $servicePrice;
+            $servicePrice->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServicePrice(ServicePrices $servicePrice): self
+    {
+        if ($this->servicePrices->contains($servicePrice)) {
+            $this->servicePrices->removeElement($servicePrice);
+            // set the owning side to null (unless already changed)
+            if ($servicePrice->getService() === $this) {
+                $servicePrice->setService(null);
+            }
+        }
 
         return $this;
     }

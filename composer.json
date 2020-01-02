@@ -15,7 +15,6 @@
         "symfony/flex": "^1.1",
         "symfony/form": "4.4.*",
         "symfony/framework-bundle": "4.3.*",
-        "symfony/google-mailer": "4.4.*",
         "symfony/mailer": "4.4.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "*",
@@ -28,6 +27,7 @@
         "symfony/web-link": "4.3.*",
         "symfony/webpack-encore-bundle": "^1.5",
         "symfony/yaml": "4.3.*",
+        "tattali/calendar-bundle": "^1.1",
         "vich/uploader-bundle": "^1.12"
     },
     "require-dev": {
@@ -43,7 +43,8 @@
         "symfony/phpunit-bridge": "4.3.*",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "^1.0",
-        "symfony/web-server-bundle": "4.3.*"
+        "symfony/web-server-bundle": "4.3.*",
+        "symfony/google-mailer": "4.4.*"
     },
     "config": {
         "preferred-install": {

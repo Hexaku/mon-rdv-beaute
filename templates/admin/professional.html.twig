@@ -24,6 +24,7 @@
                         <th>Activité</th>
                         <th>Télephone</th>
                         <th>Image</th>
+                        <th>Horaires</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,10 +46,27 @@
                             <td>{{professional.place}}</td>
                             <td>{{professional.description}}</td>
                             <td>{{professional.phone}}</td>
-                            <td><img src="{{ vich_uploader_asset(professional, 'imageFile') }}" height="auto" width="200px"/></td>
+                            <td><img src="{{ vich_uploader_asset(professional, 'imageFile') }}" alt="professional image" height="100px" width="auto"/></td>
+                            <td>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePagesHours{{ loop.index }}" aria-expanded="true" aria-controls="collapsePagesHours"><button class="btn btn-primary">Voir</button></a>
+                                <div id="collapsePagesHours{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        {% if professional.businessHour.toArray is empty %}
+                                            <p>Il n'y a pas d'horaires disponible pour ce professionnel</p>
+                                        {% else %}
+                                            {% for hour in professional.businessHour.toArray %}
+                                            <p>{{ hour.day|day }} : {{ hour.openTime|date('H:i')}} - {{ hour.closeTime|date('H:i')}}</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     {% else %}
-                        <h4>Il n'y a pas de professionnels !</h4>
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore de professionnels !" | raw }}
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>

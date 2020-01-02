@@ -16,9 +16,6 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/contact", name="contact")
-     * @param MailerInterface $mailer
-     * @return Response
-     * @throws TransportExceptionInterface
      */
     public function index(Request $request, MailerInterface $mailer): Response
     {
@@ -32,9 +29,9 @@ class ContactController extends AbstractController
                 ->to('designebenjamin@gmail.com')
                 ->subject('Vous avez reçu un message depuis Mon RDV Beauté !')
                 ->html($this->renderView("contact/mail.html.twig", [
+                    "firstName" => $data["firstName"],
+                    "lastName" => $data["lastName"],
                     "message" => $data["message"],
-                    "prenom" => $data["prenom"],
-                    "nom" => $data["nom"],
                     "email" => $data["email"],
                 ]));
 

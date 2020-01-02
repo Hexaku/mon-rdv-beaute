@@ -5,6 +5,40 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
+/* ANIMATION PRE LOADER */
+
+.wrap {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 300px;
+    height: auto;
+  }
+}
+
+#layer_1 {
+  width: 200px;
+  height: auto;
+}
+
+.wrap.hidden {
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 
 /* MOBILE FIRST ! */
 * {
@@ -22,15 +56,13 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: #D6A9A9;
 }
 
 /* Elements a afficher uniquement en desktop */
 .topbar-menu-desktop, .topbar-connexion-desktop, .topbar-menu-tablet, .mobile {
   display: none;
 }
-
-
 
 /* Calque noir header */
 .layer {
@@ -60,7 +92,6 @@ a:hover {
   align-items: center;
   padding: 15px 0;
   position: relative;
-  margin-bottom: 50px;
   font-family: "Libre Baskerville", serif;
 }
 
@@ -75,7 +106,11 @@ a:hover {
   cursor: pointer;
 }
 
-.topbar-menu-mobile {
+.topbar-flex {
+  display: none;
+}
+
+.topbar-menu-mobile, .topbar-connexion-mobile {
   position: relative;
   font-family: "Libre Baskerville", serif;
   color: white;
@@ -90,8 +125,11 @@ a:hover {
   a {
     margin: 10px 0;
   }
+
   a:hover {
     cursor: pointer;
+    color: white;
+    text-decoration: underline;
   }
 }
 
@@ -107,9 +145,11 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   :first-child {
     border-radius: 10px 10px 0 0;
   }
+
   :last-child {
     border-radius: 0 0 10px 10px;
   }
@@ -127,6 +167,7 @@ a:hover {
   background-color: #FFBD14;
   width: 80%;
   border: 1px solid black;
+
   span {
     font-weight: bold;
     font-size: 18px;
@@ -184,7 +225,8 @@ a:hover {
   text-align: center;
   line-height: 1.5;
   font-size: 42px;
-  margin-bottom: 100px;
+  margin-bottom: 70px;
+  margin-top: 50px
 }
 
 .main {
@@ -196,6 +238,8 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 60px;
 }
 
 .category-image {
@@ -204,11 +248,14 @@ a:hover {
 }
 
 .category-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 70%;
+  height: 75px;
   margin: -35px auto 60px auto;
-  padding: 20px 0;
+  padding: 20px 10px;
   text-align: center;
-  height: auto;
   background-color: #CF8080;
   color: white;
   border-radius: 10px;
@@ -224,6 +271,7 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 75px;
 }
 
 .article-flex {
@@ -236,7 +284,8 @@ a:hover {
 .article-title {
   font-size: 27px;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  font-family: "Libre Baskerville", serif;
 }
 
 .article-image {
@@ -323,7 +372,7 @@ a:hover {
 
 
 /* TABLET AND DESKTOP PART */
-@media only screen and(min-width:500px){
+@media only screen and(min-width: 500px) {
   .topbar-main-logo {
     width: 275px;
   }
@@ -348,31 +397,31 @@ a:hover {
       margin: 15px 20px;
     }
   }
-
 }
 
-@media only screen and(min-width:750px) {
+@media only screen and(min-width: 750px) {
   .topbar-main-logo {
     width: 350px;
   }
 
-  .topbar {
-    margin-bottom: 150px;
+  .main-title {
+  margin-top: 100px;
   }
 
   .main {
     margin: 0 80px;
   }
 
-  .account {
-    display: block;
+  .category-button {
+    font-size: 20px;
   }
 }
 
-@media only screen and(min-width:850px) {
+@media only screen and(min-width: 850px) {
   .topbar-main-logo {
     width: 500px;
   }
+
   .topbar {
     margin-bottom: 0;
     padding-bottom: 0;
@@ -384,7 +433,7 @@ a:hover {
     align-items: center;
   }
 
-  .topbar-burger {
+  .topbar-connexion-mobile {
     display: none;
   }
 
@@ -394,18 +443,26 @@ a:hover {
     display: flex;
     justify-content: space-around;
     font-family: "Libre Baskerville", serif;
-    font-size: 22px;
-    color: #D6A9A9;
+    font-size: 20px;
+    color: white;
     margin-bottom: 200px;
     a {
       margin: 0 5px;
     }
   }
 
+  .topbar-burger {
+    display: none;
+  }
+
   .topbar-connexion-desktop {
     display: block;
     font-family: "Libre Baskerville", serif;
     color: #D6A9A9;
+  }
+
+  .account {
+    display: block;
   }
 
   .filter-form {
@@ -423,7 +480,7 @@ a:hover {
   }
 
   .filter-input {
-    width: 15%;
+    width: 20%;
   }
 
   .filter-submit {
@@ -432,6 +489,10 @@ a:hover {
 
   .article-flex {
     width: 600px;
+  }
+
+  .category-button {
+    font-size: 24px;
   }
 
   .higher-footer {
@@ -474,6 +535,7 @@ a:hover {
   .footer-copyright {
     flex-direction: row;
     margin: 0;
+
     a {
       margin: 0 8px;
     }
@@ -484,15 +546,22 @@ a:hover {
   }
 }
 
-@media only screen and (min-width: 1250px){
+
+
+@media only screen and (min-width: 1250px) {
   .topbar-main-logo {
-    width: 500px;
+    width: 400px;
   }
 
   .topbar {
-    padding-top: 0;
-    margin-top: -10px;
+    padding-top: 10px;
     margin-bottom: 200px;
+  }
+
+  .topbar-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .topbar-menu-tablet {
@@ -502,7 +571,7 @@ a:hover {
   .topbar-menu-desktop {
     display: block;
     font-family: "Libre Baskerville", serif;
-    color: #D6A9A9;
+    color: white;
     a {
       margin: 0 8px;
     }
@@ -510,6 +579,7 @@ a:hover {
 
   .main-title {
     margin-top: 150px;
+    margin-bottom: 100px;
   }
 
   .categories-container {
@@ -518,11 +588,16 @@ a:hover {
     justify-content: space-between;
     align-items: center;
     margin-top: 100px;
+    margin-bottom: 100px;
   }
 
   .category-image {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .category-button {
+    font-size: 16px;
   }
 
   .category-content {
@@ -584,7 +659,19 @@ a:hover {
   }
 }
 
-@media only screen and (min-width: 1500px){
+@media only screen and (min-width: 1400px) {
+  .category-image {
+    width: 400px;
+    height: 400px;
+  }
+
+  .topbar-main-logo {
+    margin-right: 15px;
+    width: 550px;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
   .topbar-menu-desktop {
     a {
       margin: 0 18px;
@@ -593,17 +680,24 @@ a:hover {
 
   .topbar {
     margin-bottom: 150px;
+    padding-top: 0;
   }
 
   .topbar-main-logo {
-    width: 650px;
+    width: 600px;
+    margin-right: 15px;
   }
 
   .main-title {
     font-size: 50px;
   }
+
+  .filter-input {
+    width: 15%;
+  }
+
+  .category-image {
+    width: 450px;
+    height: 450px;
+  }
 }
-
-
-
-

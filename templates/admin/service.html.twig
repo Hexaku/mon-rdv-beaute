@@ -1,0 +1,85 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Liste des prestations{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <h2 class="h2 mb-3 text-gray-800">Liste des prestations</h2>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Prestations</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <a href="{{ path("admin_service_new") }}"><button class="btn btn-success btn-add">Ajouter une prestation</button></a>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Professionnel</th>
+                        <th>Slogan</th>
+                        <th>Description</th>
+                        <th>Type de prestation</th>
+                        <th>Durée</th>
+                        <th>Délai de reprise</th>
+                        <th>Image</th>
+                        <th>Prix</th>
+                        <th>Prix additionnels</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for service in services %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{service.name}}</a>
+                                <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        <div class="flex-buttons">
+                                            <a class="collapse-item" href="{{ path('admin_service_edit', {'id': service.id}) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            {{ include('admin/_service_delete_form.html.twig') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{service.category.name}}</td>
+                            <td>{{service.professional.name}}</td>
+                            <td>{{service.slogan}}</td>
+                            <td>{{service.description}}</td>
+                            <td>{{service.serviceType|service}}</td>
+                            <td>{{service.duration|duration}}</td>
+                            <td>{{service.intervalTime|duration}}</td>
+                            <td><img src="{{ vich_uploader_asset(service, 'imageFile') }}" alt="service image" height="100px" width="auto"/></td>
+                            <td>{{service.price}}€</td>
+                            <td>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePagesHours{{ loop.index }}" aria-expanded="true" aria-controls="collapsePagesHours"><button class="btn btn-primary">Voir</button></a>
+                                <div id="collapsePagesHours{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                    <div class="bg-white py-2 collapse-inner rounded">
+                                        {% if service.servicePrices.toArray is empty %}
+                                            <p>Il n'y a pas de prix additionnels pour ce service</p>
+                                        {% else %}
+                                            {% for servicePrice in service.servicePrices.toArray %}
+                                                <p>{{ servicePrice.name }} - {{ servicePrice.price }}€</p>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore de prestations !" | raw }}
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

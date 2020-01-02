@@ -40,7 +40,10 @@
                             <td>{{article.content}}</td>
                         </tr>
                     {% else %}
-                        <h4>Il n'y a pas d'articles !</h4>
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore d'articles !" | raw }}
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>
