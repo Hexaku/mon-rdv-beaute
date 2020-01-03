@@ -176,10 +176,6 @@ class Professional
     {
         if ($this->services->contains($service)) {
             $this->services->removeElement($service);
-            // set the owning side to null (unless already changed)
-            if ($service->getProfessional() === $this) {
-                $service->setProfessional(null);
-            }
         }
 
         return $this;
@@ -257,10 +253,6 @@ class Professional
     {
         if ($this->businessHour->contains($businessHour)) {
             $this->businessHour->removeElement($businessHour);
-            // set the owning side to null (unless already changed)
-            if ($businessHour->getProfessional() === $this) {
-                $businessHour->setProfessional(null);
-            }
         }
 
         return $this;
