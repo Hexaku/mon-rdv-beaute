@@ -1,9 +1,75 @@
 @import "vars";
+@import "~bootstrap/scss/bootstrap";
 
-body {
-    background-color: $secondary-color;
+/* IMPORT DE POLICES */
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+.title {
+    font-family: "Libre Baskerville", serif;
+    font-size: 2rem;
+    margin: 50px 0;
+    text-align: center;
 }
 
-a {
-    color: $warm-color;
+.category-carousel {
+    margin: 50px 0;
+}
+
+.contact-form {
+    margin: 50px 15px;
+}
+
+.card {
+    margin-bottom: 25px;
+}
+
+.salmon-link {
+    color: #D6A9A9;
+
+    :hover {
+        color: #0b2e13;
+    }
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 20px;
+
+    a {
+        margin-right: 15px;
+    }
+}
+
+.flex-buttons {
+    display: flex;
+
+    button {
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .category-carousel {
+        margin: 50px 100px;
+    }
+
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .category-carousel {
+        margin: 50px 250px;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .contact-form {
+        max-width: 900px;
+    }
 }

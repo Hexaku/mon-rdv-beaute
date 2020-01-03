@@ -1,0 +1,51 @@
+
+<header class="header">
+        <div class="topbar">
+            <div class="mobile">
+                <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+            </div>
+            <nav class="topbar-menu topbar-menu-desktop">
+                <a href="{{ path('category_index') }}">PRESTATIONS</a>
+                <a href="#">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('about') }}">A PROPOS</a>
+                <a href="{{ path('contact') }}">CONTACT</a>
+            </nav>
+            <div class="topbar-burger" id="burger">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div >
+                <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+            </div>
+            <div class="topbar-container-connexion">
+                <a href="#"><img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion"></a>
+                <div class="topbar-container-connexion-flex">
+                    {% if app.user %}
+                        <span class="account">{{ app.user.email }}</span>
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            <a href="{{ path('admin_index') }}" class="topbar-connexion-desktop"><button class="btn btn-link">Espace admin</button></a>
+                        {% endif %}
+                        <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop">Se déconnecter</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <nav class="topbar-menu topbar-menu-mobile no-show" id="topbar-menu-mobile">
+            <a href="{{ path('category_index') }}">Prestations</a>
+            <div class="white-line"></div>
+            <a href="#">Journée Bien-Être</a>
+            <div class="white-line"></div>
+            <a href="{{ path('about') }}">A propos</a>
+            <div class="white-line"></div>
+            <a href="{{ path('contact') }}">Contact</a>
+        </nav>
+        <nav class="topbar-menu topbar-menu-tablet">
+            <a href="{{ path('category_index') }}">PRESTATIONS</a>
+            <a href="#">JOURNEE BIEN-ETRE</a>
+            <a href="{{ path('about') }}">A PROPOS</a>
+            <a href="{{ path('contact') }}">CONTACT</a>
+        </nav>
+</header>

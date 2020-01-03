@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Category{% endblock %}
+
+{% block body %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+    <h1 class="title">Modifier une Catégorie</h1>
+    <div class="contact-form">
+        {{ include('category/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
+{% endblock %}

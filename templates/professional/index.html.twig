@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professional index{% endblock %}
+
+{% block body %}
+    <h1>Professional index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Place</th>
+                <th>Description</th>
+                <th>Phone</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for professional in professionals %}
+            <tr>
+                <td>{{ professional.id }}</td>
+                <td>{{ professional.name }}</td>
+                <td>{{ professional.email }}</td>
+                <td>{{ professional.place }}</td>
+                <td>{{ professional.description }}</td>
+                <td>{{ professional.phone }}</td>
+                <td>
+                    <a href="{{ path('professional_show', {'id': professional.id}) }}">show</a>
+                    <a href="{{ path('professional_edit', {'id': professional.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <a href="{{ path('professional_new') }}">Create new</a>
+{% endblock %}

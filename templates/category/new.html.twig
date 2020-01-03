@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Category{% endblock %}
+
+{% block body %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="contact-form">
+        <h2 class="title">Ajouter une nouvelle catégorie</h2>
+        {{ include('category/_form.html.twig') }}
+    </div>
+{% endblock %}

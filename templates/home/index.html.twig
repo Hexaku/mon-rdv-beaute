@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mon Rendez-Vous Beauté{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('home') }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <header class="header">
+        <div class="layer"></div>
+        <div class="banner">
+            <div class="topbar">
+                <div class="mobile">
+                    <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                </div>
+                <nav class="topbar-menu topbar-menu-desktop">
+                    <a href="{{ path('category_index') }}">PRESTATIONS</a>
+                    <a href="#">JOURNEE BIEN-ETRE</a>
+                    <a href="{{ path('about') }}">A PROPOS</a>
+                    <a href="{{ path('contact') }}">CONTACT</a>
+                </nav>
+                <div class="topbar-burger" id="burger">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                <div >
+                    <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                </div>
+                <div class="topbar-container-connexion">
+                    <a href="#"><img class="topbar-connexion-logo" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion"></a>
+                    <div class="topbar-container-connexion-flex">
+                        {% if app.user %}
+                            <span class="account">{{ app.user.email }}</span>
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                                <a href="{{ path('admin_index') }}" class="topbar-connexion-desktop"><button class="btn btn-link">Espace admin</button></a>
+                            {% endif %}
+                            <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop">Se déconnecter</a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <nav class="topbar-menu topbar-menu-mobile no-show" id="topbar-menu-mobile">
+                <a href="{{ path('category_index') }}">Prestations</a>
+                <div class="white-line"></div>
+                <a href="#">Journée Bien-Être</a>
+                <div class="white-line"></div>
+                <a href="{{ path('about') }}">A propos</a>
+                <div class="white-line"></div>
+                <a href="{{ path('contact') }}">Contact</a>
+            </nav>
+            <nav class="topbar-menu topbar-menu-tablet">
+                <a href="{{ path('category_index') }}">PRESTATIONS</a>
+                <a href="#">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('about') }}">A PROPOS</a>
+                <a href="{{ path('contact') }}">CONTACT</a>
+            </nav>
+            <div>
+                <h1 class="main-title">Prenez rendez-vous avec votre bien-être</h1>
+            </div>
+            <form class="filter-form">
+                <input class="filter-input" type="text" placeholder="Toutes les prestations">
+                <input class="filter-input" type="text" placeholder="Toutes les dates">
+                <input class="filter-input" type="text" placeholder="Votre ville">
+                <button class="filter-submit" type="submit" >
+                    <span>Rechercher</span>
+                    <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="{{ asset('/build/logo-noir.svg') }}"/>
+                        <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Merci de compléter le formulaire</p>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="categories-container">
+            <div class="category">
+                <img src="{{ asset('/build/hairstyle2.jpeg') }}" class="category-image"/>
+                <a href="{{ path('category_index') }}"><div class="category-button">CHOISIR VOTRE PRESTATION</div></a>
+            </div>
+            <div class="category">
+                <img src="{{ asset('/build/massage-tools.png') }}" class="category-image"/>
+                <a href="#" data-toggle="modal" data-target="#exampleModal"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
+            </div>
+            <div class="category">
+                <img src="{{ asset('/build/contact.jpeg')  }}" class="category-image"/>
+                <a href="{{ path('contact') }}"><div class="category-button">CONTACTEZ-NOUS</div></a>
+            </div>
+        </div>
+        <div class="black-line"></div>
+        <div class="article-container">
+            <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
+            <div class="article-flex">
+                <img class="article-image" src="{{ asset('/build/hairstyle.jpeg')  }}"/>
+                <div>
+                    <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui. Mauris quam ante, aliquet et tristique non, gravida quis diam. Proin in dui quis erat vestibulum porta. Etiam sit amet rhoncus eros. Fusce consectetur tellus purus, ut vestibulum libero hendrerit id. Vestibulum eu congue neque, quis suscipit metus. Vestibulum egestas turpis libero, nec lobortis turpis iaculis eget. Praesent vitae porta turpis.</p>
+                    <a href="{{ path("article_index")}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="higher-footer">
+            <div class="footer-description">
+                <img class="footer-description-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo mon RDV Beauté"/>
+                <p class="footer-description-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui.</p>
+            </div>
+            <div class="footer-socials">
+                <h4 class="footer-socials-title">Suivez-nous !</h4>
+                <div class="footer-socials-icons">
+                    <img src="{{ asset('/build/icon-facebook.png')  }}" alt="Logo Facebook"/>
+                    <img src="{{ asset('/build/icon-insta.png')  }}" alt="Logo Instagram"/>
+                    <img src="{{ asset('/build/icon-twitter.png')  }}" alt="Logo Twitter"/>
+                    <img src="{{ asset('/build/icon-youtube.png')  }}" alt="Logo Youtube"/>
+                </div>
+            </div>
+            <div class="footer-newsletter">
+                <h4 class="footer-newsletter-title">Notre Newsletter</h4>
+                <form class="footer-newsletter-form">
+                    <input class=" footer-newsletter-input" type="text" placeholder="Entrez votre e-mail">
+                    <button class="footer-newsletter-submit" type="submit" >
+                        <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="lower-footer">
+            <div class="footer-copyright">
+                <a href="#">Termes & Conditions</a>
+                <a href="#">Informations sur l’entreprise</a>
+                <a href="#">Copyright</a>
+            </div>
+            <div class="footer-wild">
+                Built with ❤️ by Wild Code School
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>
+
