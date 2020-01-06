@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Professional;
 use App\Entity\Service;
 use App\Form\ServiceType;
 use App\Repository\ServiceRepository;
@@ -9,8 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
-
+use DateTime;
 /**
  * @Route("/service")
  */
@@ -121,5 +121,13 @@ class ServiceController extends AbstractController
         }
 
         return $this->redirectToRoute('service_index');
+    }
+
+    /**
+     * @Route("/test/{id}/{date}", name="test")
+     */
+    public function test(Professional $professional, DateTime $date): Response
+    {
+        return $this->json($professional->getName() . ' ' . $date->format('d'));
     }
 }

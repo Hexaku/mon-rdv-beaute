@@ -37,11 +37,17 @@ document.addEventListener("DOMContentLoaded", () => {
             },
         ],
         dateClick: (info) => {
-            console.log(calendarEl.getAttribute("professional"));
+            calendarEl.getAttribute("professional");
             const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
             console.log(days[info.date.getDay()]);
             console.log(info);
-            fetch("/test");
+            fetch(`/service/test/${calendarEl.getAttribute('professional')}/${info.dateStr}`)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((result) => {
+                    console.log(result);
+                });
 
             const monthNames = [
                 "Janvier", "Février", "Mars",
