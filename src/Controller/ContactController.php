@@ -19,36 +19,16 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request, MailerSender $mailerSender, $mailer): Response
+    public function index(Request $request, MailerSender $mailerSender): Response
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-
-            $email = (new Email())
-                ->from('barre.alexandre44@gmail.com')
-                ->to('barre.alexandre44@gmail.com')
-                ->subject('Vous avez reçu un message depuis Mon RDV Beauté !')
-                ->html($this->renderView("contact/mail.html.twig", [
-                    "firstName" => $data["firstName"],
-                    "lastName" => $data["lastName"],
-                    "message" => $data["message"],
-                    "email" => $data["email"],
-                ]));
-
-            $mailer->send($email);
-
             $mailerSender->sendContactMail($data);
-
-
-
             $this->addFlash("success", "Votre messaqe a bien été envoyé !");
-
             return $this->redirectToRoute('contact');
         }
-
         return $this->render("contact/index.html.twig", [
             "form" => $form->createView(),
         ]);

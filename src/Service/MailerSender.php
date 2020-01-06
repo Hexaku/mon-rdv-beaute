@@ -28,8 +28,8 @@ class MailerSender
             ->subject('Vous avez reçu un message depuis Mon RDV Beauté !')
             ->html($this->twig->render("contact/mail.html.twig", [
                 "message" => $data["message"],
-                "prenom" => $data["prenom"],
-                "nom" => $data["nom"],
+                "firstName" => $data["firstName"],
+                "lastName" => $data["lastName"],
                 "email" => $data["email"],
             ]));
 
