@@ -11,14 +11,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /* form uses in pop-up window in special day (journées bien-être)*/
-class SpecialDayType extends AbstractType
+class ContactSpeDayType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('Name', TextType::class)
             ->add('Email', EmailType::class)
-            ->add('phone', TextType::class)
+            ->add('Phone', TextType::class)
         ;
     }
 
