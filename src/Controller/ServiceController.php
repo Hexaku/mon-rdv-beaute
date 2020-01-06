@@ -71,16 +71,6 @@ class ServiceController extends AbstractController
         $businessHours = $service->getProfessional()->getBusinessHour()->toArray();
         $serviceDuration = $service->getDuration();
 
-        $repository = $this->getDoctrine()->getRepository(BusinessHour::class);
-        $professionalHours = $repository->findBy([
-            'day' => 1,
-        ]);
-        foreach ($professionalHours as $professionalHour){
-            dump($professionalHour->getOpenTime()->format("H:i"));
-            dump($professionalHour->getCloseTime()->format("H:i"));
-        }
-
-
         /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
         $result = [];
         foreach ($businessHours as $businessHour) {
@@ -103,27 +93,21 @@ class ServiceController extends AbstractController
     }
 
     /**
-     * @Route("/test/{id}/{date}", name="test")
+     * @Route("/{id}/{date}", name="test")
      */
-    public function test(Professional $professional,
-                         DateTime $date,
-                         BusinessHourRepository $businessHourRepository): Response
+    public function test(Professional $professional, DateTime $date, BusinessHourRepository $businessHourRepository): Response
     {
-        /*if ($date->format("D") == "Mon") {
-            $repository = $this->getDoctrine()->getRepository(BusinessHour::class);
-            $professionalHours = $repository->findBy([
-                'day' => 1,
-            ]);
-        }*/
 
+        $serviceDuration = $professional->getServices()->toArray()[0]->getDuration();
 
         $reservationDay = $businessHourRepository->findBy([
             "professional" => $professional,
             "day" => $date->format("N"),
         ]);
 
+        $data = [$serviceDuration, $reservationDay];
 
-        return $this->json($reservationDay, 200, [], ["groups" => ["calendar"]]);
+        return $this->json($data, 200, [], ["groups" => ["calendar"]]);
     }
 
     /**

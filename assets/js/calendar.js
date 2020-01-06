@@ -39,17 +39,29 @@ document.addEventListener("DOMContentLoaded", () => {
         dateClick: (info) => {
             calendarEl.getAttribute("professional");
             const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+            console.log(info.date.getDay());
             //console.log(days[info.date.getDay()]);
-            fetch(`/service/test/${calendarEl.getAttribute('professional')}/${info.dateStr}`)
+            fetch(`/service/${calendarEl.getAttribute('professional')}/${info.dateStr}`)
                 .then((response) => {
                     return response.json()
                 })
                 .then((result) => {
                     console.log(result);
-                    let hours = ''
-                    result.forEach((item, index) => hours += `<button class="btn btn-pink">${result[index].openTime.slice(11, 16)}</button>
-                                                          <button class="btn btn-pink">${result[index].closeTime.slice(11, 16)}</button>`)
-                    $(".modal-body").html(hours);
+                    /*
+                    result[0] = durée de la prestation (en mn)
+                    result[1] = horaires du professionel
+                     */
+                    if (result[1].length == 0) {
+                        $(".modal-body").html("Il n'y a pas d'horaires disponible pour ce jour");
+                    } else {
+                        let hours = ''
+                        result.forEach((item, index) => hours += `<button class="btn btn-pink">${result[1][index].openTime.slice(11, 16)}</button> 
+                                                          <button class="btn btn-pink">${result[1][index].closeTime.slice(11, 16)}</button>`)
+
+                        $(".modal-body").html(hours);
+                    }
+
+
                     $('#exampleModalCenter').modal();
 
                 });
