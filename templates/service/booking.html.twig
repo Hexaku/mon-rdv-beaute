@@ -6,7 +6,7 @@
 {% block body %}
     <div class="container-flex">
         <h1 class="title">Réserver votre rendez-vous en ligne</h1>
-        <div id="calendar-holder" data-events-url="{{ path('fc_load_events') }}"></div>
+        <div id="calendar-holder" data-events-url="{{ path('fc_load_events') }}" professional="{{ service.professional.id }}"></div>
     </div>
 
     <!-- Modal -->

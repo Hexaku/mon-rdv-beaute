@@ -37,9 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
             },
         ],
         dateClick: (info) => {
+            console.log(calendarEl.getAttribute("professional"));
             const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
             console.log(days[info.date.getDay()]);
             console.log(info);
+            fetch("/test");
 
             const monthNames = [
                 "Janvier", "Février", "Mars",
