@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\BusinessHour;
 use App\Entity\Professional;
 use App\Entity\Service;
 use App\Form\ServiceType;
+use App\Repository\BusinessHourRepository;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,6 +71,16 @@ class ServiceController extends AbstractController
         $businessHours = $service->getProfessional()->getBusinessHour()->toArray();
         $serviceDuration = $service->getDuration();
 
+        $repository = $this->getDoctrine()->getRepository(BusinessHour::class);
+        $professionalHours = $repository->findBy([
+            'day' => 1,
+        ]);
+        foreach ($professionalHours as $professionalHour){
+            dump($professionalHour->getOpenTime()->format("H:i"));
+            dump($professionalHour->getCloseTime()->format("H:i"));
+        }
+
+
         /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
         $result = [];
         foreach ($businessHours as $businessHour) {
@@ -88,6 +100,30 @@ class ServiceController extends AbstractController
             "service" => $service,
             "dates" => $result,
         ]);
+    }
+
+    /**
+     * @Route("/test/{id}/{date}", name="test")
+     */
+    public function test(Professional $professional,
+                         DateTime $date,
+                         BusinessHourRepository $businessHourRepository): Response
+    {
+        /*if ($date->format("D") == "Mon") {
+            $repository = $this->getDoctrine()->getRepository(BusinessHour::class);
+            $professionalHours = $repository->findBy([
+                'day' => 1,
+            ]);
+        }*/
+
+
+        $reservationDay = $businessHourRepository->findBy([
+            "professional" => $professional,
+            "day" => $date->format("N"),
+        ]);
+
+
+        return $this->json($reservationDay, 200, [], ["groups" => ["calendar"]]);
     }
 
     /**
@@ -122,13 +158,5 @@ class ServiceController extends AbstractController
         }
 
         return $this->redirectToRoute('service_index');
-    }
-
-    /**
-     * @Route("/test/{id}/{date}", name="test")
-     */
-    public function test(Professional $professional, DateTime $date): Response
-    {
-        return $this->json($professional->getName() . ' ' . $date->format('d'));
     }
 }

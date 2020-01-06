@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -17,13 +18,14 @@ class BusinessHour
         4 => "Jeudi",
         5 => "Vendredi",
         6 => "Samedi",
-        7 => "Dimanche"
+        0 => "Dimanche"
     ];
 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"calendar"})
      */
     private $id;
 
@@ -32,6 +34,7 @@ class BusinessHour
      * @Assert\Positive
      * @Assert\Range(min="1", max="7")
      * @Assert\NotBlank()
+     * @Groups({"calendar"})
      */
     private $day;
 
@@ -39,6 +42,7 @@ class BusinessHour
      * @ORM\Column(type="time")
      * @Assert\Time
      * @Assert\NotBlank()
+     * @Groups({"calendar"})
      */
     private $openTime;
 
@@ -46,6 +50,7 @@ class BusinessHour
      * @ORM\Column(type="time")
      * @Assert\Time
      * @Assert\NotBlank()
+     * @Groups({"calendar"})
      */
     private $closeTime;
 

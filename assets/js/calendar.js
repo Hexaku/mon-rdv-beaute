@@ -39,14 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
         dateClick: (info) => {
             calendarEl.getAttribute("professional");
             const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-            console.log(days[info.date.getDay()]);
-            console.log(info);
+            //console.log(days[info.date.getDay()]);
             fetch(`/service/test/${calendarEl.getAttribute('professional')}/${info.dateStr}`)
                 .then((response) => {
                     return response.json()
                 })
                 .then((result) => {
                     console.log(result);
+                    let hours = ''
+                    result.forEach((item, index) => hours += `<button class="btn btn-pink">${result[index].openTime.slice(11, 16)}</button>
+                                                          <button class="btn btn-pink">${result[index].closeTime.slice(11, 16)}</button>`)
+                    $(".modal-body").html(hours);
+                    $('#exampleModalCenter').modal();
+
                 });
 
             const monthNames = [
@@ -59,8 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let monthIndex = info.date.getMonth();
             let year = info.date.getFullYear();
 
-            //$(".modal-body").text(day + ' ' + monthNames[monthIndex] + ' ' + year);
-            $('#exampleModalCenter').modal();
+
+
         },
         header: {
             left: "prev,next today",
