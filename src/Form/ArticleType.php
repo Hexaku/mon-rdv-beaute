@@ -17,8 +17,8 @@ class ArticleType extends AbstractType
         $builder
             ->add('title', TextType::class, ["label" => "Titre"])
             ->add('content', CKEditorType::class, ["label" => "Contenu"])
-            ->add('isHomePage', CheckboxType::class,
-                ["label" => "Mettre cet article en avant sur la home page", "required" => false])
+            ->add('isHomePage', CheckboxType::class, ["label" => "Mettre cet article en avant sur la home page", "required" => false])
+            ->add('professional', null, ["choice_label" => "name", "label" => "Professionnel"])
         ;
     }
 

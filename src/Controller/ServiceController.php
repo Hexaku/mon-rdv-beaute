@@ -67,43 +67,23 @@ class ServiceController extends AbstractController
      */
     public function booking(Service $service): Response
     {
-        /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
-        $businessHours = $service->getProfessional()->getBusinessHour()->toArray();
-        $serviceDuration = $service->getDuration();
-
-        /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
-        $result = [];
-        foreach ($businessHours as $businessHour) {
-            $period = new \DatePeriod(
-                new \DateTime($businessHour->getOpenTime()->format("H:i")),
-                new \DateInterval("PT" . $serviceDuration . "M"),
-                new \DateTime($businessHour->getCloseTime()->format("H:i"))
-            );
-
-            foreach ($period as $date) {
-                $date->format("H:i");
-                $result[] = $date;
-            }
-        }
-
         return $this->render("service/booking.html.twig", [
             "service" => $service,
-            "dates" => $result,
         ]);
     }
 
     /**
      * @Route("/{id}/{date}", name="test")
      */
-    public function test(Professional $professional, DateTime $date, BusinessHourRepository $businessHourRepository): Response
+    public function test(
+        Professional $professional,
+        DateTime $date,
+        BusinessHourRepository $businessHourRepo
+    ): Response
     {
 
-        /* GET PROFESSIONAL LINKED TO THE SERVICE */
-        $service = $professional->getServices()->toArray()[0];
-
-
         /* */
-        $reservationDays = $businessHourRepository->findBy([
+        $reservationDays = $businessHourRepo->findBy([
             "professional" => $professional,
             "day" => $date->format("N"),
         ]);

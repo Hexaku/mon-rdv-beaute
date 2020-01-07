@@ -304,17 +304,20 @@
                 <a href="{{ path('contact_professional') }}"><div class="category-button">NOUS REJOINDRE</div></a>
             </div>
         </div>
-        <div class="black-line"></div>
-        <div class="article-container">
-            <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
-            <div class="article-flex">
-                <img class="article-image" src="{{ asset('/build/hairstyle.jpeg')  }}"/>
-                <div>
-                    <p class="article-content">{{article[0].content|slice(0, 400)|striptags }}...</p>
-                    <a href="{{ path("article_index", {'id': article[0].id})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+        {% if article is empty %}
+
+            {% else %}
+                <div class="article-container">
+                    <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
+                    <div class="article-flex">
+                        <img class="article-image" src="{{ asset("build/hairstyle.jpeg") }}"/>
+                        <div>
+                            <p class="article-content">{{article.content|slice(0, 400)|striptags }}...</p>
+                            <a href="{{ path("article_show", {'id': article.id})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+        {% endif %}
     </main>
 
     <footer class="footer">

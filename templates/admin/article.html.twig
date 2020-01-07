@@ -20,6 +20,7 @@
                         <th>Id</th>
                         <th>Titre</th>
                         <th>Contenu</th>
+                        <th>Professionnel</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,7 @@
                                 </div>
                             </td>
                             <td>{{article.content}}</td>
+                            <td>{{ article.professional.name }}</td>
                         </tr>
                     {% else %}
                         <div class="alert alert-primary alert-dismissible" role="alert">
