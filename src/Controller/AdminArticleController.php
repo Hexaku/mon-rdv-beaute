@@ -41,12 +41,10 @@ class AdminArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             /* CONVERT ALL ARTICLES IsHomePage TO FALSE*/
-            if($newArticle->getIsHomePage() == true){
-                foreach($articles as $article){
+            if ($newArticle->getIsHomePage() == true) {
+                foreach ($articles as $article) {
                     $article->setIsHomePage(false);
-
                 }
                 $newArticle->setIsHomePage(true);
             }
@@ -79,12 +77,10 @@ class AdminArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             /* CONVERT ALL ARTICLES IsHomePage TO FALSE*/
-            if($newArticle->getIsHomePage() == true){
-                foreach($articles as $article){
+            if ($newArticle->getIsHomePage() == true) {
+                foreach ($articles as $article) {
                     $article->setIsHomePage(false);
-
                 }
                 $newArticle->setIsHomePage(true);
             }
