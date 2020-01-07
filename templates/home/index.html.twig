@@ -304,6 +304,17 @@
                 <a href="{{ path('contact_professional') }}"><div class="category-button">NOUS REJOINDRE</div></a>
             </div>
         </div>
+        {% if information is empty %}
+
+        {% else %}
+            <div class="article-container">
+                <h1 class="article-title">{{ information.name }}</h1>
+                <div class="text-center">
+                    <p>{{ information.content | raw }}</p>
+                </div>
+            </div>
+        {% endif %}
+
         {% if article is empty %}
 
             {% else %}
