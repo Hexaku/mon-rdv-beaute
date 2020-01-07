@@ -3,8 +3,8 @@
 
 namespace App\Controller;
 
-use App\Entity\ContactSpeDay;
-use App\Form\ContactSpeDayType;
+use App\Entity\ContactDay;
+use App\Form\ContactDayType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,13 +21,13 @@ class HomeController extends AbstractController
     {
         /** To get contacts details of people interested by a special_day,
         send in special_day table*/
-        $contactSpeDay = new ContactSpeDay();
-        $form = $this->createForm(ContactSpeDayType::class, $contactSpeDay);
+        $contactDay = new contactDay();
+        $form = $this->createForm(contactDayType::class, $contactDay);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($contactSpeDay);
+            $entityManager->persist($contactDay);
             $entityManager->flush();
 
             return $this->redirectToRoute('home');
@@ -35,7 +35,7 @@ class HomeController extends AbstractController
 
         return $this->render("home/index.html.twig", [
             'form' => $form->createView(),
-            'contactSpeDay' => $contactSpeDay
+            'contactDay' => $contactDay
         ]);
     }
 }

@@ -6,11 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContactSpeDayRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ContactDayRepository")
  */
 
 //Entity : shows contact details use to give info about special day for people interested into this
-class ContactSpeDay
+class ContactDay
 {
     /**
      * @ORM\Id()

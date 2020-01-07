@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /* form uses in pop-up window in special day (journées bien-être)*/
-class ContactSpeDayType extends AbstractType
+class ContactDayType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\ContactSpeDay;
+use App\Entity\ContactDay;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method ContactSpeDay|null find($id, $lockMode = null, $lockVersion = null)
- * @method ContactSpeDay|null findOneBy(array $criteria, array $orderBy = null)
- * @method ContactSpeDay[]    findAll()
- * @method ContactSpeDay[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ContactDay|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ContactDay|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ContactDay[]    findAll()
+ * @method ContactDay[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ContactSpeDayRepository extends ServiceEntityRepository
+class ContactDayRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ContactSpeDay::class);
+        parent::__construct($registry, ContactDay::class);
     }
 
     // /**
