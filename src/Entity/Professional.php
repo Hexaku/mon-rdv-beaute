@@ -83,10 +83,16 @@ class Professional
      */
     private $uploadedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="professional")
+     */
+    private $articles;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
         $this->businessHour = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +259,37 @@ class Professional
     {
         if ($this->businessHour->contains($businessHour)) {
             $this->businessHour->removeElement($businessHour);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setProfessional($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getProfessional() === $this) {
+                $article->setProfessional(null);
+            }
         }
 
         return $this;
