@@ -18,9 +18,6 @@ class DayExtension extends AbstractExtension
     public function formatDay($day)
     {
         switch ($day) {
-            case 0:
-                return "Dimanche";
-                break;
             case 1:
                 return "Lundi";
                 break;
@@ -38,6 +35,9 @@ class DayExtension extends AbstractExtension
                 break;
             case 6:
                 return "Samedi";
+                break;
+            case 7:
+                return "Dimanche";
                 break;
         }
     }

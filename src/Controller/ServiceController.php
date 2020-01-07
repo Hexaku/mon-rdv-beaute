@@ -98,16 +98,40 @@ class ServiceController extends AbstractController
     public function test(Professional $professional, DateTime $date, BusinessHourRepository $businessHourRepository): Response
     {
 
-        $serviceDuration = $professional->getServices()->toArray()[0]->getDuration();
+        /* GET PROFESSIONAL LINKED TO THE SERVICE */
+        $service = $professional->getServices()->toArray()[0];
 
-        $reservationDay = $businessHourRepository->findBy([
+
+        /* */
+        $reservationDays = $businessHourRepository->findBy([
             "professional" => $professional,
             "day" => $date->format("N"),
         ]);
 
-        $data = [$serviceDuration, $reservationDay];
 
-        return $this->json($data, 200, [], ["groups" => ["calendar"]]);
+        /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
+        $serviceDuration = $professional->getServices()->toArray()[0]->getDuration();
+
+
+        /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
+        $result = [];
+        foreach ($reservationDays as $reservationDay) {
+            $period = new \DatePeriod(
+                new \DateTime($reservationDay->getOpenTime()->format("H:i")),
+                new \DateInterval("PT" . $serviceDuration . "M"),
+                new \DateTime($reservationDay->getCloseTime()->format("H:i"))
+            );
+
+            foreach ($period as $date) {
+                $hoursMinutes = $date->format("H:i");
+                $result[] = $hoursMinutes;
+            }
+        }
+
+
+
+
+        return $this->json($result, 200, [], ["groups" => ["calendar"]]);
     }
 
     /**

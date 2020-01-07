@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
         dateClick: (info) => {
             calendarEl.getAttribute("professional");
-            const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+            const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
             console.log(info.date.getDay());
             //console.log(days[info.date.getDay()]);
             fetch(`/service/${calendarEl.getAttribute('professional')}/${info.dateStr}`)
@@ -47,17 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then((result) => {
                     console.log(result);
-                    /*
-                    result[0] = durée de la prestation (en mn)
-                    result[1] = horaires du professionel
-                     */
-                    if (result[1].length == 0) {
+
+                    if (result.length == 0) {
                         $(".modal-body").html("Il n'y a pas d'horaires disponible pour ce jour");
                     } else {
                         let hours = ''
-                        result.forEach((item, index) => hours += `<button class="btn btn-pink">${result[1][index].openTime.slice(11, 16)}</button> 
-                                                          <button class="btn btn-pink">${result[1][index].closeTime.slice(11, 16)}</button>`)
-
+                        result.forEach((item, index) => hours += `<button class="btn btn-pink">${result[index]}</button>`)
                         $(".modal-body").html(hours);
                     }
 
