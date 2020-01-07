@@ -29,6 +29,11 @@ class Article
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isHomePage = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +59,18 @@ class Article
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getIsHomePage(): ?bool
+    {
+        return $this->isHomePage;
+    }
+
+    public function setIsHomePage(bool $isHomePage): self
+    {
+        $this->isHomePage = $isHomePage;
 
         return $this;
     }
