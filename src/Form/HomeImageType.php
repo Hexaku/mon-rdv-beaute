@@ -13,7 +13,7 @@ class HomeImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fileName', FileType::class, ['label' => 'Image'])
+            ->add('imageFile', FileType::class, ['label' => 'Image'])
         ;
     }
 

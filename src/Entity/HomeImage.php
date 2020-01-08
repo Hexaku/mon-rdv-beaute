@@ -25,29 +25,7 @@ class HomeImage
     private $fileName;
 
     /**
-     * @return mixed
-     */
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    /**
-     * @param mixed $imageFile
-     * @return HomeImage
-     */
-    public function setImageFile($imageFile)
-    {
-        $this->imageFile = $imageFile;
-        // Only change the updated af if the file is really uploaded to avoid database updates.
-        // This is needed when the file should be set when loading the entity.
-        if ($this->imageFile instanceof UploadedFile) {
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    /**
-     * @Vich\UploadableField(mapping="home_image", fileNameProperty="filename")
+     * @Vich\UploadableField(mapping="home_image", fileNameProperty="fileName")
      */
     private $imageFile;
 
@@ -61,22 +39,30 @@ class HomeImage
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getFileName()
     {
         return $this->fileName;
     }
 
-    /**
-     * @param mixed $fileName
-     * @return HomeImage
-     */
-    public function setFileName($fileName)
+    public function setFileName(string $fileName): HomeImage
     {
         $this->fileName = $fileName;
         return $this;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        // Only change the updated af if the file is really uploaded to avoid database updates.
+        // This is needed when the file should be set when loading the entity.
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->uploadedAt = new \DateTime('now');
+        }
     }
 
     public function getUploadedAt(): ?\DateTimeInterface
