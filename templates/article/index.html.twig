@@ -10,8 +10,8 @@
         <div class="card">
             <div class="card-body">
                 <h3>{{ article.title }}</h3>
-                <p>{{ article.content }}</p>
-                <a href="{{ path('article_show', {'id': article.id}) }}"><button class="btn btn-primary">Lire l'article</button></a>
+                <p>{{ article.content|slice(0, 500)|striptags}}...</p>
+                <a href="{{ path('article_show', {'id': article.id}) }}"><button class="btn btn-success">Lire l'article</button></a>
             </div>
         </div>
         {% else %}
