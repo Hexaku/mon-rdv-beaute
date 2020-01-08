@@ -21,6 +21,8 @@ class HomeController extends AbstractController
             "isHomePage" => true,
         ]);
 
+        $articleProfessional = $article->getProfessional();
+
         $informationRepo = $this->getDoctrine()->getRepository(Information::class);
         $information = $informationRepo->findOneBy([
             "isHomePage" => true,
@@ -30,6 +32,7 @@ class HomeController extends AbstractController
 
         return $this->render("home/index.html.twig", [
             "article" => $article,
+            "articleProfessional" => $articleProfessional,
             "information" => $information,
         ]);
     }
