@@ -321,7 +321,7 @@
                 <div class="article-container">
                     <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
                     <div class="article-flex">
-                        <img class="article-image" src="{{ asset("build/hairstyle.jpeg") }}"/>
+                        <img class="article-image" src="{{ vich_uploader_asset(articleProfessional, 'imageFile') }}"/>
                         <div>
                             <p class="article-content">{{article.content|slice(0, 400)|striptags }}...</p>
                             <a href="{{ path("article_show", {'id': article.id})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
