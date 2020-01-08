@@ -1,0 +1,15 @@
+
+<div class="modal-body">
+    <div>
+        <h5>Merci de compléter le formulaire</h5>
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        <p>{{ form_start(form) }}</p>
+            <p>{{ form_row(form.Name) }}</p>
+            <p>{{ form_row(form.Email) }}</p>
+            <p>{{ form_row(form.Phone) }}</p>
+            <button type="submit" name="btnSearch" class="btn btn-primary float-right">Envoyer</button>
+        <p>{{ form_end(form) }}</p>
+
+    </div>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+</div>

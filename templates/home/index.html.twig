@@ -202,7 +202,7 @@
                     </div>
                     <nav class="topbar-menu topbar-menu-desktop">
                         <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                        <a href="#">JOURNEE BIEN-ETRE</a>
+                        <a href="{{ path('special_day_index') }}">JOURNEE BIEN-ETRE</a>
                         <a href="{{ path('about') }}">A PROPOS</a>
                         <a href="{{ path('contact') }}">CONTACT</a>
                     </nav>
@@ -283,16 +283,8 @@
                         <img src="{{ asset('/build/logo-noir.svg') }}"/>
                         <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
                     </div>
-                    <div class="modal-body">
-                        <p>Merci de compléter le formulaire</p>
-                        {{ form_start(form) }}
-                        {{ form_row(form.Name) }}
-                        {{ form_row(form.Email) }}
-                        {{ form_row(form.Phone) }}
-                        <button type="submit" name="btnSearch">Envoyer</button>
-                        {{ form_end(form) }}
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <div>
+                        {{ include('special_day/_modal_form.html.twig') }}
                     </div>
                 </div>
             </div>
