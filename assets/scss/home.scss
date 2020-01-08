@@ -433,28 +433,6 @@ a:hover {
     align-items: center;
   }
 
-  .topbar-connexion-mobile {
-    display: none;
-  }
-
-  .topbar-menu-tablet {
-    text-align: center;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    font-family: "Libre Baskerville", serif;
-    font-size: 20px;
-    color: white;
-    margin-bottom: 200px;
-    a {
-      margin: 0 5px;
-    }
-  }
-
-  .topbar-burger {
-    display: none;
-  }
-
   .topbar-connexion-desktop {
     display: block;
     font-family: "Libre Baskerville", serif;
@@ -546,6 +524,29 @@ a:hover {
   }
 }
 
+@media only screen and (min-width: 1050px) {
+  .topbar-connexion-mobile {
+    display: none;
+  }
+
+  .topbar-menu-tablet {
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-family: "Libre Baskerville", serif;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 200px;
+    a {
+      margin: 0 5px;
+    }
+  }
+
+  .topbar-burger {
+    display: none;
+  }
+}
 
 
 @media only screen and (min-width: 1250px) {
@@ -575,6 +576,7 @@ a:hover {
     a {
       margin: 0 8px;
     }
+    font-size: 14px;
   }
 
   .main-title {
@@ -671,14 +673,15 @@ a:hover {
 
   .topbar-main-logo {
     margin-right: 15px;
-    width: 550px;
+    width: 475px;
   }
 }
 
 @media only screen and (min-width: 1500px) {
   .topbar-menu-desktop {
     a {
-      margin: 0 18px;
+      margin: 0 10px;
+      font-size: 16px;
     }
   }
 
@@ -688,7 +691,7 @@ a:hover {
   }
 
   .topbar-main-logo {
-    width: 600px;
+    width: 500px;
     margin-right: 15px;
   }
 
@@ -703,5 +706,17 @@ a:hover {
   .category-image {
     width: 450px;
     height: 450px;
+  }
+}
+
+@media only screen and(min-width: 1650px) {
+  .topbar-main-logo {
+    width: 550px;
+  }
+
+  .topbar-menu-desktop {
+    a {
+      margin: 0 12px;
+    }
   }
 }
