@@ -20,8 +20,10 @@ class AdminHomeImageController extends AbstractController
      */
     public function image(HomeImageRepository $homeImageRepository): Response
     {
+        $categories = ["Prestations", "Journées bien-être", "Contact"];
         return $this->render('admin/home_image.html.twig', [
             'home_images' => $homeImageRepository->findAll(),
+            'categories' => $categories,
         ]);
     }
 
@@ -46,5 +48,39 @@ class AdminHomeImageController extends AbstractController
             'home_image' => $homeImage,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/image/{id}/edit", name="admin_home_image_edit", methods={"GET","POST"})
+     */
+    public function imageEdit(Request $request, HomeImage $homeImage): Response
+    {
+        $form = $this->createForm(HomeImageType::class, $homeImage);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_home_image');
+        }
+
+        return $this->render('admin/home_image_edit.html.twig', [
+            'home_image' => $homeImage,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/image/{id}", name="admin_home_image_delete", methods={"DELETE"})
+     */
+    public function imageDelete(Request $request, HomeImage $homeImage): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$homeImage->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($homeImage);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_home_image');
     }
 }

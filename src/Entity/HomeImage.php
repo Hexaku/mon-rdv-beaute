@@ -44,7 +44,7 @@ class HomeImage
         return $this->fileName;
     }
 
-    public function setFileName(string $fileName): HomeImage
+    public function setFileName($fileName): HomeImage
     {
         $this->fileName = $fileName;
         return $this;
