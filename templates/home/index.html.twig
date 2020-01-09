@@ -292,15 +292,28 @@
         </div>
         <div class="categories-container">
             <div class="category">
-                <img src="{{ asset('/build/hairstyle2.jpeg') }}" class="category-image rounded"/>
+                {% for position in positions %}
+                    {% if position.position == 1 %}
+                        <img src="{{ vich_uploader_asset(position, "imageFile") }}" class="category-image rounded"/>
+                    {% endif %}
+                {% endfor %}
                 <a href="{{ path('category_index') }}"><div class="category-button">CHOISIR VOTRE PRESTATION</div></a>
             </div>
             <div class="category">
-                <img src="{{ asset('/build/massage-tools.png') }}" class="category-image rounded"/>
+                {% for position in positions %}
+                    {% if position.position == 2 %}
+                        <img src="{{ vich_uploader_asset(position, "imageFile") }}" class="category-image rounded"/>
+                    {% endif %}
+                {% endfor %}
                 <a href="#" data-toggle="modal" data-target="#exampleModal"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
-                <img src="{{ asset('/build/contact.jpeg')  }}" class="category-image rounded"/>
+                {% for position in positions %}
+                    {% if position.position == 3 %}
+                        <img src="{{ vich_uploader_asset(position, "imageFile")  }}" class="category-image rounded"/>
+                    {% endif %}
+                {% endfor %}
+
                 <a href="{{ path('contact_professional') }}"><div class="category-button">NOUS REJOINDRE</div></a>
             </div>
         </div>

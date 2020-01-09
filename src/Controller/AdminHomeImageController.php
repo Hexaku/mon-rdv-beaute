@@ -20,10 +20,8 @@ class AdminHomeImageController extends AbstractController
      */
     public function image(HomeImageRepository $homeImageRepository): Response
     {
-        $categories = ["Prestations", "Journées bien-être", "Contact"];
         return $this->render('admin/home_image.html.twig', [
-            'home_images' => $homeImageRepository->findAll(),
-            'categories' => $categories,
+            'home_images' => $homeImageRepository->findAll()
         ]);
     }
 

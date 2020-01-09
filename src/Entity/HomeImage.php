@@ -12,6 +12,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class HomeImage
 {
+    const CATEGORIES = [
+        1 => "Prestations",
+        2 => "Journée bien-être",
+        3 => "Contact",
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -33,6 +39,11 @@ class HomeImage
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $uploadedAt;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position;
 
     public function getId(): ?int
     {
@@ -73,6 +84,18 @@ class HomeImage
     public function setUploadedAt(?\DateTimeInterface $uploadedAt): self
     {
         $this->uploadedAt = $uploadedAt;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }
