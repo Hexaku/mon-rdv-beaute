@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Entity\ContactDay;
 use App\Form\ContactDayType;
+use App\Entity\Article;
+use App\Entity\Information;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,11 +33,28 @@ class HomeController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('home');
-        }
+        }            
+
+        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
+        $article = $articleRepository->findOneBy([
+            "isHomePage" => true,
+        ]);
+
+        $articleProfessional = $article->getProfessional();
+
+        $informationRepo = $this->getDoctrine()->getRepository(Information::class);
+        $information = $informationRepo->findOneBy([
+            "isHomePage" => true,
+        ]);
+
+
 
         return $this->render("home/index.html.twig", [
-            'form' => $form->createView(),
-            'contactDay' => $contactDay
+            "form" => $form->createView(),
+            "contactDay" => $contactDay
+            "article" => $article,
+            "articleProfessional" => $articleProfessional,
+            "information" => $information            
         ]);
     }
 }
