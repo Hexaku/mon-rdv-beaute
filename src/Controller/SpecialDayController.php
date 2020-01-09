@@ -5,19 +5,21 @@ namespace App\Controller;
 
 use App\Entity\ContactDay;
 use App\Form\ContactDayType;
-use App\Entity\Article;
-use App\Entity\Information;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+/**
+ * Class SpecialDayController
+ * @package App\Controller
+ *
+ */
+//@Route("special/day")
+class SpecialDayController extends AbstractController
 {
     /**
-     * @return Response
-     * @Route("/", name="home", methods={"GET", "POST"})
+     * @Route("/home", name="special_day_index")
      */
     public function index(Request $request): Response
     {
@@ -33,28 +35,10 @@ class HomeController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('home');
-        }            
-
-        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
-        $article = $articleRepository->findOneBy([
-            "isHomePage" => true,
-        ]);
-
-        $articleProfessional = $article->getProfessional();
-
-        $informationRepo = $this->getDoctrine()->getRepository(Information::class);
-        $information = $informationRepo->findOneBy([
-            "isHomePage" => true,
-        ]);
-
-
-
+        }
         return $this->render("home/index.html.twig", [
-            "form" => $form->createView(),
-            "contactDay" => $contactDay
-            "article" => $article,
-            "articleProfessional" => $articleProfessional,
-            "information" => $information            
+            'form' => $form->createView(),
+            'contactDay' => $contactDay
         ]);
     }
 }
