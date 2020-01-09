@@ -16,9 +16,9 @@ class ContactDayType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Name', TextType::class)
-            ->add('Email', EmailType::class)
-            ->add('Phone', TextType::class)
+            ->add('Name', TextType::class, ["label" => "Nom"])
+            ->add('Email', EmailType::class, ["label" => "Email"])
+            ->add('Phone', TextType::class, ["label" => "Téléphone"])
         ;
     }
 
