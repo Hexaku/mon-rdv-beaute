@@ -36,8 +36,8 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Revenus (Brut)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">1500€</div>
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Clients (Total)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -71,7 +71,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Membres (total)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">76</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -104,7 +104,7 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Visiteurs</h6>
                     </div>
                     <div class="card-body">
                         <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
@@ -125,54 +125,46 @@
                         <h6 class="m-0 font-weight-bold text-primary">Objectifs</h6>
                     </div>
                     <div class="card-body">
-                        <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        {% for dashboard in dashboards %}
+                                {% if dashboard.category == 1 %}
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar" style="width:{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                        <div class="bg-white py-2 collapse-inner rounded">
+                                            <div class="flex-buttons">
+                                                {{ include('admin/_dashboard_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elseif dashboard.category == 2 %}
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width:{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                        <div class="bg-white py-2 collapse-inner rounded">
+                                            <div class="flex-buttons">
+                                                {{ include('admin/_dashboard_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                        {% endfor %}
+                        {# danger - warning - info - bg-success #}
+                        <hr>
+                        <a href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages"><button class="mb-3 btn btn-primary">Ajouter un objectif</button></a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                                <div>
+                                    <h4 class="h4 mb-3 text-gray-800">Ajouter un nouvel objectif</h4>
+                                    {{ include('dashboard/_form.html.twig') }}
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Formulaire</h6>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
 
