@@ -87,7 +87,8 @@ class Professional
      * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="professional")
      */
     private $bookings;
-  
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="professional")
      */
     private $articles;
