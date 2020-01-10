@@ -1,8 +1,8 @@
 <?php
 
-
 namespace App\Controller;
 
+use App\Entity\HomeImage;
 use App\Entity\ContactDay;
 use App\Form\ContactDayType;
 use App\Entity\Article;
@@ -21,6 +21,10 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
+
+        $repository = $this->getDoctrine()->getRepository(HomeImage::class);
+        $positions = $repository->findAll();
+
         /** To get contacts details of people interested by a special_day,
         send in special_day table*/
         $contactDay = new contactDay();
@@ -48,13 +52,14 @@ class HomeController extends AbstractController
         ]);
 
 
-
         return $this->render("home/index.html.twig", [
             "form" => $form->createView(),
             "contactDay" => $contactDay
             "article" => $article,
             "articleProfessional" => $articleProfessional,
-            "information" => $information            
+            "information" => $information ,
+            "positions" => $positions,
+
         ]);
     }
 }

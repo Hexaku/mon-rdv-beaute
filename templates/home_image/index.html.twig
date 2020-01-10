@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HomeImage index{% endblock %}
+
+{% block body %}
+    <h1>HomeImage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FileName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for home_image in home_images %}
+            <tr>
+                <td>{{ home_image.id }}</td>
+                <td>{{ home_image.fileName }}</td>
+                <td>
+                    <a href="{{ path('home_image_show', {'id': home_image.id}) }}">show</a>
+                    <a href="{{ path('home_image_edit', {'id': home_image.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('home_image_new') }}">Create new</a>
+{% endblock %}
