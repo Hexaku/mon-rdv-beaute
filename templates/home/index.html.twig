@@ -202,7 +202,8 @@
                     </div>
                     <nav class="topbar-menu topbar-menu-desktop">
                         <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                        <a href="#">JOURNEE BIEN-ETRE</a>
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">JOURNEE BIEN-ETRE</a>
+                        <a href="{{ path('article_index') }}">ARTICLES</a>
                         <a href="{{ path('about') }}">A PROPOS</a>
                         <a href="{{ path('contact') }}">CONTACT</a>
                     </nav>
@@ -236,6 +237,8 @@
                 <div class="white-line"></div>
                 <a href="#">Journée Bien-Être</a>
                 <div class="white-line"></div>
+                <a href="{{ path('article_index') }}">Articles</a>
+                <div class="white-line"></div>
                 <a href="{{ path('about') }}">A propos</a>
                 <div class="white-line"></div>
                 <a href="{{ path('contact') }}">Contact</a>
@@ -256,6 +259,7 @@
             <nav class="topbar-menu topbar-menu-tablet">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>
                 <a href="#">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('article_index') }}">ARTICLES</a>
                 <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
             </nav>
@@ -275,7 +279,7 @@
     </header>
 
     <main class="main">
-        <!-- Modal -->
+        <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -283,38 +287,64 @@
                         <img src="{{ asset('/build/logo-noir.svg') }}"/>
                         <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
                     </div>
-                    <div class="modal-body">
-                        <p>Merci de compléter le formulaire</p>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <div>
+                        {{ include('special_day/_modal_form.html.twig') }}
                     </div>
                 </div>
             </div>
         </div>
         <div class="categories-container">
             <div class="category">
-                <img src="{{ asset('/build/hairstyle2.jpeg') }}" class="category-image rounded"/>
+                {% for position in positions %}
+                    {% if position.position == 1 %}
+                        <img src="{{ vich_uploader_asset(position, "imageFile") }}" class="category-image rounded"/>
+                    {% endif %}
+                {% endfor %}
                 <a href="{{ path('category_index') }}"><div class="category-button">CHOISIR VOTRE PRESTATION</div></a>
             </div>
             <div class="category">
-                <img src="{{ asset('/build/massage-tools.png') }}" class="category-image rounded"/>
+                {% for position in positions %}
+                    {% if position.position == 2 %}
+                        <img src="{{ vich_uploader_asset(position, "imageFile") }}" class="category-image rounded"/>
+                    {% endif %}
+                {% endfor %}
                 <a href="#" data-toggle="modal" data-target="#exampleModal"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
-                <img src="{{ asset('/build/contact.jpeg')  }}" class="category-image rounded"/>
+                {% for position in positions %}
+                    {% if position.position == 3 %}
+                        <img src="{{ vich_uploader_asset(position, "imageFile")  }}" class="category-image rounded"/>
+                    {% endif %}
+                {% endfor %}
+
                 <a href="{{ path('contact_professional') }}"><div class="category-button">NOUS REJOINDRE</div></a>
             </div>
         </div>
-        <div class="black-line"></div>
-        <div class="article-container">
-            <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
-            <div class="article-flex">
-                <img class="article-image" src="{{ asset('/build/hairstyle.jpeg')  }}"/>
-                <div>
-                    <p class="article-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui. Mauris quam ante, aliquet et tristique non, gravida quis diam. Proin in dui quis erat vestibulum porta. Etiam sit amet rhoncus eros. Fusce consectetur tellus purus, ut vestibulum libero hendrerit id. Vestibulum eu congue neque, quis suscipit metus. Vestibulum egestas turpis libero, nec lobortis turpis iaculis eget. Praesent vitae porta turpis.</p>
-                    <a href="{{ path("article_index")}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+        {% if information is empty %}
+
+        {% else %}
+            <div class="article-container">
+                <h1 class="article-title">{{ information.name }}</h1>
+                <div class="text-center">
+                    <p>{{ information.content | raw }}</p>
                 </div>
             </div>
-        </div>
+        {% endif %}
+
+        {% if article is empty %}
+
+            {% else %}
+                <div class="article-container">
+                    <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
+                    <div class="article-flex">
+                        <img class="article-image" src="{{ vich_uploader_asset(articleProfessional, 'imageFile') }}"/>
+                        <div>
+                            <p class="article-content">{{article.content|slice(0, 400)|striptags }}...</p>
+                            <a href="{{ path("article_show", {'id': article.id})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+                        </div>
+                    </div>
+                </div>
+        {% endif %}
     </main>
 
     <footer class="footer">

@@ -30,20 +30,34 @@ class AdminArticleController extends AbstractController
      */
     public function articleNew(Request $request): Response
     {
-        $article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
+        /* INITIALIZE ARTICLE REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repository->findBy([
+            "isHomePage" => true,
+        ]);
+
+        $newArticle = new Article();
+        $form = $this->createForm(ArticleType::class, $newArticle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /* CONVERT ALL ARTICLES IsHomePage TO FALSE*/
+            if ($newArticle->getIsHomePage() == true) {
+                foreach ($articles as $article) {
+                    $article->setIsHomePage(false);
+                }
+                $newArticle->setIsHomePage(true);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($article);
+            $entityManager->persist($newArticle);
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_article');
         }
 
         return $this->render('admin/article_new.html.twig', [
-            'article' => $article,
+            'article' => $newArticle,
             'form' => $form->createView(),
         ]);
     }
@@ -51,19 +65,33 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/article/{id}/edit", name="admin_article_edit", methods={"GET","POST"})
      */
-    public function articleEdit(Request $request, Article $article): Response
+    public function articleEdit(Request $request, Article $newArticle): Response
     {
-        $form = $this->createForm(ArticleType::class, $article);
+        /* INITIALIZE ARTICLE REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repository->findBy([
+            "isHomePage" => true,
+        ]);
+
+        $form = $this->createForm(ArticleType::class, $newArticle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /* CONVERT ALL ARTICLES IsHomePage TO FALSE*/
+            if ($newArticle->getIsHomePage() == true) {
+                foreach ($articles as $article) {
+                    $article->setIsHomePage(false);
+                }
+                $newArticle->setIsHomePage(true);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_article');
         }
 
         return $this->render('admin/article_edit.html.twig', [
-            'article' => $article,
+            'article' => $newArticle,
             'form' => $form->createView(),
         ]);
     }

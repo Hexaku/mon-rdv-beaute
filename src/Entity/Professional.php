@@ -87,12 +87,17 @@ class Professional
      * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="professional")
      */
     private $bookings;
+  
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="professional")
+     */
+    private $articles;
 
     public function __construct()
     {
         $this->services = new ArrayCollection();
         $this->businessHour = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -278,10 +283,8 @@ class Professional
             $this->bookings[] = $booking;
             $booking->setProfessional($this);
         }
-
-        return $this;
     }
-
+  
     public function removeBooking(Booking $booking): self
     {
         if ($this->bookings->contains($booking)) {
@@ -289,6 +292,38 @@ class Professional
             // set the owning side to null (unless already changed)
             if ($booking->getProfessional() === $this) {
                 $booking->setProfessional(null);
+            }
+        }
+        return $this;
+    }
+      
+              
+    /*
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setProfessional($this);
+        }
+
+        return $this;
+    }
+         
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getProfessional() === $this) {
+                $article->setProfessional(null);
+
             }
         }
 

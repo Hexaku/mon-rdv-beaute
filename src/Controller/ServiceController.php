@@ -83,9 +83,9 @@ class ServiceController extends AbstractController
         /* */
         $reservationDays = $businessHourRepo->findBy([
             "professional" => $service->getProfessional(),
+
             "day" => $date->format("N"),
         ]);
-
         /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
         $serviceDuration = $service->getDuration();
 
