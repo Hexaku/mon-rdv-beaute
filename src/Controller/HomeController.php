@@ -37,7 +37,7 @@ class HomeController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('home');
-        }            
+        }
 
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
         $article = $articleRepository->findOneBy([
@@ -54,7 +54,7 @@ class HomeController extends AbstractController
 
         return $this->render("home/index.html.twig", [
             "form" => $form->createView(),
-            "contactDay" => $contactDay
+            "contactDay" => $contactDay,
             "article" => $article,
             "articleProfessional" => $articleProfessional,
             "information" => $information ,
