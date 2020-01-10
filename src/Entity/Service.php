@@ -74,11 +74,6 @@ class Service
     private $professional;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Customer", inversedBy="services")
-     */
-    private $member;
-
-    /**
      * @ORM\Column(type="integer")
      * @Assert\Range(min="1", max="2")
      */
@@ -109,6 +104,11 @@ class Service
      *     cascade={"persist"})
      */
     private $servicePrices;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="service")
+     */
+    private $bookings;
 
     /**
      * @return mixed
@@ -148,8 +148,8 @@ class Service
 
     public function __construct()
     {
-        $this->member = new ArrayCollection();
         $this->servicePrices = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -261,32 +261,6 @@ class Service
     }
 
     /**
-     * @return Collection|Customer[]
-     */
-    public function getMember(): Collection
-    {
-        return $this->member;
-    }
-
-    public function addMember(Customer $member): self
-    {
-        if (!$this->member->contains($member)) {
-            $this->member[] = $member;
-        }
-
-        return $this;
-    }
-
-    public function removeMember(Customer $member): self
-    {
-        if ($this->member->contains($member)) {
-            $this->member->removeElement($member);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getServiceType()
@@ -341,6 +315,37 @@ class Service
             // set the owning side to null (unless already changed)
             if ($servicePrice->getService() === $this) {
                 $servicePrice->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getService() === $this) {
+                $booking->setService(null);
             }
         }
 

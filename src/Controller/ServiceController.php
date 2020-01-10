@@ -67,51 +67,27 @@ class ServiceController extends AbstractController
      */
     public function booking(Service $service): Response
     {
-        /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
-        $businessHours = $service->getProfessional()->getBusinessHour()->toArray();
-        $serviceDuration = $service->getDuration();
-
-        /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
-        $result = [];
-        foreach ($businessHours as $businessHour) {
-            $period = new \DatePeriod(
-                new \DateTime($businessHour->getOpenTime()->format("H:i")),
-                new \DateInterval("PT" . $serviceDuration . "M"),
-                new \DateTime($businessHour->getCloseTime()->format("H:i"))
-            );
-
-            foreach ($period as $date) {
-                $date->format("H:i");
-                $result[] = $date;
-            }
-        }
-
         return $this->render("service/booking.html.twig", [
             "service" => $service,
-            "dates" => $result,
         ]);
     }
 
     /**
      * @Route("/{id}/{date}", name="test")
      */
-    public function test(Professional $professional, DateTime $date, BusinessHourRepository $businessHourRepository): Response
-    {
-
-        /* GET PROFESSIONAL LINKED TO THE SERVICE */
-        $service = $professional->getServices()->toArray()[0];
-
-
+    public function test(
+        Service $service,
+        DateTime $date,
+        BusinessHourRepository $businessHourRepo
+    ): Response {
         /* */
-        $reservationDays = $businessHourRepository->findBy([
-            "professional" => $professional,
+        $reservationDays = $businessHourRepo->findBy([
+            "professional" => $service->getProfessional(),
             "day" => $date->format("N"),
         ]);
 
-
         /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
-        $serviceDuration = $professional->getServices()->toArray()[0]->getDuration();
-
+        $serviceDuration = $service->getDuration();
 
         /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
         $result = [];
@@ -127,9 +103,6 @@ class ServiceController extends AbstractController
                 $result[] = $hoursMinutes;
             }
         }
-
-
-
 
         return $this->json($result, 200, [], ["groups" => ["calendar"]]);
     }

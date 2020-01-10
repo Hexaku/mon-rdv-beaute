@@ -83,10 +83,16 @@ class Professional
      */
     private $uploadedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="professional")
+     */
+    private $bookings;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
         $this->businessHour = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +259,37 @@ class Professional
     {
         if ($this->businessHour->contains($businessHour)) {
             $this->businessHour->removeElement($businessHour);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setProfessional($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getProfessional() === $this) {
+                $booking->setProfessional(null);
+            }
         }
 
         return $this;
