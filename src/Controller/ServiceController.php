@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\BusinessHour;
+use App\Entity\Professional;
 use App\Entity\Service;
 use App\Form\ServiceType;
+use App\Repository\BusinessHourRepository;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
 
 /**
  * @Route("/service")
@@ -66,6 +70,48 @@ class ServiceController extends AbstractController
         return $this->render("service/booking.html.twig", [
             "service" => $service,
         ]);
+    }
+
+    /**
+     * @Route("/{id}/{date}", name="test")
+     */
+    public function test(
+        Professional $professional,
+        DateTime $date,
+        BusinessHourRepository $businessHourRepo
+    ): Response
+    {
+
+        /* */
+        $reservationDays = $businessHourRepo->findBy([
+            "professional" => $professional,
+            "day" => $date->format("N"),
+        ]);
+
+
+        /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
+        $serviceDuration = $professional->getServices()->toArray()[0]->getDuration();
+
+
+        /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
+        $result = [];
+        foreach ($reservationDays as $reservationDay) {
+            $period = new \DatePeriod(
+                new \DateTime($reservationDay->getOpenTime()->format("H:i")),
+                new \DateInterval("PT" . $serviceDuration . "M"),
+                new \DateTime($reservationDay->getCloseTime()->format("H:i"))
+            );
+
+            foreach ($period as $date) {
+                $hoursMinutes = $date->format("H:i");
+                $result[] = $hoursMinutes;
+            }
+        }
+
+
+
+
+        return $this->json($result, 200, [], ["groups" => ["calendar"]]);
     }
 
     /**
