@@ -76,22 +76,18 @@ class ServiceController extends AbstractController
      * @Route("/{id}/{date}", name="test")
      */
     public function test(
-        Professional $professional,
+        Service $service,
         DateTime $date,
         BusinessHourRepository $businessHourRepo
-    ): Response
-    {
-
+    ): Response {
         /* */
         $reservationDays = $businessHourRepo->findBy([
-            "professional" => $professional,
+            "professional" => $service->getProfessional(),
+
             "day" => $date->format("N"),
         ]);
-
-
         /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
-        $serviceDuration = $professional->getServices()->toArray()[0]->getDuration();
-
+        $serviceDuration = $service->getDuration();
 
         /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
         $result = [];
@@ -107,9 +103,6 @@ class ServiceController extends AbstractController
                 $result[] = $hoursMinutes;
             }
         }
-
-
-
 
         return $this->json($result, 200, [], ["groups" => ["calendar"]]);
     }

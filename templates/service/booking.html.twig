@@ -6,7 +6,7 @@
 {% block body %}
     <div class="container-flex">
         <h1 class="title">Réserver votre rendez-vous en ligne</h1>
-        <div id="calendar-holder" data-events-url="{{ path('fc_load_events') }}" professional="{{ service.professional.id }}"></div>
+        <div id="calendar-holder" data-events-url="{{ path('fc_load_events', {}) }}" service="{{ service.id }}"></div>
     </div>
 
     <!-- Modal -->
@@ -19,12 +19,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <a href=""><button type="button" class="btn btn-primary">Save changes</button></a>
                 </div>
             </div>
         </div>

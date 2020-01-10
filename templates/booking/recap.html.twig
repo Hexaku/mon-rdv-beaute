@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recapitulatif Réservation{% endblock %}
+
+{% block body %}
+    <h1>Récapitulatif de votre commande</h1>
+
+    <p>Vous avez réservé pour le service {{ service.name }} le
+        {{ date|date('d/M/Y') }}
+        à {{ hour }} avec {{ service.professional.name }}.
+        Confirmer votre prise de rendez-vous en cliquant sur le bouton valider ci-dessous.</p>
+
+    <a href="{{ path(
+        'booking_new', { "id" : service.id, "date" : date|date("d/M/Y")|replace({"/": "-"}), "hour" : hour}
+    ) }}">
+        <button>Valider mon rendez-vous</button>
+    </a>
+
+    <a href="{{ path('booking_index') }}">back to list</a>
+
+
+{% endblock %}

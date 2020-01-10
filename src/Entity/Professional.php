@@ -84,6 +84,10 @@ class Professional
     private $uploadedAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="professional")
+     */
+    private $bookings;
+  
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="professional")
      */
     private $articles;
@@ -92,6 +96,7 @@ class Professional
     {
         $this->services = new ArrayCollection();
         $this->businessHour = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
 
@@ -265,6 +270,35 @@ class Professional
     }
 
     /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setProfessional($this);
+        }
+    }
+  
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getProfessional() === $this) {
+                $booking->setProfessional(null);
+            }
+        }
+        return $this;
+    }
+      
+              
+    /*
      * @return Collection|Article[]
      */
     public function getArticles(): Collection
@@ -281,7 +315,7 @@ class Professional
 
         return $this;
     }
-
+         
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
@@ -289,6 +323,7 @@ class Professional
             // set the owning side to null (unless already changed)
             if ($article->getProfessional() === $this) {
                 $article->setProfessional(null);
+
             }
         }
 

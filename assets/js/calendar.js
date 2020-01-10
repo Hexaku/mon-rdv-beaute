@@ -31,48 +31,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 extraParams: {
                     filters: JSON.stringify({})
                 },
-                failure: () => {
-                    // alert("There was an error while fetching FullCalendar!");
-                },
             },
         ],
         dateClick: (info) => {
-            calendarEl.getAttribute("professional");
-            const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
-            console.log(info.date.getDay());
-            //console.log(days[info.date.getDay()]);
-            fetch(`/service/${calendarEl.getAttribute('professional')}/${info.dateStr}`)
+            fetch(`/service/${calendarEl.getAttribute('service')}/${info.dateStr}`)
                 .then((response) => {
-                    return response.json()
+                    return response.json();
                 })
                 .then((result) => {
                     console.log(result);
-
-                    if (result.length == 0) {
+                    if (result.length === 0) {
                         $(".modal-body").html("Il n'y a pas d'horaires disponible pour ce jour");
                     } else {
-                        let hours = ''
-                        result.forEach((item, index) => hours += `<button class="btn btn-pink">${result[index]}</button>`)
+                        let hours = '';
+                        result.forEach((item, index) => hours += `<a href="/booking/${calendarEl.getAttribute('service')}/${info.dateStr}/${result[index]}" class="btn btn-pink">${result[index]}</a>`)
                         $(".modal-body").html(hours);
                     }
-
-
                     $('#exampleModalCenter').modal();
-
                 });
-
-            const monthNames = [
-                "Janvier", "Février", "Mars",
-                "Avril", "Mai", "Juin", "Juillet",
-                "Août", "Septembre", "Octobre",
-                "Novembre", "Decembre"
-            ];
-            let day = info.date.getDate();
-            let monthIndex = info.date.getMonth();
-            let year = info.date.getFullYear();
-
-
-
         },
         header: {
             left: "prev,next today",
