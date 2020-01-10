@@ -295,28 +295,27 @@
         </div>
         <div class="categories-container">
             <div class="category">
-                {% for position in positions %}
-                    {% if position.position == 1 %}
+                {% for position in positions if position.position == 1 %}
                         <img src="{{ vich_uploader_asset(position, "imageFile") }}" class="category-image rounded"/>
-                    {% endif %}
+                    {% else %}
+                        <img src="{{ asset('build/hairstylist.jpeg') }}" class="category-image rounded">
                 {% endfor %}
                 <a href="{{ path('category_index') }}"><div class="category-button">CHOISIR VOTRE PRESTATION</div></a>
             </div>
             <div class="category">
-                {% for position in positions %}
-                    {% if position.position == 2 %}
+                {% for position in positions if position.position == 2 %}
                         <img src="{{ vich_uploader_asset(position, "imageFile") }}" class="category-image rounded"/>
-                    {% endif %}
+                    {% else %}
+                        <img src="{{ asset('build/bien-etre.png') }}" class="category-image rounded">
                 {% endfor %}
                 <a href="#" data-toggle="modal" data-target="#exampleModal"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
-                {% for position in positions %}
-                    {% if position.position == 3 %}
+                {% for position in positions if position.position == 3 %}
                         <img src="{{ vich_uploader_asset(position, "imageFile")  }}" class="category-image rounded"/>
-                    {% endif %}
+                    {% else %}
+                        <img src="{{ asset('build/contact2.jpg') }}" class="category-image rounded">
                 {% endfor %}
-
                 <a href="{{ path('contact_professional') }}"><div class="category-button">NOUS REJOINDRE</div></a>
             </div>
         </div>
@@ -337,7 +336,7 @@
                 <div class="article-container">
                     <h1 class="article-title">LA PROFESSIONNELLE DU MOIS</h1>
                     <div class="article-flex">
-                        <img class="article-image" src="{{ vich_uploader_asset(articleProfessional, 'imageFile') }}"/>
+                        <img class="article-image" src="{{ vich_uploader_asset(article.professional, 'imageFile') }}"/>
                         <div>
                             <p class="article-content">{{article.content|slice(0, 400)|striptags }}...</p>
                             <a href="{{ path("article_show", {'id': article.id})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>

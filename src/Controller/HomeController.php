@@ -44,7 +44,9 @@ class HomeController extends AbstractController
             "isHomePage" => true,
         ]);
 
-        $articleProfessional = $article->getProfessional();
+
+
+
 
         $informationRepo = $this->getDoctrine()->getRepository(Information::class);
         $information = $informationRepo->findOneBy([
@@ -56,7 +58,6 @@ class HomeController extends AbstractController
             "form" => $form->createView(),
             "contactDay" => $contactDay,
             "article" => $article,
-            "articleProfessional" => $articleProfessional,
             "information" => $information ,
             "positions" => $positions,
 
