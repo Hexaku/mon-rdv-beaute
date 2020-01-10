@@ -1,11 +1,8 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Entity\Professional;
-use App\Entity\Service;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Service\Slugify;
@@ -19,23 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminCategoryController extends AbstractController
 {
-    /**
-     * @Route("/", name="admin_index")
-     */
-    public function index(): Response
-    {
-        $repositoryService = $this->getDoctrine()->getRepository(Service::class);
-        $services = $repositoryService->findAllServices();
-
-        $repoProfessional = $this->getDoctrine()->getRepository(Professional::class);
-        $professionals = $repoProfessional->findAllProfessionals();
-
-        return $this->render("admin/index.html.twig", [
-            "services" => $services,
-            "professionals" => $professionals,
-        ]);
-    }
-
     /**
      * @Route("/category", name="admin_category", methods={"GET"})
      */
