@@ -6,7 +6,7 @@ use App\Entity\HomeImage;
 use App\Entity\ContactDay;
 use App\Form\ContactDayType;
 use App\Entity\Article;
-use App\Entity\Information;
+use App\Entity\HomeInformation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +45,7 @@ class HomeController extends AbstractController
         ]);
 
         /* GET THE INFORMATION WITH isHomePage = true TO SHOW ON HOME PAGE */
-        $informationRepo = $this->getDoctrine()->getRepository(Information::class);
+        $informationRepo = $this->getDoctrine()->getRepository(HomeInformation::class);
         $information = $informationRepo->findOneBy([
             "isHomePage" => true,
         ]);
@@ -55,9 +55,8 @@ class HomeController extends AbstractController
             "form" => $form->createView(),
             "contactDay" => $contactDay,
             "article" => $article,
-            "home_information" => $information ,
+            "information" => $information ,
             "positions" => $positions,
-
         ]);
     }
 }

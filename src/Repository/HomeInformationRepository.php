@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Information;
+use App\Entity\HomeInformation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Information|null find($id, $lockMode = null, $lockVersion = null)
- * @method Information|null findOneBy(array $criteria, array $orderBy = null)
- * @method Information[]    findAll()
- * @method Information[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HomeInformation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HomeInformation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HomeInformation[]    findAll()
+ * @method HomeInformation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class InformationRepository extends ServiceEntityRepository
+class HomeInformationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Information::class);
+        parent::__construct($registry, HomeInformation::class);
     }
 
     // /**
-    //  * @return Information[] Returns an array of Information objects
+    //  * @return HomeInformation[] Returns an array of HomeInformation objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class InformationRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Information
+    public function findOneBySomeField($value): ?HomeInformation
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')

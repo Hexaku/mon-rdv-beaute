@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Information;
+use App\Entity\HomeInformation;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -28,7 +28,7 @@ class HomeInformationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Information::class,
+            'data_class' => HomeInformation::class,
         ]);
     }
 }
