@@ -4,11 +4,11 @@
 namespace App\Controller;
 
 use App\Entity\HomeImage;
-use App\Entity\Information;
+use App\Entity\HomeInformation;
 use App\Form\HomeImageType;
 use App\Form\HomeInformationType;
 use App\Repository\HomeImageRepository;
-use App\Repository\InformationRepository;
+use App\Repository\HomeInformationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminHomeController extends AbstractController
 {
     /**
-     * @Route("/home_information", name="admin_home_information")
+     * @Route("/information", name="admin_home_information")
      */
-    public function information(InformationRepository $informationRepo): Response
+    public function information(HomeInformationRepository $informationRepo): Response
     {
         return $this->render('admin/home_information.html.twig', [
             'informations' => $informationRepo->findAll(),
@@ -35,12 +35,12 @@ class AdminHomeController extends AbstractController
     public function informationNew(Request $request): Response
     {
         /* INITIALIZE INFORMATION REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Information::class);
+        $repository = $this->getDoctrine()->getRepository(HomeInformation::class);
         $informations = $repository->findBy([
             "isHomePage" => true,
         ]);
 
-        $newInformation = new Information();
+        $newInformation = new HomeInformation();
         $form = $this->createForm(HomeInformationType::class, $newInformation);
         $form->handleRequest($request);
 
@@ -67,12 +67,12 @@ class AdminHomeController extends AbstractController
     }
 
     /**
-     * @Route("/home_information/{id}/edit", name="admin_home_information_edit", methods={"GET","POST"})
+     * @Route("/information/{id}/edit", name="admin_home_information_edit", methods={"GET","POST"})
      */
-    public function informationEdit(Request $request, Information $newInformation): Response
+    public function informationEdit(Request $request, HomeInformation $newInformation): Response
     {
         /* INITIALIZE INFORMATION REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Information::class);
+        $repository = $this->getDoctrine()->getRepository(HomeInformation::class);
         $informations = $repository->findBy([
             "isHomePage" => true,
         ]);
@@ -101,9 +101,9 @@ class AdminHomeController extends AbstractController
     }
 
     /**
-     * @Route("/home_information/{id}", name="admin_home_information_delete", methods={"DELETE"})
+     * @Route("/information/{id}", name="admin_home_information_delete", methods={"DELETE"})
      */
-    public function informationDelete(Request $request, Information $information): Response
+    public function informationDelete(Request $request, HomeInformation $information): Response
     {
         if ($this->isCsrfTokenValid('delete'.$information->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
