@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InformationType extends AbstractType
+class HomeInformationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,7 +20,7 @@ class InformationType extends AbstractType
             ->add(
                 'isHomePage',
                 CheckboxType::class,
-                ["label" => "Mettre cette information en avant sur la page d'accueil", "required" => false]
+                ["label" => "Mettre cette home_information en avant sur la page d'accueil", "required" => false]
             )
         ;
     }

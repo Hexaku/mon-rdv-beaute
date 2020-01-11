@@ -27,32 +27,6 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="category_new", methods={"GET","POST"})
-     */
-    public function new(Request $request, Slugify $slugify): Response
-    {
-
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $slug = $slugify->generate($category->getName());
-            $category->setSlug($slug);
-            $entityManager->persist($category);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('category_index');
-        }
-
-        return $this->render('category/new.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{slug}", name="category_show", methods={"GET"})
      */
     public function show(Category $category): Response
@@ -61,29 +35,6 @@ class CategoryController extends AbstractController
         return $this->render('category/show.html.twig', [
             'category' => $category,
             'services' => $services,
-        ]);
-    }
-
-    /**
-     * @Route("/{slug}/edit", name="category_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Category $category, Slugify $slugify): Response
-    {
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $slug = $slugify->generate($category->getName());
-            $category->setSlug($slug);
-
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('category_index');
-        }
-
-        return $this->render('category/edit.html.twig', [
-            'category' => $category,
-            'form' => $form->createView(),
         ]);
     }
 

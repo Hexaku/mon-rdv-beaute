@@ -21,11 +21,10 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-
         $repository = $this->getDoctrine()->getRepository(HomeImage::class);
         $positions = $repository->findAll();
 
-        /** To get contacts details of people interested by a special_day,
+        /* To get contacts details of people interested by a special_day,
         send in special_day table*/
         $contactDay = new contactDay();
         $form = $this->createForm(contactDayType::class, $contactDay);
@@ -39,15 +38,13 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        /* GET THE ARTICLE WITH isHomePage = true TO SHOW ON HOME PAGE */
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
         $article = $articleRepository->findOneBy([
             "isHomePage" => true,
         ]);
 
-
-
-
-
+        /* GET THE INFORMATION WITH isHomePage = true TO SHOW ON HOME PAGE */
         $informationRepo = $this->getDoctrine()->getRepository(Information::class);
         $information = $informationRepo->findOneBy([
             "isHomePage" => true,
@@ -58,7 +55,7 @@ class HomeController extends AbstractController
             "form" => $form->createView(),
             "contactDay" => $contactDay,
             "article" => $article,
-            "information" => $information ,
+            "home_information" => $information ,
             "positions" => $positions,
 
         ]);
