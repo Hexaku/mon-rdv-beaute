@@ -323,7 +323,7 @@
 
         {% else %}
             <div class="article-container">
-                <h1 class="article-title">{{ information.name }}</h1>
+                <h1 class="article-title">{{ information.name|upper }}</h1>
                 <div class="text-center">
                     <p>{{ information.content | raw }}</p>
                 </div>

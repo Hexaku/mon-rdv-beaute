@@ -15,7 +15,7 @@
             {% endfor %}
             {% if app.user %}
                 {% if 'ROLE_ADMIN' in app.user.roles %}
-                    <div><a href="{{ path('category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
+                    <div><a href="{{ path('admin_category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
                 {% endif %}
             {% endif %}
         </div>
