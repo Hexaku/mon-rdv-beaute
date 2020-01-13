@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\HomeImage;
 use App\Entity\ContactDay;
+use App\Entity\Service;
+use App\Entity\ServiceSearch;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Entity\HomeInformation;
+use App\Form\ServiceSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +24,13 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $repository = $this->getDoctrine()->getRepository(HomeImage::class);
-        $positions = $repository->findAll();
+        $search = new ServiceSearch();
+        $formFilter = $this->createForm(ServiceSearchType::class, $search);
+        $formFilter->handleRequest($request);
+
+        /* QUERY DYNAMIC FILTER SERVICE */
+        $serviceRepo = $this->getDoctrine()->getRepository(Service::class);
+        $services = $serviceRepo->findServicesByQuery($search);
 
         /* To get contacts details of people interested by a special_day,
         send in special_day table*/
@@ -38,6 +46,10 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        /* GET IMAGES CARD POSITIONS CARD */
+        $repository = $this->getDoctrine()->getRepository(HomeImage::class);
+        $positions = $repository->findAll();
+
         /* GET THE ARTICLE WITH isHomePage = true TO SHOW ON HOME PAGE */
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
         $article = $articleRepository->findOneBy([
@@ -50,6 +62,7 @@ class HomeController extends AbstractController
             "isHomePage" => true,
         ]);
 
+        dump($services);
 
         return $this->render("home/index.html.twig", [
             "form" => $form->createView(),
@@ -57,6 +70,7 @@ class HomeController extends AbstractController
             "article" => $article,
             "information" => $information ,
             "positions" => $positions,
+            "formFilter" => $formFilter->createView(),
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Service;
+use App\Entity\ServiceSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -29,5 +30,16 @@ class ServiceRepository extends ServiceEntityRepository
 
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
+    }
+
+    public function findServicesByQuery(ServiceSearch $search)
+    {
+        $query = $this->createQueryBuilder("s")
+                ->andWhere("s.name LIKE :serviceName")
+                ->setParameter("serviceName", $search->getServiceName().'%')
+                ->getQuery()
+                ->getResult()
+        ;
+        return $query;
     }
 }
