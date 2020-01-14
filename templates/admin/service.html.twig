@@ -49,7 +49,7 @@
                             <td>{{service.category.name}}</td>
                             <td>{{service.professional.name}}</td>
                             <td>{{service.slogan}}</td>
-                            <td>{{service.description}}</td>
+                            <td>{{ service.description|slice(0, 250)}}...</td>
                             <td>{{service.serviceType|service}}</td>
                             <td>{{service.duration|duration}}</td>
                             <td>{{service.intervalTime|duration}}</td>

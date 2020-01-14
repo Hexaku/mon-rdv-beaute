@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{article.content|striptags}}</td>
+                            <td>{{article.content|striptags|slice(0, 500)}}...</td>
                             <td>{{ article.professional.name }}</td>
                             <td>{{ article.isHomePage ? "oui" : "non" }}</td>
                         </tr>
