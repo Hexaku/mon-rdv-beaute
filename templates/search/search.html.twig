@@ -20,7 +20,10 @@
             </div>
         {% endfor %}
         {% if services is empty %}
-            <h4>Il n'y a pas de prestations pour votre recherche</h4>
+            <div class="text-center">
+                <h4 class="mb-5">Il n'y a pas de prestations pour votre recherche</h4>
+                <button class="btn btn-pink">Voir toutes les prestations</button>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

@@ -266,21 +266,22 @@
             <div>
                 <h1 class="main-title">Prenez rendez-vous avec votre bien-être</h1>
             </div>
-            <div>
-                {{ form_start(formFilter) }}
-                    {{ form_row(formFilter.serviceName) }}
-                    {{ form_row(formFilter.serviceLocation) }}
-                    <button class="btn btn-primary">Rechercher</button>
+            <div class="filter-container">
+                {{ form_start(formFilter, {'attr': {'class': 'filter-form'}}) }}
+                    <div style="width: 100%">
+                        {{ form_row(formFilter.serviceName, {'attr': {'class': 'filter-input filter-input-round'}}) }}
+                    </div>
+                    <div style="width: 100%">
+                        {{ form_row(formFilter.serviceLocation, {'attr': {'class': 'filter-input'}}) }}
+                    </div>
+                    <div style="width: 100%" class="div-submit">
+                        <button class="filter-submit">
+                            <span>Rechercher</span>
+                            <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
+                        </button>
+                    </div>
                 {{ form_end(formFilter) }}
             </div>
-            <form class="filter-form">
-                <input class="filter-input" type="text" placeholder="Toutes les prestations">
-                <input class="filter-input" type="text" placeholder="Votre ville">
-                <button class="filter-submit" type="submit" >
-                    <span>Rechercher</span>
-                    <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
-                </button>
-            </form>
         </div>
     </header>
 
