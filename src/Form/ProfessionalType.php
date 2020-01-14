@@ -19,6 +19,7 @@ class ProfessionalType extends AbstractType
             ->add('name', TextType::class, ["label" => "Nom"])
             ->add('email', EmailType::class, ["label" => "Email"])
             ->add('place', TextType::class, ["label" => "Adresse"])
+            ->add('city', TextType::class, ["label" => "Ville"])
             ->add('description', TextType::class, ["label" => "Activité"])
             ->add('phone', TextType::class, ["label" => "Téléphone"])
             ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])

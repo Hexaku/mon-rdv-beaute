@@ -11,6 +11,7 @@ use App\Entity\Article;
 use App\Entity\HomeInformation;
 use App\Form\ServiceSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,13 +25,22 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $search = new ServiceSearch();
-        $formFilter = $this->createForm(ServiceSearchType::class, $search);
-        $formFilter->handleRequest($request);
-
-        /* QUERY DYNAMIC FILTER SERVICE */
-        $serviceRepo = $this->getDoctrine()->getRepository(Service::class);
-        $services = $serviceRepo->findServicesByQuery($search);
+        $formFilter = $this
+            ->createFormBuilder()
+            ->setAction($this->generateUrl("home_filter"))
+            ->setMethod("GET")
+            ->add("serviceName", TextType::class, ["required" => false,
+                "label" => false,
+                "attr" => [
+                "placeholder" => "Toutes les prestations"
+            ]])
+            ->add("serviceLocation", TextType::class, ["required" => false,
+                "label" => false,
+                "attr" => [
+                "placeholder" => "Toutes les villes"
+            ]])
+            ->getForm()
+        ;
 
         /* To get contacts details of people interested by a special_day,
         send in special_day table*/
@@ -62,8 +72,6 @@ class HomeController extends AbstractController
             "isHomePage" => true,
         ]);
 
-        dump($services);
-
         return $this->render("home/index.html.twig", [
             "form" => $form->createView(),
             "contactDay" => $contactDay,
@@ -71,6 +79,22 @@ class HomeController extends AbstractController
             "information" => $information ,
             "positions" => $positions,
             "formFilter" => $formFilter->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="home_filter")
+     */
+    public function search(Request $request): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Service::class);
+        $services = $repository->findServicesByQuery(
+            $request->query->get("form")["serviceName"],
+            $request->query->get("form")["serviceLocation"]
+        );
+
+        return $this->render("search/search.html.twig", [
+            "services" => $services,
         ]);
     }
 }

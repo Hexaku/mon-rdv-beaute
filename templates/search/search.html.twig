@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+    <div class="container-flex">
+        <h2 class="title">Nos prestations</h2>
+        {% for service in services %}
+            <div class="card-service rounded">
+                <div class="card-service-left">
+                    <img class="card-service-image" src="{{ vich_uploader_asset(service, 'imageFile') }}"/>
+                    <p class="card-service-slogan hidden">{{ service.slogan }}</p>
+                </div>
+                <div class="card-service-separator"></div>
+                <div class="card-service-right">
+                    <a href="{{ path('service_show', {'slug': service.slug}) }}" class="grey-link"><h3 class="card-service-name">{{ service.name }}</h3></a>
+                    <p class="card-service-price">{{ service.duration|duration }} | {{ service.price }}€</p>
+                    <a href="{{ path('service_booking', {'slug': service.slug}) }}"><button class="btn btn-lg btn-pink">Prendre RDV</button></a>
+                </div>
+            </div>
+        {% endfor %}
+        {% if services is empty %}
+            <h4>Il n'y a pas de prestations pour votre recherche</h4>
+        {% endif %}
+    </div>
+{% endblock %}
