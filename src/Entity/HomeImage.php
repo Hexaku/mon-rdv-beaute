@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -72,16 +74,16 @@ class HomeImage
         // Only change the updated af if the file is really uploaded to avoid database updates.
         // This is needed when the file should be set when loading the entity.
         if ($this->imageFile instanceof UploadedFile) {
-            $this->uploadedAt = new \DateTime('now');
+            $this->uploadedAt = new DateTime('now');
         }
     }
 
-    public function getUploadedAt(): ?\DateTimeInterface
+    public function getUploadedAt(): ?DateTimeInterface
     {
         return $this->uploadedAt;
     }
 
-    public function setUploadedAt(?\DateTimeInterface $uploadedAt): self
+    public function setUploadedAt(?DateTimeInterface $uploadedAt): self
     {
         $this->uploadedAt = $uploadedAt;
 

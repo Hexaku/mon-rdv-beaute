@@ -36,7 +36,7 @@ class UserFixtures extends Fixture
             ))
             ->setFirstname('Marie')
             ->setLastname('Dupont')
-            ->setBirthdate(new \DateTime('15-06-1960'))
+            ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0123456789');
 
 
@@ -53,27 +53,11 @@ class UserFixtures extends Fixture
             ))
             ->setFirstname('Thierry')
             ->setLastname('Dubois')
-            ->setBirthdate(new \DateTime('15-09-1960'))
+            ->setBirthdate(new DateTime('15-09-1960'))
             ->setPhone('0123456789');
 
 
         $manager->persist($user2);
-
-
-        $user3 = new User();
-        $user3->setEmail("user3@monsite.com")
-            ->setRoles(['ROLE_USER'])
-            ->setPassword($this->passwordEncoder->encodePassword(
-                $user3,
-                'userpassword'
-            ))
-            ->setFirstname('Helene')
-            ->setLastname('Azerty')
-            ->setBirthdate(new \DateTime('28-06-1960'))
-            ->setPhone('0192837465');
-
-
-        $manager->persist($user3);
 
 
         $prestataire = new User();
@@ -85,7 +69,7 @@ class UserFixtures extends Fixture
             ))
             ->setFirstname('Azerty')
             ->setLastname('Ytreza')
-            ->setBirthdate(new \DateTime('15-06-1960'))
+            ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0917836524');
 
 
@@ -102,7 +86,7 @@ class UserFixtures extends Fixture
             ))
             ->setFirstname('Poiuyt')
             ->setLastname('Tyuiop')
-            ->setBirthdate(new \DateTime('15-06-1960'))
+            ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0634253647');
 
 
@@ -118,7 +102,7 @@ class UserFixtures extends Fixture
             ))
             ->setFirstname('Wxcvbn')
             ->setLastname('Nbvcxw')
-            ->setBirthdate(new \DateTime('15-06-1960'))
+            ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0735465833');
 
         $manager->persist($admin);
