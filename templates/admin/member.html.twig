@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Liste des membres{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+    <h2 class="h2 mb-3 text-gray-800">Liste des membres</h2>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Membres</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Date de naissance</th>
+                        <th>Téléphone</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for member in members %}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{member.firstname}}</td>
+                            <td>{{member.lastname}}</td>
+                            <td>{{member.birthdate|date("d/m/Y")}}</td>
+                            <td>{{member.phone}}</td>
+                            <td>{{member.email}}</td>
+                        </tr>
+                    {% else %}
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore de membres !" | raw }}
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

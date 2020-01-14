@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Dashboard;
 use App\Entity\Professional;
 use App\Entity\Service;
+use App\Entity\User;
 use App\Form\DashboardType;
 use App\Repository\DashboardRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,6 +29,9 @@ class AdminDashboardController extends AbstractController
         $repoProfessional = $this->getDoctrine()->getRepository(Professional::class);
         $professionals = $repoProfessional->findAllProfessionals();
 
+        $repoMembers = $this->getDoctrine()->getRepository(User::class);
+        $members = $repoMembers->findAllUsers();
+
         $dashboard = new Dashboard();
         $form = $this->createForm(DashboardType::class, $dashboard);
         $form->handleRequest($request);
@@ -43,6 +47,7 @@ class AdminDashboardController extends AbstractController
         return $this->render("admin/index.html.twig", [
             "services" => $services,
             "professionals" => $professionals,
+            "members" => $members,
             'dashboard' => $dashboard,
             'dashboards' => $dashboardRepository->findAll(),
             'form' => $form->createView(),
