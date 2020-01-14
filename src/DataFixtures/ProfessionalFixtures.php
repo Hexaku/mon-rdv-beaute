@@ -18,7 +18,8 @@ class ProfessionalFixtures extends Fixture
             ->setDescription('Coiffeuse')
             ->setEmail('maridubois@monsite.mail')
             ->setFilename('5df8f893904fe535997572.jpg')
-            ->setPlace('8 rue de Nantes, 44000 Nantes');
+            ->setPlace('8 rue de Nantes, 44000 Nantes')
+            ->setCity("Nantes");
 
         $manager->persist($professional);
         $this->addReference('marie', $professional);
@@ -30,7 +31,8 @@ class ProfessionalFixtures extends Fixture
             ->setDescription('Coiffeur')
             ->setEmail('thierrydupont@monsite.mail')
             ->setFilename('5df8fb52e26c4367514253.png')
-            ->setPlace('20 rue de Nantes, 44000 Nantes');
+            ->setPlace('20 rue de Nantes, 44000 Nantes')
+            ->setCity("Carquefou");
 
         $manager->persist($professional);
         $this->addReference('thierry', $professional);
