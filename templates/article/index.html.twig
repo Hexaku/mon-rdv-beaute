@@ -11,7 +11,7 @@
             <div class="card-body">
                 <h3>{{ article.title }}</h3>
                 <p>{{ article.content|slice(0, 500)|striptags}}...</p>
-                <a href="{{ path('article_show', {'id': article.id}) }}"><button class="btn btn-success">Lire l'article</button></a>
+                <a href="{{ path('article_show', {'slug': article.slug}) }}"><button class="btn btn-success">Lire l'article</button></a>
             </div>
         </div>
         {% else %}
