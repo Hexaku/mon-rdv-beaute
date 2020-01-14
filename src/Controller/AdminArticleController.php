@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,10 +46,11 @@ class AdminArticleController extends AbstractController
             if ($newArticle->getIsHomePage() == true) {
                 foreach ($articles as $article) {
                     $article->setIsHomePage(false);
+                    $slug = Slugify::generate($article->getTitle());
+                    $article->setSlug($slug);
                 }
                 $newArticle->setIsHomePage(true);
             }
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newArticle);
             $entityManager->flush();

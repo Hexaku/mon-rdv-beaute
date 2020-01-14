@@ -339,7 +339,7 @@
                         <img class="article-image" src="{{ vich_uploader_asset(article.professional, 'imageFile') }}"/>
                         <div>
                             <p class="article-content">{{article.content|slice(0, 400)|striptags }}...</p>
-                            <a href="{{ path("article_show", {'id': article.id})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
+                            <a href="{{ path("article_show", {'slug': article.slug})}}"><div class="article-button category-button">LIRE L'ARTICLE</div></a>
                         </div>
                     </div>
                 </div>

@@ -36,7 +36,9 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
             feugiat felis. Aliquam nisi elit, vulputate a varius eu, tincidunt mollis augue. Nam vel quam quis turpis 
             sagittis egestas quis ut justo. Sed non porttitor lorem, sed condimentum purus. Nullam sollicitudin ante 
             felis. Nulla dapibus diam at erat semper maximus. ')
-            ->setIsHomePage(true);
+            ->setIsHomePage(true)
+            ->setSlug('professionel-du-mois');
+
 
         $manager->persist($article);
         $manager->flush();
@@ -44,7 +46,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $article = new Article();
 
         $article->setProfessional($this->getReference('thierry'))
-            ->setTitle('Professionel du mois')
+            ->setTitle('Professionel du mois 2')
             ->setContent('Nulla tristique tortor a lacus euismod, sed elementum arcu interdum. Aliquam 
             vel luctus risus, nec faucibus
             ex. Mauris maximus massa eu convallis tincidunt. Integer accumsan ornare arcu, in bibendum nisl ultrices 
@@ -61,7 +63,8 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
             Mauris erat erat, lacinia ut varius et, dapibus eu turpis. Duis varius fermentum mi ac tristique. Phasellus 
             eleifend iaculis quam, sit amet mollis leo imperdiet nec. Pellentesque condimentum sapien sed orci ornare 
             vulputate. Praesent tincidunt efficitur vulputate.')
-            ->setIsHomePage(false);
+            ->setIsHomePage(false)
+            ->setSlug('professionel-du-mois-2');
 
         $manager->persist($article);
         $manager->flush();

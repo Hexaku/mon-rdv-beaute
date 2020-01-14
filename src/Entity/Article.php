@@ -18,10 +18,34 @@ class Article
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     */
+
+    private $slug;
+
+    /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
      */
     private $title;
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="text")
