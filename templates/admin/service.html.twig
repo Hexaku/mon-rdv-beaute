@@ -25,7 +25,6 @@
                         <th>Description</th>
                         <th>Type de prestation</th>
                         <th>Durée</th>
-                        <th>Délai de reprise</th>
                         <th>Image</th>
                         <th>Prix</th>
                         <th>Prix additionnels</th>
@@ -52,7 +51,6 @@
                             <td>{{ service.description|slice(0, 250)}}...</td>
                             <td>{{service.serviceType|service}}</td>
                             <td>{{service.duration|duration}}</td>
-                            <td>{{service.intervalTime|duration}}</td>
                             <td><img src="{{ vich_uploader_asset(service, 'imageFile') }}" alt="service image" height="100px" width="auto"/></td>
                             <td>{{service.price}}€</td>
                             <td>
