@@ -30,4 +30,25 @@ class ServiceRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
+
+    public function findServicesByQuery($serviceName, $serviceCity)
+    {
+        $query = $this->createQueryBuilder("s")
+            ->innerJoin("s.professional", "p");
+        if ($serviceName) {
+            $query = $query
+            ->andWhere("s.name LIKE :serviceName")
+            ->setParameter("serviceName", $serviceName.'%');
+        };
+        if ($serviceCity) {
+            $query = $query
+            ->andWhere("p.city LIKE :serviceCity")
+            ->setParameter("serviceCity", $serviceCity.'%');
+        }
+        $query = $query
+            ->getQuery()
+            ->getResult()
+        ;
+        return $query;
+    }
 }
