@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Service;
 use App\Form\ServiceType;
+use App\Repository\BookingRepository;
 use App\Repository\BusinessHourRepository;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,6 +35,7 @@ class ServiceController extends AbstractController
      */
     public function booking(Service $service): Response
     {
+        //dd($service->getProfessional()->getBookings()->toArray());
         return $this->render("service/booking.html.twig", [
             "service" => $service,
         ]);
@@ -45,12 +47,12 @@ class ServiceController extends AbstractController
     public function fetch(
         Service $service,
         DateTime $date,
-        BusinessHourRepository $businessHourRepo
+        BusinessHourRepository $businessHourRepo,
+        BookingRepository $bookingRepository
     ): Response {
         /* */
         $reservationDays = $businessHourRepo->findBy([
             "professional" => $service->getProfessional(),
-
             "day" => $date->format("N"),
         ]);
         /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
@@ -58,16 +60,33 @@ class ServiceController extends AbstractController
 
         /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
         $result = [];
+
+        $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $date);
+
         foreach ($reservationDays as $reservationDay) {
             $period = new DatePeriod(
                 new DateTime($reservationDay->getOpenTime()->format("H:i")),
                 new DateInterval("PT" . $serviceDuration . "M"),
                 new DateTime($reservationDay->getCloseTime()->format("H:i"))
             );
-
+            //$period ne prends pas le jour en compte, seulement les heures
             foreach ($period as $date) {
-                $hoursMinutes = $date->format("H:i");
-                $result[] = $hoursMinutes;
+                $add = true;
+                foreach ($bookings as $booking) {
+                    $bookingHour = explode(':', $booking->getHour());
+                    $bookingHourEnd = explode(':', $booking->getHourEnd());
+                    if ($date->format('H:i') >= $booking->getDate()
+                            ->setTime($bookingHour[0], $bookingHour[1])
+                            ->format('H:i')
+                        && $date->format('H:i') <= $booking->getDate()
+                            ->setTime($bookingHourEnd[0], $bookingHourEnd[1])
+                            ->format('H:i')) {
+                        $add = false;
+                    }
+                }
+                if ($add) {
+                    $result[] = $date->format('H:i');
+                }
             }
         }
 
