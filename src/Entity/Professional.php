@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProfessionalRepository")
@@ -95,6 +96,7 @@ class Professional
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"filter"})
      */
     private $city;
 

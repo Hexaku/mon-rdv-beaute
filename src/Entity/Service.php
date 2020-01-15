@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
@@ -29,6 +30,7 @@ class Service
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Groups({"filter"})
      */
     private $name;
 

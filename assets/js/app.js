@@ -15,6 +15,7 @@ require('bootstrap');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
+/* ANIMATION ICON BURGER */
 const burgerElt = document.getElementById('burger');
 const topbarMenuElt = document.getElementById('topbar-menu-mobile');
 
@@ -23,6 +24,7 @@ burgerElt.addEventListener('click', (e) => {
     burgerElt.classList.toggle('change');
 });
 
+/* STYLE CONNEXION */
 const connexionElt = document.getElementById('connexion');
 const topbarConnexionElt = document.getElementById('topbar-connexion-mobile');
 

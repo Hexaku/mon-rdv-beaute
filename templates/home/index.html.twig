@@ -7,6 +7,7 @@
     <title>{% block title %}Mon Rendez-Vous Beauté{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('home') }}
+        {{ encore_entry_link_tags('autocomplete') }}
     {% endblock %}
 </head>
 <body>
@@ -393,7 +394,9 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('autocomplete') }}
 {% endblock %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script src="https://cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
@@ -413,6 +416,31 @@
         },2100)
     })
 </script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(event) {
+        /*$('#form_serviceName').on('input', function(event) {
+            console.log(event.target.value);
+        })*/
+
+        $('#form_serviceName').autocomplete({hint: false}, [
+            {
+                source: function (query, cb) {
+                    $.ajax({
+                        url: 'api\/filter\/',
+                    }).then(function(data) {
+                        console.log(data[0][0].name)
+                        cb(data[0][0].name);
+                    })
+                },
+            }
+        ])
+    })
+</script>
+
+
 </body>
 </html>
 
