@@ -285,6 +285,7 @@
             </div>
         </div>
     </header>
+    {% include "flash_message.html.twig" %}
 
     <main class="main">
         <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
@@ -371,12 +372,14 @@
             </div>
             <div class="footer-newsletter">
                 <h4 class="footer-newsletter-title">Notre Newsletter</h4>
-                <form class="footer-newsletter-form">
-                    <input class=" footer-newsletter-input" type="text" placeholder="Entrez votre e-mail">
-                    <button class="footer-newsletter-submit" type="submit" >
-                        <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
-                    </button>
-                </form>
+                <div class="footer-newsletter-form">
+                    {{ form_start(formNewsletter) }}
+                        {{ form_row((formNewsletter.email)) }}
+                        <button class="footer-newsletter-submit" type="submit" >
+                            <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
+                        </button>
+                    {{ form_end(formNewsletter) }}
+                </div>
             </div>
         </div>
         <div class="lower-footer">

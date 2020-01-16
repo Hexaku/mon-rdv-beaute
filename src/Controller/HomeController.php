@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\HomeImage;
 use App\Entity\ContactDay;
+use App\Entity\Newsletter;
 use App\Entity\Professional;
 use App\Entity\Service;
 use App\Entity\ServiceSearch;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Entity\HomeInformation;
+use App\Form\NewsletterType;
 use App\Form\ServiceSearchType;
 use App\Repository\ProfessionalRepository;
 use App\Repository\ServiceRepository;
@@ -28,6 +30,7 @@ class HomeController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        /* CREATING FILTER FORM */
         $formFilter = $this
             ->createFormBuilder()
             ->setAction($this->generateUrl("home_filter"))
@@ -65,17 +68,31 @@ class HomeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(HomeImage::class);
         $positions = $repository->findAll();
 
+        /* GET THE INFORMATION WITH isHomePage = true TO SHOW ON HOME PAGE */
+        $informationRepo = $this->getDoctrine()->getRepository(HomeInformation::class);
+        $information = $informationRepo->findOneBy([
+            "isHomePage" => true,
+        ]);
+
         /* GET THE ARTICLE WITH isHomePage = true TO SHOW ON HOME PAGE */
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
         $article = $articleRepository->findOneBy([
             "isHomePage" => true,
         ]);
 
-        /* GET THE INFORMATION WITH isHomePage = true TO SHOW ON HOME PAGE */
-        $informationRepo = $this->getDoctrine()->getRepository(HomeInformation::class);
-        $information = $informationRepo->findOneBy([
-            "isHomePage" => true,
-        ]);
+        /* CREATE NEWSLETTER FORM AND ADD DATA IN DATABASE */
+        $newsletter = new Newsletter();
+        $formNewsletter = $this->createForm(NewsletterType::class, $newsletter);
+        $formNewsletter->handleRequest($request);
+
+        if ($formNewsletter->isSubmitted() && $formNewsletter->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newsletter);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
 
         return $this->render("home/index.html.twig", [
             "form" => $form->createView(),
@@ -84,6 +101,7 @@ class HomeController extends AbstractController
             "information" => $information ,
             "positions" => $positions,
             "formFilter" => $formFilter->createView(),
+            "formNewsletter" => $formNewsletter->createView(),
         ]);
     }
 
