@@ -338,6 +338,12 @@
                 </div>
             </div>
         {% endif %}
+        <div class="video-wrapper">
+            <h1 class="article-title">{{ video.title|upper }}</h1>
+            <div class="video-container">
+                <iframe width="560" height="315" src="{{ video.link }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
 
         {% if article is empty %}
 
