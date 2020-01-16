@@ -108,10 +108,11 @@ class HomeController extends AbstractController
      */
     public function fetch(
         ServiceRepository $serviceRepository,
-        ProfessionalRepository $professionalRepo
+        ProfessionalRepository $professionalRepo,
+        Request $request
     ): Response {
-        $services = $serviceRepository->findAll();
-        $professionals = $professionalRepo->findAll();
+        $services = $serviceRepository->findAllMatching($request->query->get('query'));
+        $professionals = $professionalRepo->findAllMatching($request->query->get('query'));
 
         $result = [$services, $professionals];
 

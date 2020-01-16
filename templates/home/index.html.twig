@@ -429,12 +429,25 @@
             {
                 source: function (query, cb) {
                     $.ajax({
-                        url: 'api\/filter\/',
+                        url: 'api\/filter\/'+'?query='+query,
                     }).then(function(data) {
-                        console.log(data[0][0].name)
-                        cb(data[0][0].name);
+                        cb(data[0]);
                     })
                 },
+                displayKey: 'name',
+            }
+        ])
+
+        $('#form_serviceLocation').autocomplete({hint: false}, [
+            {
+                source: function (query, cb) {
+                    $.ajax({
+                        url: 'api\/filter\/'+'?query='+query,
+                    }).then(function(data) {
+                        cb(data[1]);
+                    })
+                },
+                displayKey: 'city',
             }
         ])
     })

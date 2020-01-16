@@ -30,4 +30,15 @@ class ProfessionalRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAll();
     }
+
+    public function findAllMatching(string $query, int $limit = 5)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.city LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
