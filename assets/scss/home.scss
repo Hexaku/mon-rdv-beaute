@@ -643,9 +643,13 @@ a:hover {
     justify-content: center;
   }
 
-  .footer-newsletter-form {
+  .footer-newsletter-form form {
     display: flex;
     justify-content: center;
+  }
+
+  .footer-newsletter-form form div {
+    width: 250px;
   }
 
   .footer-newsletter-title {
@@ -664,6 +668,11 @@ a:hover {
     border: 1px solid black;
     border-radius: 0 10px 10px 0;
     padding: 10px;
+    height: 46px;
+  }
+
+  #newsletter_email {
+    width: 100%;
   }
 
   .mobile {
