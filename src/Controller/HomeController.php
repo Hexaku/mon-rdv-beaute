@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\HomeImage;
 use App\Entity\ContactDay;
+use App\Entity\Professional;
 use App\Entity\Service;
 use App\Entity\ServiceSearch;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Entity\HomeInformation;
 use App\Form\ServiceSearchType;
+use App\Repository\ProfessionalRepository;
+use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
@@ -32,12 +35,14 @@ class HomeController extends AbstractController
             ->add("serviceName", TextType::class, ["required" => false,
                 "label" => false,
                 "attr" => [
-                "placeholder" => "Toutes les prestations"
+                    "placeholder" => "Toutes les prestations",
+                    "id" => "filter-service-name",
             ]])
             ->add("serviceLocation", TextType::class, ["required" => false,
                 "label" => false,
                 "attr" => [
-                "placeholder" => "Toutes les villes"
+                    "placeholder" => "Toutes les villes",
+                    "id" => "filter-service-location",
             ]])
             ->getForm()
         ;
@@ -95,6 +100,24 @@ class HomeController extends AbstractController
 
         return $this->render("search/search.html.twig", [
             "services" => $services,
+        ]);
+    }
+
+    /**
+     * @Route("/api/filter", name="home_filter_fetch")
+     */
+    public function fetch(
+        ServiceRepository $serviceRepository,
+        ProfessionalRepository $professionalRepo,
+        Request $request
+    ): Response {
+        $services = $serviceRepository->findAllMatching($request->query->get('query'));
+        $professionals = $professionalRepo->findAllMatching($request->query->get('query'));
+
+        $result = [$services, $professionals];
+
+        return $this->json($result, 200, [], [
+            "groups" => ["filter"]
         ]);
     }
 }

@@ -149,6 +149,8 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .filter-input-round {
@@ -159,7 +161,7 @@ a:hover {
   font-family: "Libre Baskerville", serif;
   padding: 10px;
   border: 1px solid black;
-  width: 80%;
+  width: 100%;
 }
 
 .filter-submit {
@@ -167,7 +169,7 @@ a:hover {
   background-color: #FFBD14;
   border: 1px solid black;
   margin: 0 auto;
-  width: 80%;
+  width: 100%;
   border-radius: 0 0 10px 10px;
   span {
     font-weight: bold;
@@ -381,10 +383,6 @@ a:hover {
 @media only screen and(min-width: 500px) {
   .topbar-main-logo {
     width: 275px;
-  }
-
-  .filter-input, .filter-submit {
-    width: 65%;
   }
 
   .main {
