@@ -202,7 +202,7 @@
                     </div>
                     <nav class="topbar-menu topbar-menu-desktop">
                         <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                        <a href="#" data-toggle="modal" data-target="#exampleModal">JOURNEE BIEN-ETRE</a>
+                        <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
                         <a href="{{ path('article_index') }}">ARTICLES</a>
                         <a href="{{ path('about') }}">A PROPOS</a>
                         <a href="{{ path('contact') }}">CONTACT</a>
@@ -235,7 +235,7 @@
             <nav class="topbar-menu topbar-menu-mobile no-show rounded" id="topbar-menu-mobile">
                 <a href="{{ path('category_index') }}">Prestations</a>
                 <div class="white-line"></div>
-                <a href="#">Journée Bien-Être</a>
+                <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
                 <div class="white-line"></div>
                 <a href="{{ path('article_index') }}">Articles</a>
                 <div class="white-line"></div>
@@ -250,7 +250,7 @@
                         <div class="white-line"></div>
                         <a href="{{ path('app_logout') }}">Se déconnecter</a>
                     {% endif %}
-                {% else %}
+                {% else %}<a href="#"><button class="btn btn-lg btn-pink">Plus d'infos</button></a>
                 <a href="{{ path('app_login') }}">Se connecter</a>
                 <div class="white-line"></div>
                 <a href="{{ path('app_register') }}">S'inscrire</a>
@@ -258,7 +258,7 @@
             </nav>
             <nav class="topbar-menu topbar-menu-tablet">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                <a href="#">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
                 <a href="{{ path('article_index') }}">ARTICLES</a>
                 <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
@@ -286,20 +286,6 @@
     </header>
 
     <main class="main">
-        <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="{{ asset('/build/logo-noir.svg') }}"/>
-                        <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
-                    </div>
-                    <div>
-                        {{ include('special_day/_modal_form.html.twig') }}
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="categories-container">
             <div class="category">
                 {% for position in positions if position.position == 1 %}
@@ -315,7 +301,7 @@
                     {% else %}
                         <img src="{{ asset('build/bien-etre.png') }}" class="category-image rounded">
                 {% endfor %}
-                <a href="#" data-toggle="modal" data-target="#exampleModal"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
+                <<a href="{{ path('special_day') }}"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
                 {% for position in positions if position.position == 3 %}
