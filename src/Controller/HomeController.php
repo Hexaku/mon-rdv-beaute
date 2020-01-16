@@ -122,19 +122,25 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/api/filter", name="home_filter_fetch")
+     * @Route("/api/filter/services", name="home_filter_fetch_services")
      */
-    public function fetch(
-        ServiceRepository $serviceRepository,
-        ProfessionalRepository $professionalRepo,
-        Request $request
-    ): Response {
+    public function fetchServices(ServiceRepository $serviceRepository, Request $request): Response
+    {
         $services = $serviceRepository->findAllMatching($request->query->get('query'));
+
+        return $this->json($services, 200, [], [
+            "groups" => ["filter"]
+        ]);
+    }
+
+    /**
+     * @Route("/api/filter/professionals", name="home_filter_fetch_professionals")
+     */
+    public function fetchProfessionals(ProfessionalRepository $professionalRepo, Request $request): Response
+    {
         $professionals = $professionalRepo->findAllMatching($request->query->get('query'));
 
-        $result = [$services, $professionals];
-
-        return $this->json($result, 200, [], [
+        return $this->json($professionals, 200, [], [
             "groups" => ["filter"]
         ]);
     }
