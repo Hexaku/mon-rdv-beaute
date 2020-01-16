@@ -10,10 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/special_day")
+ */
 class SpecialDayController extends AbstractController
 {
     /**
-     * @Route("special_day", name="special_day")
+     * @Route("/", name="special_day")
      */
     public function index(Request $request): Response
     {
@@ -34,5 +37,13 @@ send in special_day table*/
             "form" => $form->createView(),
             "contactDay" => $contactDay
         ]);
+    }
+
+    /**
+     * @Route("/show", name="special_day_show")
+     */
+    public function show(): Response
+    {
+        return $this->render('special_day/show.html.twig');
     }
 }
