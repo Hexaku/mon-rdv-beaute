@@ -69,21 +69,30 @@ class ServiceController extends AbstractController
                 new DateInterval("PT" . $serviceDuration . "M"),
                 new DateTime($reservationDay->getCloseTime()->format("H:i"))
             );
-            //$period ne prends pas le jour en compte, seulement les heures
             foreach ($period as $date) {
                 $add = true;
                 foreach ($bookings as $booking) {
                     $bookingHour = explode(':', $booking->getHour());
                     $bookingHourEnd = explode(':', $booking->getHourEnd());
-                    if ($date->format('H:i') >= $booking->getDate()
-                            ->setTime($bookingHour[0], $bookingHour[1])
+                    $bookingDuration = $booking->getService()->getDuration();
+                    $diff = 0;
+
+                    if ($bookingDuration < $serviceDuration) {
+                        $diff = $serviceDuration - $bookingDuration;
+                    }
+
+                    if ($date->format('H:i') >=
+                        $booking->getDate()
+                            ->setTime($bookingHour[0], intval($bookingHour[1]) - $diff)
                             ->format('H:i')
-                        && $date->format('H:i') <= $booking->getDate()
+                        && $date->format('H:i') <=
+                        $booking->getDate()
                             ->setTime($bookingHourEnd[0], $bookingHourEnd[1])
                             ->format('H:i')) {
                         $add = false;
                     }
                 }
+
                 if ($add) {
                     $result[] = $date->format('H:i');
                 }
