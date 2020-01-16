@@ -34,7 +34,7 @@ class AdminHomeController extends AbstractController
      */
     public function informationNew(Request $request): Response
     {
-        /* INITIALIZE INFORMATION REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
+        /* INITIALIZE INFORMATION REPOSITORY FOR ALL INFORMATION WITH isHomePage == true */
         $repository = $this->getDoctrine()->getRepository(HomeInformation::class);
         $informations = $repository->findBy([
             "isHomePage" => true,
@@ -71,7 +71,7 @@ class AdminHomeController extends AbstractController
      */
     public function informationEdit(Request $request, HomeInformation $newInformation): Response
     {
-        /* INITIALIZE INFORMATION REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
+        /* INITIALIZE INFORMATION REPOSITORY FOR ALL INFORMATION WITH isHomePage == true */
         $repository = $this->getDoctrine()->getRepository(HomeInformation::class);
         $informations = $repository->findBy([
             "isHomePage" => true,

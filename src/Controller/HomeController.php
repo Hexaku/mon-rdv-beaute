@@ -8,6 +8,7 @@ use App\Entity\Newsletter;
 use App\Entity\Professional;
 use App\Entity\Service;
 use App\Entity\ServiceSearch;
+use App\Entity\Video;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Entity\HomeInformation;
@@ -15,6 +16,7 @@ use App\Form\NewsletterType;
 use App\Form\ServiceSearchType;
 use App\Repository\ProfessionalRepository;
 use App\Repository\ServiceRepository;
+use App\Service\FormatYoutubeLink;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormTypeInterface;
@@ -28,7 +30,7 @@ class HomeController extends AbstractController
      * @return Response
      * @Route("/", name="home", methods={"GET", "POST"})
      */
-    public function index(Request $request): Response
+    public function index(Request $request, FormatYoutubeLink $formatYoutubeLink): Response
     {
         /* CREATING FILTER FORM */
         $formFilter = $this
@@ -74,6 +76,14 @@ class HomeController extends AbstractController
             "isHomePage" => true,
         ]);
 
+        /* GET THE VIDEO WITH isHomePage = true TO SHOW ON HOME PAGE */
+        $videoRepository = $this->getDoctrine()->getRepository(Video::class);
+        $video = $videoRepository->findOneBy([
+            "isHomePage" => true,
+        ]);
+        /* FORMAT YOUTUBE LINK TO FIT IFRAME YT PATTERN */
+        $video->setLink($formatYoutubeLink->format($video->getLink()));
+
         /* GET THE ARTICLE WITH isHomePage = true TO SHOW ON HOME PAGE */
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);
         $article = $articleRepository->findOneBy([
@@ -98,7 +108,8 @@ class HomeController extends AbstractController
             "form" => $form->createView(),
             "contactDay" => $contactDay,
             "article" => $article,
-            "information" => $information ,
+            "information" => $information,
+            "video" => $video,
             "positions" => $positions,
             "formFilter" => $formFilter->createView(),
             "formNewsletter" => $formNewsletter->createView(),
