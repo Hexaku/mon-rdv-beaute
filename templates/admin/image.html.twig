@@ -1,50 +1,52 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}Liste des informations{% endblock %}
+{% block title %}Liste des images{% endblock %}
 
 {% block content %}
     <!-- Page Heading -->
-    <h2 class="h2 mb-3 text-gray-800">Liste des informations</h2>
+    <h2 class="h2 mb-3 text-gray-800">Liste des images</h2>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Informations</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Image</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <a href="{{ path("admin_home_information_new") }}"><button class="btn btn-success btn-add">Ajouter une information</button></a>
+                    {% if images|length < 3  %}
+                        <a href="{{  path("admin_home_image_new") }}"><button class="btn btn-success btn-add">Ajouter une image</button></a>
+                    {% else %}
+                    {% endif %}
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Titre</th>
-                        <th>Contenu</th>
-                        <th>Mis en avant</th>
+                        <th>Catégorie</th>
+                        <th>Image</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for information in informations %}
+                    {% for image in images %}
                         <tr>
                             <td>{{loop.index}}</td>
                             <td>
-                                <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{information.name}}</a>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{ image.position|position }}</a>
                                 <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                     <div class="bg-white py-2 collapse-inner rounded">
                                         <div class="flex-buttons">
-                                            <a class="collapse-item" href="{{ path('admin_home_information_edit', {'id': information.id}) }}"><button class="btn btn-warning">Modifier</button></a>
-                                            {{ include('admin/_home_information_delete_form.html.twig') }}
+                                            <a class="collapse-item" href="{{   path('admin_home_image_edit', {'id': image.id}) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            {{ include('admin/_image_delete_form.html.twig') }}
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td>{{information.content|striptags}}</td>
-                            <td>{{ information.isHomePage ? "oui" : "non" }}</td>
+                            <td> <img src="{{ vich_uploader_asset(image, 'imageFile')}}" height="100px" width="auto"/> </td>
+
                         </tr>
                     {% else %}
                         <div class="alert alert-primary alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            {{ "Il n'y a pas encore d'informations !" | raw }}
+                            {{ "Il n'y a pas encore d'images !" | raw }}
                         </div>
                     {% endfor %}
                     </tbody>

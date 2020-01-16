@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\HomeImage;
+use App\Entity\Image;
 use App\Entity\ContactDay;
 use App\Entity\Newsletter;
 use App\Entity\Professional;
@@ -11,7 +11,7 @@ use App\Entity\ServiceSearch;
 use App\Entity\Video;
 use App\Form\ContactDayType;
 use App\Entity\Article;
-use App\Entity\HomeInformation;
+use App\Entity\Information;
 use App\Form\NewsletterType;
 use App\Form\ServiceSearchType;
 use App\Repository\ProfessionalRepository;
@@ -67,11 +67,11 @@ class HomeController extends AbstractController
         }
 
         /* GET IMAGES CARD POSITIONS CARD */
-        $repository = $this->getDoctrine()->getRepository(HomeImage::class);
+        $repository = $this->getDoctrine()->getRepository(Image::class);
         $positions = $repository->findAll();
 
         /* GET THE INFORMATION WITH isHomePage = true TO SHOW ON HOME PAGE */
-        $informationRepo = $this->getDoctrine()->getRepository(HomeInformation::class);
+        $informationRepo = $this->getDoctrine()->getRepository(Information::class);
         $information = $informationRepo->findOneBy([
             "isHomePage" => true,
         ]);
@@ -81,8 +81,11 @@ class HomeController extends AbstractController
         $video = $videoRepository->findOneBy([
             "isHomePage" => true,
         ]);
-        /* FORMAT YOUTUBE LINK TO FIT IFRAME YT PATTERN */
-        $video->setLink($formatYoutubeLink->format($video->getLink()));
+
+        if ($video != null) {
+            /* FORMAT YOUTUBE LINK TO FIT IFRAME YT PATTERN */
+            $video->setLink($formatYoutubeLink->format($video->getLink()));
+        }
 
         /* GET THE ARTICLE WITH isHomePage = true TO SHOW ON HOME PAGE */
         $articleRepository = $this->getDoctrine()->getRepository(Article::class);

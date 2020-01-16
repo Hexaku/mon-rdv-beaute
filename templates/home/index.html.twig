@@ -330,21 +330,26 @@
         </div>
         {% if information is empty %}
 
-        {% else %}
-            <div class="article-container">
-                <h1 class="article-title">{{ information.name|upper }}</h1>
-                <div class="text-center">
-                    <p>{{ information.content | raw }}</p>
+            {% else %}
+                <div class="article-container">
+                    <h1 class="article-title">{{ information.name|upper }}</h1>
+                    <div class="text-center">
+                        <p>{{ information.content | raw }}</p>
+                    </div>
                 </div>
-            </div>
         {% endif %}
-        <div class="video-wrapper">
-            <h1 class="article-title">{{ video.title|upper }}</h1>
-            <div class="video-container">
-                <iframe width="560" height="315" src="{{ video.link }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
 
+        {% if video is empty %}
+
+            {% else %}
+                <div class="video-wrapper">
+                    <h1 class="article-title">{{ video.title|upper }}</h1>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="{{ video.link }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+        {% endif %}
+        
         {% if article is empty %}
 
             {% else %}

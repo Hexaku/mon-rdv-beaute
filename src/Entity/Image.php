@@ -12,7 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\HomeImageRepository")
  * @Vich\Uploadable()
  */
-class HomeImage
+class Image
 {
     const CATEGORIES = [
         1 => "Prestations",
@@ -57,7 +57,7 @@ class HomeImage
         return $this->fileName;
     }
 
-    public function setFileName($fileName): HomeImage
+    public function setFileName($fileName): Image
     {
         $this->fileName = $fileName;
         return $this;
