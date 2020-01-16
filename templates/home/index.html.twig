@@ -432,9 +432,10 @@
             {
                 source: function (query, cb) {
                     $.ajax({
-                        url: 'api\/filter\/'+'?query='+query,
+                        url: 'api\/filter\/services\/'+'?query='+query,
                     }).then(function(data) {
-                        cb(data[0]);
+                        console.log(data);
+                        cb(data);
                     })
                 },
                 displayKey: 'name',
@@ -445,9 +446,9 @@
             {
                 source: function (query, cb) {
                     $.ajax({
-                        url: 'api\/filter\/'+'?query='+query,
+                        url: 'api\/filter\/professionals\/'+'?query='+query,
                     }).then(function(data) {
-                        cb(data[1]);
+                        cb(data);
                     })
                 },
                 displayKey: 'city',
