@@ -44,45 +44,32 @@ class Category
     private $slug;
 
     /**
-     * @return string|null
+     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="category")
      */
+    private $services;
+
+
     public function getFilename(): ?string
     {
         return $this->filename;
     }
 
-    /**
-     * @param string|null $filename
-     * @return Category
-     */
     public function setFilename(?string $filename): Category
     {
         $this->filename = $filename;
         return $this;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\File\File|null
-     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    /**
-     * @param File|null $imageFile
-     * @return Category
-     */
     public function setImageFile(?File $imageFile): Category
     {
         $this->imageFile = $imageFile;
         return $this;
     }
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="category")
-     */
-    private $services;
 
     public function __construct()
     {
@@ -105,10 +92,7 @@ class Category
 
         return $this;
     }
-
-    /**
-     * @return Collection|Service[]
-     */
+    
     public function getServices(): Collection
     {
         return $this->services;

@@ -51,18 +51,11 @@ class Article
         return $this->id;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     * @return Article
-     */
     public function setSlug($slug)
     {
         $this->slug = $slug;

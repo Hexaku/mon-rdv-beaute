@@ -173,9 +173,6 @@ class Professional
         return $this;
     }
 
-    /**
-     * @return Collection|Service[]
-     */
     public function getServices(): Collection
     {
         return $this->services;
@@ -200,36 +197,22 @@ class Professional
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFilename(): ?string
     {
         return $this->filename;
     }
 
-    /**
-     * @param string|null $filename
-     * @return Professional
-     */
     public function setFilename(?string $filename): Professional
     {
         $this->filename = $filename;
         return $this;
     }
 
-    /**
-     * @return File|null
-     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    /**
-     * @param File|null $imageFile
-     * @return Professional
-     */
     public function setImageFile(?File $imageFile): Professional
     {
         $this->imageFile = $imageFile;
@@ -250,9 +233,6 @@ class Professional
         return $this;
     }
 
-    /**
-     * @return Collection|BusinessHour[]
-     */
     public function getBusinessHour(): Collection
     {
         return $this->businessHour;
@@ -277,9 +257,6 @@ class Professional
         return $this;
     }
 
-    /**
-     * @return Collection|Booking[]
-     */
     public function getBookings(): Collection
     {
         return $this->bookings;
@@ -291,6 +268,7 @@ class Professional
             $this->bookings[] = $booking;
             $booking->setProfessional($this);
         }
+        return $this;
     }
   
     public function removeBooking(Booking $booking): self
@@ -304,11 +282,7 @@ class Professional
         }
         return $this;
     }
-      
-              
-    /*
-     * @return Collection|Article[]
-     */
+
     public function getArticles(): Collection
     {
         return $this->articles;

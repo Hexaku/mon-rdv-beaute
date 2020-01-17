@@ -26,7 +26,6 @@ class UserFixtures extends Fixture
             'the_new_password'
         ));
 
-
         $user1 = new User();
         $user1->setEmail("user1@monsite.com")
             ->setRoles(['ROLE_USER'])
@@ -39,10 +38,7 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0123456789');
 
-
-
         $manager->persist($user1);
-
 
         $user2 = new User();
         $user2->setEmail("user2@monsite.com")
@@ -56,9 +52,7 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-09-1960'))
             ->setPhone('0123456789');
 
-
         $manager->persist($user2);
-
 
         $prestataire = new User();
         $prestataire->setEmail("prestataire@monsite.com")
@@ -72,10 +66,7 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0917836524');
 
-
         $manager->persist($prestataire);
-
-
 
         $prestataire1 = new User();
         $prestataire1->setEmail("subscriberauthor2@monsite.com")
@@ -91,7 +82,6 @@ class UserFixtures extends Fixture
 
 
         $manager->persist($prestataire1);
-
 
         $admin = new User();
         $admin->setEmail('admin@monsite.com')

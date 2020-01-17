@@ -190,9 +190,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Booking[]
-     */
     public function getBookings(): Collection
     {
         return $this->bookings;

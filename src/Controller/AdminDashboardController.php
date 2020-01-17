@@ -3,9 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Dashboard;
-use App\Entity\Professional;
-use App\Entity\Service;
-use App\Entity\User;
 use App\Form\DashboardType;
 use App\Repository\DashboardRepository;
 use App\Repository\ProfessionalRepository;
@@ -31,12 +28,9 @@ class AdminDashboardController extends AbstractController
         ProfessionalRepository $professionalRepo,
         UserRepository $userRepository
     ): Response {
-        //$serviceRepository = new ServiceRepository();
 
         $services = $serviceRepository->findAllServices();
-
         $professionals = $professionalRepo->findAllProfessionals();
-
         $members = $userRepository->findAllUsers();
 
         $dashboard = new Dashboard();

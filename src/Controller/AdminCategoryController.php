@@ -36,7 +36,6 @@ class AdminCategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($category);
             $slug = $slugify->generate($category->getName());
             $category->setSlug($slug);
 

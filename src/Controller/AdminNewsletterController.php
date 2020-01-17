@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin")
  */
-class AdminNewspaperController extends AbstractController
+class AdminNewsletterController extends AbstractController
 {
     /**
      * @Route("/newsletter", name="admin_newsletter", methods={"GET"})
