@@ -33,7 +33,6 @@ class ServiceFixtures extends Fixture implements DependentFixtureInterface
             vulputate. Praesent tincidunt efficitur vulputate.')
             ->setCategory($this->getReference('coiffure'))
             ->setDuration(60)
-            ->setIntervalTime(5)
             ->setPrice(40)
             ->setSlogan('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
             ->setServiceType(1);
@@ -52,7 +51,6 @@ class ServiceFixtures extends Fixture implements DependentFixtureInterface
             Ut quis augue facilisis, aliquam felis vitae, rutrum ante. Etiam lacinia euismod lorem.')
             ->setCategory($this->getReference('coiffure'))
             ->setDuration(30)
-            ->setIntervalTime(5)
             ->setPrice(40)
             ->setSlogan('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
             ->setServiceType(1);
@@ -71,7 +69,6 @@ class ServiceFixtures extends Fixture implements DependentFixtureInterface
             Ut quis augue facilisis, aliquam felis vitae, rutrum ante. Etiam lacinia euismod lorem.')
             ->setCategory($this->getReference('coiffure'))
             ->setDuration(120)
-            ->setIntervalTime(5)
             ->setPrice(40)
             ->setSlogan('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
             ->setServiceType(1);
@@ -91,7 +88,6 @@ class ServiceFixtures extends Fixture implements DependentFixtureInterface
             ut malesuada eros rhoncus efficitur. Nunc sem elit, sagittis ac accumsan non, vulputate ut tortor.')
             ->setCategory($this->getReference('coiffure'))
             ->setDuration(45)
-            ->setIntervalTime(5)
             ->setPrice(75)
             ->setSlogan('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
             ->setServiceType(1);
