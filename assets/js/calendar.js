@@ -39,12 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     return response.json();
                 })
                 .then((result) => {
-                    console.log(result);
                     if (result.length === 0) {
                         $(".modal-body").html("Il n'y a pas d'horaires disponible pour ce jour");
                     } else {
+                        console.log(info.date);
                         let hours = '';
-                        result.forEach((item, index) => hours += `<a href="/booking/${calendarEl.getAttribute('service')}/${info.dateStr}/${result[index]}" class="btn btn-pink">${result[index]}</a>`)
+                        result.forEach((item, index) => {
+                            hours += `<a href="/booking/${calendarEl.getAttribute('service')}/${info.dateStr}/${result[index]}" class="btn btn-pink">${result[index]}</a>`;
+                        })
                         $(".modal-body").html(hours);
                     }
                     $('#exampleModalCenter').modal();

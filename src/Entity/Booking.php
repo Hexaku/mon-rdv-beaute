@@ -44,6 +44,11 @@ class Booking
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $hourEnd;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +110,18 @@ class Booking
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getHourEnd(): ?string
+    {
+        return $this->hourEnd;
+    }
+
+    public function setHourEnd(string $hourEnd): self
+    {
+        $this->hourEnd = $hourEnd;
 
         return $this;
     }
