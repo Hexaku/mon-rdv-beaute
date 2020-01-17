@@ -11,41 +11,31 @@ require('bootstrap');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
-var $collectionHolder;
+let $collectionHolder;
 
 // setup an "add a tag" link
-var $addTagButton = $('<button type="button" class="add_tag_link btn btn-primary">Ajouter un prix</button>');
-var $newLinkLi = $('<p></p>').append($addTagButton);
+const $addTagButton = $('<button type="button" class="add_tag_link btn btn-primary">Ajouter un prix</button>');
+const $newLinkLi = $('<p></p>').append($addTagButton);
 
-jQuery(document).ready(function () {
-    // Get the ul that holds the collection of hours
-    $collectionHolder = $('div.hours');
+function addTagFormDeleteLink($tagFormLi) {
+    const $removeFormButton = $('<button type="button" class="btn btn-danger">Supprimer le prix</button>');
+    $tagFormLi.append($removeFormButton);
 
-    // add the "add a tag" anchor and li to the hours ul
-    $collectionHolder.append($newLinkLi);
-
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
-    // add a delete link to all of the existing tag form li elements
-
-
-    $addTagButton.on('click', function (e) {
-        // add a new tag form (see next code block)
-        addTagForm($collectionHolder, $newLinkLi);
+    $removeFormButton.on('click', (e) => {
+        // remove the li for the tag form
+        $tagFormLi.remove();
     });
-});
+}
 
-function addTagForm($collectionHolder, $newLinkLi)
-{
+// eslint-disable-next-line no-shadow
+function addTagForm($collectionHolder, $newLinkLi) {
     // Get the data-prototype explained earlier
-    var prototype = $collectionHolder.data('prototype');
+    const prototype = $collectionHolder.data('prototype');
 
     // get the new index
-    var index = $collectionHolder.data('index');
+    const index = $collectionHolder.data('index');
 
-    var newForm = prototype;
+    let newForm = prototype;
     // You need this only if you didn't set 'label' => false in your hours field in TaskType
     // Replace '__name__label__' in the prototype's HTML to
     // instead be a number based on how many items we have
@@ -59,18 +49,28 @@ function addTagForm($collectionHolder, $newLinkLi)
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<p></p>').append(newForm);
+    const $newFormLi = $('<p></p>').append(newForm);
     $newLinkLi.before($newFormLi);
 
     addTagFormDeleteLink($newFormLi);
 }
 
-function addTagFormDeleteLink($tagFormLi) {
-    var $removeFormButton = $('<button type="button" class="btn btn-danger">Supprimer le prix</button>');
-    $tagFormLi.append($removeFormButton);
+jQuery(document).ready(() => {
+    // Get the ul that holds the collection of hours
+    $collectionHolder = $('div.hours');
 
-    $removeFormButton.on('click', function(e) {
-        // remove the li for the tag form
-        $tagFormLi.remove();
+    // add the "add a tag" anchor and li to the hours ul
+    $collectionHolder.append($newLinkLi);
+
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+    // add a delete link to all of the existing tag form li elements
+
+
+    $addTagButton.on('click', (e) => {
+        // add a new tag form (see next code block)
+        addTagForm($collectionHolder, $newLinkLi);
     });
-}
+});
