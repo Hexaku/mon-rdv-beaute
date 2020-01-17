@@ -16,11 +16,11 @@ require('bootstrap');
 const $ = require('jquery');
 
 document.addEventListener('DOMContentLoaded', () => {
-    let calendarEl = document.getElementById('calendar-holder');
+    const calendarEl = document.getElementById('calendar-holder');
 
-    let eventsUrl = calendarEl.dataset.eventsUrl;
+    const { eventsUrl } = calendarEl.dataset;
 
-    let calendar = new Calendar(calendarEl, {
+    const calendar = new Calendar(calendarEl, {
         defaultView: 'dayGridMonth',
         editable: true,
         selectable: true,
@@ -38,9 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.json())
                 .then((result) => {
                     if (result.length === 0) {
-                        $(".modal-body").html('Il n\'y a pas d\'horaires disponible pour ce jour');
+                        $('.modal-body').html('Il n\'y a pas d\'horaires disponible pour ce jour');
                     } else {
-                        console.log(info.date);
                         let hours = '';
                         result.forEach((item, index) => {
                             hours += `<a href="/booking/${calendarEl.getAttribute('service')}/${info.dateStr}/${result[index]}" class="btn btn-pink">${result[index]}</a>`;
