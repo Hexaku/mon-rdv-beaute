@@ -42,8 +42,25 @@ send in special_day table*/
     /**
      * @Route("/show", name="special_day_show")
      */
-    public function show(): Response
+    public function show(Request $request): Response
     {
-        return $this->render('special_day/show.html.twig');
+        /* To get contacts details of people interested by a special_day,
+send in special_day table*/
+        $contactDay = new contactDay();
+        $form = $this->createForm(contactDayType::class, $contactDay);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contactDay);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('special_day/show.html.twig', [
+            "form" => $form->createView(),
+            "contactDay" => $contactDay
+        ]);
     }
 }
