@@ -5,24 +5,22 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\ContactDay;
 use App\Entity\Newsletter;
-use App\Entity\Professional;
 use App\Entity\Service;
-use App\Entity\ServiceSearch;
 use App\Entity\Video;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Entity\Information;
 use App\Form\NewsletterType;
-use App\Form\ServiceSearchType;
 use App\Repository\ProfessionalRepository;
 use App\Repository\ServiceRepository;
 use App\Service\FormatYoutubeLink;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 class HomeController extends AbstractController
 {

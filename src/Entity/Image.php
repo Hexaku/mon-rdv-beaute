@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HomeImageRepository")
@@ -29,6 +30,7 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $fileName;
 
@@ -44,6 +46,7 @@ class Image
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $position;
 
