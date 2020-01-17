@@ -70,13 +70,6 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ path("admin_special_day")}}">
-                <i class="fas fa-fw fa-spa"></i>
-                <span>Journées bien-être</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
             <a class="nav-link" href="{{ path("admin_article")}}">
                 <i class="far fa-fw fa-edit"></i>
                 <span>Articles</span>
@@ -105,7 +98,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ path("admin_member") }}">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Membres</span>
             </a>
@@ -130,8 +123,31 @@
                     <h6 class="collapse-header">Personnalisables</h6>
                     <a class="collapse-item" href="{{ path("admin_home_image") }}">Images de catégories</a>
                     <a class="collapse-item" href="{{ path("admin_home_information") }}">Billets d'informations</a>
+                    <a class="collapse-item" href="{{ path("admin_home_video") }}">Vidéo de présentation</a>
                 </div>
             </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Prospects
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path("admin_special_day")}}">
+                <i class="fas fa-fw fa-spa"></i>
+                <span>Journées bien-être</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path("admin_newsletter") }}">
+                <i class="fas fa-fw fa-newspaper"></i>
+                <span>Newsletter</span>
+            </a>
         </li>
 
 
@@ -293,13 +309,13 @@
 
                     <div class="topbar-divider d-none d-sm-block"></div>
 
-                    <!-- Nav Item - User HomeInformation -->
+                    <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
                             <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                         </a>
-                        <!-- Dropdown - User HomeInformation -->
+                        <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>

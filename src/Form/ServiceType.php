@@ -28,7 +28,6 @@ class ServiceType extends AbstractType
                 "label" => "Type de prestation"
             ])
             ->add('duration', IntegerType::class, ["label" => "Durée (en minutes)"])
-            ->add('intervalTime', IntegerType::class, ["label" => "Délai de reprise (en minutes)"])
             ->add('imageFile', FileType::class, ['required' => false, "label" => "Image"])
             ->add('price', IntegerType::class, ["label" => "Prix"])
             ->add('servicePrices', CollectionType::class, [

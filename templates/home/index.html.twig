@@ -7,6 +7,7 @@
     <title>{% block title %}Mon Rendez-Vous Beauté{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('home') }}
+        {{ encore_entry_link_tags('autocomplete') }}
     {% endblock %}
 </head>
 <body>
@@ -266,17 +267,25 @@
             <div>
                 <h1 class="main-title">Prenez rendez-vous avec votre bien-être</h1>
             </div>
-            <form class="filter-form">
-                <input class="filter-input" type="text" placeholder="Toutes les prestations">
-                <input class="filter-input" type="text" placeholder="Toutes les dates">
-                <input class="filter-input" type="text" placeholder="Votre ville">
-                <button class="filter-submit" type="submit" >
-                    <span>Rechercher</span>
-                    <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
-                </button>
-            </form>
+            <div class="filter-container">
+                {{ form_start(formFilter, {'attr': {'class': 'filter-form'}}) }}
+                    <div style="width: 100%">
+                        {{ form_row(formFilter.serviceName, {'attr': {'class': 'filter-input filter-input-round'}}) }}
+                    </div>
+                    <div style="width: 100%">
+                        {{ form_row(formFilter.serviceLocation, {'attr': {'class': 'filter-input'}}) }}
+                    </div>
+                    <div style="width: 100%" class="div-submit">
+                        <button class="filter-submit">
+                            <span>Rechercher</span>
+                            <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
+                        </button>
+                    </div>
+                {{ form_end(formFilter) }}
+            </div>
         </div>
     </header>
+    {% include "flash_message.html.twig" %}
 
     <main class="main">
         <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
@@ -321,15 +330,26 @@
         </div>
         {% if information is empty %}
 
-        {% else %}
-            <div class="article-container">
-                <h1 class="article-title">{{ information.name|upper }}</h1>
-                <div class="text-center">
-                    <p>{{ information.content | raw }}</p>
+            {% else %}
+                <div class="article-container">
+                    <h1 class="article-title">{{ information.name|upper }}</h1>
+                    <div class="text-center">
+                        <p>{{ information.content | raw }}</p>
+                    </div>
                 </div>
-            </div>
         {% endif %}
 
+        {% if video is empty %}
+
+            {% else %}
+                <div class="video-wrapper">
+                    <h1 class="article-title">{{ video.title|upper }}</h1>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="{{ video.link }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+        {% endif %}
+        
         {% if article is empty %}
 
             {% else %}
@@ -363,12 +383,14 @@
             </div>
             <div class="footer-newsletter">
                 <h4 class="footer-newsletter-title">Notre Newsletter</h4>
-                <form class="footer-newsletter-form">
-                    <input class=" footer-newsletter-input" type="text" placeholder="Entrez votre e-mail">
-                    <button class="footer-newsletter-submit" type="submit" >
-                        <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
-                    </button>
-                </form>
+                <div class="footer-newsletter-form">
+                    {{ form_start(formNewsletter) }}
+                        {{ form_row((formNewsletter.email)) }}
+                        <button class="footer-newsletter-submit" type="submit" >
+                            <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
+                        </button>
+                    {{ form_end(formNewsletter) }}
+                </div>
             </div>
         </div>
         <div class="lower-footer">
@@ -386,7 +408,9 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('autocomplete') }}
 {% endblock %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script src="https://cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
@@ -406,6 +430,45 @@
         },2100)
     })
 </script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(event) {
+        /*$('#form_serviceName').on('input', function(event) {
+            console.log(event.target.value);
+        })*/
+
+        $('#form_serviceName').autocomplete({hint: false}, [
+            {
+                source: function (query, cb) {
+                    $.ajax({
+                        url: 'api\/filter\/services\/'+'?query='+query,
+                    }).then(function(data) {
+                        console.log(data);
+                        cb(data);
+                    })
+                },
+                displayKey: 'name',
+            }
+        ])
+
+        $('#form_serviceLocation').autocomplete({hint: false}, [
+            {
+                source: function (query, cb) {
+                    $.ajax({
+                        url: 'api\/filter\/professionals\/'+'?query='+query,
+                    }).then(function(data) {
+                        cb(data);
+                    })
+                },
+                displayKey: 'city',
+            }
+        ])
+    })
+</script>
+
+
 </body>
 </html>
 

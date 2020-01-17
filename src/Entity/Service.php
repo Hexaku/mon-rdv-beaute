@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
@@ -29,6 +30,7 @@ class Service
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Groups({"filter"})
      */
     private $name;
 
@@ -46,13 +48,6 @@ class Service
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank
-     * @Assert\PositiveOrZero
-     */
-    private $intervalTime;
 
     /**
      * @ORM\Column(type="integer")
@@ -207,19 +202,6 @@ class Service
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-
-    public function getIntervalTime()
-    {
-        return $this->intervalTime;
-    }
-
-    public function setIntervalTime($intervalTime): self
-    {
-        $this->intervalTime = $intervalTime;
 
         return $this;
     }

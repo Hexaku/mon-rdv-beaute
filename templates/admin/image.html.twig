@@ -14,7 +14,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    {% if home_images|length < 3  %}
+                    {% if images|length < 3  %}
                         <a href="{{  path("admin_home_image_new") }}"><button class="btn btn-success btn-add">Ajouter une image</button></a>
                     {% else %}
                     {% endif %}
@@ -26,21 +26,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for home_image in home_images %}
+                    {% for image in images %}
                         <tr>
                             <td>{{loop.index}}</td>
                             <td>
-                                <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{ home_image.position|position }}</a>
+                                <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{ image.position|position }}</a>
                                 <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                     <div class="bg-white py-2 collapse-inner rounded">
                                         <div class="flex-buttons">
-                                            <a class="collapse-item" href="{{   path('admin_home_image_edit', {'id': home_image.id}) }}"><button class="btn btn-warning">Modifier</button></a>
-                                            {{ include('admin/_home_image_delete_form.html.twig') }}
+                                            <a class="collapse-item" href="{{   path('admin_home_image_edit', {'id': image.id}) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            {{ include('admin/_image_delete_form.html.twig') }}
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td> <img src="{{ vich_uploader_asset(home_image, 'imageFile')}}" height="100px" width="auto"/> </td>
+                            <td> <img src="{{ vich_uploader_asset(image, 'imageFile')}}" height="100px" width="auto"/> </td>
 
                         </tr>
                     {% else %}
