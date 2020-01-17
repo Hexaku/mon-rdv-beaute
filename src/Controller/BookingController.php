@@ -33,6 +33,11 @@ class BookingController extends AbstractController
      */
     public function new(Request $request, Service $service, DateTime $date, $hour): Response
     {
+        /*
+         * $duration correspond à la durée du service réservé au quel on retire une minute
+         * afin de laisser afficher les créneaux suivant
+         * ex réservation à 17h00 pour une durée d'1h, le créneaux de 18h00 sera disponible
+         */
         $duration =($service->getDuration() * 60) - 60;
         $hourEnd = date('H:i', intval(strtotime($hour) + $duration));
         $booking = new Booking();
