@@ -14,7 +14,7 @@ class ServiceExtension extends AbstractExtension
         ];
     }
 
-    public function formatService($service)
+    public function formatService(int $service): string
     {
         switch ($service) {
             case 1:

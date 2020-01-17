@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Form\ImageType;
-use App\Repository\HomeImageRepository;
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +18,10 @@ class AdminHomeImageController extends AbstractController
     /**
      * @Route("/image", name="admin_home_image")
      */
-    public function image(HomeImageRepository $homeImageRepository): Response
+    public function image(ImageRepository $imageRepository): Response
     {
         return $this->render('admin/image.html.twig', [
-            'images' => $homeImageRepository->findAll()
+            'images' => $imageRepository->findAll()
         ]);
     }
 

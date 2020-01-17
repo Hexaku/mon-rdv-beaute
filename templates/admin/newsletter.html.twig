@@ -3,9 +3,6 @@
 {% block title %}Newsletter{% endblock %}
 
 {% block content %}
-    {# pour plus de lisibilité ajouter ici un lien pour rejoindre une nouvelle page.
-    C'est celle -ci qui affichera la liste des personnes intéressées par les journées bien-être
-   #}
     <h2 class="h2 mb-3 text-gray-800">Newsletter</h2>
 
     <!-- DataTales Example -->
@@ -16,7 +13,6 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <!--<a href="{#{{ path("admin_category_new") }}#}"><button class="btn btn-success btn-add">Ajouter une catégorie</button></a>-->
                     <thead>
                     <tr>
                         <th>Id</th>
@@ -38,7 +34,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 {% endblock %}

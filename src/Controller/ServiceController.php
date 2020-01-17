@@ -32,7 +32,6 @@ class ServiceController extends AbstractController
      */
     public function booking(Service $service): Response
     {
-        //dd($service->getProfessional()->getBookings()->toArray());
         return $this->render("service/booking.html.twig", [
             "service" => $service,
         ]);

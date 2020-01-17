@@ -7,8 +7,8 @@ use App\Entity\Newsletter;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Form\NewsletterType;
-use App\Repository\HomeImageRepository;
-use App\Repository\HomeInformationRepository;
+use App\Repository\ImageRepository;
+use App\Repository\InformationRepository;
 use App\Repository\ProfessionalRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\VideoRepository;
@@ -27,8 +27,8 @@ class HomeController extends AbstractController
     public function index(
         Request $request,
         FormatYoutubeLink $formatYoutubeLink,
-        HomeImageRepository $imageRepository,
-        HomeInformationRepository $informationRepo,
+        ImageRepository $imageRepository,
+        InformationRepository $informationRepo,
         VideoRepository $videoRepository
     ): Response {
         /* CREATING FILTER FORM */

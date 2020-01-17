@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HomeImageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  * @Vich\Uploadable()
  */
 class Image
@@ -30,7 +30,6 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $fileName;
 

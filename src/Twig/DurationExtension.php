@@ -14,7 +14,7 @@ class DurationExtension extends AbstractExtension
         ];
     }
 
-    public function formatDuration($duration)
+    public function formatDuration(int $duration): string
     {
         $hours = floor($duration / 60);
         $minutes = ($duration % 60);
