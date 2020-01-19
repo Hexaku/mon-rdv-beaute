@@ -38,12 +38,11 @@ class RegistrationController extends AbstractController
 
             $verifyUser = new UserVerify();
             $verifyUser->setUser($user);
-            $verifyUser->getUser();
             $verifyUser->setCreatedAt(new DateTime('now'));
             $verifyUser->setToken($tokenGenerator->generateToken());
 
-            $token = $verifyUser->getToken();
             $data = $form->getData();
+            $token = $verifyUser->getToken();
 
             $mailer->sendVerificationMail($data, $token);
 
@@ -75,6 +74,7 @@ class RegistrationController extends AbstractController
         $manager->flush();
 
         $this->addFlash("success", "Votre compte est validé ! Vous pouvez vous connecter");
+
         return $this->redirectToRoute('app_login');
     }
 }
