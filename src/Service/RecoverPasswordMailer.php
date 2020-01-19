@@ -18,7 +18,7 @@ class RecoverPasswordMailer
         $this->twig = $twig;
     }
 
-    public function sendRecoverMail($data, $token): void
+    public function sendRecoverMail(array $data, string $token): void
     {
         $mail = $data["email"];
 
