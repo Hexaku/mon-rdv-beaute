@@ -77,7 +77,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Cet email n\'existe pas');
+        } elseif (!$user->getIsValidated()) {
+            throw new CustomUserMessageAuthenticationException('Votre compte n\'est pas encore activé, 
+            veuillez valider votre email pour vous connecter');
         }
 
         return $user;

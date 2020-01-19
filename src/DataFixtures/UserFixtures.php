@@ -36,7 +36,8 @@ class UserFixtures extends Fixture
             ->setFirstname('Marie')
             ->setLastname('Dupont')
             ->setBirthdate(new DateTime('15-06-1960'))
-            ->setPhone('0123456789');
+            ->setPhone('0123456789')
+            ->setIsValidated(true);
 
         $manager->persist($user1);
 
@@ -50,7 +51,8 @@ class UserFixtures extends Fixture
             ->setFirstname('Thierry')
             ->setLastname('Dubois')
             ->setBirthdate(new DateTime('15-09-1960'))
-            ->setPhone('0123456789');
+            ->setPhone('0123456789')
+            ->setIsValidated(true);
 
         $manager->persist($user2);
 
@@ -64,7 +66,8 @@ class UserFixtures extends Fixture
             ->setFirstname('Azerty')
             ->setLastname('Ytreza')
             ->setBirthdate(new DateTime('15-06-1960'))
-            ->setPhone('0917836524');
+            ->setPhone('0917836524')
+            ->setIsValidated(true);
 
         $manager->persist($prestataire);
 
@@ -78,7 +81,8 @@ class UserFixtures extends Fixture
             ->setFirstname('Poiuyt')
             ->setLastname('Tyuiop')
             ->setBirthdate(new DateTime('15-06-1960'))
-            ->setPhone('0634253647');
+            ->setPhone('0634253647')
+            ->setIsValidated(true);
 
 
         $manager->persist($prestataire1);
@@ -93,7 +97,8 @@ class UserFixtures extends Fixture
             ->setFirstname('Wxcvbn')
             ->setLastname('Nbvcxw')
             ->setBirthdate(new DateTime('15-06-1960'))
-            ->setPhone('0735465833');
+            ->setPhone('0735465833')
+            ->setIsValidated(true);
 
         $manager->persist($admin);
 
