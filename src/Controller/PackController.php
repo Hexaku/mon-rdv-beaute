@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/pack")
+ * @Route("/special_day")
  */
 class PackController extends AbstractController
 {
@@ -20,7 +20,7 @@ class PackController extends AbstractController
      */
     public function index(PackRepository $packRepository): Response
     {
-        return $this->render('pack/index.html.twig', [
+        return $this->render('special_day/index.html.twig', [
             'packs' => $packRepository->findAll(),
         ]);
     }
@@ -30,8 +30,22 @@ class PackController extends AbstractController
      */
     public function show(Pack $pack): Response
     {
-        return $this->render('pack/show.html.twig', [
+        return $this->render('special_day/show.html.twig', [
             'pack' => $pack,
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="pack_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Pack $pack): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$pack->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($pack);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('pack_index');
     }
 }
