@@ -49,7 +49,7 @@ class UserVerify
         return $this;
     }
 
-    public function getToken(): ?string
+    public function getToken(): string
     {
         return $this->token;
     }
