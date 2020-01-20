@@ -26,6 +26,7 @@ class Dashboard
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $category;
 
