@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Pack;
 use App\Form\PackType;
 use App\Repository\PackRepository;
+use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +37,9 @@ class AdminPackController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = Slugify::generate($pack->getName());
+            $pack->setSlug($slug);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($pack);
             $entityManager->flush();

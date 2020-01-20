@@ -6,26 +6,15 @@
     <div class="container-flex">
         <p><a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-lg btn-primary">Plus d'infos</button></a></p>
         <p><a href="{{ path('special_day') }}"><button class="btn btn-lg btn-light">Retour</button></a></p>
-        <h2 class="title">Pack - {#{{ category.name }}#}</h2>
-        {#{% for service in services %}#}
-        <div class="card-service rounded">
-            <div class="card-service-left">
-                <img class="card-service-image" src="{#{{ vich_uploader_asset(service, 'imageFile') }}#}"/>
-                <p class="card-service-slogan hidden">{#{{ service.slogan }}#}</p>
-            </div>
-            <div class="card-service-separator"></div>
-            <div class="card-service-right">
-                <h3>Pack 2 prestations</h3>
-                <p>Prix : 49,00€</p>
-                <p>2 prestations aux choix parmi le massage, la coiffure et l'esthétique</p>
-                <!--<a href="{#{{ path('service_show', {'slug': service.slug}) }}" class="grey-link"><h3 class="card-service-name">{{ service.name }}</h3></a>-->
-                    <!--<p class="card-service-price">{{ service.duration|duration }} | {{ service.price }}#}</p>-->
-                <a href="{{ path('special_day_show') }}"><button class="btn btn-lg btn-pink">Détails</button></a>
-
-            </div>
-        </div>
-        {#{% endfor %}#}
     </div>
+
+    <div class="container-flex text-center">
+        <h1 class="title">{{ pack.name }}</h1>
+        <p class="service-price mb-3">{{ pack.price }}€</p>
+        <img src="{#{{ vich_uploader_asset(service, 'imageFile') }}#}" class="img-fluid rounded mb-5 mt-5"/>
+        <p class="service-description mb-4">{{ pack.description }}</p>
+    </div>
+
     <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -35,7 +24,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
                 </div>
                 <div>
-                    {{ include('special_day/_modal_form.html.twig') }}
+                    {#{{ include('special_day/_modal_form.html.twig') }}#}
                 </div>
             </div>
         </div>

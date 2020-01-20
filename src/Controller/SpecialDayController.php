@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 use App\Entity\ContactDay;
+use App\Entity\Pack;
 use App\Form\ContactDayType;
+use App\Repository\PackRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class SpecialDayController extends AbstractController
 {
     /**
-     * @Route("/", name="special_day")
+     * @Route("/", name="special_day", methods={"GET"})
      */
-    public function index(Request $request): Response
+    public function index(Request $request, PackRepository $packRepository): Response
     {
         /* To get contacts details of people interested by a special_day,
 send in special_day table*/
@@ -35,32 +37,18 @@ send in special_day table*/
         }
         return $this->render("special_day/index.html.twig", [
             "form" => $form->createView(),
-            "contactDay" => $contactDay
+            "contactDay" => $contactDay,
+            "packs" => $packRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/show", name="special_day_show")
+     * @Route("/{slug}", name="special_day_pack")
      */
-    public function show(Request $request): Response
+    public function showPack(Pack $pack): Response
     {
-        /* To get contacts details of people interested by a special_day,
-send in special_day table*/
-        $contactDay = new contactDay();
-        $form = $this->createForm(contactDayType::class, $contactDay);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($contactDay);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->render('special_day/show.html.twig', [
-            "form" => $form->createView(),
-            "contactDay" => $contactDay
+        return $this->render("special_day/show.html.twig", [
+            "pack" => $pack,
         ]);
     }
 }
