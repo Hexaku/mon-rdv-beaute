@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Dashboard;
 use App\Form\DashboardType;
+use App\Repository\BookingRepository;
 use App\Repository\DashboardRepository;
 use App\Repository\ProfessionalRepository;
 use App\Repository\UserRepository;
@@ -26,12 +27,14 @@ class AdminDashboardController extends AbstractController
         DashboardRepository $dashboardRepository,
         ServiceRepository $serviceRepository,
         ProfessionalRepository $professionalRepo,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        BookingRepository $bookingRepository
     ): Response {
 
         $services = $serviceRepository->findAllServices();
         $professionals = $professionalRepo->findAllProfessionals();
         $members = $userRepository->findAllUsers();
+        $customers = $bookingRepository->findAllCustomers();
 
         $dashboard = new Dashboard();
         $form = $this->createForm(DashboardType::class, $dashboard);
@@ -49,6 +52,7 @@ class AdminDashboardController extends AbstractController
             "services" => $services,
             "professionals" => $professionals,
             "members" => $members,
+            "customers" => $customers,
             'dashboard' => $dashboard,
             'dashboards' => $dashboardRepository->findAll(),
             'form' => $form->createView(),
