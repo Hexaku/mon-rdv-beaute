@@ -1,0 +1,6 @@
+<div>
+    <p>Bonjour !</p>
+    <p>L'utilisateur {{ booking.user.firstname }} {{ booking.user.lastname }}
+        a réservé le service {{ booking.service.name }} avec {{ booking.professional.name }} le {{ booking.date | date('Y/m/d') }}
+        à {{ booking.hour }} vous pouvez le joindre au {{ booking.user.phone }}</p>
+</div>

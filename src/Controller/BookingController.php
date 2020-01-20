@@ -6,6 +6,7 @@ use App\Entity\Booking;
 use App\Entity\Service;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
+use App\Service\MailerSender;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +31,13 @@ class BookingController extends AbstractController
     /**
      * @Route("/{id}/{date}/{hour}/new", name="booking_new", methods={"GET","POST"})
      */
-    public function new(Service $service, DateTime $date, $hour): Response
+    public function new(MailerSender $mailerSender, Service $service, DateTime $date, $hour): Response
     {
         /*
          * $duration is service duration minus 1 minute to show next time intervals
          * example : booking at 5PM (17h00) for 1 hour = the date interval for 6PM (18h00) will be available
          */
+
         $duration =($service->getDuration() * 60) - 60;
         $hourEnd = date('H:i', intval(strtotime($hour) + $duration));
         $booking = new Booking();
@@ -46,6 +48,7 @@ class BookingController extends AbstractController
             ->setHourEnd($hourEnd)
             ->setService($service);
 
+        $mailerSender->recapMail($booking);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($booking);
         $entityManager->flush();
@@ -109,13 +112,6 @@ class BookingController extends AbstractController
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($booking);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('booking_index');
-        }
 
         return $this->render('booking/recap.html.twig', [
             'service' => $service,

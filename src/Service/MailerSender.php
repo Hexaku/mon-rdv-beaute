@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Booking;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
@@ -31,6 +32,36 @@ class MailerSender
                 "firstName" => $data["firstName"],
                 "lastName" => $data["lastName"],
                 "email" => $data["email"],
+            ]));
+
+        $this->mailer->send($email);
+    }
+
+    public function recapMail(Booking $booking): void
+    {
+        $mail = $_ENV['MAILER_ADMIN'];
+
+        $email = (new Email())
+            ->from($mail)
+            ->to($mail)
+            ->subject('Recapitulatif de la reservation!')
+            ->html($this->twig->render("booking/mail.html.twig", [
+                'booking' => $booking,
+            ]));
+
+        $this->mailer->send($email);
+    }
+
+    public function recapMailClient(Booking $booking, $email): void
+    {
+        $mail = $_ENV['MAILER_ADMIN'];
+
+        $mail = (new Email())
+            ->from($mail)
+            ->to($mail)
+            ->subject('Recapitulatif de vôtre réservation !')
+            ->html($this->twig->render("booking/mail.html.twig", [
+                'booking' => $booking,
             ]));
 
         $this->mailer->send($email);
