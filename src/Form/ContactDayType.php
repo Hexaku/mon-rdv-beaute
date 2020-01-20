@@ -2,12 +2,10 @@
 
 namespace App\Form;
 
-//use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -28,8 +26,14 @@ class ContactDayType extends AbstractType
                 "required" => true,
                 "constraints" => [new NotBlank()]
             ])
-            ->add('Phone', TextType::class, ["label" => "Téléphone (facultatif)"])
-            ->add('Comment', TextareaType::class, ["label" => "Message (facultatif)"])
+            ->add('Phone', TextType::class, [
+                "label" => "Téléphone (facultatif)",
+                "required" => false,
+                ])
+            ->add('Comment', TextareaType::class, [
+                "label" => "Message (facultatif)",
+                "required" => false,
+                ])
         ;
     }
 

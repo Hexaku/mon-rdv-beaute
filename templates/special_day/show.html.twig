@@ -10,9 +10,9 @@
 
     <div class="container-flex text-center">
         <h1 class="title">{{ pack.name }}</h1>
-        <p class="service-price mb-3">{{ pack.price }}€</p>
+        <h3 class="service-price mb-3">{{ pack.price }}€</h3>
         <img src="{#{{ vich_uploader_asset(service, 'imageFile') }}#}" class="img-fluid rounded mb-5 mt-5"/>
-        <p class="service-description mb-4">{{ pack.description }}</p>
+        <h4 class="service-description mb-4">{{ pack.description }}</h4>
     </div>
 
     <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
@@ -24,7 +24,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
                 </div>
                 <div>
-                    {#{{ include('special_day/_modal_form.html.twig') }}#}
+                    {{ include('special_day/_modal_form.html.twig') }}
                 </div>
             </div>
         </div>

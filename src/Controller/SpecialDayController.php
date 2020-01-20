@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SpecialDayController extends AbstractController
 {
     /**
-     * @Route("/", name="special_day", methods={"GET"})
+     * @Route("/", name="special_day", methods={"POST", "GET"})
      */
     public function index(Request $request, PackRepository $packRepository): Response
     {
@@ -43,12 +43,27 @@ send in special_day table*/
     }
 
     /**
-     * @Route("/{slug}", name="special_day_pack")
+     * @Route("/{slug}", name="special_day_pack", methods={"POST", "GET"})
      */
-    public function showPack(Pack $pack): Response
+    public function showPack(Request $request, Pack $pack): Response
     {
+        /* To get contacts details of people interested by a special_day,
+send in contact_day table*/
+        $contactDay = new contactDay();
+        $form = $this->createForm(contactDayType::class, $contactDay);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contactDay);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render("special_day/show.html.twig", [
             "pack" => $pack,
+            "form" => $form->createView(),
         ]);
     }
 }

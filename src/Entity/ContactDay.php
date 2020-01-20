@@ -28,12 +28,12 @@ class ContactDay
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\NotBlank
      */
     private $phone;
 
