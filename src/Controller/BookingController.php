@@ -7,7 +7,6 @@ use App\Entity\Service;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use DateTime;
-use DateInterval;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +30,7 @@ class BookingController extends AbstractController
     /**
      * @Route("/{id}/{date}/{hour}/new", name="booking_new", methods={"GET","POST"})
      */
-    public function new(Request $request, Service $service, DateTime $date, $hour): Response
+    public function new(Service $service, DateTime $date, $hour): Response
     {
         /*
          * $duration is service duration minus 1 minute to show next time intervals

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
-use App\Service\Mailer;
 use App\Service\MailerSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

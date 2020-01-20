@@ -153,13 +153,13 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getConfirmPassword()
+    public function getConfirmPassword(): string
     {
         return $this->confirmPassword;
     }
 
 
-    public function setConfirmPassword($confirmPassword)
+    public function setConfirmPassword(string $confirmPassword): self
     {
         $this->confirmPassword = $confirmPassword;
         return $this;
