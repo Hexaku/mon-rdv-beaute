@@ -14,7 +14,7 @@ class Dashboard
         1 => "Prestations",
         2 => "Professionnels",
         3 => "Membres",
-        4 => "Clients",
+        4 => "Réservations",
     ];
 
     /**
