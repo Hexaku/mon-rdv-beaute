@@ -37,6 +37,7 @@ class AdminPackController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //create a slug with the name of the pack
             $slug = Slugify::generate($pack->getName());
             $pack->setSlug($slug);
 
