@@ -1,23 +1,4 @@
-# Project 3 - Starter Kit - Symfony 4.4.*
-
-![Wild Code School](https://wildcodeschool.fr/wp-content/uploads/2019/01/logo_pink_176x60.png)
-
-This starter kit is here to easily start a repository for your students.
-
-It's symfony website-skeleton project with some additional tools to validate code standards.
-
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
-  
-    * PHP_CodeSniffer to check PSR2 
-    * PHPStan will check PHP recommendation
-     
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
-
-* Travis CI, as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
-
-    * Tasks to check if vendor, .idea, env.local are not versionned,
-    * PHP_CodeSniffer to check PSR2,
-    * PHPStan will check PHP recommendation.
+# Mon RDV Beauté
 
 ## Getting Started for Projects
 
@@ -45,16 +26,9 @@ It's symfony website-skeleton project with some additional tools to validate cod
 3. Run `./bin/eslint assets/js` to launch ESLint JS linter
 3. Run `./bin/sass-lint -c sass-linter.yml` to launch Sass-lint SASS/CSS linter
 
-### Windows Users
-
-If you develop on Windows, you should edit you git configuration to change your end of line rules with this command :
-
-`git config --global core.autocrlf true`
-
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
-
 
 ## Built With
 
@@ -71,12 +45,12 @@ Add additional notes about how to deploy this on a live system
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-
 ## Authors
 
-Wild Code School trainers team
+- Béatrice BEAUPERIN
+- Alexandre BARRÉ
+- Benjamin DÉSIGNÉ
+- Axel REDOIS
 
 ## License
 
@@ -101,6 +75,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Acknowledgments
-
