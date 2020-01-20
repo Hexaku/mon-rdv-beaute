@@ -20,7 +20,7 @@ Les journées bien-être
                     <h3>{{ pack.name }}</h3>
                     <!--<a href="{#{{ path('service_show', {'slug': service.slug}) }}#}" class="grey-link"><h3 class="card-service-name">{{ pack.name }}</h3></a>-->
                     <p class="card-service-price">{{ pack.description }} | {{ pack.price }} €</p>
-                    <a href="{{ path('special_day_show') }}"><button class="btn btn-lg btn-pink">Détails</button></a>
+                    <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}"><button class="btn btn-lg btn-pink">Détails</button></a>
 
                 </div>
             </div>
