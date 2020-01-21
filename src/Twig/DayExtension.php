@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -15,7 +14,7 @@ class DayExtension extends AbstractExtension
         ];
     }
 
-    public function formatDay($day)
+    public function formatDay(int $day): string
     {
         switch ($day) {
             case 1:

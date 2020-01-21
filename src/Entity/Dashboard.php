@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DashboardRepository")
@@ -13,7 +14,7 @@ class Dashboard
         1 => "Prestations",
         2 => "Professionnels",
         3 => "Membres",
-        4 => "Clients",
+        4 => "Réservations",
     ];
 
     /**
@@ -25,11 +26,14 @@ class Dashboard
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $category;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
+     * @Assert\NotBlank
      */
     private $value;
 

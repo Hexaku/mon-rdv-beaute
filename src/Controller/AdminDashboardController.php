@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Dashboard;
-use App\Entity\Professional;
-use App\Entity\Service;
-use App\Entity\User;
 use App\Form\DashboardType;
+use App\Repository\BookingRepository;
 use App\Repository\DashboardRepository;
+use App\Repository\ProfessionalRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ServiceRepository;
 
 /**
  * @Route("/admin")
@@ -21,16 +22,19 @@ class AdminDashboardController extends AbstractController
     /**
      * @Route("/", name="admin_index", methods={"GET","POST"})
      */
-    public function index(Request $request, DashboardRepository $dashboardRepository): Response
-    {
-        $repositoryService = $this->getDoctrine()->getRepository(Service::class);
-        $services = $repositoryService->findAllServices();
+    public function index(
+        Request $request,
+        DashboardRepository $dashboardRepository,
+        ServiceRepository $serviceRepository,
+        ProfessionalRepository $professionalRepo,
+        UserRepository $userRepository,
+        BookingRepository $bookingRepository
+    ): Response {
 
-        $repoProfessional = $this->getDoctrine()->getRepository(Professional::class);
-        $professionals = $repoProfessional->findAllProfessionals();
-
-        $repoMembers = $this->getDoctrine()->getRepository(User::class);
-        $members = $repoMembers->findAllUsers();
+        $services = $serviceRepository->findAllServices();
+        $professionals = $professionalRepo->findAllProfessionals();
+        $members = $userRepository->findAllUsers();
+        $customers = $bookingRepository->findAllCustomers();
 
         $dashboard = new Dashboard();
         $form = $this->createForm(DashboardType::class, $dashboard);
@@ -48,6 +52,7 @@ class AdminDashboardController extends AbstractController
             "services" => $services,
             "professionals" => $professionals,
             "members" => $members,
+            "customers" => $customers,
             'dashboard' => $dashboard,
             'dashboards' => $dashboardRepository->findAll(),
             'form' => $form->createView(),

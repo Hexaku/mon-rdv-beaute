@@ -4,7 +4,7 @@ namespace App\Service;
 
 class Slugify
 {
-    public static function generate($input)
+    public static function generate(string $input): ?string
     {
         $input = strtolower($input);
 

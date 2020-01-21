@@ -51,4 +51,15 @@ class ServiceRepository extends ServiceEntityRepository
         ;
         return $query;
     }
+
+    public function findAllMatching(string $query, int $limit = 5)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.name LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

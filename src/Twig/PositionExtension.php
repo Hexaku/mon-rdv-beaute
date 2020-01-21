@@ -14,7 +14,7 @@ class PositionExtension extends AbstractExtension
         ];
     }
 
-    public function formatPosition($position)
+    public function formatPosition(int $position): string
     {
         switch ($position) {
             case 1:

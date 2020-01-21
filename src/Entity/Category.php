@@ -5,10 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @Vich\Uploadable()
  */
 class Category
 {
@@ -20,8 +23,21 @@ class Category
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
+     */
+    private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="categories_image", fileNameProperty="filename")
+     * @Assert\NotBlank
+     */
+    private $imageFile;
+
+    /**
      * @ORM\Column(type="string", length=150)
      * @Assert\NotBlank
+     * @Assert\Length(max="150")
      */
     private $name;
 
@@ -34,6 +50,29 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="category")
      */
     private $services;
+
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): Category
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile): Category
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
 
     public function __construct()
     {
@@ -56,10 +95,7 @@ class Category
 
         return $this;
     }
-
-    /**
-     * @return Collection|Service[]
-     */
+    
     public function getServices(): Collection
     {
         return $this->services;

@@ -19,6 +19,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
+                        <th>Image</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,7 @@
                                     </div>
                                 </div>
                             </td>
+                            <td> <img src="{{ vich_uploader_asset(category, 'imageFile')}}" height="100px" width="auto"/> </td>
                         </tr>
                     {% else %}
                         <div class="alert alert-primary alert-dismissible" role="alert">
@@ -46,7 +48,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 

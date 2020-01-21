@@ -24,6 +24,7 @@ Encore
     .addEntry('home', './assets/scss/home.scss')
     .addEntry('admin', './assets/scss/admin.scss')
     .addEntry('calendar', './assets/js/calendar.js')
+    .addEntry('autocomplete', './assets/js/autocomplete.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     .copyFiles([

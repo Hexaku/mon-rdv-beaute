@@ -35,4 +35,5 @@ yarn-error.log
 
 ###> upload/images ###
 /public/images/
+/public/uploads/
 ###< upload/images ###

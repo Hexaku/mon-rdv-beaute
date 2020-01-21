@@ -7,6 +7,7 @@
     <title>{% block title %}Mon Rendez-Vous Beauté{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('home') }}
+        {{ encore_entry_link_tags('autocomplete') }}
     {% endblock %}
 </head>
 <body>
@@ -284,6 +285,7 @@
             </div>
         </div>
     </header>
+    {% include "flash_message.html.twig" %}
 
     <main class="main">
         <div class="categories-container">
@@ -314,15 +316,26 @@
         </div>
         {% if information is empty %}
 
-        {% else %}
-            <div class="article-container">
-                <h1 class="article-title">{{ information.name|upper }}</h1>
-                <div class="text-center">
-                    <p>{{ information.content | raw }}</p>
+            {% else %}
+                <div class="article-container">
+                    <h1 class="article-title">{{ information.name|upper }}</h1>
+                    <div class="text-center">
+                        <p>{{ information.content | raw }}</p>
+                    </div>
                 </div>
-            </div>
         {% endif %}
 
+        {% if video is empty %}
+
+            {% else %}
+                <div class="video-wrapper">
+                    <h1 class="article-title">{{ video.title|upper }}</h1>
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="{{ video.link }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+        {% endif %}
+        
         {% if article is empty %}
 
             {% else %}
@@ -356,12 +369,14 @@
             </div>
             <div class="footer-newsletter">
                 <h4 class="footer-newsletter-title">Notre Newsletter</h4>
-                <form class="footer-newsletter-form">
-                    <input class=" footer-newsletter-input" type="text" placeholder="Entrez votre e-mail">
-                    <button class="footer-newsletter-submit" type="submit" >
-                        <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
-                    </button>
-                </form>
+                <div class="footer-newsletter-form">
+                    {{ form_start(formNewsletter) }}
+                        {{ form_row((formNewsletter.email)) }}
+                        <button class="footer-newsletter-submit" type="submit" >
+                            <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
+                        </button>
+                    {{ form_end(formNewsletter) }}
+                </div>
             </div>
         </div>
         <div class="lower-footer">
@@ -379,26 +394,72 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('autocomplete') }}
 {% endblock %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 <script src="https://cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
 <script>
     $(function() {
-
         $(".petal").velocity(
             "transition.expandIn",
             {stagger: 25, drag:true, duration:2000}
         ).delay(4000)
-
     });
-    window.addEventListener("load", function () {
-        const loader = document.querySelector(".wrap");
-        window.setInterval(function(){
-            loader.className += " hidden";
-        },2100)
-    })
+
+    function Preloader() {
+        window.addEventListener("load", function () {
+            const loader = document.querySelector(".wrap");
+            window.setInterval(function(){
+                loader.className += " hidden";
+            },1500)
+        })
+    }
+
+    if (!sessionStorage.getItem('doNotShow')) {
+        sessionStorage.setItem("doNotShow", true);
+        Preloader();
+    } else {
+        $ ('.wrap').hide();
+    }
+
+
 </script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(event) {
+
+        $('#form_serviceName').autocomplete({hint: false}, [
+            {
+                source: function (query, cb) {
+                    $.ajax({
+                        url: 'api\/filter\/services\/'+'?query='+query,
+                    }).then(function(data) {
+                        console.log(data);
+                        cb(data);
+                    })
+                },
+                displayKey: 'name',
+            }
+        ]);
+
+        $('#form_serviceLocation').autocomplete({hint: false}, [
+            {
+                source: function (query, cb) {
+                    $.ajax({
+                        url: 'api\/filter\/professionals\/'+'?query='+query,
+                    }).then(function(data) {
+                        cb(data);
+                    })
+                },
+                displayKey: 'city',
+            }
+        ]);
+    });
+</script>
+
 </body>
 </html>
-

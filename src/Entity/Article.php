@@ -26,26 +26,9 @@ class Article
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Assert\Length(max="100")
      */
     private $title;
-
-    /**
-     * @return mixed
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param mixed $slug
-     * @return Article
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
 
     /**
      * @ORM\Column(type="text")
@@ -67,6 +50,17 @@ class Article
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+        return $this;
     }
 
     public function getTitle(): ?string

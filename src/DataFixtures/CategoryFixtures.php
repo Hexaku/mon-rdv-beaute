@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\DataFixtures;
 
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CategoryFixtures extends Fixture
 {
@@ -15,7 +13,8 @@ class CategoryFixtures extends Fixture
         $category = new  Category();
 
         $category->setName('Coiffure')
-            ->setSlug('coiffure');
+            ->setSlug('coiffure')
+            ->setFilename('5e217337174ed958691177.png');
 
         $this->addReference('coiffure', $category);
         $manager->persist($category);
@@ -23,7 +22,8 @@ class CategoryFixtures extends Fixture
         $category = new  Category();
 
         $category->setName('Massage')
-            ->setSlug('massage');
+            ->setSlug('massage')
+            ->setFilename('5e217337174ed958691177.png');
 
         $this->addReference('massage', $category);
         $manager->persist($category);
@@ -31,7 +31,8 @@ class CategoryFixtures extends Fixture
         $category = new  Category();
 
         $category->setName('Esthétique')
-            ->setSlug('esthetique');
+            ->setSlug('esthetique')
+            ->setFilename('5e217337174ed958691177.png');
 
         $this->addReference('esthetique', $category);
         $manager->persist($category);

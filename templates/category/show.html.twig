@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container-flex">
         <h2 class="title">Nos prestations - {{ category.name }}</h2>
-        {% for service in services %}
+        {% for service in category.services %}
         <div class="card-service rounded">
             <div class="card-service-left">
                 <img class="card-service-image" src="{{ vich_uploader_asset(service, 'imageFile') }}"/>

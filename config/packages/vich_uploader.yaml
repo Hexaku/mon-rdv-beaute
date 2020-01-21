@@ -17,4 +17,6 @@ vich_uploader:
         pack_image:
             uri_prefix: /images/pack
             upload_destination: '%kernel.project_dir%/public/images/pack'
-            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        categories_image:
+            uri_prefix: /images/categories
+            upload_destination: '%kernel.project_dir%/public/images/categories'

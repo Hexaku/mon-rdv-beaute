@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
@@ -29,6 +30,8 @@ class Service
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Assert\Length(max="100")
+     * @Groups({"filter"})
      */
     private $name;
 
@@ -103,36 +106,22 @@ class Service
      */
     private $bookings;
 
-    /**
-     * @return mixed
-     */
     public function getFilename()
     {
         return $this->filename;
     }
 
-    /**
-     * @param mixed $filename
-     * @return Service
-     */
     public function setFilename($filename)
     {
         $this->filename = $filename;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getImageFile()
     {
         return $this->imageFile;
     }
 
-    /**
-     * @param mixed $imageFile
-     * @return Service
-     */
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
@@ -162,19 +151,12 @@ class Service
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     * @return Service
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
         return $this;
@@ -240,18 +222,11 @@ class Service
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getServiceType()
     {
         return $this->serviceType;
     }
 
-    /**
-     * @param mixed $serviceType
-     * @return Service
-     */
     public function setServiceType($serviceType)
     {
         $this->serviceType = $serviceType;
@@ -270,9 +245,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|ServicePrices[]
-     */
     public function getServicePrices(): Collection
     {
         return $this->servicePrices;
@@ -301,9 +273,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|Booking[]
-     */
     public function getBookings(): Collection
     {
         return $this->bookings;
