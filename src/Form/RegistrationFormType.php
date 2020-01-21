@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,9 +25,15 @@ class RegistrationFormType extends AbstractType
             ->add("lastname", TextType::class, ["label" => "Nom"])
             ->add("birthdate", BirthdayType::class, ["label" => "Date de naissance"])
             ->add("phone", TextType::class, ["label" => "Téléphone"])
+            ->add("adress", TextType::class, ["label" => "Adresse"])
+            ->add("city", TextType::class, ["label" => "Ville"])
             ->add('email', EmailType::class)
-            ->add('password', PasswordType::class, ["label" => "Mot de passe"])
-            ->add('confirmPassword', PasswordType::class, ['label' => 'Confirmez votre mot de passe'])
+            ->add('password', RepeatedType::class, [
+                "label" => "Mot de passe",
+                "type" => PasswordType::class,
+                "first_options" => ["label" => "Mot de passe"],
+                "second_options" => ["label" => "Confirmez le mot de passe"]
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 "label" => "J'accepte les conditions générales d'utilisation",

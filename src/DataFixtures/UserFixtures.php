@@ -38,7 +38,8 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0123456789')
             ->setIsValidated(true)
-            ->setUniqid(uniqid());
+            ->setAdress("1 rue Chaptal")
+            ->setCity("Nantes");
 
         $manager->persist($user1);
 
@@ -54,7 +55,8 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-09-1960'))
             ->setPhone('0123456789')
             ->setIsValidated(true)
-            ->setUniqid(uniqid());
+            ->setAdress("5 rue Lambray")
+            ->setCity("Carquefou");
 
         $manager->persist($user2);
 
@@ -70,7 +72,8 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0917836524')
             ->setIsValidated(true)
-            ->setUniqid(uniqid());
+            ->setAdress("14 rue des Louars")
+            ->setCity("Nantes");
 
         $manager->persist($prestataire);
 
@@ -86,7 +89,8 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0634253647')
             ->setIsValidated(true)
-            ->setUniqid(uniqid());
+            ->setAdress("4bis quai François Mitterand")
+            ->setCity("Nantes");
 
 
         $manager->persist($prestataire1);
@@ -103,7 +107,8 @@ class UserFixtures extends Fixture
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0735465833')
             ->setIsValidated(true)
-            ->setUniqid(uniqid());
+            ->setAdress("8 rue Graslin")
+            ->setCity("Nantes");
 
         $manager->persist($admin);
 

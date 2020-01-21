@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ForgetPasswordType;
 use App\Form\RegistrationFormType;
+use App\Repository\BookingRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,37 +16,41 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile/{uniqid}", name="profile_index")
+     * @Route("/profile/{id}", name="profile_index")
      */
     public function profile(User $user): Response
     {
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute("home");
+        }
         return $this->render("profile/index.html.twig", [
             "user" => $user,
         ]);
     }
 
     /**
-     * @Route("/profile/{uniqid}/edit", name="profile_edit")
+     * @Route("/profile/{id}/edit", name="profile_edit")
      */
-    public function profileEdit(Request $request): Response
+    public function profileEdit(Request $request, ObjectManager $manager, User $user): Response
     {
-        $user = new User();
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute("home");
+        }
+
         $form = $this->createForm(RegistrationFormType::class, $user)
             ->remove("birthdate")
             ->remove("email")
             ->remove("password")
-            ->remove("confirmPassword")
             ->remove("agreeTerms");
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
             $this->addFlash("success", "Vos informations ont bien été mis à jour");
 
-            return $this->redirectToRoute('profile_index');
+            return $this->redirectToRoute('profile_index', ['id' => $user->getId()]);
         }
 
         return $this->render('profile/edit.html.twig', [
@@ -55,14 +60,18 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/{uniqid}/password/edit", name="profile_password_edit")
+     * @Route("/profile/{id}/password/edit", name="profile_password_edit")
      */
     public function profilePasswordEdit(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        ObjectManager $manager
+        ObjectManager $manager,
+        User $user
     ): Response {
-        $user = new User();
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute("home");
+        }
+
         $form = $this->createForm(ForgetPasswordType::class, $user);
         $form->handleRequest($request);
 
@@ -75,12 +84,26 @@ class ProfileController extends AbstractController
 
             $this->addFlash("success", "Vous avez bien modifié votre mot de passe");
 
-            return $this->redirectToRoute('profile_index');
+            return $this->redirectToRoute('profile_index', ['id' => $user->getId()]);
         }
 
         return $this->render('profile/edit_password.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/profile/{id}/booking", name="profile_booking")
+     */
+    public function profileBookings(User $user, BookingRepository $bookingRepository): Response
+    {
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute("home");
+        }
+
+        return $this->render("profile/booking.html.twig", [
+            "bookings" => $bookingRepository->findAll(),
         ]);
     }
 }

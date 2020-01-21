@@ -55,6 +55,20 @@ class User implements UserInterface
     private $phone;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max="255")
+     */
+    private $adress;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max="255")
+     */
+    private $city;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank
      * @Assert\Email(message="Cette adresse mail n'est pas valide")
@@ -70,12 +84,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe doivent être identiques")
-     */
-    private $confirmPassword;
-
-    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -89,11 +97,6 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isValidated = false;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $uniqid;
 
     public function __construct()
     {
@@ -278,14 +281,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUniqid(): ?string
+    public function getAdress(): ?string
     {
-        return $this->uniqid;
+        return $this->adress;
     }
 
-    public function setUniqid(string $uniqid): self
+    public function setAdress(string $adress): self
     {
-        $this->uniqid = $uniqid;
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
