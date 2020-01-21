@@ -40,7 +40,8 @@
                             </td>
                             <td>{{pack.price}} €</td>
                             <td>{{pack.description|slice(0, 250)}}...</td>
-                            <!--<td><img src="{#{{ vich_uploader_asset(service, 'imageFile') }}#}" alt="service image" height="100px" width="auto"/></td>-->
+                            <!-- Vich uses to upload a photo for a pack -->
+                            <td><img src="{{ vich_uploader_asset(pack, 'imageFile') }}" alt="pack image" height="100px" width="auto"/></td>
                         </tr>
                     {% else %}
                         <div class="alert alert-primary alert-dismissible" role="alert">

@@ -11,7 +11,8 @@
     <div class="container-flex text-center">
         <h1 class="title">{{ pack.name }}</h1>
         <h3 class="service-price mb-3">{{ pack.price }}€</h3>
-        <img src="{#{{ vich_uploader_asset(service, 'imageFile') }}#}" class="img-fluid rounded mb-5 mt-5"/>
+        <!-- Vich uses to upload a photo for a pack -->
+        <img src="{{ vich_uploader_asset(pack, 'imageFile') }}" class="img-fluid rounded mb-5 mt-5"/>
         <h4 class="service-description mb-4">{{ pack.description }}</h4>
     </div>
 

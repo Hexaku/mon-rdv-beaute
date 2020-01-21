@@ -12,7 +12,8 @@ Les journées bien-être
         {% for pack in packs %}
             <div class="card-service rounded">
                 <div class="card-service-left">
-                    <img class="card-service-image" src="{#{{ vich_uploader_asset(service, 'imageFile') }}#}"/>
+                    <!-- Vich uses to upload a photo for a pack -->
+                    <img class="card-service-image" src="{{ vich_uploader_asset(pack, 'imageFile') }}"/>
                     <p class="card-service-slogan hidden">{#{{ service.slogan }}#}</p>
                 </div>
                 <div class="card-service-separator"></div>
