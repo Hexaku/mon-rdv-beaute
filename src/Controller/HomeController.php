@@ -51,20 +51,6 @@ class HomeController extends AbstractController
             ->getForm()
         ;
 
-        /* To get contacts details of people interested by a special_day,
-        send in special_day table*/
-        $contactDay = new contactDay();
-        $form = $this->createForm(contactDayType::class, $contactDay);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($contactDay);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('home');
-        }
-
         /* GET IMAGES CARD POSITIONS CARD */
         $positions = $imageRepository->findAll();
 
@@ -103,8 +89,6 @@ class HomeController extends AbstractController
         }
 
         return $this->render("home/index.html.twig", [
-            "form" => $form->createView(),
-            "contactDay" => $contactDay,
             "article" => $article,
             "information" => $information,
             "video" => $video,
