@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ContactDay;
 use App\Entity\Newsletter;
+use App\Entity\User;
 use App\Form\ContactDayType;
 use App\Entity\Article;
 use App\Form\NewsletterType;
