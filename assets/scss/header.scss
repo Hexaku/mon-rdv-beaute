@@ -161,6 +161,12 @@ a:hover {
     display: none;
 }
 
+.icon-mobile {
+    display: block;
+    color: white;
+    margin-right: 10px;
+}
+
 /* TABLET AND DESKTOP PART */
 @media only screen and(min-width: 500px) {
     .topbar-main-logo {

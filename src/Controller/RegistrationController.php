@@ -35,6 +35,7 @@ class RegistrationController extends AbstractController
             $hash = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setRoles(['ROLE_USER']);
+            $user->setUniqid(uniqid());
 
             $verifyUser = new UserVerify();
             $verifyUser->setUser($user);

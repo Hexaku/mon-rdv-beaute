@@ -90,6 +90,11 @@ class User implements UserInterface
      */
     private $isValidated = false;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $uniqid;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -269,6 +274,18 @@ class User implements UserInterface
     public function setIsValidated(bool $isValidated): self
     {
         $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    public function getUniqid(): ?string
+    {
+        return $this->uniqid;
+    }
+
+    public function setUniqid(string $uniqid): self
+    {
+        $this->uniqid = $uniqid;
 
         return $this;
     }

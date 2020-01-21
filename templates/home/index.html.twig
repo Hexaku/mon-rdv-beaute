@@ -221,9 +221,11 @@
                     <img class="topbar-connexion-logo" id="connexion" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
                     <div class="topbar-container-connexion-flex">
                         {% if app.user %}
-                            <span class="account">{{ app.user.email }}</span>
+                            <span class="account">Bonjour {{ app.user.firstname }}</span>
                             {% if 'ROLE_ADMIN' in app.user.roles %}
                                 <a href="{{ path('admin_index') }}" class="topbar-connexion-desktop"><button class="btn btn-link">Espace admin</button></a>
+                            {% else %}
+                                <a href="{{  path('profile_index', {uniqid: app.user.uniqid}) }}" class="topbar-connexion-desktop">Mon espace</a>
                             {% endif %}
                             <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop">Se déconnecter</a>
                         {% else %}
@@ -249,9 +251,12 @@
                     {% if 'ROLE_ADMIN' in app.user.roles %}
                         <a href="{{ path('admin_index') }}">Espace admin</a>
                         <div class="white-line"></div>
-                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    {% else %}
+                        <a href="{{  path('profile_index', {firstname: app.user.firstname, uniqid: app.user.uniqid}) }}">Mon espace</a>
+                        <div class="white-line"></div>
                     {% endif %}
-                {% else %}<a href="#"><button class="btn btn-lg btn-pink">Plus d'infos</button></a>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% else %}
                 <a href="{{ path('app_login') }}">Se connecter</a>
                 <div class="white-line"></div>
                 <a href="{{ path('app_register') }}">S'inscrire</a>
