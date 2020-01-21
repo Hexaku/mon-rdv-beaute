@@ -28,12 +28,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
+     * @Assert\Length(max="50")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Assert\Length(max="100")
      */
     private $lastname;
 
@@ -56,6 +58,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank
      * @Assert\Email(message="Cette adresse mail n'est pas valide")
+     * @Assert\Length(max="180")
      */
     private $email;
 
@@ -97,7 +100,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

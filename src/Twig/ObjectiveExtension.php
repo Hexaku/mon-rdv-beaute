@@ -27,7 +27,7 @@ class ObjectiveExtension extends AbstractExtension
                 return "Membres";
                 break;
             case 4:
-                return "Clients";
+                return "Réservations";
                 break;
         }
     }

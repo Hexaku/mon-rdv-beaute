@@ -20,12 +20,14 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Assert\Length(max="255")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Assert\Length(max="255")
      */
     private $link;
 
@@ -51,7 +53,7 @@ class Video
         return $this;
     }
 
-    public function getLink(): string
+    public function getLink(): ?string
     {
         return $this->link;
     }

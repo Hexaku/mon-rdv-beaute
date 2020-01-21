@@ -32,6 +32,7 @@ class Professional
 
     /**
      * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
+     * @Assert\NotBlank
      */
     private $imageFile;
 
