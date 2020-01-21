@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes prestations reservées{% endblock %}
+{% block title %}Mes prestations réservées{% endblock %}
 
 {% block body %}
     <div class="container-flex">
-        <h1 class="title">Mes prestations reservées</h1>
-        <div>{{ dump(bookings) }}</div>
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            {{ "Vous n'avez pas encore fait de réservations !" | raw }}
-        </div>
+        <h1 class="title">Mes prestations réservées</h1>
+        {% if bookings is empty %}
+            <div class="alert alert-primary alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                {{ "Vous n'avez pas encore fait de réservations !" | raw }}
+            </div>
+        {% endif %}
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-pink">Réservations</h6>
@@ -29,7 +30,7 @@
                         <tbody>
                         {% for booking in bookings %}
                             <tr>
-                                <td>{{ booking.service.name }}</td>
+                                <td><a href="{{ path('service_show', {slug: booking.service.slug }) }}" class="pink-link">{{ booking.service.name }}</a></td>
                                 <td>{{ booking.professional.name }}</td>
                                 <td>{{ booking.date|date("d/m/Y")  }}</td>
                                 <td>{{ booking.hour }}</td>

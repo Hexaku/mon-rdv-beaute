@@ -481,6 +481,14 @@ a:hover {
         display: block;
     }
 
+    .pink-line {
+        display: block;
+        background-color: #d18a8a;
+        height: 1px;
+        width: 60%;
+        margin: 7px auto;
+    }
+
     .filter-form {
         display: flex;
         flex-direction: row;

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Service;
 use App\Entity\User;
 use App\Form\ForgetPasswordType;
 use App\Form\RegistrationFormType;
 use App\Repository\BookingRepository;
+use App\Repository\ServiceRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,8 +98,10 @@ class ProfileController extends AbstractController
     /**
      * @Route("/profile/{id}/booking", name="profile_booking")
      */
-    public function profileBookings(User $user, BookingRepository $bookingRepository): Response
-    {
+    public function profileBookings(
+        User $user,
+        BookingRepository $bookingRepository
+    ): Response {
         if ($this->getUser() !== $user) {
             return $this->redirectToRoute("home");
         }
