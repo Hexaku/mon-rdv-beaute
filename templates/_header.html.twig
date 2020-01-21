@@ -29,7 +29,7 @@
                     {% if 'ROLE_ADMIN' in app.user.roles %}
                         <a href="{{ path('admin_index') }}" class="topbar-connexion-desktop"><button class="btn btn-link">Espace admin</button></a>
                     {% else %}
-                        <a href="{{  path('profile_index', {uniqid: app.user.uniqid}) }}" class="topbar-connexion-desktop">Mon espace</a>
+                        <a href="{{  path('profile_index', {id: app.user.id}) }}" class="topbar-connexion-desktop">Mon espace</a>
                     {% endif %}
                     <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop">Se déconnecter</a>
                 {% else %}
@@ -56,7 +56,7 @@
                 <a href="{{ path('admin_index') }}">Espace admin</a>
                 <div class="white-line"></div>
             {% else %}
-                <a href="{{  path('profile_index', {firstname: app.user.firstname, uniqid: app.user.uniqid}) }}">Mon espace</a>
+                <a href="{{  path('profile_index', { id: app.user.id}) }}">Mon espace</a>
                 <div class="white-line"></div>
             {% endif %}
                 <a href="{{ path('app_logout') }}">Se déconnecter</a>
