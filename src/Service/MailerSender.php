@@ -56,7 +56,7 @@ class MailerSender
     {
         $mail = $_ENV['MAILER_ADMIN'];
 
-        $mail = (new Email())
+        $email = (new Email())
             ->from($mail)
             ->to($mail)
             ->subject('Recapitulatif de vôtre réservation !')
