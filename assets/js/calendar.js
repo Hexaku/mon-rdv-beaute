@@ -15,6 +15,13 @@ import '../scss/calendar.scss'; // this will create a calendar.css file reachabl
 require('bootstrap');
 const $ = require('jquery');
 
+/* FOS BUNDLE JS ROUTING */
+const routes = require('../../public/js/fos_js_routes.json');
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
+
+Routing.setRoutingData(routes);
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const calendarEl = document.getElementById('calendar-holder');
 
@@ -39,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             today.setHours(0);
             /* IF PAST NO EVENT IS DONE, ELSE A MODAL OPEN WITH AVAILABLE HOURS FOR THIS SERVICE */
             if (today < info.date) {
-                fetch(`/service/${calendarEl.getAttribute('service')}/${info.dateStr}`)
+                fetch(Routing.generate('get_hours', { id: calendarEl.getAttribute('service'), date: info.dateStr }))
                     .then(response => response.json())
                     .then((result) => {
                         if (result.length === 0) {

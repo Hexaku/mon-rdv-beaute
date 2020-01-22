@@ -38,7 +38,7 @@ class ServiceController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/{date}", name="test")
+     * @Route("/{id}/{date}", name="get_hours", options={"expose" = true})
      */
     public function fetch(
         Service $service,
