@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class DayExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('day', [$this, 'formatDay']),

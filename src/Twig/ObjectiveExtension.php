@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class ObjectiveExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('objective', [$this, 'formatObjective']),

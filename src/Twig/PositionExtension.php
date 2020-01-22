@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class PositionExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('position', [$this, 'formatPosition']),

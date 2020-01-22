@@ -31,7 +31,7 @@ class ServiceRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-    public function findServicesByQuery($serviceName, $serviceCity): ?array
+    public function findServicesByQuery(string $serviceName, string $serviceCity): ?array
     {
         $query = $this->createQueryBuilder("s")
             ->innerJoin("s.professional", "p");

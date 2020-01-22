@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class DurationExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('duration', [$this, 'formatDuration']),

@@ -16,29 +16,17 @@ import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/pu
 require('bootstrap');
 const $ = require('jquery');
 
-/* FOS BUNDLE JS ROUTING */
-const routes = require('../../public/js/fos_js_routes.json');
+// FOS BUNDLE JS ROUTING
+const routes = require('../../public/js/fos_js_routes.json'); // eslint-disable-line
 
 Routing.setRoutingData(routes);
 
 document.addEventListener('DOMContentLoaded', () => {
     const calendarEl = document.getElementById('calendar-holder');
-
-    const { eventsUrl } = calendarEl.dataset;
-
     const calendar = new Calendar(calendarEl, {
         defaultView: 'dayGridMonth',
         editable: true,
         selectable: true,
-        eventSources: [
-            {
-                url: eventsUrl,
-                method: 'POST',
-                extraParams: {
-                    filters: JSON.stringify({}),
-                },
-            },
-        ],
         dateClick: (info) => {
             /* CREATE NEW DATE TO COMPARE IF DATE CLICKED IS PAST OR NOT */
             const today = new Date();

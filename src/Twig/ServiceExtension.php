@@ -7,7 +7,7 @@ use Twig\TwigFilter;
 
 class ServiceExtension extends AbstractExtension
 {
-    public function getFilters(): ?array
+    public function getFilters(): array
     {
         return [
             new TwigFilter('service', [$this, 'formatService']),

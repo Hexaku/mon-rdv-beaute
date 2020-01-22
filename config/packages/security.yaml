@@ -38,12 +38,10 @@ security:
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/article, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/business, roles: ROLE_ADMIN }
         - { path: ^/customer, roles: ROLE_ADMIN }
         - { path: ^/member, roles: ROLE_ADMIN }
         - { path: ^/professional, roles: ROLE_ADMIN }
-        - { path: ^/service, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/servicetype, roles: ROLE_ADMIN }
         - { path: ^/register/prestataire, roles: ROLE_ADMIN }
 
