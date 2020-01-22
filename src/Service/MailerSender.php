@@ -35,4 +35,23 @@ class MailerSender
 
         $this->mailer->send($email);
     }
+
+    public function sendProContactMail(array $data): void
+    {
+        $mail = $_ENV['MAILER_ADMIN'];
+        $email = (new Email())
+            ->from($mail)
+            ->to($mail)
+            ->subject('Un professionel souhaite rejoindre Mon RDV Beauté !')
+            ->html($this->twig->render("contact-professional/mail.html.twig", [
+                "firstName" => $data["firstName"],
+                "lastName" => $data["lastName"],
+                "email" => $data["email"],
+                "profession" => $data["profession"],
+                "city" => $data["city"],
+                "commentary" => $data["commentary"],
+            ]));
+
+        $this->mailer->send($email);
+    }
 }

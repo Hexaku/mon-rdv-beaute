@@ -20,7 +20,6 @@ class Article
     /**
      * @ORM\Column(type="string", length=50)
      */
-
     private $slug;
 
     /**

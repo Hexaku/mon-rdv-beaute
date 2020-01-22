@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ContactProfessionalType;
+use App\Service\MailerSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,33 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactProfessionalController extends AbstractController
 {
     /**
-     * @param Request $request
-     * @param MailerInterface $mailer
-     * @return Response
-     * @throws TransportExceptionInterface
      * @Route("/contact-professional", name="contact_professional")
      */
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function index(Request $request, MailerSender $mailerSender): Response
     {
         $form = $this->createForm(ContactProfessionalType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $email = (new Email())
-                ->from('akuserukid@gmail.com')
-                ->to('akuserukid@gmail.com')
-                ->subject('Un professionel souhaite rejoindre Mon RDV Beauté !')
-                ->html($this->renderView("contact-professional/mail.html.twig", [
-                    "firstName" => $data["firstName"],
-                    "lastName" => $data["lastName"],
-                    "email" => $data["email"],
-                    "profession" => $data["profession"],
-                    "city" => $data["city"],
-                    "commentary" => $data["commentary"],
-                ]));
 
-            $mailer->send($email);
+            $mailerSender->sendProContactMail($data);
 
             $this->addFlash("success", "Votre demande a bien été envoyé !");
 

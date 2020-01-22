@@ -7,14 +7,14 @@ use Twig\TwigFilter;
 
 class ServiceExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): ?array
     {
         return [
             new TwigFilter('service', [$this, 'formatService']),
         ];
     }
 
-    public function formatService($service)
+    public function formatService(int $service): ?string
     {
         switch ($service) {
             case 1:

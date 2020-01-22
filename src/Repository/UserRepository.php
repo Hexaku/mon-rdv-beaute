@@ -36,7 +36,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findAllUsers()
+    public function findAllUsers(): ?array
     {
         $conn = $this->getEntityManager()->getConnection();
 

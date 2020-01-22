@@ -19,7 +19,7 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    public function findAllServices()
+    public function findAllServices(): ?array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -31,7 +31,7 @@ class ServiceRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-    public function findServicesByQuery($serviceName, $serviceCity)
+    public function findServicesByQuery($serviceName, $serviceCity): ?array
     {
         $query = $this->createQueryBuilder("s")
             ->innerJoin("s.professional", "p");
@@ -52,7 +52,7 @@ class ServiceRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function findAllMatching(string $query, int $limit = 5)
+    public function findAllMatching(string $query, int $limit = 5): ?array
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.name LIKE :query')

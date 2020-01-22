@@ -19,7 +19,7 @@ class ProfessionalRepository extends ServiceEntityRepository
         parent::__construct($registry, Professional::class);
     }
 
-    public function findAllProfessionals()
+    public function findAllProfessionals(): ?array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -31,7 +31,7 @@ class ProfessionalRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-    public function findAllMatching(string $query, int $limit = 5)
+    public function findAllMatching(string $query, int $limit = 5): ?array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.city LIKE :query')

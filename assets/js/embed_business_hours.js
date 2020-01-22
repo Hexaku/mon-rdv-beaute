@@ -46,11 +46,6 @@ function addTagForm($collectionHolder, $newLinkLi)
     var index = $collectionHolder.data('index');
 
     var newForm = prototype;
-    // You need this only if you didn't set 'label' => false in your hours field in TaskType
-    // Replace '__name__label__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    // newForm = newForm.replace(/__name__label__/g, index);
-
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
     newForm = newForm.replace(/__name__/g, index);

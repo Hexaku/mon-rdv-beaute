@@ -105,37 +105,23 @@ class Service
      */
     private $bookings;
 
-    /**
-     * @return mixed
-     */
-    public function getFilename()
+    public function getFilename(): ?string
     {
         return $this->filename;
     }
 
-    /**
-     * @param mixed $filename
-     * @return Service
-     */
-    public function setFilename($filename)
+    public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getImageFile()
+    public function getImageFile(): ?string
     {
         return $this->imageFile;
     }
 
-    /**
-     * @param mixed $imageFile
-     * @return Service
-     */
-    public function setImageFile($imageFile)
+    public function setImageFile(?string $imageFile): self
     {
         $this->imageFile = $imageFile;
         return $this;
@@ -164,19 +150,12 @@ class Service
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     * @return Service
-     */
-    public function setSlug($slug)
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
         return $this;
@@ -206,12 +185,12 @@ class Service
         return $this;
     }
 
-    public function getDuration()
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
 
-    public function setDuration($duration): self
+    public function setDuration(?int $duration): self
     {
         $this->duration = $duration;
 
@@ -242,19 +221,12 @@ class Service
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getServiceType()
+    public function getServiceType(): ?int
     {
         return $this->serviceType;
     }
 
-    /**
-     * @param mixed $serviceType
-     * @return Service
-     */
-    public function setServiceType($serviceType)
+    public function setServiceType(?int $serviceType): self
     {
         $this->serviceType = $serviceType;
         return $this;
@@ -272,9 +244,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|ServicePrices[]
-     */
     public function getServicePrices(): Collection
     {
         return $this->servicePrices;
@@ -303,9 +272,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|Booking[]
-     */
     public function getBookings(): Collection
     {
         return $this->bookings;
