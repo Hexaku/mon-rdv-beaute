@@ -11,16 +11,14 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 
 import '../scss/calendar.scss'; // this will create a calendar.css file reachable to 'encore_entry_link_tags'
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min';
 
 require('bootstrap');
 const $ = require('jquery');
 
 /* FOS BUNDLE JS ROUTING */
 const routes = require('../../public/js/fos_js_routes.json');
-import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
-
 Routing.setRoutingData(routes);
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const calendarEl = document.getElementById('calendar-holder');
