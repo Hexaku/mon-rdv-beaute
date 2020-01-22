@@ -14,12 +14,14 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <a href="{{ path("admin_article_new") }}"><button class="btn btn-success btn-add">Ajouter une article</button></a>
+                    <a href="{{ path("admin_article_new") }}"><button class="btn btn-success btn-add">Ajouter un article</button></a>
                     <thead>
                     <tr>
                         <th>Id</th>
                         <th>Titre</th>
                         <th>Contenu</th>
+                        <th>Professionnel</th>
+                        <th>Mis en avant</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,15 +39,19 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{article.content}}</td>
+                            <td>{{article.content|striptags|slice(0, 500)}}...</td>
+                            <td>{{ article.professional.name }}</td>
+                            <td>{{ article.isHomePage ? "oui" : "non" }}</td>
                         </tr>
                     {% else %}
-                        <h4>Il n'y a pas d'articles !</h4>
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore d'articles !" | raw }}
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 

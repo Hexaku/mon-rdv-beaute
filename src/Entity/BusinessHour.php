@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -24,22 +25,32 @@ class BusinessHour
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"calendar"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      * @Assert\Range(min="1", max="7")
+     * @Assert\NotBlank()
+     * @Groups({"calendar"})
      */
     private $day;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\Time
+     * @Assert\NotBlank()
+     * @Groups({"calendar"})
      */
     private $openTime;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\Time
+     * @Assert\NotBlank()
+     * @Groups({"calendar"})
      */
     private $closeTime;
 
@@ -71,24 +82,24 @@ class BusinessHour
         return self::DAYS[$this->day];
     }
 
-    public function getOpenTime()
+    public function getOpenTime(): \DateTime
     {
         return $this->openTime;
     }
 
-    public function setOpenTime($openTime): self
+    public function setOpenTime(\DateTime $openTime): self
     {
         $this->openTime = $openTime;
 
         return $this;
     }
 
-    public function getCloseTime()
+    public function getCloseTime(): \DateTime
     {
         return $this->closeTime;
     }
 
-    public function setCloseTime($closeTime): self
+    public function setCloseTime(\DateTime $closeTime): self
     {
         $this->closeTime = $closeTime;
 

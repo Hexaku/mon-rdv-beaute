@@ -1,7 +1,176 @@
 {% extends 'admin.html.twig' %}
 
-{% block title %}Admin index{% endblock %}
+{% block title %}Espace admin{% endblock %}
 
 {% block content %}
-    <h1>Bienvenue sur l'espace admin</h1>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Prestations (total)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ services[0]["COUNT(id)"]}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-spa fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Clients (Total)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Professionnels (total)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ professionals[0]["COUNT(id)"]}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Membres (total)</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ members[0]["COUNT(id)"]}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+                <!-- Bienvenue -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Bienvenue</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{{ asset("build/website.svg") }}" alt="">
+                        </div>
+                        <p>Bienvenue dans votre espace admin, ici vous pouvez lister, ajouter, modifier et supprimer le contenu de votre site !</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 mb-4">
+
+                <!-- Project Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Objectifs</h6>
+                    </div>
+                    <div class="card-body">
+                        {% for dashboard in dashboards %}
+                                {% if dashboard.category == 1 %}
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar" style="width:{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                        <div class="bg-white py-2 collapse-inner rounded">
+                                            <div class="flex-buttons">
+                                                {{ include('admin/_dashboard_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elseif dashboard.category == 2 %}
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width:{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                        <div class="bg-white py-2 collapse-inner rounded">
+                                            <div class="flex-buttons">
+                                                {{ include('admin/_dashboard_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elseif dashboard.category == 3 %}
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((members[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width:{{ ((members[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((members[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                        <div class="bg-white py-2 collapse-inner rounded">
+                                            <div class="flex-buttons">
+                                                {{ include('admin/_dashboard_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                        {% endfor %}
+                        {# danger - warning - info - bg-success #}
+                        <hr>
+                        <a href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages"><button class="mb-3 btn btn-primary">Ajouter un objectif</button></a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                                <div>
+                                    <h4 class="h4 mb-3 text-gray-800">Ajouter un nouvel objectif</h4>
+                                    {{ include('dashboard/_form.html.twig') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 {% endblock %}
+
+

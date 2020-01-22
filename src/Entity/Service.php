@@ -5,12 +5,21 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
+ * @Vich\Uploadable()
  */
 class Service
 {
+    const SERVICE_TYPE = [
+        1 => "Sur place",
+        2 => "À domicile"
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,8 +29,15 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Groups({"filter"})
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -34,24 +50,11 @@ class Service
     private $description;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $image;
-
-    /**
      * @ORM\Column(type="integer")
-     */
-    private $intervalTime;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\PositiveOrZero
      */
     private $duration;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $area;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="services")
@@ -60,36 +63,74 @@ class Service
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Price", mappedBy="service")
-     */
-    private $prices;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Professional", inversedBy="services")
      * @ORM\JoinColumn(nullable=false)
      */
     private $professional;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Customer", inversedBy="services")
-     */
-    private $member;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ServiceType", inversedBy="services")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min="1", max="2")
      */
     private $serviceType;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     * @Assert\Positive
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\ServicePrices",
+     *     mappedBy="service",
+     *     orphanRemoval=true,
+     *     cascade={"persist"})
+     */
+    private $servicePrices;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="service")
+     */
+    private $bookings;
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
+        return $this;
+    }
+
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?string $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+    }
+
     public function __construct()
     {
-        $this->prices = new ArrayCollection();
-        $this->member = new ArrayCollection();
+        $this->servicePrices = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,6 +147,17 @@ class Service
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 
@@ -133,50 +185,14 @@ class Service
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getIntervalTime()
-    {
-        return $this->intervalTime;
-    }
-
-    public function setIntervalTime($intervalTime): self
-    {
-        $this->intervalTime = $intervalTime;
-
-        return $this;
-    }
-
-    public function getDuration()
+    public function getDuration(): ?int
     {
         return $this->duration;
     }
 
-    public function setDuration($duration): self
+    public function setDuration(?int $duration): self
     {
         $this->duration = $duration;
-
-        return $this;
-    }
-
-    public function getArea(): ?string
-    {
-        return $this->area;
-    }
-
-    public function setArea(?string $area): self
-    {
-        $this->area = $area;
 
         return $this;
     }
@@ -193,37 +209,6 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|Price[]
-     */
-    public function getPrices(): Collection
-    {
-        return $this->prices;
-    }
-
-    public function addPrice(Price $price): self
-    {
-        if (!$this->prices->contains($price)) {
-            $this->prices[] = $price;
-            $price->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removePrice(Price $price): self
-    {
-        if ($this->prices->contains($price)) {
-            $this->prices->removeElement($price);
-            // set the owning side to null (unless already changed)
-            if ($price->getService() === $this) {
-                $price->setService(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getProfessional(): ?Professional
     {
         return $this->professional;
@@ -236,41 +221,14 @@ class Service
         return $this;
     }
 
-    /**
-     * @return Collection|Customer[]
-     */
-    public function getMember(): Collection
-    {
-        return $this->member;
-    }
-
-    public function addMember(Customer $member): self
-    {
-        if (!$this->member->contains($member)) {
-            $this->member[] = $member;
-        }
-
-        return $this;
-    }
-
-    public function removeMember(Customer $member): self
-    {
-        if ($this->member->contains($member)) {
-            $this->member->removeElement($member);
-        }
-
-        return $this;
-    }
-
-    public function getServiceType(): ?ServiceType
+    public function getServiceType(): ?int
     {
         return $this->serviceType;
     }
 
-    public function setServiceType(?ServiceType $serviceType): self
+    public function setServiceType(?int $serviceType): self
     {
         $this->serviceType = $serviceType;
-
         return $this;
     }
 
@@ -282,6 +240,62 @@ class Service
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getServicePrices(): Collection
+    {
+        return $this->servicePrices;
+    }
+
+    public function addServicePrice(ServicePrices $servicePrice): self
+    {
+        if (!$this->servicePrices->contains($servicePrice)) {
+            $this->servicePrices[] = $servicePrice;
+            $servicePrice->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServicePrice(ServicePrices $servicePrice): self
+    {
+        if ($this->servicePrices->contains($servicePrice)) {
+            $this->servicePrices->removeElement($servicePrice);
+            // set the owning side to null (unless already changed)
+            if ($servicePrice->getService() === $this) {
+                $servicePrice->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getService() === $this) {
+                $booking->setService(null);
+            }
+        }
 
         return $this;
     }

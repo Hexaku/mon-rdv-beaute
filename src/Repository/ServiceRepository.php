@@ -18,4 +18,48 @@ class ServiceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Service::class);
     }
+
+    public function findAllServices(): ?array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT COUNT(id) FROM service';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+    }
+
+    public function findServicesByQuery(string $serviceName, string $serviceCity): ?array
+    {
+        $query = $this->createQueryBuilder("s")
+            ->innerJoin("s.professional", "p");
+        if ($serviceName) {
+            $query = $query
+            ->andWhere("s.name LIKE :serviceName")
+            ->setParameter("serviceName", $serviceName.'%');
+        };
+        if ($serviceCity) {
+            $query = $query
+            ->andWhere("p.city LIKE :serviceCity")
+            ->setParameter("serviceCity", $serviceCity.'%');
+        }
+        $query = $query
+            ->getQuery()
+            ->getResult()
+        ;
+        return $query;
+    }
+
+    public function findAllMatching(string $query, int $limit = 5): ?array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.name LIKE :query')
+            ->setParameter('query', '%'.$query.'%')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

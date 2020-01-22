@@ -6,8 +6,15 @@ vich_uploader:
             uri_prefix: /images/professionals
             upload_destination: '%kernel.project_dir%/public/images/professionals'
             namer: Vich\UploaderBundle\Naming\UniqidNamer
-
-    #mappings:
-    #    products:
-    #        uri_prefix: /images/products
-    #        upload_destination: '%kernel.project_dir%/public/images/products'
+        services_image:
+            uri_prefix: /images/services
+            upload_destination: '%kernel.project_dir%/public/images/services'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        home_image:
+            uri_prefix: /images/home
+            upload_destination: '%kernel.project_dir%/public/images/home'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        categories_image:
+            uri_prefix: /images/categories
+            upload_destination: '%kernel.project_dir%/public/images/categories'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

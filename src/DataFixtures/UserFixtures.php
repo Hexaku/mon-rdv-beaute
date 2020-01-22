@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use DateTime;
 
 class UserFixtures extends Fixture
 {
@@ -25,75 +26,79 @@ class UserFixtures extends Fixture
             'the_new_password'
         ));
 
-
         $user1 = new User();
-        $user1->setEmail("user1@monsite.com");
-        $user1->setRoles(['ROLE_USER']);
-        $user1->setPassword($this->passwordEncoder->encodePassword(
-            $user1,
-            'userpassword'
-        ));
-
+        $user1->setEmail("user1@monsite.com")
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordEncoder->encodePassword(
+                $user1,
+                'userpassword'
+            ))
+            ->setFirstname('Marie')
+            ->setLastname('Dupont')
+            ->setBirthdate(new DateTime('15-06-1960'))
+            ->setPhone('0123456789')
+            ->setIsValidated(true);
 
         $manager->persist($user1);
 
-
         $user2 = new User();
-        $user2->setEmail("user2@monsite.com");
-        $user2->setRoles(['ROLE_USER']);
-        $user2->setPassword($this->passwordEncoder->encodePassword(
-            $user2,
-            'userpassword'
-        ));
-
+        $user2->setEmail("user2@monsite.com")
+            ->setRoles(['ROLE_USER'])
+            ->setPassword($this->passwordEncoder->encodePassword(
+                $user2,
+                'userpassword'
+            ))
+            ->setFirstname('Thierry')
+            ->setLastname('Dubois')
+            ->setBirthdate(new DateTime('15-09-1960'))
+            ->setPhone('0123456789')
+            ->setIsValidated(true);
 
         $manager->persist($user2);
 
-
-        $user3 = new User();
-        $user3->setEmail("user3@monsite.com");
-        $user3->setRoles(['ROLE_USER']);
-        $user3->setPassword($this->passwordEncoder->encodePassword(
-            $user3,
-            'userpassword'
-        ));
-
-
-        $manager->persist($user3);
-
-
         $prestataire = new User();
-        $prestataire->setEmail("prestataire@monsite.com");
-        $prestataire->setRoles(['ROLE_PRESTATAIRE']);
-        $prestataire->setPassword($this->passwordEncoder->encodePassword(
-            $prestataire,
-            'prestatairepassword'
-        ));
-
+        $prestataire->setEmail("prestataire@monsite.com")
+            ->setRoles(['ROLE_PRESTATAIRE'])
+            ->setPassword($this->passwordEncoder->encodePassword(
+                $prestataire,
+                'prestatairepassword'
+            ))
+            ->setFirstname('Azerty')
+            ->setLastname('Ytreza')
+            ->setBirthdate(new DateTime('15-06-1960'))
+            ->setPhone('0917836524')
+            ->setIsValidated(true);
 
         $manager->persist($prestataire);
 
-
-
         $prestataire1 = new User();
-        $prestataire1->setEmail("subscriberauthor2@monsite.com");
-        $prestataire1->setRoles(['ROLE_PRESTATAIRE']);
-        $prestataire1->setPassword($this->passwordEncoder->encodePassword(
-            $prestataire1,
-            'prestatairepassword'
-        ));
+        $prestataire1->setEmail("subscriberauthor2@monsite.com")
+            ->setRoles(['ROLE_PRESTATAIRE'])
+            ->setPassword($this->passwordEncoder->encodePassword(
+                $prestataire1,
+                'prestatairepassword'
+            ))
+            ->setFirstname('Poiuyt')
+            ->setLastname('Tyuiop')
+            ->setBirthdate(new DateTime('15-06-1960'))
+            ->setPhone('0634253647')
+            ->setIsValidated(true);
 
 
         $manager->persist($prestataire1);
 
-
         $admin = new User();
-        $admin->setEmail('admin@monsite.com');
-        $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword($this->passwordEncoder->encodePassword(
-            $admin,
-            'adminpassword'
-        ));
+        $admin->setEmail('admin@monsite.com')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword($this->passwordEncoder->encodePassword(
+                $admin,
+                'adminpassword'
+            ))
+            ->setFirstname('Wxcvbn')
+            ->setLastname('Nbvcxw')
+            ->setBirthdate(new DateTime('15-06-1960'))
+            ->setPhone('0735465833')
+            ->setIsValidated(true);
 
         $manager->persist($admin);
 

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProfessionalRepository")
@@ -70,7 +71,11 @@ class Professional
     private $services;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BusinessHour", mappedBy="professional", orphanRemoval=true)
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\BusinessHour",
+     *     mappedBy="professional",
+     *     orphanRemoval=true,
+     *     cascade={"persist"})
      */
     private $businessHour;
 
@@ -79,9 +84,28 @@ class Professional
      */
     private $uploadedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="professional")
+     */
+    private $bookings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="professional")
+     */
+    private $articles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"filter"})
+     */
+    private $city;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
+        $this->businessHour = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,9 +173,6 @@ class Professional
         return $this;
     }
 
-    /**
-     * @return Collection|Service[]
-     */
     public function getServices(): Collection
     {
         return $this->services;
@@ -171,62 +192,27 @@ class Professional
     {
         if ($this->services->contains($service)) {
             $this->services->removeElement($service);
-            // set the owning side to null (unless already changed)
-            if ($service->getProfessional() === $this) {
-                $service->setProfessional(null);
-            }
         }
 
         return $this;
     }
 
-    public function getBusinessHour(): ?BusinessHour
-    {
-        return $this->businessHour;
-    }
-
-    public function setBusinessHour(BusinessHour $businessHour): self
-    {
-        $this->businessHour = $businessHour;
-
-        // set the owning side of the relation if necessary
-        if ($businessHour->getProfessional() !== $this) {
-            $businessHour->setProfessional($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getFilename(): ?string
     {
         return $this->filename;
     }
 
-    /**
-     * @param string|null $filename
-     * @return Professional
-     */
     public function setFilename(?string $filename): Professional
     {
         $this->filename = $filename;
         return $this;
     }
 
-    /**
-     * @return File|null
-     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    /**
-     * @param File|null $imageFile
-     * @return Professional
-     */
     public function setImageFile(?File $imageFile): Professional
     {
         $this->imageFile = $imageFile;
@@ -244,6 +230,96 @@ class Professional
         if ($this->imageFile instanceof UploadedFile) {
             $this->uploadedAt = new DateTime('now');
         }
+        return $this;
+    }
+
+    public function getBusinessHour(): Collection
+    {
+        return $this->businessHour;
+    }
+
+    public function addBusinessHour(BusinessHour $businessHour): self
+    {
+        if (!$this->businessHour->contains($businessHour)) {
+            $this->businessHour[] = $businessHour;
+            $businessHour->setProfessional($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBusinessHour(BusinessHour $businessHour): self
+    {
+        if ($this->businessHour->contains($businessHour)) {
+            $this->businessHour->removeElement($businessHour);
+        }
+
+        return $this;
+    }
+
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setProfessional($this);
+        }
+        return $this;
+    }
+  
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->contains($booking)) {
+            $this->bookings->removeElement($booking);
+            // set the owning side to null (unless already changed)
+            if ($booking->getProfessional() === $this) {
+                $booking->setProfessional(null);
+            }
+        }
+        return $this;
+    }
+
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setProfessional($this);
+        }
+
+        return $this;
+    }
+         
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getProfessional() === $this) {
+                $article->setProfessional(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
         return $this;
     }
 }

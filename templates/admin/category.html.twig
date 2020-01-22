@@ -19,6 +19,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
+                        <th>Image</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,7 +28,7 @@
                             <td>{{loop.index}}</td>
                             <td>
                                 <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages">{{category.name}}</a>
-                                <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                                <div id="collapsePages{{ loop.index }}" class="collapse sorting" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                     <div class="bg-white py-2 collapse-inner rounded">
                                         <div class="flex-buttons">
                                             <a class="collapse-item" href="{{ path('admin_category_edit', {'id': category.id}) }}"><button class="btn btn-warning">Modifier</button></a>
@@ -36,14 +37,17 @@
                                     </div>
                                 </div>
                             </td>
+                            <td> <img src="{{ vich_uploader_asset(category, 'imageFile')}}" height="100px" width="auto"/> </td>
                         </tr>
                     {% else %}
-                        <h4>Il n'y a pas de catégories !</h4>
+                        <div class="alert alert-primary alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{ "Il n'y a pas encore de catégories !" | raw }}
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 

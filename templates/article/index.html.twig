@@ -3,15 +3,15 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <div class="contact-form">
+    <div class="container-flex">
         <h2 class="title">Tous les articles</h2>
-        <a href="{{ path('article_new') }}"><button class="btn btn-link">Écrire un nouvel article</button></a>
+        <a href="{{ path('admin_article_new') }}"><button class="btn btn-link">Écrire un nouvel article</button></a>
         {% for article in articles %}
         <div class="card">
             <div class="card-body">
                 <h3>{{ article.title }}</h3>
-                <p>{{ article.content }}</p>
-                <a href="{{ path('article_show', {'id': article.id}) }}"><button class="btn btn-primary">Lire l'article</button></a>
+                <p>{{ article.content|slice(0, 500)|striptags}}...</p>
+                <a href="{{ path('article_show', {'slug': article.slug}) }}"><button class="btn btn-success">Lire l'article</button></a>
             </div>
         </div>
         {% else %}

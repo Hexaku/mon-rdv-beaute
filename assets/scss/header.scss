@@ -13,7 +13,8 @@ a {
 }
 
 a:hover {
-    color: #4B6635;
+    color: #d18a8a;
+    text-decoration: underline;
 }
 
 /* Elements a afficher uniquement en desktop */
@@ -54,7 +55,11 @@ a:hover {
     cursor: pointer;
 }
 
-.topbar-menu-mobile {
+.topbar-flex {
+    display: none;
+}
+
+.topbar-menu-mobile, .topbar-connexion-mobile {
     position: relative;
     font-family: "Libre Baskerville", serif;
     color: white;
@@ -73,6 +78,8 @@ a:hover {
 
     a:hover {
         cursor: pointer;
+        color: white;
+        text-decoration: underline;
     }
 }
 
@@ -165,15 +172,11 @@ a:hover {
     .topbar-main-logo {
         width: 350px;
     }
-
-    .account {
-        display: block;
-    }
 }
 
 @media only screen and(min-width: 850px) {
     .topbar-main-logo {
-        width: 500px;
+        width: 450px;
     }
 
     .topbar {
@@ -187,6 +190,10 @@ a:hover {
         align-items: center;
     }
 
+    .topbar-connexion-mobile {
+        display: none;
+    }
+
     .topbar-container-connexion-flex {
         display: flex;
         flex-direction: column;
@@ -194,36 +201,31 @@ a:hover {
         justify-content: center;
     }
 
-
     .topbar-connexion-desktop {
         display: block;
         font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
+        color: #d18a8a
     }
 
-    /*.topbar-menu-tablet {
-      text-align: center;
-      position: relative;
-      display: flex;
-      justify-content: space-around;
-      font-family: "Libre Baskerville", serif;
-      font-size: 22px;
-      color: #D6A9A9;
-      margin-bottom: 200px;
-      a {
-        margin: 0 5px;
-      }
-    }*/
+    .account {
+        display: block;
+    }
 }
 
 @media only screen and (min-width: 1250px) {
     .topbar-main-logo {
-        width: 500px;
+        width: 400px;
     }
 
     .topbar {
         padding-top: 0;
         margin-top: -10px;
+    }
+
+    .topbar-flex {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
     }
 
     .topbar-menu-tablet {
@@ -233,7 +235,8 @@ a:hover {
     .topbar-menu-desktop {
         display: block;
         font-family: "Libre Baskerville", serif;
-        color: #D6A9A9;
+        color: #d18a8a;
+        font-size: 14px;
 
         a {
             margin: 0 8px;
@@ -251,13 +254,42 @@ a:hover {
     .topbar-burger {
         display: none;
     }
+}
 
+@media only screen and (min-width: 1400px) {
+    .topbar-menu-desktop {
+        a {
+            font-size: 16px;
+        }
+    }
+
+    .topbar-main-logo {
+        margin-right: 15px;
+        width: 450px;
+    }
 }
 
 @media only screen and (min-width: 1500px) {
     .topbar-menu-desktop {
         a {
-            margin: 0 18px;
+            margin: 0 10px;
+        }
+    }
+
+    .topbar-main-logo {
+        margin-right: 15px;
+        width: 500px;
+    }
+}
+
+@media only screen and(min-width: 1650px) {
+    .topbar-main-logo {
+        width: 550px;
+    }
+
+    .topbar-menu-desktop {
+        a {
+            margin: 0 12px;
         }
     }
 }

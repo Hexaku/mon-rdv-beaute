@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Entity\Category;
@@ -17,14 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminCategoryController extends AbstractController
 {
-    /**
-     * @Route("/", name="admin_index")
-     */
-    public function index(): Response
-    {
-        return $this->render("admin/index.html.twig");
-    }
-
     /**
      * @Route("/category", name="admin_category", methods={"GET"})
      */
