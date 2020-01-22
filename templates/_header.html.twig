@@ -7,7 +7,7 @@
             </div>
             <nav class="topbar-menu topbar-menu-desktop">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
                 <a href="{{ path('article_index') }}">ARTICLES</a>
                 <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
@@ -43,7 +43,7 @@
     <nav class="topbar-menu topbar-menu-mobile no-show rounded" id="topbar-menu-mobile">
         <a href="{{ path('category_index') }}">Prestations</a>
         <div class="white-line"></div>
-        <a href="#">Journée Bien-Être</a>
+        <a href="{{ path('special_day') }}">Journée Bien-Être</a>
         <div class="white-line"></div>
         <a href="{{ path('article_index') }}">Articles</a>
         <div class="white-line"></div>
@@ -69,7 +69,7 @@
     </nav>
     <nav class="topbar-menu topbar-menu-tablet">
         <a href="{{ path('category_index') }}">PRESTATIONS</a>
-        <a href="#">JOURNEE BIEN-ETRE</a>
+        <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
         <a href="{{ path('article_index') }}">ARTICLES</a>
         <a href="{{ path('about') }}">A PROPOS</a>
         <a href="{{ path('contact') }}">CONTACT</a>
