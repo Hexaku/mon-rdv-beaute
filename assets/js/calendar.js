@@ -18,6 +18,7 @@ const $ = require('jquery');
 
 /* FOS BUNDLE JS ROUTING */
 const routes = require('../../public/js/fos_js_routes.json');
+
 Routing.setRoutingData(routes);
 
 document.addEventListener('DOMContentLoaded', () => {
