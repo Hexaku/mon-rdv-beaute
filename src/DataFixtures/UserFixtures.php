@@ -37,7 +37,9 @@ class UserFixtures extends Fixture
             ->setLastname('Dupont')
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0123456789')
-            ->setIsValidated(true);
+            ->setIsValidated(true)
+            ->setAdress("1 rue Chaptal")
+            ->setCity("Nantes");
 
         $manager->persist($user1);
 
@@ -52,7 +54,9 @@ class UserFixtures extends Fixture
             ->setLastname('Dubois')
             ->setBirthdate(new DateTime('15-09-1960'))
             ->setPhone('0123456789')
-            ->setIsValidated(true);
+            ->setIsValidated(true)
+            ->setAdress("5 rue Lambray")
+            ->setCity("Carquefou");
 
         $manager->persist($user2);
 
@@ -67,7 +71,9 @@ class UserFixtures extends Fixture
             ->setLastname('Ytreza')
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0917836524')
-            ->setIsValidated(true);
+            ->setIsValidated(true)
+            ->setAdress("14 rue des Louars")
+            ->setCity("Nantes");
 
         $manager->persist($prestataire);
 
@@ -82,7 +88,9 @@ class UserFixtures extends Fixture
             ->setLastname('Tyuiop')
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0634253647')
-            ->setIsValidated(true);
+            ->setIsValidated(true)
+            ->setAdress("4bis quai François Mitterand")
+            ->setCity("Nantes");
 
 
         $manager->persist($prestataire1);
@@ -94,11 +102,13 @@ class UserFixtures extends Fixture
                 $admin,
                 'adminpassword'
             ))
-            ->setFirstname('Wxcvbn')
-            ->setLastname('Nbvcxw')
+            ->setFirstname('Admin')
+            ->setLastname('admin')
             ->setBirthdate(new DateTime('15-06-1960'))
             ->setPhone('0735465833')
-            ->setIsValidated(true);
+            ->setIsValidated(true)
+            ->setAdress("8 rue Graslin")
+            ->setCity("Nantes");
 
         $manager->persist($admin);
 

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +14,12 @@ class ForgetPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('password', PasswordType::class, ["label" => "Mot de passe",])
-            ->add("confirm_password", PasswordType::class, ["label" => "Confirmez votre mot de passe",])
+            ->add('password', RepeatedType::class, [
+                "label" => "Mot de passe",
+                "type" => PasswordType::class,
+                "first_options" => ["label" => "Mot de passe"],
+                "second_options" => ["label" => "Confirmez le mot de passe"]
+                ])
         ;
     }
 

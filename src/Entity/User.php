@@ -55,6 +55,20 @@ class User implements UserInterface
     private $phone;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max="255")
+     */
+    private $adress;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max="255")
+     */
+    private $city;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank
      * @Assert\Email(message="Cette adresse mail n'est pas valide")
@@ -68,12 +82,6 @@ class User implements UserInterface
      * @Assert\Length(min="6", minMessage="Le mot de passe doit avoir au minimum 6 caractères")
      */
     private $password;
-
-    /**
-     * @Assert\NotBlank
-     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe doivent être identiques")
-     */
-    private $confirmPassword;
 
     /**
      * @ORM\Column(type="json")
@@ -153,18 +161,6 @@ class User implements UserInterface
     {
         $this->password = $password;
 
-        return $this;
-    }
-
-    public function getConfirmPassword()
-    {
-        return $this->confirmPassword;
-    }
-
-
-    public function setConfirmPassword($confirmPassword)
-    {
-        $this->confirmPassword = $confirmPassword;
         return $this;
     }
 
@@ -269,6 +265,30 @@ class User implements UserInterface
     public function setIsValidated(bool $isValidated): self
     {
         $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
