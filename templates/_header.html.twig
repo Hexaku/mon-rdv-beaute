@@ -7,7 +7,7 @@
             </div>
             <nav class="topbar-menu topbar-menu-desktop">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>
-                <a href="#" data-toggle="modal" data-target="#exampleModal">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
                 <a href="{{ path('article_index') }}">ARTICLES</a>
                 <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
@@ -25,15 +25,17 @@
             <img class="topbar-connexion-logo" id="connexion" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
             <div class="topbar-container-connexion-flex">
                 {% if app.user %}
-                    <span class="account">{{ app.user.email }}</span>
+                    <span class="account">Bonjour {{ app.user.firstname }}</span>
                     {% if 'ROLE_ADMIN' in app.user.roles %}
                         <a href="{{ path('admin_index') }}" class="topbar-connexion-desktop"><button class="btn btn-link">Espace admin</button></a>
+                    {% else %}
+                        <a href="{{  path('profile_index', {id: app.user.id}) }}" class="topbar-connexion-desktop">Mon espace</a>
                     {% endif %}
                     <a href="{{ path('app_logout') }}" class="topbar-connexion-desktop">Se déconnecter</a>
                 {% else %}
-                    <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">CONNEXION</a>
+                    <a href="{{ path('app_login') }}" class="topbar-connexion-desktop">Connexion</a>
+                    <div class="pink-line"></div>
                     <a href="{{ path('app_register') }}" class="topbar-connexion-desktop">S'inscrire</a>
-
                 {% endif %}
             </div>
         </div>
@@ -41,7 +43,7 @@
     <nav class="topbar-menu topbar-menu-mobile no-show rounded" id="topbar-menu-mobile">
         <a href="{{ path('category_index') }}">Prestations</a>
         <div class="white-line"></div>
-        <a href="#">Journée Bien-Être</a>
+        <a href="{{ path('special_day') }}">Journée Bien-Être</a>
         <div class="white-line"></div>
         <a href="{{ path('article_index') }}">Articles</a>
         <div class="white-line"></div>
@@ -54,8 +56,11 @@
             {% if 'ROLE_ADMIN' in app.user.roles %}
                 <a href="{{ path('admin_index') }}">Espace admin</a>
                 <div class="white-line"></div>
-                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% else %}
+                <a href="{{  path('profile_index', { id: app.user.id}) }}">Mon espace</a>
+                <div class="white-line"></div>
             {% endif %}
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
         {% else %}
             <a href="{{ path('app_login') }}">Se connecter</a>
             <div class="white-line"></div>
@@ -64,7 +69,7 @@
     </nav>
     <nav class="topbar-menu topbar-menu-tablet">
         <a href="{{ path('category_index') }}">PRESTATIONS</a>
-        <a href="#">JOURNEE BIEN-ETRE</a>
+        <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
         <a href="{{ path('article_index') }}">ARTICLES</a>
         <a href="{{ path('about') }}">A PROPOS</a>
         <a href="{{ path('contact') }}">CONTACT</a>

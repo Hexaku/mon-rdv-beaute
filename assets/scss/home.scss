@@ -223,6 +223,12 @@ a:hover {
     display: none;
 }
 
+.icon-mobile {
+    display: block;
+    color: white;
+    margin-right: 10px;
+}
+
 .main-title {
     position: relative;
     color: white;
@@ -473,6 +479,14 @@ a:hover {
 
     .account {
         display: block;
+    }
+
+    .pink-line {
+        display: block;
+        background-color: #d18a8a;
+        height: 1px;
+        width: 60%;
+        margin: 7px auto;
     }
 
     .filter-form {
