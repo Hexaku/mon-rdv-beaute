@@ -416,28 +416,35 @@
 <script src="https://cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
 <script>
     $(function() {
-
         $(".petal").velocity(
             "transition.expandIn",
             {stagger: 25, drag:true, duration:2000}
         ).delay(4000)
-
     });
-    window.addEventListener("load", function () {
-        const loader = document.querySelector(".wrap");
-        window.setInterval(function(){
-            loader.className += " hidden";
-        },2100)
-    })
+
+    function Preloader() {
+        window.addEventListener("load", function () {
+            const loader = document.querySelector(".wrap");
+            window.setInterval(function(){
+                loader.className += " hidden";
+            },1500)
+        })
+    }
+
+    if (!sessionStorage.getItem('doNotShow')) {
+        sessionStorage.setItem("doNotShow", true);
+        Preloader();
+    } else {
+        $ ('.wrap').hide();
+    }
+
+
 </script>
 <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.jquery.min.js"></script>
 
 <script>
     $(document).ready(function(event) {
-        /*$('#form_serviceName').on('input', function(event) {
-            console.log(event.target.value);
-        })*/
 
         $('#form_serviceName').autocomplete({hint: false}, [
             {
@@ -451,7 +458,7 @@
                 },
                 displayKey: 'name',
             }
-        ])
+        ]);
 
         $('#form_serviceLocation').autocomplete({hint: false}, [
             {
@@ -464,11 +471,9 @@
                 },
                 displayKey: 'city',
             }
-        ])
-    })
+        ]);
+    });
 </script>
-
 
 </body>
 </html>
-

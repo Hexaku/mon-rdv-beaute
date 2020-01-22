@@ -1,225 +1,228 @@
 @import "vars";
 @import "~bootstrap/scss/bootstrap";
-
 /* IMPORT DE POLICES */
 @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
 
 ul {
-  margin: 20px 0;
-  li {
-    margin: 15px 0;
-  }
+    margin: 20px 0;
+
+    li {
+        margin: 15px 0;
+    }
 }
 
 /* CONTAINER FLEX */
 .container-flex {
-  margin: 50px 15px;
-  li {
-    list-style: none;
-  }
+    margin: 50px 15px;
+
+    li {
+        list-style: none;
+    }
 }
 
 /* TITRES DES PAGES */
 .title {
-  font-family: "Libre Baskerville", serif;
-  font-size: 1.8rem;
-  margin: 50px 0;
-  text-align: center;
-  color: #414141;
+    font-family: "Libre Baskerville", serif;
+    font-size: 1.8rem;
+    margin: 50px 0;
+    text-align: center;
+    color: #414141;
 }
 
 .subtitle-pink {
-  font-family: "Libre Baskerville", serif;
-  font-size: 1.6rem;
-  margin: 50px 0;
-  text-align: center;
-  color: #d18a8a;
+    font-family: "Libre Baskerville", serif;
+    font-size: 1.6rem;
+    margin: 50px 0;
+    text-align: center;
+    color: #d18a8a;
 }
 
 .category-carousel {
-  margin: 50px 0;
+    margin: 50px 0;
 }
 
 /* CARD ARTICLES */
 .card {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .grey-link {
-  color: #414141;
+    color: #414141;
 }
 
 .grey-link:hover {
-  color: #d18a8a;
-  text-decoration: none;
+    color: #d18a8a;
+    text-decoration: none;
 }
 
 .flex-buttons {
-  display: flex;
-  button {
-    margin-right: 10px;
-  }
+    display: flex;
+
+    button {
+        margin-right: 10px;
+    }
 }
 
 .bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .description-block {
-  margin-bottom: 30px !important;
+    margin-bottom: 30px !important;
 }
 
 .categories {
-  text-align: center;
-  font-size: 22px;
-  a {
-    margin: 0 20px;
-  }
+    text-align: center;
+    font-size: 22px;
+
+    a {
+        margin: 0 20px;
+    }
 }
 
 /* CARD PRESTATIONS */
 .card-service {
-  border: 1px solid #dbd9d9;
-  padding: 30px 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-bottom: 30px;
-  margin-right: 20px;
-  margin-left: 20px;
+    border: 1px solid #dbd9d9;
+    padding: 30px 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .card-service-right, .card-service-left {
-  text-align: center;
+    text-align: center;
 }
 
 .card-service-left {
-  margin-bottom: 25px;
-  width: 250px;
+    margin-bottom: 25px;
+    width: 250px;
 }
 
 .card-service-name {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .card-service-link:hover {
-  color: #474e54;
+    color: #474e54;
 }
 
 .card-service-price {
-  margin-bottom: 15px;
-  font-size: 19px;
+    margin-bottom: 15px;
+    font-size: 19px;
 }
 
 .card-service-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 1px solid #dbd9d9;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid #dbd9d9;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 .btn-pink {
-  background-color: #CF8080;
-  color: white;
+    background-color: #CF8080;
+    color: white;
 }
 
 .btn-pink:hover {
-  color: white;
-  background-color: #e5a099;
+    color: white;
+    background-color: #e5a099;
 }
 
 /* DESCRIPTION SERVICE */
 .service-separator {
-  width: 80%;
-  background-color: #a6acb2;
-  height: 1px;
-  margin: 40px auto;
+    width: 80%;
+    background-color: #a6acb2;
+    height: 1px;
+    margin: 40px auto;
 }
 
 .service-price {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .service-title {
-  font-family: "Libre Baskerville", Serif;
+    font-family: "Libre Baskerville", Serif;
 }
 
 @media only screen and (min-width: 600px) {
-  .container-flex {
-    max-width: 600px;
-    margin: 50px auto;
-  }
+    .container-flex {
+        max-width: 600px;
+        margin: 50px auto;
+    }
 
-  .card-service {
-    flex-direction: row;
-    margin-bottom: 25px;
-    padding: 30px 10px;
-  }
+    .card-service {
+        flex-direction: row;
+        margin-bottom: 25px;
+        padding: 30px 10px;
+    }
 
-  .card-service-right, .card-service-left {
-    width: 50%;
-  }
+    .card-service-right, .card-service-left {
+        width: 50%;
+    }
 
-  .card-service-separator {
-    height: 260px;
-    background-color: #414141;
-    opacity: 0.7;
-    width: 1px;
-  }
+    .card-service-separator {
+        height: 260px;
+        background-color: #414141;
+        opacity: 0.7;
+        width: 1px;
+    }
 }
 
 @media only screen and (min-width: 800px) {
-  .category-carousel {
-    margin: 50px 100px;
-  }
+    .category-carousel {
+        margin: 50px 100px;
+    }
 
-  .container-flex {
-    max-width: 800px;
-  }
+    .container-flex {
+        max-width: 800px;
+    }
 
-  .card-service-name {
-    margin-bottom: 25px;
-  }
+    .card-service-name {
+        margin-bottom: 25px;
+    }
 
-  .card-service-price {
-    margin-bottom: 25px;
-  }
+    .card-service-price {
+        margin-bottom: 25px;
+    }
 
-  .card-service-image {
-    width: 250px;
-    height: 250px;
-  }
+    .card-service-image {
+        width: 250px;
+        height: 250px;
+    }
 }
 
 @media only screen and (min-width: 1200px) {
-  .category-carousel {
-    margin: 50px 250px;
-  }
+    .category-carousel {
+        margin: 50px 250px;
+    }
 
-  .title {
-    font-size: 2.2rem;
-  }
+    .title {
+        font-size: 2.2rem;
+    }
 
-  .container-flex {
-    max-width: 1000px;
-  }
+    .container-flex {
+        max-width: 1000px;
+    }
 
-  .card-service {
-    margin-bottom: 50px;
-    padding: 55px 45px;
-  }
+    .card-service {
+        margin-bottom: 50px;
+        padding: 55px 45px;
+    }
 
-  .card-service-name {
-    margin-bottom: 35px;
-  }
+    .card-service-name {
+        margin-bottom: 35px;
+    }
 
-  .card-service-price {
-    margin-bottom: 35px;
-  }
+    .card-service-price {
+        margin-bottom: 35px;
+    }
 }

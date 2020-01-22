@@ -5,10 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Cette adresse email est déja utilisée"
+ * )
  */
 class User implements UserInterface
 {
@@ -20,9 +26,51 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank
+     */
+    private $birthdate;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern="/^[0-9]*$/", message="Le numéro de téléphone ne doit contenir que des chiffres")
+     * @Assert\Length(min="10", minMessage="Le numéro de téléphone doit être composé de 10 chiffres")
+     * @Assert\Length(max="10", maxMessage="Le numéro de téléphone doit être composé de 10 chiffres")
+     */
+    private $phone;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Email(message="Cette adresse mail n'est pas valide")
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(min="6", minMessage="Le mot de passe doit avoir au minimum 6 caractères")
+     */
+    private $password;
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe doivent être identiques")
+     */
+    private $confirmPassword;
 
     /**
      * @ORM\Column(type="json")
@@ -30,34 +78,14 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string")
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $lastname;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $birthdate;
-
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
-    private $phone;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Booking", mappedBy="user")
      */
     private $bookings;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isValidated = false;
 
     public function __construct()
     {
@@ -69,7 +97,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -122,6 +150,18 @@ class User implements UserInterface
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    public function getConfirmPassword(): string
+    {
+        return $this->confirmPassword;
+    }
+
+
+    public function setConfirmPassword(string $confirmPassword): self
+    {
+        $this->confirmPassword = $confirmPassword;
         return $this;
     }
 
@@ -190,9 +230,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Booking[]
-     */
     public function getBookings(): Collection
     {
         return $this->bookings;
@@ -217,6 +254,18 @@ class User implements UserInterface
                 $booking->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsValidated(): ?bool
+    {
+        return $this->isValidated;
+    }
+
+    public function setIsValidated(bool $isValidated): self
+    {
+        $this->isValidated = $isValidated;
 
         return $this;
     }

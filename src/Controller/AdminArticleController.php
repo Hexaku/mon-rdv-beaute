@@ -29,11 +29,10 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/article/new", name="admin_article_new", methods={"GET","POST"})
      */
-    public function articleNew(Request $request): Response
+    public function articleNew(Request $request, ArticleRepository $articleRepository): Response
     {
         /* INITIALIZE ARTICLE REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Article::class);
-        $articles = $repository->findBy([
+        $articles = $articleRepository->findBy([
             "isHomePage" => true,
         ]);
 
@@ -67,11 +66,10 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/article/{id}/edit", name="admin_article_edit", methods={"GET","POST"})
      */
-    public function articleEdit(Request $request, Article $newArticle): Response
+    public function articleEdit(Request $request, Article $newArticle, ArticleRepository $articleRepository): Response
     {
         /* INITIALIZE ARTICLE REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Article::class);
-        $articles = $repository->findBy([
+        $articles = $articleRepository->findBy([
             "isHomePage" => true,
         ]);
 

@@ -28,11 +28,10 @@ class AdminHomeVideoController extends AbstractController
     /**
      * @Route("/video/new", name="admin_home_video_new", methods={"GET","POST"})
      */
-    public function videoNew(Request $request): Response
+    public function videoNew(Request $request, VideoRepository $videoRepository): Response
     {
         /* INITIALIZE VIDEO REPOSITORY FOR ALL VIDEO WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Video::class);
-        $videos = $repository->findBy([
+        $videos = $videoRepository->findBy([
             "isHomePage" => true,
         ]);
 
@@ -65,11 +64,10 @@ class AdminHomeVideoController extends AbstractController
     /**
      * @Route("/video/{id}/edit", name="admin_home_video_edit", methods={"GET","POST"})
      */
-    public function informationEdit(Request $request, Video $newVideo): Response
+    public function informationEdit(Request $request, Video $newVideo, VideoRepository $videoRepository): Response
     {
         /* INITIALIZE INFORMATION REPOSITORY FOR ALL ARTICLE WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Video::class);
-        $videos = $repository->findBy([
+        $videos = $videoRepository->findBy([
             "isHomePage" => true,
         ]);
 

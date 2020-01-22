@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Information;
 use App\Form\InformationType;
-use App\Repository\HomeInformationRepository;
+use App\Repository\InformationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class AdminHomeInformationController extends AbstractController
     /**
      * @Route("/information", name="admin_home_information")
      */
-    public function information(HomeInformationRepository $informationRepo): Response
+    public function information(InformationRepository $informationRepo): Response
     {
         return $this->render('admin/information.html.twig', [
             'informations' => $informationRepo->findAll(),
@@ -28,11 +28,10 @@ class AdminHomeInformationController extends AbstractController
     /**
      * @Route("/home_information/new", name="admin_home_information_new", methods={"GET","POST"})
      */
-    public function informationNew(Request $request): Response
+    public function informationNew(Request $request, InformationRepository $informationRepo): Response
     {
         /* INITIALIZE INFORMATION REPOSITORY FOR ALL INFORMATION WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Information::class);
-        $informations = $repository->findBy([
+        $informations = $informationRepo->findBy([
             "isHomePage" => true,
         ]);
 
@@ -65,11 +64,13 @@ class AdminHomeInformationController extends AbstractController
     /**
      * @Route("/information/{id}/edit", name="admin_home_information_edit", methods={"GET","POST"})
      */
-    public function informationEdit(Request $request, Information $information): Response
-    {
+    public function informationEdit(
+        Request $request,
+        Information $information,
+        InformationRepository $informationRepo
+    ): Response {
         /* INITIALIZE INFORMATION REPOSITORY FOR ALL INFORMATION WITH isHomePage == true */
-        $repository = $this->getDoctrine()->getRepository(Information::class);
-        $informations = $repository->findBy([
+        $informations = $informationRepo->findBy([
             "isHomePage" => true,
         ]);
 

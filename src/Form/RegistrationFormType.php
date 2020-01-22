@@ -25,29 +25,14 @@ class RegistrationFormType extends AbstractType
             ->add("birthdate", BirthdayType::class, ["label" => "Date de naissance"])
             ->add("phone", TextType::class, ["label" => "Téléphone"])
             ->add('email', EmailType::class)
+            ->add('password', PasswordType::class, ["label" => "Mot de passe"])
+            ->add('confirmPassword', PasswordType::class, ['label' => 'Confirmez votre mot de passe'])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 "label" => "J'accepte les conditions générales d'utilisation",
                 'constraints' => [
                     new IsTrue([
                         'message' => "Vous devez accepter les conditions générales d'utilisation",
-                    ]),
-                ],
-            ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                "label" => "Mot de passe",
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
                     ]),
                 ],
             ])

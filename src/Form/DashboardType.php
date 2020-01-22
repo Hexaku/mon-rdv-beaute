@@ -14,7 +14,10 @@ class DashboardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', ChoiceType::class, ["choices" => $this->getCategories(), "label" => "Catégorie"])
+            ->add('category', ChoiceType::class, [
+                "choices" => $this->getCategories(),
+                "label" => "Catégorie"
+            ])
             ->add('value', IntegerType::class, ["label" => "Objectif (en nombre)"])
         ;
     }

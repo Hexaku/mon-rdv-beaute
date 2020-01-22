@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -15,7 +14,7 @@ class ObjectiveExtension extends AbstractExtension
         ];
     }
 
-    public function formatObjective($objective)
+    public function formatObjective(int $objective): string
     {
         switch ($objective) {
             case 1:

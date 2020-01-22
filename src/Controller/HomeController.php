@@ -2,24 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Image;
 use App\Entity\ContactDay;
 use App\Entity\Newsletter;
-use App\Entity\Professional;
-use App\Entity\Service;
-use App\Entity\ServiceSearch;
-use App\Entity\Video;
 use App\Form\ContactDayType;
 use App\Entity\Article;
-use App\Entity\Information;
 use App\Form\NewsletterType;
-use App\Form\ServiceSearchType;
+use App\Repository\ImageRepository;
+use App\Repository\InformationRepository;
 use App\Repository\ProfessionalRepository;
 use App\Repository\ServiceRepository;
+use App\Repository\VideoRepository;
 use App\Service\FormatYoutubeLink;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,11 +22,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @return Response
      * @Route("/", name="home", methods={"GET", "POST"})
      */
-    public function index(Request $request, FormatYoutubeLink $formatYoutubeLink): Response
-    {
+    public function index(
+        Request $request,
+        FormatYoutubeLink $formatYoutubeLink,
+        ImageRepository $imageRepository,
+        InformationRepository $informationRepo,
+        VideoRepository $videoRepository
+    ): Response {
         /* CREATING FILTER FORM */
         $formFilter = $this
             ->createFormBuilder()
@@ -67,22 +66,19 @@ class HomeController extends AbstractController
         }
 
         /* GET IMAGES CARD POSITIONS CARD */
-        $repository = $this->getDoctrine()->getRepository(Image::class);
-        $positions = $repository->findAll();
+        $positions = $imageRepository->findAll();
 
         /* GET THE INFORMATION WITH isHomePage = true TO SHOW ON HOME PAGE */
-        $informationRepo = $this->getDoctrine()->getRepository(Information::class);
         $information = $informationRepo->findOneBy([
             "isHomePage" => true,
         ]);
 
         /* GET THE VIDEO WITH isHomePage = true TO SHOW ON HOME PAGE */
-        $videoRepository = $this->getDoctrine()->getRepository(Video::class);
         $video = $videoRepository->findOneBy([
             "isHomePage" => true,
         ]);
 
-        if ($video != null) {
+        if ($video !== null) {
             /* FORMAT YOUTUBE LINK TO FIT IFRAME YT PATTERN */
             $video->setLink($formatYoutubeLink->format($video->getLink()));
         }
@@ -106,7 +102,6 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-
         return $this->render("home/index.html.twig", [
             "form" => $form->createView(),
             "contactDay" => $contactDay,
@@ -122,10 +117,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/search", name="home_filter")
      */
-    public function search(Request $request): Response
+    public function search(Request $request, ServiceRepository $serviceRepository): Response
     {
-        $repository = $this->getDoctrine()->getRepository(Service::class);
-        $services = $repository->findServicesByQuery(
+        $services = $serviceRepository->findServicesByQuery(
             $request->query->get("form")["serviceName"],
             $request->query->get("form")["serviceLocation"]
         );

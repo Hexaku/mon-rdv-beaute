@@ -7,7 +7,6 @@ use App\Entity\Service;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use DateTime;
-use DateInterval;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,12 +30,11 @@ class BookingController extends AbstractController
     /**
      * @Route("/{id}/{date}/{hour}/new", name="booking_new", methods={"GET","POST"})
      */
-    public function new(Request $request, Service $service, DateTime $date, $hour): Response
+    public function new(Service $service, DateTime $date, $hour): Response
     {
         /*
-         * $duration correspond à la durée du service réservé au quel on retire une minute
-         * afin de laisser afficher les créneaux suivant
-         * ex réservation à 17h00 pour une durée d'1h, le créneaux de 18h00 sera disponible
+         * $duration is service duration minus 1 minute to show next time intervals
+         * example : booking at 5PM (17h00) for 1 hour = the date interval for 6PM (18h00) will be available
          */
         $duration =($service->getDuration() * 60) - 60;
         $hourEnd = date('H:i', intval(strtotime($hour) + $duration));

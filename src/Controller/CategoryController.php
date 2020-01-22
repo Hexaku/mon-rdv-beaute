@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
-use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,10 +29,8 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
-        $services = $category->getServices()->toArray();
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'services' => $services,
         ]);
     }
 

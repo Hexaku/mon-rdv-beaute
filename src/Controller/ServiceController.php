@@ -3,12 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Service;
-use App\Form\ServiceType;
 use App\Repository\BookingRepository;
 use App\Repository\BusinessHourRepository;
-use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use DateInterval;
@@ -35,7 +32,6 @@ class ServiceController extends AbstractController
      */
     public function booking(Service $service): Response
     {
-        //dd($service->getProfessional()->getBookings()->toArray());
         return $this->render("service/booking.html.twig", [
             "service" => $service,
         ]);
@@ -60,32 +56,22 @@ class ServiceController extends AbstractController
         /* DATE INTERVAL AND PERIOD BETWEEN OPEN AND CLOSE TIME */
         $result = [];
 
-        /*
-         * La méthode find permet de récupérer uniquement les réservations du jour sur
-         * lequel nous cliquont qui sont affilié au professionel lié au service
-         */
+        /*The "find" method is able to get only bookings of the day clicked linked to the professional of the service*/
         $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $date);
 
         foreach ($reservationDays as $reservationDay) {
-            /*
-             *$period va servir à afficher les heures coté js en récuperant tout les intervalles
-             *de temps en fonction de la durée des services et des horraires d'ouverture du professionel.
-             */
+            /* $period is able to show hours (in JS side) while getting time intervals
+             * in function of services duration and professional hours */
             $period = new DatePeriod(
                 new DateTime($reservationDay->getOpenTime()->format("H:i")),
                 new DateInterval("PT" . $serviceDuration . "M"),
                 new DateTime($reservationDay->getCloseTime()->format("H:i"))
             );
             foreach ($period as $date) {
-                /*
-                 * Tant que $add est égale a true, l'horraire sera enregistré dans result
-                 */
+                /* While $add is equal to true, hour will be saved in result */
                 $add = true;
                 foreach ($bookings as $booking) {
-                    /*
-                     * On explode les heures de début et de fin des réservation
-                     * pour les utiliser en setTime
-                     */
+                    /* We explode start and end hours of booking to use them in setTime */
                     $bookingHour = explode(':', $booking->getHour());
                     $bookingHourEnd = explode(':', $booking->getHourEnd());
                     $bookingDuration = $booking->getService()->getDuration();
@@ -95,10 +81,7 @@ class ServiceController extends AbstractController
                         $diff = $serviceDuration - $bookingDuration;
                     }
 
-                    /*
-                     * La condition empêche d'afficher les heures réservées en prenant également en compte la
-                     * durée des réservations.
-                     */
+                    /* The condition is blocking show of hours booked, taking also the bookings duration  */
                     if ($date->format('H:i') >=
                         $booking->getDate()
                             ->setTime($bookingHour[0], intval($bookingHour[1]) - $diff)
