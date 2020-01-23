@@ -37,7 +37,7 @@ class BookingRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllCustomers()
+    public function findAllCustomers(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 

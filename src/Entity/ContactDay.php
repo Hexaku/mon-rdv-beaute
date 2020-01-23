@@ -37,8 +37,12 @@ class ContactDay
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Regex(pattern="/^[0-9]*$/", message="Le numéro de téléphone ne doit contenir que des chiffres")
-     * @Assert\Length(min="10", minMessage="Le numéro de téléphone doit être composé de 10 chiffres")
-     * @Assert\Length(max="10", maxMessage="Le numéro de téléphone doit être composé de 10 chiffres")
+     * @Assert\Length(
+     *     min="10",
+     *     max="10",
+     *     minMessage="Le numéro de téléphone doit être composé de 10 chiffres",
+     *     maxMessage="Le numéro de téléphone doit être composé de 10 chiffres"
+     * )
      */
     private $phone;
 

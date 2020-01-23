@@ -28,15 +28,16 @@ class BookingService
         $result = [];
 
         /*
-         * La méthode find permet de récupérer uniquement les réservations du jour sur
-         * lequel nous cliquont qui sont affilié au professionel lié au service
+         * The find function takes only bookings of the day on which we click,
+         * related to the professional and to the service.
          */
         $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $date);
 
         foreach ($reservationDays as $reservationDay) {
             /*
-             *$period va servir à afficher les heures coté js en récuperant tout les intervalles
-             *de temps en fonction de la durée des services et des horraires d'ouverture du professionel.
+             * $period is used to show hours available on the the js file
+             * It uses professional business hours and the services duration
+             * to create all time interval
              */
             $period = new DatePeriod(
                 new DateTime($reservationDay->getOpenTime()->format("H:i")),
@@ -45,13 +46,13 @@ class BookingService
             );
             foreach ($period as $date) {
                 /*
-                 * Tant que $add est égale a true, l'horraire sera enregistré dans result
+                 * While $add is true, the hour is stocked in result
                  */
                 $add = true;
                 foreach ($bookings as $booking) {
                     /*
-                     * On explode les heures de début et de fin des réservation
-                     * pour les utiliser en setTime
+                     * We explode beginning and end hours of the bookings to use them
+                     * at setTime
                      */
                     $bookingHour = explode(':', $booking->getHour());
                     $bookingHourEnd = explode(':', $booking->getHourEnd());
@@ -63,8 +64,8 @@ class BookingService
                     }
 
                     /*
-                     * La condition empêche d'afficher les heures réservées en prenant également en compte la
-                     * durée des réservations.
+                     * The if condition prevent to show bookings hours and take in consideration
+                     * bookings duration
                      */
                     if ($date->format('H:i') >=
                         $booking->getDate()
