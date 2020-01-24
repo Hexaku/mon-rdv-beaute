@@ -1,8 +1,6 @@
 {%  extends 'base.html.twig' %}
 
-{% block title %}
-Les journées bien-être
-{% endblock %}
+{% block title %}Les journées bien-être{% endblock %}
 
 {% block body %}
 
@@ -13,20 +11,19 @@ Les journées bien-être
                 <div class="card-service-left">
                     <!-- Vich uses to upload a photo for a pack -->
                     <img class="card-service-image" src="{{ vich_uploader_asset(pack, 'imageFile') }}"/>
-                    <p class="card-service-slogan hidden">{#{{ service.slogan }}#}</p>
                 </div>
                 <div class="card-service-separator"></div>
                 <div class="card-service-right">
-
-                    <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}" class="grey-link"><h3>{{ pack.name }}</h3></a>
+                    <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}" class="grey-link"><h3 class="card-title-pack">{{ pack.name }}</h3></a>
                     <p class="card-service-price">{{ pack.price }} €</p>
                     <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}"><button class="btn btn-lg btn-pink">Détails</button></a>
-
                 </div>
             </div>
         {% endfor %}
         <div class="text-center">
-            <a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-lg btn-success">Être informé des prochaines journées bien-être</button></a>
+            <div class="service-separator"></div>
+            <h4 class="service-title" id="#title-button-modal">Besoin d'en savoir plus ?</h4>
+            <a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-success">Être informé des prochaines journées bien-être</button></a>
         </div>
     </div>
     <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
@@ -42,6 +39,4 @@ Les journées bien-être
             </div>
         </div>
     </div>
-
-
 {% endblock %}

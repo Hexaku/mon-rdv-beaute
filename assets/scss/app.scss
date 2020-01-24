@@ -185,6 +185,10 @@ ul {
     font-family: "Libre Baskerville", Serif;
 }
 
+.card-title-pack {
+    margin-bottom: 25px !important;
+}
+
 .modal-image {
     margin: 0 auto;
 }
@@ -194,6 +198,15 @@ ul {
     flex-direction: row-reverse;
     justify-content: space-between;
 }
+
+#title-button-modal {
+    margin-bottom: 30px;
+}
+
+.no-underline {
+    text-decoration: none !important;
+}
+
 @media only screen and (min-width: 600px) {
     .container-flex {
         max-width: 600px;
