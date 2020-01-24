@@ -239,7 +239,7 @@
             <nav class="topbar-menu topbar-menu-mobile no-show rounded" id="topbar-menu-mobile">
                 <a href="{{ path('category_index') }}">Prestations</a>
                 <div class="white-line"></div>
-                <a href="{{ path('special_day') }}">JOURNEE BIEN-ETRE</a>
+                <a href="{{ path('special_day') }}">Journées Bien-Être</a>
                 <div class="white-line"></div>
                 <a href="{{ path('article_index') }}">Articles</a>
                 <div class="white-line"></div>
@@ -270,6 +270,7 @@
                 <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
             </nav>
+            {% include "flash_message.html.twig" %}
             <div>
                 <h1 class="main-title">Prenez rendez-vous avec votre bien-être</h1>
             </div>

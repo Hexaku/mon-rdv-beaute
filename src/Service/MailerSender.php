@@ -44,7 +44,7 @@ class MailerSender
         $email = (new Email())
             ->from($mail)
             ->to($mail)
-            ->subject('Recapitulatif de la reservation!')
+            ->subject('Un utilisateur a réservé une prestation !')
             ->html($this->twig->render("booking/mail.html.twig", [
                 'booking' => $booking,
             ]));
@@ -59,7 +59,7 @@ class MailerSender
         $email = (new Email())
             ->from($mail)
             ->to($mail)
-            ->subject('Recapitulatif de vôtre réservation !')
+            ->subject('Récapitulatif de votre réservation !')
             ->html($this->twig->render("booking/mail.html.twig", [
                 'booking' => $booking,
             ]));

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Booking;
 use App\Entity\Service;
+use App\Entity\User;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Service\MailerSender;
@@ -52,6 +53,11 @@ class BookingController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($booking);
         $entityManager->flush();
+
+        $this->addFlash(
+            "success",
+            "Votre rendez-vous est bien validé, un mail vous a été envoyé !"
+        );
 
         return $this->redirectToRoute('home');
     }
