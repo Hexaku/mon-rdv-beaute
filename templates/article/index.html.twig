@@ -5,7 +5,6 @@
 {% block body %}
     <div class="container-flex">
         <h2 class="title">Tous les articles</h2>
-        <a href="{{ path('admin_article_new') }}"><button class="btn btn-link">Écrire un nouvel article</button></a>
         {% for article in articles %}
         <div class="card">
             <div class="card-body">

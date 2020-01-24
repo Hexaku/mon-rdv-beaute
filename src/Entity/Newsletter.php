@@ -20,7 +20,7 @@ class Newsletter
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
-     * @Assert\Type("email")
+     * @Assert\Email
      */
     private $email;
 

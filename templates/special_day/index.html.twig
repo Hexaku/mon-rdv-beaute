@@ -7,7 +7,6 @@ Les journées bien-être
 {% block body %}
 
     <div class="container-flex">
-        <a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-lg btn-primary">Plus d'infos</button></a>
         <h2 class="title">Nos packs </h2>
         {% for pack in packs %}
             <div class="card-service rounded">
@@ -20,12 +19,15 @@ Les journées bien-être
                 <div class="card-service-right">
                     <h3>{{ pack.name }}</h3>
                     <!--<a href="{#{{ path('service_show', {'slug': service.slug}) }}#}" class="grey-link"><h3 class="card-service-name">{{ pack.name }}</h3></a>-->
-                    <p class="card-service-price">{{ pack.description }} | {{ pack.price }} €</p>
+                    <p class="card-service-price">{{ pack.price }} €</p>
                     <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}"><button class="btn btn-lg btn-pink">Détails</button></a>
 
                 </div>
             </div>
         {% endfor %}
+        <div class="text-center">
+            <a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-lg btn-success">Être informé des prochaines journées bien-être</button></a>
+        </div>
     </div>
     <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

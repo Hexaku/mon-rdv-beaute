@@ -270,7 +270,9 @@
                 <a href="{{ path('about') }}">A PROPOS</a>
                 <a href="{{ path('contact') }}">CONTACT</a>
             </nav>
-            {% include "flash_message.html.twig" %}
+            <div>
+                {% include "flash_message.html.twig" %}
+            </div>
             <div>
                 <h1 class="main-title">Prenez rendez-vous avec votre bien-être</h1>
             </div>
@@ -363,7 +365,7 @@
         <div class="higher-footer">
             <div class="footer-description">
                 <img class="footer-description-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo mon RDV Beauté"/>
-                <p class="footer-description-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut nisl justo. Curabitur hendrerit faucibus dui.</p>
+                <p class="footer-description-content">Prenez rendez-vous avec votre bien-être</p>
             </div>
             <div class="footer-socials">
                 <h4 class="footer-socials-title">Suivez-nous !</h4>
