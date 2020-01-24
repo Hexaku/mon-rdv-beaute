@@ -3,17 +3,15 @@
 {% block title %}Détail du pack{% endblock %}
 
 {% block body %}
-    <div class="container-flex">
-        <p><a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-lg btn-primary">Plus d'infos</button></a></p>
-        <p><a href="{{ path('special_day') }}"><button class="btn btn-lg btn-light">Retour</button></a></p>
-    </div>
-
     <div class="container-flex text-center">
         <h1 class="title">{{ pack.name }}</h1>
         <h3 class="service-price mb-3">{{ pack.price }}€</h3>
         <!-- Vich uses to upload a photo for a pack -->
         <img src="{{ vich_uploader_asset(pack, 'imageFile') }}" class="img-fluid rounded mb-5 mt-5"/>
         <h4 class="service-description mb-4">{{ pack.description }}</h4>
+    </div>
+    <div class="container-flex">
+        <p><a href="{{ path('special_day') }}"><button class="btn btn-success">Retour à la liste</button></a></p>
     </div>
 
     <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
