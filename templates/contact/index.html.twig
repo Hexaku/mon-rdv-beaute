@@ -7,9 +7,13 @@
     <div class="container-flex">
             {% include "flash_message.html.twig" %}
             {{ form_start(form) }}
-            <div class="form-flex">
-                {{ form_row(form.firstName) }}
-                {{ form_row(form.lastName) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.lastName) }}
+                </div>
             </div>
             {{ form_row(form.email) }}
             {{ form_row(form.message) }}

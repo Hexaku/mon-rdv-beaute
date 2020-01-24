@@ -312,7 +312,7 @@
                     {% else %}
                         <img src="{{ asset('build/bien-etre.png') }}" class="category-image rounded">
                 {% endfor %}
-                <<a href="{{ path('special_day') }}"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
+                <a href="{{ path('special_day') }}"><div class="category-button">DECOUVRIR NOS JOURNEES BIEN-ETRE</div></a>
             </div>
             <div class="category">
                 {% for position in positions if position.position == 3 %}

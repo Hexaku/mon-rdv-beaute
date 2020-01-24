@@ -19,7 +19,7 @@ class ServiceFixtures extends Fixture implements DependentFixtureInterface
         $service = new Service();
 
         $service->setProfessional($this->getReference('marie'))
-            ->setFilename('')
+            ->setFilename('5e1a16dc33bb1300009762.jpeg')
             ->setSlug('coiffure-1')
             ->setName('Coiffure 1')
             ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non accumsan ante. 

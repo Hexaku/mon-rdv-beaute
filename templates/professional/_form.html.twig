@@ -3,10 +3,22 @@
 {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.email) }}
-    {{ form_row(form.place) }}
-    {{ form_row(form.city) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.phone) }}
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.place) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.city) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.description) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.phone) }}
+        </div>
+    </div>
     {{ form_row(form.imageFile) }}
         <div class="flex-form">
             <h5>Horaires</h5>
