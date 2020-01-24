@@ -42,6 +42,7 @@ class BookingController extends AbstractController
         $duration =($service->getDuration() * 60) - 60;
         $hourEnd = date('H:i', intval(strtotime($hour) + $duration));
         $booking = new Booking();
+
         $booking->setProfessional($service->getProfessional())
             ->setUser($this->getUser())
             ->setDate($date)
@@ -49,7 +50,9 @@ class BookingController extends AbstractController
             ->setHourEnd($hourEnd)
             ->setService($service);
 
+        $mailerSender->recapMailClient($booking);
         $mailerSender->recapMail($booking);
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($booking);
         $entityManager->flush();

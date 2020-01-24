@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -56,6 +57,11 @@ class Pack
      */
     private $uploadedAt;
 
+    /**
+     * @Vich\UploadableField(mapping="pack_image", fileNameProperty="filename")
+     */
+    private $imageFile;
+
     public function getUploadedAt(): ?\DateTimeInterface
     {
         return $this->uploadedAt;
@@ -67,23 +73,23 @@ class Pack
         return $this;
     }
 
-    public function getFileName()
+    public function getFileName(): ?string
     {
         return $this->fileName;
     }
 
-    public function setFileName($fileName)
+    public function setFileName(?string $fileName): self
     {
         $this->fileName = $fileName;
         return $this;
     }
 
-    public function getImageFile()
+    public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    public function setImageFile($imageFile)
+    public function setImageFile(?File $imageFile): void
     {
         $this->imageFile = $imageFile;
         // Only change the updated af if the file is really uploaded to avoid database updates.
@@ -92,13 +98,6 @@ class Pack
             $this->uploadedAt = new DateTime('now');
         }
     }
-
-    /**
-     * @Vich\UploadableField(mapping="pack_image", fileNameProperty="filename")
-     */
-    private $imageFile;
-
-
 
     public function getId(): ?int
     {

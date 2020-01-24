@@ -52,19 +52,25 @@ class MailerSender
         $this->mailer->send($email);
     }
 
-    public function recapMailClient(Booking $booking, $email): void
+    public function recapMailClient(Booking $booking): void
     {
-        $mail = $_ENV['MAILER_ADMIN'];
 
-        $email = (new Email())
-            ->from($mail)
-            ->to($mail)
-            ->subject('Récapitulatif de votre réservation !')
-            ->html($this->twig->render("booking/mail.html.twig", [
-                'booking' => $booking,
-            ]));
+        $emailFrom = $_ENV['MAILER_ADMIN'];
+        $user = $booking->getUser();
+        if ($emailFrom && $user) {
+            $emailTo = $user->getEmail();
+            if ($emailTo) {
+                $email = (new Email())
+                    ->from($emailFrom)
+                    ->to($emailTo)
+                    ->subject('Recapitulatif de vôtre réservation !')
+                    ->html($this->twig->render("booking/mail.html.twig", [
+                        'booking' => $booking,
+                    ]));
 
-        $this->mailer->send($email);
+                $this->mailer->send($email);
+            }
+        }
     }
 
     public function sendProContactMail(array $data): void
