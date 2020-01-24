@@ -185,6 +185,15 @@ ul {
     font-family: "Libre Baskerville", Serif;
 }
 
+.modal-image {
+    margin: 0 auto;
+}
+
+.modal-footer-flex {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
 @media only screen and (min-width: 600px) {
     .container-flex {
         max-width: 600px;
