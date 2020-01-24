@@ -23,17 +23,18 @@ class VerifyTokenMailer
     {
         $mail = $data->getEmail();
         $firstName = $data->getFirstname();
+        if ($mail) {
+            $email = (new Email())
+                ->from($mail)
+                ->to($mail)
+                ->subject('Confirmation d\'inscription - Mon RDV Beauté ')
+                ->html($this->twig->render("registration/mail.html.twig", [
+                    "firstname" => $firstName,
+                    "lien" => "http://127.0.0.1:8000/verify-email",
+                    "token" => $token,
+                ]));
 
-        $email = (new Email())
-            ->from($mail)
-            ->to($mail)
-            ->subject('Confirmation d\'inscription - Mon RDV Beauté ')
-            ->html($this->twig->render("registration/mail.html.twig", [
-                "firstname" => $firstName,
-                "lien" => "http://127.0.0.1:8000/verify-email",
-                "token" => $token,
-            ]));
-
-        $this->mailer->send($email);
+            $this->mailer->send($email);
+        }
     }
 }

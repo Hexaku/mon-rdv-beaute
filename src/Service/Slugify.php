@@ -16,7 +16,9 @@ class Slugify
             $input = trim($input);
 
             $input = preg_replace('!\s+!', '-', $input);
+
+            return $input;
         }
-        return $input;
+        return null;
     }
 }

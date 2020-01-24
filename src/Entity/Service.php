@@ -30,6 +30,7 @@ class Service
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Assert\Length(max="100")
      * @Groups({"filter"})
      */
     private $name;

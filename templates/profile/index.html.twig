@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div class="container-flex">
+        {% include "flash_message.html.twig" %}
+        <h1 class="title">Mon profil</h1>
+        <div></div>
+        <div><a href="{{ path('profile_edit', {id: user.id}) }}">Editer mon profil</a></div>
+        <div><a href="{{ path('profile_password_edit', {id: user.id}) }}">Modifier mon mot de passe</a></div>
+        <div><a href="{{ path('profile_booking', {id: user.id}) }}">Voir mes prestations reservées</a></div>
+    </div>
+{% endblock %}

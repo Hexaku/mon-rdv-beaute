@@ -28,12 +28,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
+     * @Assert\Length(max="50")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Assert\Length(max="100")
      */
     private $lastname;
 
@@ -53,9 +55,24 @@ class User implements UserInterface
     private $phone;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max="255")
+     */
+    private $adress;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max="255")
+     */
+    private $city;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank
      * @Assert\Email(message="Cette adresse mail n'est pas valide")
+     * @Assert\Length(max="180")
      */
     private $email;
 
@@ -65,12 +82,6 @@ class User implements UserInterface
      * @Assert\Length(min="6", minMessage="Le mot de passe doit avoir au minimum 6 caractères")
      */
     private $password;
-
-    /**
-     * @Assert\NotBlank
-     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe doivent être identiques")
-     */
-    private $confirmPassword;
 
     /**
      * @ORM\Column(type="json")
@@ -97,7 +108,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -150,18 +161,6 @@ class User implements UserInterface
     {
         $this->password = $password;
 
-        return $this;
-    }
-
-    public function getConfirmPassword(): string
-    {
-        return $this->confirmPassword;
-    }
-
-
-    public function setConfirmPassword(string $confirmPassword): self
-    {
-        $this->confirmPassword = $confirmPassword;
         return $this;
     }
 
@@ -266,6 +265,30 @@ class User implements UserInterface
     public function setIsValidated(bool $isValidated): self
     {
         $this->isValidated = $isValidated;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
