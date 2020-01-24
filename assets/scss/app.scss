@@ -54,6 +54,18 @@ ul {
     margin: 50px 0;
 }
 
+.carousel-inner {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-images {
+    width: 100%;
+    height: 275px;
+}
+
 /* CARD ARTICLES */
 .card {
     margin-bottom: 25px;
@@ -140,13 +152,21 @@ ul {
 }
 
 .btn-pink {
-    background-color: #CF8080;
+    background-color: #f29696;
     color: white;
+}
+
+.btn-hours {
+    margin-right: 10px;
 }
 
 .btn-pink:hover {
     color: white;
     background-color: #e5a099;
+}
+
+#registration_form_birthdate select {
+    margin-right: 15px;
 }
 
 /* DESCRIPTION SERVICE */
@@ -169,6 +189,11 @@ ul {
     .container-flex {
         max-width: 600px;
         margin: 50px auto;
+    }
+
+    .carousel-images {
+        width: 100%;
+        height: 400px;
     }
 
     .card-service {
@@ -215,6 +240,11 @@ ul {
 @media only screen and (min-width: 1200px) {
     .category-carousel {
         margin: 50px 250px;
+    }
+
+    .carousel-images {
+        width: 100%;
+        height: 700px;
     }
 
     .title {

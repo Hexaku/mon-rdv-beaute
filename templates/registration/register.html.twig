@@ -7,12 +7,30 @@
     <div class="container-flex">
         <h1 class="title">S'inscrire</h1>
         {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.firstname) }}
-            {{ form_row(registrationForm.lastname) }}
-            {{ form_row(registrationForm.birthdate) }}
-            {{ form_row(registrationForm.phone) }}
-            {{ form_row(registrationForm.adress) }}
-            {{ form_row(registrationForm.city) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(registrationForm.firstname) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(registrationForm.lastname) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(registrationForm.birthdate) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(registrationForm.phone) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(registrationForm.adress) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(registrationForm.city) }}
+                </div>
+            </div>
             {{ form_row(registrationForm.email) }}
             {{ form_row(registrationForm.password) }}
             {{ form_row(registrationForm.agreeTerms) }}

@@ -26,7 +26,7 @@
             <div class="carousel-inner">
                 {% for category in categories %}
                 <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
-                    <img class="d-block w-100" src="{{ vich_uploader_asset(category, 'imageFile')}}" alt="First slide">
+                    <img class="d-block w-100 carousel-images" src="{{ vich_uploader_asset(category, 'imageFile')}}" alt="First slide">
                 </div>
                 {% endfor %}
             </div>

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else {
                             let hours = '';
                             result.forEach((item, index) => {
-                                hours += `<a href="/booking/${calendarEl.getAttribute('service')}/${info.dateStr}/${result[index]}" class="btn btn-pink">${result[index]}</a>`;
+                                hours += `<a href="/booking/${calendarEl.getAttribute('service')}/${info.dateStr}/${result[index]}" class="btn btn-pink btn-hours">${result[index]}</a>`;
                             });
                             $('.modal-body').html(hours);
                         }
