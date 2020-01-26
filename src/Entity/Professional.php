@@ -39,6 +39,7 @@ class Professional
     /**
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank
+     * @Assert\Length(max="100")
      */
     private $name;
 
@@ -46,12 +47,14 @@ class Professional
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Email
+     * @Assert\Length(max="255")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Assert\Length(max="255")
      */
     private $place;
 
@@ -63,6 +66,13 @@ class Professional
     /**
      * @ORM\Column(type="string", length=10)
      * @Assert\NotBlank
+     * @Assert\Regex(pattern="/^[0-9]*$/", message="Le numéro de téléphone ne doit contenir que des chiffres")
+     * @Assert\Length(
+     *     min="10",
+     *     max="10",
+     *     minMessage="Le numéro de téléphone doit être composé de 10 chiffres",
+     *     maxMessage="Le numéro de téléphone doit être composé de 10 chiffres"
+     * )
      */
     private $phone;
 

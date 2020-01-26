@@ -19,14 +19,9 @@ class ContactDayType extends AbstractType
         $builder
             ->add('Name', TextType::class, [
                 "label" => "Nom",
-                "constraints" => [new NotBlank()]
             ])
             ->add('Email', EmailType::class, [
                 "label" => "Email",
-                "constraints" => [
-                    new NotBlank(),
-                    new Email()
-                ]
             ])
             ->add('Phone', TextType::class, [
                 "label" => "Téléphone (facultatif)",
