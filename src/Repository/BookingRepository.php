@@ -23,11 +23,12 @@ class BookingRepository extends ServiceEntityRepository
 
     public function findBookingByProfessionalAndDate(?Professional $professional, DateTime $date): array
     {
-        return $this
-            ->createQueryBuilder('b')
+        //to access expr method, we have to put createQueryBuilder in a variable before
+        $qb = $this->createQueryBuilder('b');
+        return $qb
             ->join('b.professional', 'p')
-            ->where('p = :p')
-            ->andWhere('b.date = :date')
+            ->where($qb->expr()->eq('p', ':p'))
+            ->andWhere($qb->expr()->eq('b.date', ':date'))
             ->setParameters([
                 'p' => $professional,
                 'date' => $date
@@ -37,15 +38,14 @@ class BookingRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllCustomers(): array
+    public function findAllBookings(): ?int
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT COUNT(id) FROM booking';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-
         // returns an array of arrays (i.e. a raw data set)
-        return $stmt->fetchAll();
+        return $this
+            ->createQueryBuilder('b')
+            ->select("count(b)")
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 }

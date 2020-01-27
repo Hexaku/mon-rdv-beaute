@@ -19,16 +19,15 @@ class ProfessionalRepository extends ServiceEntityRepository
         parent::__construct($registry, Professional::class);
     }
 
-    public function findAllProfessionals(): ?array
+    public function findAllProfessionals(): ?int
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT COUNT(id) FROM professional';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-
         // returns an array of arrays (i.e. a raw data set)
-        return $stmt->fetchAll();
+        return $this
+            ->createQueryBuilder("p")
+            ->select("count(p)")
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 
     public function findAllMatching(string $query, int $limit = 5): ?array

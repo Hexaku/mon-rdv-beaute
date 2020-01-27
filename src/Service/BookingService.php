@@ -13,13 +13,13 @@ class BookingService
 {
     public function bookingService(
         Service $service,
-        DateTime $date,
+        DateTime $dateTime,
         BusinessHourRepository $businessHourRepo,
         BookingRepository $bookingRepository
     ) {
         $reservationDays = $businessHourRepo->findBy([
             "professional" => $service->getProfessional(),
-            "day" => $date->format("N"),
+            "day" => $dateTime->format("N"),
         ]);
         /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
         $serviceDuration = $service->getDuration();
@@ -31,7 +31,7 @@ class BookingService
          * The find function takes only bookings of the day on which we click,
          * related to the professional and to the service.
          */
-        $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $date);
+        $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $dateTime);
 
         foreach ($reservationDays as $reservationDay) {
             /*
@@ -77,6 +77,10 @@ class BookingService
                             ->format('H:i')) {
                         $add = false;
                     }
+                }
+                $now = new DateTime();
+                if ($dateTime->format('Y/m/d') === $now->format('Y/m/d') && $date < $now) {
+                    $add = false;
                 }
                 if ($add) {
                     $result[] = $date->format('H:i');
