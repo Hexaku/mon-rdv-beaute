@@ -34,7 +34,7 @@ class AdminDashboardController extends AbstractController
         $services = $serviceRepository->findAllServices();
         $professionals = $professionalRepo->findAllProfessionals();
         $members = $userRepository->findAllUsers();
-        $customers = $bookingRepository->findAllCustomers();
+        $customers = $bookingRepository->findAllBookings();
 
         $dashboard = new Dashboard();
         $form = $this->createForm(DashboardType::class, $dashboard);

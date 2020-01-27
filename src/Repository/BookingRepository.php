@@ -37,15 +37,14 @@ class BookingRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllCustomers(): array
+    public function findAllBookings(): ?int
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT COUNT(id) FROM booking';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-
         // returns an array of arrays (i.e. a raw data set)
-        return $stmt->fetchAll();
+        return $this
+            ->createQueryBuilder('b')
+            ->select("count(b)")
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 }
