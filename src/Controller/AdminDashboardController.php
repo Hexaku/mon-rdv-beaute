@@ -31,11 +31,13 @@ class AdminDashboardController extends AbstractController
         BookingRepository $bookingRepository
     ): Response {
 
+        /* INITIALIZE 4 VARIABLES FOR ADMIN STATS */
         $services = $serviceRepository->findAllServices();
         $professionals = $professionalRepo->findAllProfessionals();
         $members = $userRepository->findAllUsers();
         $customers = $bookingRepository->findAllBookings();
 
+        /* CREATING OBJECTIVES ON ADMIN DASHBOARD */
         $dashboard = new Dashboard();
         $form = $this->createForm(DashboardType::class, $dashboard);
         $form->handleRequest($request);

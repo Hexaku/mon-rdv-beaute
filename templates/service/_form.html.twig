@@ -25,7 +25,9 @@
         <div class="hours" data-prototype="{{ form_widget(form.servicePrices.vars.prototype)|e('html_attr')}}">
             {# iterate over each existing tag and render its only field: name #}
             {% for servicePrice in form.servicePrices %}
-                {{ form_row(servicePrice) }}
+                <div class="row-hour mb-3">
+                    {{ form_row(servicePrice) }}
+                </div>
             {% endfor %}
         </div>
     </div>
