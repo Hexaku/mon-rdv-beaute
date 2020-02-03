@@ -177,7 +177,7 @@ class Professional
         return $this->phone;
     }
 
-    public function setPhone(int $phone): self
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 
@@ -281,7 +281,7 @@ class Professional
         }
         return $this;
     }
-  
+
     public function removeBooking(Booking $booking): self
     {
         if ($this->bookings->contains($booking)) {
@@ -308,7 +308,7 @@ class Professional
 
         return $this;
     }
-         
+
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {

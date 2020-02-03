@@ -21,7 +21,7 @@ class ContactDay
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      * @Assert\Length(max="255")
      */
     private $name;
@@ -29,7 +29,7 @@ class ContactDay
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
-     * @Assert\Email
+     * @Assert\Email(message="Cette adresse mail n'est pas valide")
      * @Assert\Length(max="255")
      */
     private $email;

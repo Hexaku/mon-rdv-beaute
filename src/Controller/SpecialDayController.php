@@ -33,8 +33,11 @@ class SpecialDayController extends AbstractController
             $entityManager->persist($contactDay);
             $entityManager->flush();
 
+            $this->addFlash("primary", "Votre inscription s'est bien déroulée");
+
             return $this->redirectToRoute('home');
         }
+
         return $this->render("special_day/index.html.twig", [
             "form" => $form->createView(),
             "contactDay" => $contactDay,
