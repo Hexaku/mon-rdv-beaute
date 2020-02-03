@@ -11,12 +11,12 @@
         <img src="{{ vich_uploader_asset(service, 'imageFile') }}" class="img-fluid rounded mb-5 mt-5"/>
         <p class="service-description mb-4">{{ service.description }}</p>
         {% if service.servicePrices is not empty %}
-            <h4 class="service-title mb-4">Options</h4>
+            <h4 class="service-title mb-4 mt-5">Options</h4>
         {% endif %}
         {% for servicePrice in service.servicePrices.toArray %}
             <p>{{ servicePrice.name }} - {{ servicePrice.price }}€</p>
         {% endfor %}
-        <h4 class="service-title mb-4">Réservation</h4>
+        <h4 class="service-title mb-4 mt-5">Réservation</h4>
         <a href="{{ path('service_booking', {'slug': service.slug}) }}"><button class="btn btn-pink">Réserver maintenant</button></a>
         {# 1 = "Sur place", 2 = "A domicile" #}
         {% if service.serviceType is same as (1) %}

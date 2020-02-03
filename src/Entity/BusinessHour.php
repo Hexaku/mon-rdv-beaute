@@ -82,24 +82,24 @@ class BusinessHour
         return self::DAYS[$this->day];
     }
 
-    public function getOpenTime(): \DateTime
+    public function getOpenTime(): ?\DateTime
     {
         return $this->openTime;
     }
 
-    public function setOpenTime(\DateTime $openTime): self
+    public function setOpenTime(?\DateTime $openTime): self
     {
         $this->openTime = $openTime;
 
         return $this;
     }
 
-    public function getCloseTime(): \DateTime
+    public function getCloseTime(): ?\DateTime
     {
         return $this->closeTime;
     }
 
-    public function setCloseTime(\DateTime $closeTime): self
+    public function setCloseTime(?\DateTime $closeTime): self
     {
         $this->closeTime = $closeTime;
 

@@ -53,6 +53,9 @@ jQuery(document).ready(() => {
     // Get the ul that holds the collection of hours
     $collectionHolder = $('div.hours');
 
+    $collectionHolder.find('.row-hour').each(() => {
+        addTagFormDeleteLink($(this));
+    });
     // add the "add a tag" anchor and li to the hours ul
     $collectionHolder.append($newLinkLi);
 

@@ -28,11 +28,14 @@ class Pack
     /**
      * @ORM\Column(type="string", length=150)
      * @Assert\NotBlank
+     * @Assert\Length(max="150")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Positive()
      */
     private $price;
 

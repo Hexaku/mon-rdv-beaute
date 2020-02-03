@@ -86,6 +86,8 @@ class HomeController extends AbstractController
             $entityManager->persist($newsletter);
             $entityManager->flush();
 
+            $this->addFlash("success", "Vous êtes désormais inscrit sur notre newsletter !");
+
             return $this->redirectToRoute('home');
         }
 

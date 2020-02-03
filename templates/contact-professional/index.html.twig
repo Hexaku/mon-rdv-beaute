@@ -18,7 +18,24 @@
     <div class="container-flex">
         {% include "flash_message.html.twig" %}
         {{ form_start(form) }}
-        {{ form_widget(form) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.firstName) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.lastName) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(form.profession) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(form.city) }}
+                </div>
+            </div>
+            {{ form_row(form.email) }}
+            {{ form_row(form.commentary) }}
         <button class="btn btn-success">{{ button_label|default('Envoyer') }}</button>
         {{ form_end(form) }}
     </div>
