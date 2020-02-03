@@ -34,15 +34,17 @@ class BookingService
         $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $dateTime);
 
         foreach ($reservationDays as $reservationDay) {
+            $reservationDayOpen = $reservationDay->getOpenTime();
+            $reservationDayClose = $reservationDay->getCloseTime();
             /*
              * $period is used to show hours available on the the js file
              * It uses professional business hours and the services duration
              * to create all time interval
              */
             $period = new DatePeriod(
-                new DateTime($reservationDay->getOpenTime()->format("H:i")),
+                new DateTime($reservationDayOpen ? $reservationDayOpen->format("H:i") : "now"),
                 new DateInterval("PT" . $serviceDuration . "M"),
-                new DateTime($reservationDay->getCloseTime()->format("H:i"))
+                new DateTime($reservationDayClose ? $reservationDayClose->format("H:i") : "now")
             );
             foreach ($period as $date) {
                 /*
