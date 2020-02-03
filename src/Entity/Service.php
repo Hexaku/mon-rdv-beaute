@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -89,7 +90,7 @@ class Service
 
     /**
      * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank
      */
     private $imageFile;
 
@@ -118,12 +119,12 @@ class Service
         return $this;
     }
 
-    public function getImageFile(): ?string
+    public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    public function setImageFile(?string $imageFile): self
+    public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
         return $this;
