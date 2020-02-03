@@ -66,7 +66,7 @@ class BookingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/{date}/{hour}", name="booking_recap", methods={"GET"})
+     * @Route("/{id}/{date}/{hour}", name="booking_recap", methods={"GET"}, options={"expose": true})
      */
     public function booking(
         Service $service,
