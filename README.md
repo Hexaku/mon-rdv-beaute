@@ -1,23 +1,4 @@
-# Project 3 - Starter Kit - Symfony 4.4.*
-
-![Wild Code School](https://wildcodeschool.fr/wp-content/uploads/2019/01/logo_pink_176x60.png)
-
-This starter kit is here to easily start a repository for your students.
-
-It's symfony website-skeleton project with some additional tools to validate code standards.
-
-* GrumPHP, as pre-commit hook, will run 2 tools when `git commit` is run :
-  
-    * PHP_CodeSniffer to check PSR2 
-    * PHPStan will check PHP recommendation
-     
-  If tests fail, the commit is canceled and a warning message is displayed to developper.
-
-* Travis CI, as Continuous Integration will be run when a branch with active pull request is updated on github. It will run :
-
-    * Tasks to check if vendor, .idea, env.local are not versionned,
-    * PHP_CodeSniffer to check PSR2,
-    * PHPStan will check PHP recommendation.
+# Mon RDV Beauté
 
 ## Getting Started for Projects
 
@@ -31,11 +12,16 @@ It's symfony website-skeleton project with some additional tools to validate cod
 1. Clone this project
 2. Run `composer install`
 3. Run `yarn install`
+4. Create a `.env.local`. Take .env as a model.
+5. Run `bin/console doctrine:database:create`
+6. Run `bin/console doctrine:migration:migrate`
 
 ### Working
 
 1. Run `php bin/console server:run` to launch your local php web server
 2. Run `yarn run dev --watch` to launch your local server for assets
+
+3. If you develop this site, you can run `bin/console doctrine:fixtures:load --force` to use fixtures.
 
 ### Testing
 
@@ -45,16 +31,9 @@ It's symfony website-skeleton project with some additional tools to validate cod
 3. Run `./bin/eslint assets/js` to launch ESLint JS linter
 3. Run `./bin/sass-lint -c sass-linter.yml` to launch Sass-lint SASS/CSS linter
 
-### Windows Users
-
-If you develop on Windows, you should edit you git configuration to change your end of line rules with this command :
-
-`git config --global core.autocrlf true`
-
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
-
 
 ## Built With
 
@@ -71,36 +50,9 @@ Add additional notes about how to deploy this on a live system
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-
 ## Authors
 
-Wild Code School trainers team
-
-## License
-
-MIT License
-
-Copyright (c) 2019 aurelien@wildcodeschool.fr
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## Acknowledgments
-
+- Béatrice BEAUPERIN
+- Alexandre BARRÉ
+- Benjamin DÉSIGNÉ
+- Axel REDOIS

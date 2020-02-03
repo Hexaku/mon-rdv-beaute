@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:400,900&display=swap");
+
+#calendar-holder {
+    font-family: "Muli", sans-serif;
+    width: 800px;
+    margin: 80px auto;
+}
+
+.fc-toolbar h2,
+.fc th {
+    font-weight: inherit;
+}
+
+.fc-today {
+    border: none !important;
+    border-top: 1px solid #ddd !important;
+    font-weight: bold;
+    background-color: #ffd9d6 !important;
+}

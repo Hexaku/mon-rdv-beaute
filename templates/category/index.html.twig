@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisissez un service{% endblock %}
+
+{% block body %}
+
+    <h2 class="title">Choisissez un service</h2>
+    <div class="contact-form">
+        <div class="categories">
+            {% for category in categories %}
+                <a href="{{ path('category_show', {'slug': category.slug}) }}" class="grey-link">{{ category.name }}</a>
+                <span class="pipe-separator">{% if not loop.last %}|{% endif %}</span>
+            {% else %}
+                <p>Il n'y a pas de catégories !</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                {% for category in categories %}
+                <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                    <img class="d-block w-100 carousel-images" src="{{ vich_uploader_asset(category, 'imageFile')}}" alt="First slide">
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

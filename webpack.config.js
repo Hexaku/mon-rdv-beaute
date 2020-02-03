@@ -18,9 +18,22 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
-    //.addEntry('page1', './assets/js/page1.js')
+    .addEntry('embed_business_hours', './assets/js/embed_business_hours.js')
+    .addEntry('embed_service_prices', './assets/js/embed_service_prices.js')
+    .addEntry('header', './assets/scss/header.scss')
+    .addEntry('home', './assets/scss/home.scss')
+    .addEntry('admin', './assets/scss/admin.scss')
+    .addEntry('calendar', './assets/js/calendar.js')
+    .addEntry('autocomplete', './assets/js/autocomplete.js')
     //.addEntry('page2', './assets/js/page2.js')
 
+    .copyFiles([
+        {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+    ])
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
@@ -58,11 +71,15 @@ Encore
     //.enableIntegrityHashes()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
+
+    .copyFiles({
+        from: './assets/images',
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

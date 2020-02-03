@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recapitulatif Réservation{% endblock %}
+
+{% block body %}
+    <div class="container-flex text-center">
+        <h1 class="title">Récapitulatif de votre commande</h1>
+
+        <p>Vous souhaitez réserver le service <strong>{{ service.name }}</strong> avec <strong>{{ service.professional.name }}</strong> pour la date du
+            <strong>{{ date|date('d/m/Y') }}</strong>
+            à <strong>{{ hour }}</strong>.</p>
+        <p>Pour confirmer votre prise de rendez-vous, cliquez sur le bouton valider ci-dessous.</p>
+        {% if is_granted('ROLE_USER') %}
+            <a href="{{ path(
+                'booking_new', { "id" : service.id, "date" : date|date("d/M/Y")|replace({"/": "-"}), "hour" : hour}
+            ) }}">
+                <button class="btn btn-lg btn-success mt-4">Valider mon rendez-vous</button>
+            </a>
+        {% else %}
+            <a href="{{ path('app_login') }}">
+                <button class="btn btn-lg btn-success mt-4">Valider mon rendez-vous</button>
+            </a>
+        {% endif %}
+
+
+    </div>
+{% endblock %}

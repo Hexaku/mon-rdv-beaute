@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+    <div class="container-flex">
+        <h1 class="title">S'inscrire</h1>
+        {{ form_start(registrationForm) }}
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(registrationForm.firstname) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(registrationForm.lastname) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(registrationForm.birthdate) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(registrationForm.phone) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ form_row(registrationForm.adress) }}
+                </div>
+                <div class="col-6">
+                    {{ form_row(registrationForm.city) }}
+                </div>
+            </div>
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.password) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            <button class="btn btn-success">Je m'inscris !</button>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

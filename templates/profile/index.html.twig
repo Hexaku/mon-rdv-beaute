@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div class="container-flex">
+        {% include "flash_message.html.twig" %}
+        <h1 class="title">Mon profil</h1>
+        <h3 class="subtitle-pink">Bonjour {{ user.firstname }}</h3>
+        <div class="row">
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <a href="{{ path('profile_booking', {id: user.id}) }}" class="no-underline"><div class="text-xs font-weight-bold text-success mb-1">Voir mes prestations réservées</div></a>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-spa fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <a href="{{ path('profile_edit', {id: user.id}) }}" class="no-underline"><div class="text-xs font-weight-bold text-success mb-1">Editer mon profil</div></a>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-edit fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <a href="{{ path('profile_password_edit', {id: user.id}) }}" class="no-underline"><div class="text-xs font-weight-bold text-success mb-1">Modifier mon mot de passe</div></a>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-unlock-alt fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

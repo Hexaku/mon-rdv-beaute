@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div class="container-flex">
+        <h2 class="title">{{ article.title }}</h2>
+        <p>{{ article.content|raw }}</p>
+        <div class="flex-buttons">
+            <a href="{{ path('article_index') }}"><button class="btn btn-success">Retour à la liste</button></a>
+        </div>
+    </div>
+{% endblock %}

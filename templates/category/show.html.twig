@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+    <div class="container-flex">
+        <h2 class="title">Nos prestations - {{ category.name }}</h2>
+        {% for service in category.services %}
+        <div class="card-service rounded">
+            <div class="card-service-left">
+                <img class="card-service-image" src="{{ vich_uploader_asset(service, 'imageFile') }}"/>
+            </div>
+            <div class="card-service-separator"></div>
+            <div class="card-service-right">
+                <a href="{{ path('service_show', {'slug': service.slug}) }}" class="grey-link"><h3 class="card-service-name">{{ service.name }}</h3></a>
+                <p class="card-service-price">{{ service.duration|duration }} | {{ service.price }}€</p>
+                <a href="{{ path('service_booking', {'slug': service.slug}) }}"><button class="btn btn-lg btn-pink">Prendre RDV</button></a>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="flex-buttons">
+            <a href="{{ path('category_index') }}"><button class="btn btn-success">Retour à la liste</button></a>
+        </div>
+    </div>
+{% endblock %}
