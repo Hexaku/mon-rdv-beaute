@@ -27,7 +27,6 @@ class RecoverPasswordMailer
             ->to($mail)
             ->subject('Oubli de mot de passe - Mon RDV Beauté')
             ->html($this->twig->render("recover-password/mail.html.twig", [
-                "lien" => "http://127.0.0.1:8000/recover-password",
                 "token" => $token,
             ]));
 

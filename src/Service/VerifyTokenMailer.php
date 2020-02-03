@@ -30,7 +30,6 @@ class VerifyTokenMailer
                 ->subject('Confirmation d\'inscription - Mon RDV Beauté ')
                 ->html($this->twig->render("registration/mail.html.twig", [
                     "firstname" => $firstName,
-                    "lien" => "http://127.0.0.1:8000/verify-email",
                     "token" => $token,
                 ]));
 
