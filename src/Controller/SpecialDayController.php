@@ -23,7 +23,7 @@ class SpecialDayController extends AbstractController
     public function index(Request $request, PackRepository $packRepository): Response
     {
         /* To get contacts details of people interested by a special_day,
-send in special_day table*/
+        send in special_day table*/
         $contactDay = new contactDay();
         $form = $this->createForm(contactDayType::class, $contactDay);
         $form->handleRequest($request);
@@ -33,8 +33,11 @@ send in special_day table*/
             $entityManager->persist($contactDay);
             $entityManager->flush();
 
+            $this->addFlash("primary", "Votre inscription s'est bien déroulée");
+
             return $this->redirectToRoute('home');
         }
+
         return $this->render("special_day/index.html.twig", [
             "form" => $form->createView(),
             "contactDay" => $contactDay,
@@ -48,7 +51,7 @@ send in special_day table*/
     public function showPack(Request $request, Pack $pack): Response
     {
         /* To get contacts details of people interested by a special_day,
-send in contact_day table*/
+        send in contact_day table*/
         $contactDay = new contactDay();
         $form = $this->createForm(contactDayType::class, $contactDay);
         $form->handleRequest($request);

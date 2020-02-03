@@ -1,39 +1,37 @@
 {%  extends 'base.html.twig' %}
 
-{% block title %}
-Les journées bien-être
-{% endblock %}
+{% block title %}Les journées bien-être{% endblock %}
 
 {% block body %}
 
     <div class="container-flex">
-        <a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-lg btn-primary">Plus d'infos</button></a>
         <h2 class="title">Nos packs </h2>
         {% for pack in packs %}
             <div class="card-service rounded">
                 <div class="card-service-left">
                     <!-- Vich uses to upload a photo for a pack -->
                     <img class="card-service-image" src="{{ vich_uploader_asset(pack, 'imageFile') }}"/>
-                    <p class="card-service-slogan hidden">{#{{ service.slogan }}#}</p>
                 </div>
                 <div class="card-service-separator"></div>
                 <div class="card-service-right">
-                    <h3>{{ pack.name }}</h3>
-                    <!--<a href="{#{{ path('service_show', {'slug': service.slug}) }}#}" class="grey-link"><h3 class="card-service-name">{{ pack.name }}</h3></a>-->
-                    <p class="card-service-price">{{ pack.description }} | {{ pack.price }} €</p>
+                    <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}" class="grey-link"><h3 class="card-title-pack">{{ pack.name }}</h3></a>
+                    <p class="card-service-price">{{ pack.price }} €</p>
                     <a href="{{ path('special_day_pack', {'slug': pack.slug}) }}"><button class="btn btn-lg btn-pink">Détails</button></a>
-
                 </div>
             </div>
         {% endfor %}
+        <div class="text-center">
+            <div class="service-separator"></div>
+            <h4 class="service-title" id="title-button-modal">Besoin d'en savoir plus ?</h4>
+            <a href="#" data-toggle="modal" data-target="#exampleModal"><button class="btn btn-success">Être informé des prochaines journées bien-être</button></a>
+        </div>
     </div>
     <!-- Modal / pop-up window for people who want more infos about special day (journées bien-être)-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="{{ asset('/build/logo-noir.svg') }}"/>
-                    <h5 class="modal-title" id="exampleModalLabel">POUR ÊTRE INFORMÉ DE LA PROCHAINE JOURNÉE BIEN-ÊTRE</h5>
+                    <img src="{{ asset('/build/logo-noir.svg') }}" class="modal-image"/>
                 </div>
                 <div>
                     {{ include('special_day/_modal_form.html.twig') }}
@@ -41,6 +39,4 @@ Les journées bien-être
             </div>
         </div>
     </div>
-
-
 {% endblock %}
