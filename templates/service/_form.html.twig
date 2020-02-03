@@ -1,11 +1,23 @@
 {{ form_start(form) }}
     {{ form_row(form.name) }}
-    {{ form_row(form.category) }}
-    {{ form_row(form.professional) }}
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.category) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.professional) }}
+        </div>
+    </div>
     {{ form_row(form.slogan) }}
     {{ form_row(form.description) }}
-    {{ form_row(form.serviceType) }}
-    {{ form_row(form.duration) }}
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.serviceType) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.duration) }}
+        </div>
+    </div>
     {{ form_row(form.imageFile) }}
     {{ form_row(form.price) }}
     <div class="flex-form">
@@ -13,7 +25,9 @@
         <div class="hours" data-prototype="{{ form_widget(form.servicePrices.vars.prototype)|e('html_attr')}}">
             {# iterate over each existing tag and render its only field: name #}
             {% for servicePrice in form.servicePrices %}
-                {{ form_row(servicePrice) }}
+                <div class="row-hour mb-3">
+                    {{ form_row(servicePrice) }}
+                </div>
             {% endfor %}
         </div>
     </div>

@@ -19,16 +19,15 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
-    public function findAllServices(): ?array
+    public function findAllServices(): ?int
     {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = 'SELECT COUNT(id) FROM service';
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-
         // returns an array of arrays (i.e. a raw data set)
-        return $stmt->fetchAll();
+        return $this
+            ->createQueryBuilder('s')
+            ->select("count(s)")
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 
     public function findServicesByQuery(string $serviceName, string $serviceCity): ?array

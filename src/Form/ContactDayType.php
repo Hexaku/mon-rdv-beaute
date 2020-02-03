@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /* form uses in pop-up window in special day (journées bien-être)*/
@@ -18,13 +19,9 @@ class ContactDayType extends AbstractType
         $builder
             ->add('Name', TextType::class, [
                 "label" => "Nom",
-                "required" => true,
-                "constraints" => [new NotBlank()]
             ])
             ->add('Email', EmailType::class, [
                 "label" => "Email",
-                "required" => true,
-                "constraints" => [new NotBlank()]
             ])
             ->add('Phone', TextType::class, [
                 "label" => "Téléphone (facultatif)",

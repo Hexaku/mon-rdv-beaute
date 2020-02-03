@@ -13,13 +13,13 @@ class BookingService
 {
     public function bookingService(
         Service $service,
-        DateTime $date,
+        DateTime $dateTime,
         BusinessHourRepository $businessHourRepo,
         BookingRepository $bookingRepository
     ) {
         $reservationDays = $businessHourRepo->findBy([
             "professional" => $service->getProfessional(),
-            "day" => $date->format("N"),
+            "day" => $dateTime->format("N"),
         ]);
         /* GET PROFESSIONAL BUSINESS HOURS AND SERVICE DURATION */
         $serviceDuration = $service->getDuration();
@@ -31,18 +31,20 @@ class BookingService
          * The find function takes only bookings of the day on which we click,
          * related to the professional and to the service.
          */
-        $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $date);
+        $bookings = $bookingRepository->findBookingByProfessionalAndDate($service->getProfessional(), $dateTime);
 
         foreach ($reservationDays as $reservationDay) {
+            $reservationDayOpen = $reservationDay->getOpenTime();
+            $reservationDayClose = $reservationDay->getCloseTime();
             /*
              * $period is used to show hours available on the the js file
              * It uses professional business hours and the services duration
              * to create all time interval
              */
             $period = new DatePeriod(
-                new DateTime($reservationDay->getOpenTime()->format("H:i")),
+                new DateTime($reservationDayOpen ? $reservationDayOpen->format("H:i") : "now"),
                 new DateInterval("PT" . $serviceDuration . "M"),
-                new DateTime($reservationDay->getCloseTime()->format("H:i"))
+                new DateTime($reservationDayClose ? $reservationDayClose->format("H:i") : "now")
             );
             foreach ($period as $date) {
                 /*
@@ -77,6 +79,10 @@ class BookingService
                             ->format('H:i')) {
                         $add = false;
                     }
+                }
+                $now = new DateTime();
+                if ($dateTime->format('Y/m/d') === $now->format('Y/m/d') && $date < $now) {
+                    $add = false;
                 }
                 if ($add) {
                     $result[] = $date->format('H:i');

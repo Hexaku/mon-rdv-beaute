@@ -9,7 +9,6 @@
         <div class="card-service rounded">
             <div class="card-service-left">
                 <img class="card-service-image" src="{{ vich_uploader_asset(service, 'imageFile') }}"/>
-                <p class="card-service-slogan hidden">{{ service.slogan }}</p>
             </div>
             <div class="card-service-separator"></div>
             <div class="card-service-right">
@@ -21,14 +20,6 @@
         {% endfor %}
         <div class="flex-buttons">
             <a href="{{ path('category_index') }}"><button class="btn btn-success">Retour à la liste</button></a>
-            {% if app.user %}
-                {% if 'ROLE_ADMIN' in app.user.roles %}
-                    <a href="{{ path('admin_category_edit', {'id': category.id}) }}">
-                        <button class="btn btn-primary">Modifier la catégorie</button>
-                    </a>
-                    {{ include('category/_delete_form.html.twig') }}
-                {% endif %}
-            {% endif %}
         </div>
     </div>
 {% endblock %}

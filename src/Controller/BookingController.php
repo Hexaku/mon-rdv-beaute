@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Booking;
 use App\Entity\Service;
+use App\Entity\User;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use App\Service\MailerSender;
@@ -56,55 +57,16 @@ class BookingController extends AbstractController
         $entityManager->persist($booking);
         $entityManager->flush();
 
+        $this->addFlash(
+            "success",
+            "Votre rendez-vous est bien validé, un mail vous a été envoyé !"
+        );
+
         return $this->redirectToRoute('home');
     }
 
     /**
-     * @Route("/{id}", name="booking_show", methods={"GET"})
-     */
-    public function show(Booking $booking): Response
-    {
-        return $this->render('booking/show.html.twig', [
-            'booking' => $booking,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="booking_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Booking $booking): Response
-    {
-        $form = $this->createForm(BookingType::class, $booking);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('booking_index');
-        }
-
-        return $this->render('booking/edit.html.twig', [
-            'booking' => $booking,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="booking_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Booking $booking): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$booking->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($booking);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('booking_index');
-    }
-
-    /**
-     * @Route("/{id}/{date}/{hour}", name="booking_recap", methods={"GET"})
+     * @Route("/{id}/{date}/{hour}", name="booking_recap", methods={"GET"}, options={"expose": true})
      */
     public function booking(
         Service $service,

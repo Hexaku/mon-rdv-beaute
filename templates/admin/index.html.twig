@@ -20,7 +20,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Prestations (total)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ services[0]["COUNT(id)"]}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ services }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-spa fa-2x text-gray-300"></i>
@@ -37,7 +37,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Réservations (Total)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ customers[0]["COUNT(id)"]}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ customers }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -54,7 +54,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Professionnels (total)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ professionals[0]["COUNT(id)"]}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ professionals }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-user-tie fa-2x text-gray-300"></i>
@@ -71,7 +71,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Membres (total)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ members[0]["COUNT(id)"]}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ members }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -114,9 +114,9 @@
                     <div class="card-body">
                         {% for dashboard in dashboards %}
                                 {% if dashboard.category == 1 %}
-                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((services / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width:{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((services[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar" role="progressbar" style="width:{{ ((services / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((services / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                         <div class="bg-white py-2 collapse-inner rounded">
@@ -126,9 +126,9 @@
                                         </div>
                                     </div>
                                 {% elseif dashboard.category == 2 %}
-                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((professionals / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width:{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((professionals[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width:{{ ((professionals / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((professionals / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                         <div class="bg-white py-2 collapse-inner rounded">
@@ -138,9 +138,9 @@
                                         </div>
                                     </div>
                                 {% elseif dashboard.category == 3 %}
-                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((members[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((members / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width:{{ ((members[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((members[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width:{{ ((members / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((members / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                         <div class="bg-white py-2 collapse-inner rounded">
@@ -150,9 +150,9 @@
                                         </div>
                                     </div>
                                 {% elseif dashboard.category == 4 %}
-                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((customers[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
+                                    <a href="#" data-toggle="collapse" data-target="#collapsePages{{ loop.index }}" aria-expanded="true" aria-controls="collapsePages"><h4 class="small font-weight-bold">{{ dashboard.value }} {{ dashboard.category|objective }}<span class="float-right">{{ ((customers / dashboard.value) * 100)|round(1, 'floor') }}%</span></h4></a>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ ((customers[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((customers[0]["COUNT(id)"] / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width:{{ ((customers / dashboard.value) * 100)|round(1, 'floor') }}%" aria-valuenow="{{ ((customers / dashboard.value) * 100)|round(1, 'floor') }}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div id="collapsePages{{ loop.index }}" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                                         <div class="bg-white py-2 collapse-inner rounded">

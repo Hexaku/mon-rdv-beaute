@@ -89,6 +89,7 @@ class Service
 
     /**
      * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
+     * @Assert\NotBlank()
      */
     private $imageFile;
 

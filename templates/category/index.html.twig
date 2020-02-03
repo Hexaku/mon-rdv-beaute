@@ -13,11 +13,6 @@
             {% else %}
                 <p>Il n'y a pas de catégories !</p>
             {% endfor %}
-            {% if app.user %}
-                {% if 'ROLE_ADMIN' in app.user.roles %}
-                    <div><a href="{{ path('admin_category_new') }}"><button class="btn btn-link">Ajouter une catégorie</button></a></div>
-                {% endif %}
-            {% endif %}
         </div>
     </div>
 
@@ -31,7 +26,7 @@
             <div class="carousel-inner">
                 {% for category in categories %}
                 <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
-                    <img class="d-block w-100" src="{{ vich_uploader_asset(category, 'imageFile')}}" alt="First slide">
+                    <img class="d-block w-100 carousel-images" src="{{ vich_uploader_asset(category, 'imageFile')}}" alt="First slide">
                 </div>
                 {% endfor %}
             </div>

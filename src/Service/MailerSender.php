@@ -44,7 +44,7 @@ class MailerSender
         $email = (new Email())
             ->from($mail)
             ->to($mail)
-            ->subject('Recapitulatif de la reservation!')
+            ->subject('Un utilisateur a réservé une prestation !')
             ->html($this->twig->render("booking/mail.html.twig", [
                 'booking' => $booking,
             ]));
@@ -54,6 +54,7 @@ class MailerSender
 
     public function recapMailClient(Booking $booking): void
     {
+
         $emailFrom = $_ENV['MAILER_ADMIN'];
         $user = $booking->getUser();
         if ($emailFrom && $user) {
