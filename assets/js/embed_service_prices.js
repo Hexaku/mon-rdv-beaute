@@ -50,7 +50,6 @@ function addTagForm($collectionHolder, $newLinkLi) {
 }
 
 jQuery(document).ready(() => {
-
     // Get the ul that holds the collection of hours
     $collectionHolder = $('div.hours');
 
