@@ -111,6 +111,11 @@ class Professional
      */
     private $city;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
@@ -224,10 +229,13 @@ class Professional
         return $this->imageFile;
     }
 
-    public function setImageFile(?File $imageFile): Professional
+    public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
-        return $this;
+
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updatedAt = new DateTime('now');
+        }
     }
 
     public function getUploadedAt(): ?\DateTimeInterface
@@ -330,6 +338,18 @@ class Professional
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
