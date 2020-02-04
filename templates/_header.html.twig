@@ -3,7 +3,7 @@
     <div class="topbar">
         <div class="topbar-flex">
             <div class="mobile">
-                <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
             </div>
             <nav class="topbar-menu topbar-menu-desktop">
                 <a href="{{ path('category_index') }}">PRESTATIONS</a>
@@ -19,10 +19,10 @@
             <div class="bar3"></div>
         </div>
         <div >
-            <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+            <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('build/logo-noir.svg') }}" alt="Logo Mon RDV Beauté"/></a>
         </div>
         <div class="topbar-container-connexion">
-            <img class="topbar-connexion-logo" id="connexion" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
+            <img class="topbar-connexion-logo" id="connexion" src="{{ asset('build/icon-connexion.svg') }}" alt="Icône connexion">
             <div class="topbar-container-connexion-flex">
                 {% if app.user %}
                     <span class="account">Bonjour {{ app.user.firstname }}</span>

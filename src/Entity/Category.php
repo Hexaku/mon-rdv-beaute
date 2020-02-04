@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -25,12 +27,12 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(max="255")
+     * @Assert\NotBlank
      */
     private $filename;
 
     /**
      * @Vich\UploadableField(mapping="categories_image", fileNameProperty="filename")
-     * @Assert\NotBlank
      */
     private $imageFile;
 
@@ -51,6 +53,11 @@ class Category
      */
     private $services;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
 
     public function getFilename(): ?string
     {
@@ -68,10 +75,13 @@ class Category
         return $this->imageFile;
     }
 
-    public function setImageFile(?File $imageFile): Category
+    public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
-        return $this;
+
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updatedAt = new DateTime('now');
+        }
     }
 
     public function __construct()
@@ -95,7 +105,7 @@ class Category
 
         return $this;
     }
-    
+
     public function getServices(): Collection
     {
         return $this->services;
@@ -132,6 +142,18 @@ class Category
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
