@@ -31,12 +31,12 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(max="255")
+     * @Assert\NotBlank
      */
     private $fileName;
 
     /**
      * @Vich\UploadableField(mapping="home_image", fileNameProperty="fileName")
-     * @Assert\NotBlank
      */
     private $imageFile;
 
