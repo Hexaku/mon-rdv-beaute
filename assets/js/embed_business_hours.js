@@ -1,4 +1,4 @@
-
+import bsCustomFileInput from 'bs-custom-file-input';
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../scss/app.scss');
@@ -50,6 +50,8 @@ function addTagForm($collectionHolder, $newLinkLi) {
 }
 
 jQuery(document).ready(function () {
+    bsCustomFileInput.init();
+
     // Get the ul that holds the collection of hours
     $collectionHolder = $('div.hours');
 

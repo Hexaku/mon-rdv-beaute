@@ -87,12 +87,12 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $filename;
 
     /**
      * @Vich\UploadableField(mapping="services_image", fileNameProperty="filename")
-     * @Assert\NotBlank
      */
     private $imageFile;
 
