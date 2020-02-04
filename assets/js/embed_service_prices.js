@@ -1,4 +1,4 @@
-
+import bsCustomFileInput from 'bs-custom-file-input';
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../scss/app.scss');
@@ -50,10 +50,13 @@ function addTagForm($collectionHolder, $newLinkLi) {
 }
 
 jQuery(document).ready(() => {
+    bsCustomFileInput.init();
+
     // Get the ul that holds the collection of hours
     $collectionHolder = $('div.hours');
 
-    $collectionHolder.find('.row-hour').each(() => {
+    /* eslint-disable */
+    $collectionHolder.find('div.current').each(function () {
         addTagFormDeleteLink($(this));
     });
     // add the "add a tag" anchor and li to the hours ul
@@ -62,9 +65,6 @@ jQuery(document).ready(() => {
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
-    // add a delete link to all of the existing tag form li elements
-
 
     $addTagButton.on('click', (e) => {
         // add a new tag form (see next code block)

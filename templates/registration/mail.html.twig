@@ -1,4 +1,4 @@
 <div>
     <p>Bonjour {{ firstname }}, bienvenue sur mon RDV Beauté !</p>
-    <p>Merci de confirmer votre compte en cliquant sur le lien suivant : <a href="{{ lien }}/{{ token }}">Validation de compte</a></p>
+    <p>Merci de confirmer votre compte en cliquant sur le lien suivant : <a href="{{ absolute_url(path('app_verify', {'token' : token})) }}">Validation de compte</a></p>
 </div>

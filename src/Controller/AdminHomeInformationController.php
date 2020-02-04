@@ -42,8 +42,8 @@ class AdminHomeInformationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /* CONVERT ALL INFORMATIONS IsHomePage TO FALSE */
             if ($information->getIsHomePage() == true) {
-                foreach ($informations as $information) {
-                    $information->setIsHomePage(false);
+                foreach ($informations as $inform) {
+                    $inform->setIsHomePage(false);
                 }
                 $information->setIsHomePage(true);
             }
@@ -80,8 +80,8 @@ class AdminHomeInformationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /* CONVERT ALL INFORMATIONS IsHomePage TO FALSE */
             if ($information->getIsHomePage() == true) {
-                foreach ($informations as $information) {
-                    $information->setIsHomePage(false);
+                foreach ($informations as $inform) {
+                    $inform->setIsHomePage(false);
                 }
                 $information->setIsHomePage(true);
             }

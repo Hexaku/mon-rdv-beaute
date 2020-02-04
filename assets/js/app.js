@@ -4,6 +4,7 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
+import bsCustomFileInput from 'bs-custom-file-input';
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../scss/app.scss');
@@ -30,4 +31,8 @@ const topbarConnexionElt = document.getElementById('topbar-connexion-mobile');
 
 connexionElt.addEventListener('click', (e) => {
     topbarConnexionElt.classList.toggle('no-show');
+});
+
+$(document).ready(() => {
+    bsCustomFileInput.init();
 });

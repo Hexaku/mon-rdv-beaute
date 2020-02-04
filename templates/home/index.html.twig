@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('/build/favicon.ico') }}" />
+    <link rel="icon" href="{{ asset('build/favicon.ico') }}" />
     <title>{% block title %}Mon Rendez-Vous Beauté{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('home') }}
@@ -14,7 +14,7 @@
 {% block body %}
     <div class="preloader">
         <div class="wrap">
-            <img src="{{ asset('/build/logo-noir.svg') }}" alt="logo" />
+            <img src="{{ asset('build/logo-noir.svg') }}" alt="logo" />
             <svg version="1.1" id="layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
             <g class="flower">
@@ -199,7 +199,7 @@
             <div class="topbar">
                 <div class="topbar-flex">
                     <div class="mobile">
-                        <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                        <a href="{{ path('home') }}"><img class="topbar-main-logo" src="{{ asset('build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
                     </div>
                     <nav class="topbar-menu topbar-menu-desktop">
                         <a href="{{ path('category_index') }}">PRESTATIONS</a>
@@ -215,10 +215,10 @@
                     <div class="bar3"></div>
                 </div>
                 <div >
-                    <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
+                    <a href="{{ path('home') }}"><img class="topbar-main-logo desktop" src="{{ asset('build/logo-blanc.svg') }}" alt="Logo Mon RDV Beauté"/></a>
                 </div>
                 <div class="topbar-container-connexion">
-                    <img class="topbar-connexion-logo" id="connexion" src="{{ asset('/build/icon-connexion.svg') }}" alt="Icône connexion">
+                    <img class="topbar-connexion-logo" id="connexion" src="{{ asset('build/icon-connexion.svg') }}" alt="Icône connexion">
                     <div class="topbar-container-connexion-flex">
                         {% if app.user %}
                             <span class="account">Bonjour {{ app.user.firstname }}</span>
@@ -287,7 +287,7 @@
                     <div style="width: 100%" class="div-submit">
                         <button class="filter-submit">
                             <span>Rechercher</span>
-                            <img class="filter-icon" src="{{ asset('/build/icon-search.svg') }}" alt="Icone Loupe"/>
+                            <img class="filter-icon" src="{{ asset('build/icon-search.svg') }}" alt="Icone Loupe"/>
                         </button>
                     </div>
                 {{ form_end(formFilter) }}
@@ -364,16 +364,16 @@
     <footer class="footer">
         <div class="higher-footer">
             <div class="footer-description">
-                <img class="footer-description-logo" src="{{ asset('/build/logo-blanc.svg') }}" alt="Logo mon RDV Beauté"/>
+                <img class="footer-description-logo" src="{{ asset('build/logo-blanc.svg') }}" alt="Logo mon RDV Beauté"/>
                 <p class="footer-description-content">Prenez rendez-vous avec votre bien-être</p>
             </div>
             <div class="footer-socials">
                 <h4 class="footer-socials-title">Suivez-nous !</h4>
                 <div class="footer-socials-icons">
-                    <img src="{{ asset('/build/icon-facebook.png')  }}" alt="Logo Facebook"/>
-                    <img src="{{ asset('/build/icon-insta.png')  }}" alt="Logo Instagram"/>
-                    <img src="{{ asset('/build/icon-twitter.png')  }}" alt="Logo Twitter"/>
-                    <img src="{{ asset('/build/icon-youtube.png')  }}" alt="Logo Youtube"/>
+                    <img src="{{ asset('build/icon-facebook.png')  }}" alt="Logo Facebook"/>
+                    <img src="{{ asset('build/icon-insta.png')  }}" alt="Logo Instagram"/>
+                    <img src="{{ asset('build/icon-twitter.png')  }}" alt="Logo Twitter"/>
+                    <img src="{{ asset('build/icon-youtube.png')  }}" alt="Logo Youtube"/>
                 </div>
             </div>
             <div class="footer-newsletter">
@@ -382,7 +382,7 @@
                     {{ form_start(formNewsletter) }}
                         {{ form_row((formNewsletter.email)) }}
                         <button class="footer-newsletter-submit" type="submit" >
-                            <img class="filter-icon footer-newsletter-icon" src="{{ asset('/build/icon-mail.svg') }}" alt="Icone Mail"/>
+                            <img class="filter-icon footer-newsletter-icon" src="{{ asset('build/icon-mail.svg') }}" alt="Icone Mail"/>
                         </button>
                     {{ form_end(formNewsletter) }}
                 </div>
