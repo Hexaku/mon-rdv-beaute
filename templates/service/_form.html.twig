@@ -26,7 +26,7 @@
             {# iterate over each existing tag and render its only field: name #}
             {% for servicePrice in form.servicePrices %}
                 <div class="row-hour mb-3">
-                    {{ form_row(servicePrice) }}
+                    <div class="current mb-3">{{ form_row(servicePrice) }}</div>
                 </div>
             {% endfor %}
         </div>
