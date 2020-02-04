@@ -53,7 +53,8 @@ jQuery(document).ready(() => {
     // Get the ul that holds the collection of hours
     $collectionHolder = $('div.hours');
 
-    $collectionHolder.find('p').each(() => {
+    /* eslint-disable */
+    $collectionHolder.find('div.current').each(function () {
         addTagFormDeleteLink($(this));
     });
     // add the "add a tag" anchor and li to the hours ul

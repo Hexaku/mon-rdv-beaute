@@ -21,7 +21,7 @@ function addTagFormDeleteLink($tagFormLi) {
     const $removeFormButton = $('<button type="button" class="btn btn-danger">Supprimer l\'horaire</button>');
     $tagFormLi.append($removeFormButton);
 
-    $removeFormButton.on('click', function (e) {
+    $removeFormButton.on('click', (e) => {
         // remove the li for the tag form
         $tagFormLi.remove();
     });
@@ -49,12 +49,13 @@ function addTagForm($collectionHolder, $newLinkLi) {
     addTagFormDeleteLink($newFormLi);
 }
 
-jQuery(document).ready(function () {
+jQuery(document).ready(() => {
     // Get the ul that holds the collection of hours
     $collectionHolder = $('div.hours');
 
     // add a delete link to all of the existing tag form li elements
-    $collectionHolder.find('p').each(function () {
+    /* eslint-disable */
+    $collectionHolder.find('div.current').each(function () {
         addTagFormDeleteLink($(this));
     });
 
@@ -65,7 +66,7 @@ jQuery(document).ready(function () {
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
 
-    $addTagButton.on('click', function(e) {
+    $addTagButton.on('click', function (e) {
         // add a new tag form (see next code block)
         addTagForm($collectionHolder, $newLinkLi);
     });
