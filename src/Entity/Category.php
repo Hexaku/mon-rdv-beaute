@@ -26,13 +26,12 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="255")
-     * @Assert\NotBlank
      */
     private $filename;
 
     /**
      * @Vich\UploadableField(mapping="categories_image", fileNameProperty="filename")
+     * @Assert\Expression("this.getImageFile() or this.getFileName()", message="Vous devez uploader une photo.")
      */
     private $imageFile;
 

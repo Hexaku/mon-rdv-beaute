@@ -62,6 +62,7 @@ class Pack
 
     /**
      * @Vich\UploadableField(mapping="pack_image", fileNameProperty="filename")
+     * @Assert\Expression("this.getImageFile() or this.getFileName()", message="Vous devez uploader une photo.")
      */
     private $imageFile;
 

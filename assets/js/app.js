@@ -16,6 +16,9 @@ require('bootstrap');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
+$(document).ready(() => {
+    bsCustomFileInput.init();
+});
 /* ANIMATION ICON BURGER */
 const burgerElt = document.getElementById('burger');
 const topbarMenuElt = document.getElementById('topbar-menu-mobile');
@@ -31,8 +34,4 @@ const topbarConnexionElt = document.getElementById('topbar-connexion-mobile');
 
 connexionElt.addEventListener('click', (e) => {
     topbarConnexionElt.classList.toggle('no-show');
-});
-
-$(document).ready(() => {
-    bsCustomFileInput.init();
 });
