@@ -27,12 +27,12 @@ class Professional
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $filename;
 
     /**
      * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
+     * @Assert\NotBlank
      */
     private $imageFile;
 

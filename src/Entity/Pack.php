@@ -62,6 +62,7 @@ class Pack
 
     /**
      * @Vich\UploadableField(mapping="pack_image", fileNameProperty="filename")
+     * @Assert\NotBlank
      */
     private $imageFile;
 
