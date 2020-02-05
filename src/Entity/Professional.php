@@ -32,7 +32,7 @@ class Professional
 
     /**
      * @Vich\UploadableField(mapping="professionals_image", fileNameProperty="filename")
-     * @Assert\NotBlank
+     * @Assert\Expression("this.getImageFile() or this.getFileName()", message="Vous devez uploader une photo.")
      */
     private $imageFile;
 
