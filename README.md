@@ -21,7 +21,7 @@
 1. Run `php bin/console server:run` to launch your local php web server
 2. Run `yarn run dev --watch` to launch your local server for assets
 
-3. If you develop this site, you can run `bin/console doctrine:fixtures:load --force` to use fixtures.
+3. If you develop this site, you can run `bin/console doctrine:fixtures:load` to use fixtures.
 4. Run `bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json` to configure routes.
 
 ### Testing
