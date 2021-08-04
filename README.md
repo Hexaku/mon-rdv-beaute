@@ -1,5 +1,7 @@
 # Mon RDV Beauté
 
+![](assets/images/beaute1.png)
+
 ## Getting Started for Projects
 
 ### Prerequisites
