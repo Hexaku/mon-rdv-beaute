@@ -1,6 +1,12 @@
 # Mon RDV Beauté
 
+![](assets/images/beaute2.PNG)
+
 ![](assets/images/beaute1.png)
+
+Mon RDV Beauté est une plateforme de réservation de services de beauté. L'utilisateur peut réserver un créneau pour un service, créer un compte et suivre ses RDV beauté, etc...
+
+Le site a été développé avec Symfony pour le back-end, avec un système d'auth/authorization, un dashboard admin CRUD, une base de donnée MySQL et diverses bibliothèques permettant l'upload de fichiers (Vich Uploaders), la gestion des créneaux de RDV (tattali/calendar-bundle) etc...
 
 ## Getting Started for Projects
 
