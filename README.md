@@ -13,8 +13,8 @@
 2. Run `composer install`
 3. Run `yarn install`
 4. Create a `.env.local`. Take .env as a model.
-5. Run `bin/console doctrine:database:create`
-6. Run `bin/console doctrine:migration:migrate`
+5. Run `php bin/console doctrine:database:create`
+6. Run `php bin/console doctrine:migration:migrate`
 
 ### Working
 
