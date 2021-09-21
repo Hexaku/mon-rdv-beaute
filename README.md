@@ -59,9 +59,3 @@ Add additional notes about how to deploy this on a live system
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Authors
-
-- Béatrice BEAUPERIN
-- Alexandre BARRÉ
-- Benjamin DÉSIGNÉ
-- Axel REDOIS
